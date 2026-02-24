@@ -20,6 +20,30 @@ Moongate 是一个从个人博客 [moongate.top] 衍生而来的 VS Code 主题�
 - 背景：深夜天空般的深色，晨曦般的浅色
 - 强调色：月光洒落的亮点
 
+## 📸 预览
+
+### HTML
+![HTML 预览](./images/html-preview.png)
+
+### JavaScript
+![JavaScript 预览](./images/javascript-preview.png)
+
+### TypeScript
+![TypeScript 预览](./images/typescript-preview.png)
+
+### Vue
+![Vue 预览](./images/vue-preview.png)
+
+### Python
+![Python 预览](./images/python-preview.png)
+
+### Json
+![Json 预览](./images/json-preview.png)
+
+### Markdown
+![Markdown 预览](./images/markdown-preview.png)
+
+
 ## ⚙️ 推荐配置
 
 为了获得 Moongate 最佳的视觉体验，建议开启 VS Code 的语义高亮功能：
