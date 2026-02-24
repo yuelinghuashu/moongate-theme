@@ -1,11 +1,11 @@
-[![Version](https://img.shields.io/badge/version-1.0.0-blue)]()
+[![Version](https://img.shields.io/badge/version-1.0.1-blue)]()
 [![Marketplace](https://img.shields.io/badge/vscode-marketplace-brightgreen)]()
 
 # 🌙 Moongate Theme
 
 > 从博客到编辑器，让代码栖息在月光里
 
-Moongate 是一个从个人博客 [moongate.xxx] 衍生而来的 VS Code 主题，
+Moongate 是一个从个人博客 [moongate.top] 衍生而来的 VS Code 主题，
 它将博客的视觉语言带到了代码编辑器中。
 
 ## ✨ 设计理念
