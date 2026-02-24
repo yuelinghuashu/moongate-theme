@@ -1,3 +1,6 @@
+[![Version](https://img.shields.io/badge/version-1.0.0-blue)]()
+[![Marketplace](https://img.shields.io/badge/vscode-marketplace-brightgreen)]()
+
 # 🌙 Moongate Theme
 
 > 从博客到编辑器，让代码栖息在月光里

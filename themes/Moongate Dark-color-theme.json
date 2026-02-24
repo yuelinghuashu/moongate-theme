@@ -232,20 +232,13 @@
     "progressBar.background": "#3b82f6"
   },
   "tokenColors": [
-    // === 基础 ===
+    // === 基础规则 ===
     {
       "name": "Comment",
       "scope": ["comment", "punctuation.definition.comment"],
       "settings": {
         "fontStyle": "italic",
         "foreground": "#94a3b8"
-      }
-    },
-    {
-      "name": "Variables",
-      "scope": ["variable", "variable.parameter"],
-      "settings": {
-        "foreground": "#e2e8f0"
       }
     },
     {
@@ -275,15 +268,6 @@
         "foreground": "#7dd3fc"
       }
     },
-    // 新增：函数参数斜体
-    {
-      "name": "Function Parameters - 斜体",
-      "scope": ["variable.parameter"],
-      "settings": {
-        "fontStyle": "italic",
-        "foreground": "#7dd3fc"
-      }
-    },
     {
       "name": "Number, Constant - 月光黄",
       "scope": ["constant.numeric", "constant.language", "support.constant"],
@@ -303,7 +287,6 @@
         "foreground": "#34d399"
       }
     },
-    // 新增：字符串内插值（模板字符串中的 ${}）
     {
       "name": "String Interpolation - 发光蓝",
       "scope": [
@@ -386,7 +369,6 @@
         "foreground": "#fbbf24"
       }
     },
-    // 新增：TODO / FIXME 高亮
     {
       "name": "TODO Highlight",
       "scope": ["comment.line.todo", "comment.block.todo"],
@@ -396,20 +378,151 @@
       }
     },
 
-    // === HTML / Vue 模板 ===
+    // === 变量分层（替换原 Variables 规则）===
     {
-      "name": "HTML Doctype",
-      "scope": ["meta.tag.sgml.html", "entity.name.tag.doctype.html"],
+      "name": "Variables - 局部变量 (退后)",
+      "scope": [
+        "variable.other.readwrite.local",
+        "variable.other.local",
+        "variable.other.readwrite"
+      ],
+      "settings": {
+        "foreground": "#cbd5e1"
+      }
+    },
+    {
+      "name": "Variables - 参数 (斜体退后)",
+      "scope": ["variable.parameter", "variable.other.parameter"],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#cbd5e1"
+      }
+    },
+    {
+      "name": "Variables - 常量/全局 (保持亮度)",
+      "scope": [
+        "variable.other.constant",
+        "variable.other.global",
+        "variable.other.readwrite.global"
+      ],
+      "settings": {
+        "foreground": "#e2e8f0",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Variables - 成员属性",
+      "scope": ["variable.other.property", "variable.other.member"],
+      "settings": {
+        "foreground": "#cbd5e1"
+      }
+    },
+    {
+      "name": "Destructuring - 解构变量",
+      "scope": ["variable.other.destructuring"],
+      "settings": {
+        "foreground": "#cbd5e1"
+      }
+    },
+
+    // === 键值对优化 ===
+    {
+      "name": "Object Keys - 普通键名 (退后)",
+      "scope": [
+        "meta.object.key",
+        "meta.object-literal.key",
+        "string.unquoted.label",
+        "meta.object.key.js",
+        "meta.object.key.ts"
+      ],
+      "settings": {
+        "foreground": "#cbd5e1"
+      }
+    },
+    {
+      "name": "Object Keys - 常量键名 (保持亮度)",
+      "scope": ["meta.object.key constant", "meta.object.key constant.other"],
+      "settings": {
+        "foreground": "#e2e8f0",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Object Keys - 嵌套键名 (更退后)",
+      "scope": ["meta.object.key meta.object.key", "meta.object.key.nested"],
+      "settings": {
+        "foreground": "#94a3b8"
+      }
+    },
+    {
+      "name": "Key-Value Separator - 冒号 (视觉退后)",
+      "scope": [
+        "punctuation.separator.key-value",
+        "punctuation.separator.mapping.key-value"
+      ],
       "settings": {
         "foreground": "#64748b"
       }
     },
+
+    // === 链式编程优化 ===
+    {
+      "name": "Method Call - 第一层 (发光感)",
+      "scope": [
+        "meta.method-call entity.name.function",
+        "meta.function-call entity.name.function"
+      ],
+      "settings": {
+        "foreground": "#7dd3fc"
+      }
+    },
+    {
+      "name": "Method Call - 链式后续 (退后)",
+      "scope": [
+        "meta.method-call meta.method-call entity.name.function",
+        "meta.function-call meta.function-call entity.name.function",
+        "meta.chain entity.name.function"
+      ],
+      "settings": {
+        "foreground": "#cbd5e1"
+      }
+    },
+    {
+      "name": "Method Call - 深层链式 (更退后)",
+      "scope": [
+        "meta.method-call meta.method-call meta.method-call entity.name.function"
+      ],
+      "settings": {
+        "foreground": "#94a3b8"
+      }
+    },
+    {
+      "name": "Method Chain Separator - 点操作符",
+      "scope": ["punctuation.accessor", "punctuation.separator.dot"],
+      "settings": {
+        "foreground": "#64748b"
+      }
+    },
+
+    // === 数组元素 ===
+    {
+      "name": "Array - 元素",
+      "scope": ["meta.array.element"],
+      "settings": {
+        "foreground": "#cbd5e1"
+      }
+    },
+
+    // === HTML / Vue 模板（保持不变）===
+    {
+      "name": "HTML Doctype",
+      "scope": ["meta.tag.sgml.html", "entity.name.tag.doctype.html"],
+      "settings": { "foreground": "#64748b" }
+    },
     {
       "name": "HTML Attribute Value",
       "scope": ["string.quoted.double.html", "string.quoted.single.html"],
-      "settings": {
-        "foreground": "#34d399"
-      }
+      "settings": { "foreground": "#34d399" }
     },
     {
       "name": "HTML/Vue Text Content",
@@ -418,31 +531,22 @@
         "text.html.vue text",
         "text.html.derivative"
       ],
-      "settings": {
-        "foreground": "#cbd5e1"
-      }
+      "settings": { "foreground": "#cbd5e1" }
     },
     {
       "name": "HTML Comment",
       "scope": ["comment.block.html", "comment.html"],
-      "settings": {
-        "fontStyle": "italic",
-        "foreground": "#94a3b8"
-      }
+      "settings": { "fontStyle": "italic", "foreground": "#94a3b8" }
     },
     {
       "name": "HTML Script Tag Content",
       "scope": ["source.js.embedded.html"],
-      "settings": {
-        "foreground": "#e2e8f0"
-      }
+      "settings": { "foreground": "#e2e8f0" }
     },
     {
       "name": "HTML Style Tag Content",
       "scope": ["source.css.embedded.html"],
-      "settings": {
-        "foreground": "#e2e8f0"
-      }
+      "settings": { "foreground": "#e2e8f0" }
     },
     {
       "name": "Vue Directives",
@@ -451,10 +555,7 @@
         "meta.directive.vue",
         "punctuation.definition.directive.vue"
       ],
-      "settings": {
-        "foreground": "#c084fc",
-        "fontStyle": "bold"
-      }
+      "settings": { "foreground": "#c084fc", "fontStyle": "bold" }
     },
     {
       "name": "Vue Interpolation",
@@ -462,33 +563,24 @@
         "expression.embbeded.vue",
         "punctuation.definition.expression.vue"
       ],
-      "settings": {
-        "foreground": "#7dd3fc"
-      }
+      "settings": { "foreground": "#7dd3fc" }
     },
     {
       "name": "Vue Composition API",
       "scope": ["support.function.vue", "meta.function-call.vue"],
-      "settings": {
-        "foreground": "#7dd3fc"
-      }
+      "settings": { "foreground": "#7dd3fc" }
     },
     {
       "name": "Vue Lifecycle Hooks",
       "scope": ["support.function.vue.lifecycle"],
-      "settings": {
-        "foreground": "#c084fc",
-        "fontStyle": "italic"
-      }
+      "settings": { "foreground": "#c084fc", "fontStyle": "italic" }
     },
 
-    // === CSS ===
+    // === CSS（保持不变）===
     {
       "name": "CSS Properties",
       "scope": ["support.type.property-name.css", "meta.property-name.css"],
-      "settings": {
-        "foreground": "#7dd3fc"
-      }
+      "settings": { "foreground": "#7dd3fc" }
     },
     {
       "name": "CSS Units",
@@ -499,9 +591,7 @@
         "keyword.other.unit.em.css",
         "keyword.other.unit.percent.css"
       ],
-      "settings": {
-        "foreground": "#fbbf24"
-      }
+      "settings": { "foreground": "#fbbf24" }
     },
     {
       "name": "CSS Variable Definitions",
@@ -510,9 +600,7 @@
         "source.css variable",
         "variable.css"
       ],
-      "settings": {
-        "foreground": "#7dd3fc"
-      }
+      "settings": { "foreground": "#7dd3fc" }
     },
     {
       "name": "CSS Variable Usage",
@@ -520,9 +608,7 @@
         "meta.function.css variable",
         "support.constant.property-value.css"
       ],
-      "settings": {
-        "foreground": "#7dd3fc"
-      }
+      "settings": { "foreground": "#7dd3fc" }
     },
     {
       "name": "CSS Selectors",
@@ -531,9 +617,7 @@
         "entity.other.attribute-name.id.css",
         "entity.name.tag.css"
       ],
-      "settings": {
-        "foreground": "#3b82f6"
-      }
+      "settings": { "foreground": "#3b82f6" }
     },
     {
       "name": "CSS Pseudo",
@@ -541,102 +625,175 @@
         "entity.other.attribute-name.pseudo-class.css",
         "entity.other.attribute-name.pseudo-element.css"
       ],
-      "settings": {
-        "foreground": "#7dd3fc",
-        "fontStyle": "italic"
-      }
+      "settings": { "foreground": "#7dd3fc", "fontStyle": "italic" }
     },
     {
       "name": "CSS At-rules",
       "scope": ["keyword.control.at-rule.css", "meta.at-rule.css keyword"],
-      "settings": {
-        "foreground": "#3b82f6",
-        "fontStyle": "bold"
-      }
+      "settings": { "foreground": "#3b82f6", "fontStyle": "bold" }
     },
     {
       "name": "CSS Numbers",
       "scope": ["constant.numeric.css"],
-      "settings": {
-        "foreground": "#fbbf24"
-      }
+      "settings": { "foreground": "#fbbf24" }
     },
-    // 注意：移除了强制给颜色值着色的规则，颜色值将显示自身颜色
 
-    // === Markdown ===
+    // === Markdown（保持不变）===
     {
       "name": "Markdown Heading",
       "scope": ["markdown.heading", "markup.heading"],
-      "settings": {
-        "foreground": "#34d399",
-        "fontStyle": "bold"
-      }
+      "settings": { "foreground": "#34d399", "fontStyle": "bold" }
     },
     {
       "name": "Markdown Link",
       "scope": ["string.other.link.title.markdown"],
-      "settings": {
-        "foreground": "#7dd3fc"
-      }
+      "settings": { "foreground": "#7dd3fc" }
     },
     {
       "name": "Markup Italic",
       "scope": ["markup.italic"],
-      "settings": {
-        "fontStyle": "italic",
-        "foreground": "#cbd5e1"
-      }
+      "settings": { "fontStyle": "italic", "foreground": "#cbd5e1" }
     },
     {
       "name": "Markup Bold",
       "scope": ["markup.bold"],
-      "settings": {
-        "fontStyle": "bold",
-        "foreground": "#e2e8f0"
-      }
+      "settings": { "fontStyle": "bold", "foreground": "#e2e8f0" }
     },
     {
       "name": "Markdown - Raw Block",
       "scope": ["markup.raw.block"],
-      "settings": {
-        "foreground": "#3b82f6"
-      }
+      "settings": { "foreground": "#3b82f6" }
     },
     {
       "name": "Markdown - Fenced Language",
       "scope": ["variable.language.fenced.markdown"],
-      "settings": {
-        "foreground": "#94a3b8"
-      }
+      "settings": { "foreground": "#94a3b8" }
     },
 
-    // === JSON ===
+    // === JSON（保持不变）===
     {
       "name": "JSON Key - Level 0",
       "scope": [
         "source.json meta.structure.dictionary.json support.type.property-name.json"
       ],
-      "settings": {
-        "foreground": "#3b82f6"
-      }
+      "settings": { "foreground": "#3b82f6" }
     },
     {
       "name": "JSON Key - Level 1",
       "scope": [
         "source.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"
       ],
-      "settings": {
-        "foreground": "#fbbf24"
-      }
+      "settings": { "foreground": "#fbbf24" }
     },
     {
       "name": "JSON Key - Level 2",
       "scope": [
         "source.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"
       ],
+      "settings": { "foreground": "#f87171" }
+    },
+    // === Python 专用优化（包含兜底规则）===
+    {
+      "name": "Python Local Variables - 局部变量退后",
+      "scope": ["variable.other.readwrite.python", "variable.other.python"],
       "settings": {
-        "foreground": "#f87171"
+        "foreground": "#cbd5e1"
+      }
+    },
+    {
+      "name": "Python Function Parameters - 参数斜体退后",
+      "scope": ["variable.parameter.python"],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#cbd5e1"
+      }
+    },
+    {
+      "name": "Python Constants - 全局常量保持亮度",
+      "scope": ["constant.other.python", "variable.other.constant.python"],
+      "settings": {
+        "foreground": "#e2e8f0",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Python Instance Attributes - 成员属性退后",
+      "scope": ["variable.other.property.python"],
+      "settings": {
+        "foreground": "#cbd5e1"
+      }
+    },
+    {
+      "name": "Python Dictionary Keys - 字典键退后",
+      "scope": ["meta.mapping.key.python", "string.unquoted.key.python"],
+      "settings": {
+        "foreground": "#cbd5e1"
+      }
+    },
+    {
+      "name": "Python Decorators - 装饰器用紫色",
+      "scope": [
+        "entity.name.function.decorator.python",
+        "meta.decorator.python"
+      ],
+      "settings": {
+        "foreground": "#c084fc",
+        "fontStyle": "italic"
+      }
+    },
+    // 兜底规则：针对所有 source.python 中的未匹配变量
+    {
+      "name": "Python Variables - 通用兜底",
+      "scope": ["source.python variable.other"],
+      "settings": {
+        "foreground": "#cbd5e1"
       }
     }
-  ]
+  ],
+  "semanticTokenColors": {
+    // 变量（局部变量、全局变量等）调暗
+    "variable": "#cbd5e1",
+    "variable.readonly": "#cbd5e1",
+    "variable.readwrite": "#cbd5e1",
+
+    // 函数参数斜体调暗
+    "parameter": {
+      "foreground": "#cbd5e1",
+      "fontStyle": "italic"
+    },
+
+    // 属性（如对象属性、类成员）调暗
+    "property": "#94a3b8",
+
+    // 常量（包括枚举成员）保持亮度（但也可根据需要调暗）
+    "constant": "#e2e8f0",
+    "constant.builtin": "#e2e8f0",
+    "enumMember": "#e2e8f0",
+
+    // 函数/方法保持发光蓝
+    "function": "#7dd3fc",
+    "method": "#7dd3fc",
+
+    // 类名保持暖色点缀
+    "class": "#fbbf24",
+    "struct": "#fbbf24",
+
+    // 接口/类型别名可用主蓝
+    "interface": "#3b82f6",
+    "type": "#3b82f6",
+    "typeParameter": "#3b82f6",
+
+    // 命名空间/模块用柔和灰
+    "namespace": "#94a3b8",
+
+    // 装饰器/注解用紫色（月虹）
+    "decorator": "#c084fc",
+    "annotation": "#c084fc",
+
+    // 宏（如 Rust）用紫色
+    "macro": "#c084fc",
+
+    // 标签（如 goto 标签）用错误红
+    "label": "#f87171"
+  }
 }

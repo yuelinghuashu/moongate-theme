@@ -3,8 +3,8 @@
   "displayName": "Moongate Dark",
   "description": "Where Moon Meets Code",
   "publisher": "yuelinghuashu",
-  "icon": "./images/icon.png",
-  "version": "1.0.0",
+  "icon": "images/icon.png",
+  "version": "1.0.1",
   "engines": {
     "vscode": "^1.109.0"
   },
