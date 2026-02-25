@@ -3,6 +3,12 @@
 
 # 🌙 Moongate Theme
 
+[中文](#Chinese) | [English](#English)
+
+---
+
+## <span id="Chinese">中文</span>
+
 > 从博客到编辑器，让代码栖息在月光里
 
 Moongate 是一个从个人博客 [moongate.top] 衍生而来的 VS Code 主题，
@@ -23,26 +29,32 @@ Moongate 是一个从个人博客 [moongate.top] 衍生而来的 VS Code 主题�
 ## 📸 预览
 
 ### HTML
+
 ![HTML 预览](./images/html-preview.png)
 
 ### JavaScript
+
 ![JavaScript 预览](./images/javascript-preview.png)
 
 ### TypeScript
+
 ![TypeScript 预览](./images/typescript-preview.png)
 
 ### Vue
+
 ![Vue 预览](./images/vue-preview.png)
 
 ### Python
+
 ![Python 预览](./images/python-preview.png)
 
 ### Json
+
 ![Json 预览](./images/json-preview.png)
 
 ### Markdown
-![Markdown 预览](./images/markdown-preview.png)
 
+![Markdown 预览](./images/markdown-preview.png)
 
 ## ⚙️ 推荐配置
 
@@ -59,3 +71,63 @@ Moongate 是一个从个人博客 [moongate.top] 衍生而来的 VS Code 主题�
 ```
 
 开启后，Moongate 会对变量、参数、属性等进行精细的亮度分层，大幅提升代码可读性。
+
+[⬆ 返回顶部](#)
+
+## <span id="English">English</span>
+
+> From blog to editor, let your code rest in moonlight
+
+Moongate is a VS Code theme derived from the personal blog [moongate.top], bringing the blog's visual language into your code editor.
+
+## ✨ Design Philosophy
+
+- **Moonlight softness**: Long coding sessions without eye strain
+- **Gate-like boundaries**: Clear visual hierarchy
+- **Light and dark companion**: Accompany you through every coding moment
+
+## 🎨 Color System
+
+- **Primary**: Blues inspired by moonlight
+- **Background**: Deep night sky in dark mode, dawn-like lightness in light mode
+- **Accent**: Highlights sprinkled like moonlight
+
+## 📸 Preview
+
+### JavaScript
+
+![JavaScript Preview](./images/javascript-preview.png)
+
+### TypeScript
+
+![TypeScript Preview](./images/typescript-preview.png)
+
+### Python
+
+![Python Preview](./images/python-preview.png)
+
+### HTML
+
+![HTML Preview](./images/html-preview.png)
+
+## ⚙️ Recommended Configuration
+
+For the best Moongate experience, enable VS Code's semantic highlighting:
+
+1. Open settings (`Ctrl+,`)
+2. Search for `editor.semanticHighlighting.enabled`
+3. Check **Enabled** (or add to your `settings.json`):
+
+```json
+{
+  "editor.semanticHighlighting.enabled": true
+}
+```
+
+Once enabled, Moongate will apply fine-grained brightness layering to variables, parameters, and properties, significantly improving code readability.
+
+[⬆ Back to top](#)
+
+探索不息，编码不止 | Explore endlessly, code without ceasing
+
+© 2026 MOONGATE
