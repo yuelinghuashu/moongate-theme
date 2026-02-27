@@ -753,7 +753,10 @@
   "semanticTokenColors": {
     // 变量（局部变量、全局变量等）调暗
     "variable": "#cbd5e1",
-    "variable.readonly": "#cbd5e1",
+    "variable.readonly": {
+      "foreground": "#cbd5e1",
+      "fontStyle": "italic"
+    },
     "variable.readwrite": "#cbd5e1",
 
     // 函数参数斜体调暗
@@ -781,13 +784,16 @@
     // 接口/类型别名可用主蓝
     "interface": "#3b82f6",
     "type": "#3b82f6",
-    "typeParameter": "#3b82f6",
+    "typeParameter": "#22d3ee",
 
     // 命名空间/模块用柔和灰
     "namespace": "#94a3b8",
 
     // 装饰器/注解用紫色（月虹）
-    "decorator": "#c084fc",
+    "*.decorator": {
+      "foreground": "#c084fc",
+      "fontStyle": "italic"
+    },
     "annotation": "#c084fc",
 
     // 宏（如 Rust）用紫色
