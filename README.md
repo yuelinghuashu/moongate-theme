@@ -1,4 +1,4 @@
-[![Version](https://img.shields.io/badge/version-1.1.0-blue)]()
+[![Version](https://img.shields.io/badge/version-1.2.0-blue)]()
 [![Marketplace](https://img.shields.io/badge/vscode-marketplace-brightgreen)]()
 
 [中文](#Chinese) | [English](#English)
@@ -22,6 +22,10 @@
 ### Vue
 
 ![Vue 预览](./images/vue-preview.png)
+
+### React
+
+![React 预览](./images/react-preview.png)
 
 ### Python
 
@@ -69,6 +73,8 @@ Moongate 是一个从个人博客 [moongate.top] 衍生而来的 VS Code 主题�
 
 ## ⚙️ 推荐配置
 
+### 语义高亮
+
 为了获得 Moongate 最佳的视觉体验，建议开启 VS Code 的语义高亮功能：
 
 1. 打开设置（`Ctrl+,`）
@@ -82,6 +88,16 @@ Moongate 是一个从个人博客 [moongate.top] 衍生而来的 VS Code 主题�
 ```
 
 开启后，Moongate 会对变量、参数、属性等进行精细的亮度分层，大幅提升代码可读性。
+
+### 与 Better Comments 插件搭配
+
+如果你使用 Better Comments 插件，可以应用 Moongate 的官方配色预设：
+
+1. 打开 VS Code 设置（JSON 格式）
+
+2. 将 extras/better-comments.json 中的内容合并到 better-comments.tags 字段中
+
+3. 保存后即可看到特殊注释呈现 Moongate 专属色彩。
 
 [⬆ 返回顶部](#)
 
@@ -120,11 +136,13 @@ These aren't flashy features. They're the small frictions you never knew were th
 
 ## ⚙️ Recommended Setup
 
-To get the full Moongate experience, semantic highlighting is a must. It's what lets us make those fine-grained distinctions between variables, parameters, and properties.
+### Semantic Highlighting
 
-1. Open VS Code settings (`Ctrl+,`)
+For the best Moongate experience, enabling VS Code's semantic highlighting is highly recommended:
+
+1. Open settings (`Ctrl+,`)
 2. Search for `editor.semanticHighlighting.enabled`
-3. Check **Enabled** (or add it to your `settings.json`):
+3. Check **Enabled** (or add it directly to your `settings.json`):
 
 ```json
 {
@@ -132,7 +150,15 @@ To get the full Moongate experience, semantic highlighting is a must. It's what 
 }
 ```
 
-Once enabled, Moongate will apply fine-grained brightness layering to variables, parameters, and properties, significantly improving code readability.
+Once enabled, Moongate applies fine-grained brightness layering to variables, parameters, and properties, significantly improving code readability.
+
+### Pairing with Better Comments
+
+If you use the Better Comments extension, you can apply Moongate's official color presets:
+
+1. Open your VS Code settings (JSON format)
+2. Merge the contents of `extras/better-comments.json` into the `better-comments.tags` field
+3. Save the file, and your special comments will instantly display Moongate's exclusive colors.
 
 [⬆ Back to top](#)
 

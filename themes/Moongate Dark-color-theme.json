@@ -203,12 +203,14 @@
     "gitDecoration.ignoredResourceForeground": "#2d3748",
     "gitDecoration.conflictingResourceForeground": "#fbbf24",
 
-    /* ===== 终端 ===== */
+    /* ===== 终端颜色同步（基于 Moongate 月语义）===== */
     "terminal.background": "#0f172a",
     "terminal.foreground": "#e2e8f0",
-    "terminal.border": "#2d3748",
-    "terminal.selectionBackground": "#3b82f640",
     "terminalCursor.foreground": "#3b82f6",
+    "terminal.selectionBackground": "#3b82f640",
+    "terminal.border": "#2d3748",
+
+    // ANSI 16色配置
     "terminal.ansiBlack": "#1e293b",
     "terminal.ansiRed": "#f87171",
     "terminal.ansiGreen": "#34d399",
@@ -217,6 +219,16 @@
     "terminal.ansiMagenta": "#c084fc",
     "terminal.ansiCyan": "#22d3ee",
     "terminal.ansiWhite": "#e2e8f0",
+
+    // 亮色版本（Bright）
+    "terminal.ansiBrightBlack": "#2d3748",
+    "terminal.ansiBrightRed": "#f87171",
+    "terminal.ansiBrightGreen": "#34d399",
+    "terminal.ansiBrightYellow": "#fbbf24",
+    "terminal.ansiBrightBlue": "#3b82f6",
+    "terminal.ansiBrightMagenta": "#c084fc",
+    "terminal.ansiBrightCyan": "#22d3ee",
+    "terminal.ansiBrightWhite": "#ffffff",
 
     /* ===== 通知 ===== */
     "notifications.background": "#1e293b",
@@ -669,6 +681,14 @@
       "scope": ["variable.language.fenced.markdown"],
       "settings": { "foreground": "#94a3b8" }
     },
+    {
+      "name": "Markdown Fenced Code Language Identifier",
+      "scope": "fenced_code.block.language.markdown",
+      "settings": {
+        "foreground": "#c084fc",
+        "fontStyle": "italic"
+      }
+    },
 
     // === JSON（保持不变）===
     {
@@ -747,6 +767,54 @@
       "scope": ["source.python variable.other"],
       "settings": {
         "foreground": "#cbd5e1"
+      }
+    },
+    {
+      "name": "Better Comments - TODO",
+      "scope": ["comment.todo"],
+      "settings": {
+        "foreground": "#fbbf24",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Better Comments - FIXME",
+      "scope": ["comment.fixme"],
+      "settings": {
+        "foreground": "#f87171",
+        "fontStyle": "bold italic"
+      }
+    },
+    {
+      "name": "Better Comments - NOTE",
+      "scope": ["comment.note"],
+      "settings": {
+        "foreground": "#7dd3fc",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Better Comments - HACK",
+      "scope": ["comment.hack"],
+      "settings": {
+        "foreground": "#c084fc",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Better Comments - BUG",
+      "scope": ["comment.bug"],
+      "settings": {
+        "foreground": "#f87171",
+        "fontStyle": "bold underline"
+      }
+    },
+    {
+      "name": "Better Comments - XXX",
+      "scope": ["comment.xxx"],
+      "settings": {
+        "foreground": "#fbbf24",
+        "fontStyle": "bold"
       }
     }
   ],
