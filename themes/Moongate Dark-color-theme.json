@@ -241,7 +241,18 @@
     "extensionButton.prominentHoverBackground": "#2563eb",
 
     /* ===== 进度条 ===== */
-    "progressBar.background": "#3b82f6"
+    "progressBar.background": "#3b82f6",
+
+    /* ===== 括号高亮优化（与月语义融合）===== */
+    "editorBracketHighlight.foreground1": "#7dd3fc", // 第1层：发光蓝（函数色）
+    "editorBracketHighlight.foreground2": "#34d399", // 第2层：月灵花绿（字符串色）
+    "editorBracketHighlight.foreground3": "#fbbf24", // 第3层：月光黄（数字色）
+    "editorBracketHighlight.foreground4": "#c084fc", // 第4层：月虹紫（装饰器色）
+    "editorBracketHighlight.foreground5": "#3b82f6", // 第5层：主蓝（关键字色）
+    "editorBracketHighlight.foreground6": "#94a3b8", // 第6层：月影灰（注释色）
+
+    // 未匹配括号（错误情况）
+    "editorBracketHighlight.unexpectedBracket.foreground": "#f87171", // 红月
   },
   "tokenColors": [
     // === 基础规则 ===
@@ -769,6 +780,7 @@
         "foreground": "#cbd5e1"
       }
     },
+    // 特殊注释
     {
       "name": "Better Comments - TODO",
       "scope": ["comment.todo"],
@@ -816,6 +828,49 @@
         "foreground": "#fbbf24",
         "fontStyle": "bold"
       }
+    },
+    {
+      "name": "JSDoc - Tags",
+      "scope": [
+        "comment.block.documentation keyword.other.documentation",
+        "storage.type.class.jsdoc",
+        "entity.name.type.instance.jsdoc"
+      ],
+      "settings": {
+        "foreground": "#3b82f6",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "JSDoc - Parameter names",
+      "scope": [
+        "variable.other.jsdoc",
+        "entity.name.type.instance.jsdoc variable"
+      ],
+      "settings": {
+        "foreground": "#34d399",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "JSDoc - Types",
+      "scope": [
+        "comment.block.documentation storage.type",
+        "comment.block.documentation entity.name.type"
+      ],
+      "settings": {
+        "foreground": "#7dd3fc"
+      }
+    },
+    {
+      "name": "JSDoc - Other (brackets, punctuation)",
+      "scope": [
+        "punctuation.definition.block.tag.jsdoc",
+        "punctuation.definition.bracket.curly.jsdoc"
+      ],
+      "settings": {
+        "foreground": "#64748b"
+      }
     }
   ],
   "semanticTokenColors": {
@@ -841,12 +896,32 @@
     "constant.builtin": "#e2e8f0",
     "enumMember": "#e2e8f0",
 
-    // 函数/方法保持发光蓝
+    // 函数调用（普通）
     "function": "#7dd3fc",
+
+    // 函数定义（加粗）
+    "function.declaration": {
+      "foreground": "#7dd3fc",
+      "fontStyle": "bold"
+    },
+
+    // 方法调用（普通）
     "method": "#7dd3fc",
 
-    // 类名保持暖色点缀
+    // 方法定义（加粗）
+    "method.declaration": {
+      "foreground": "#7dd3fc",
+      "fontStyle": "bold"
+    },
+
+    // 类名（普通）
     "class": "#fbbf24",
+
+    // 类定义（加粗）
+    "class.declaration": {
+      "foreground": "#fbbf24",
+      "fontStyle": "bold"
+    },
     "struct": "#fbbf24",
 
     // 接口/类型别名可用主蓝
@@ -868,6 +943,65 @@
     "macro": "#c084fc",
 
     // 标签（如 goto 标签）用错误红
-    "label": "#f87171"
+    "label": "#f87171",
+    // 静态成员
+    "method.static": {
+      "foreground": "#7dd3fc",
+      "fontStyle": "italic"
+    },
+    "property.static": {
+      "foreground": "#94a3b8",
+      "fontStyle": "italic"
+    },
+
+    // 废弃标记（所有类型）
+    "*.deprecated": {
+      "foreground": "#64748b",
+      "fontStyle": "strikethrough"
+    },
+
+    // 异步函数
+    "function.async": {
+      "foreground": "#7dd3fc",
+      "fontStyle": "bold italic"
+    },
+    "method.async": {
+      "foreground": "#7dd3fc",
+      "fontStyle": "bold italic"
+    },
+
+    // 抽象成员
+    "class.abstract": {
+      "foreground": "#fbbf24",
+      "fontStyle": "italic"
+    },
+    "method.abstract": {
+      "foreground": "#7dd3fc",
+      "fontStyle": "italic"
+    },
+
+    // 只读参数
+    "parameter.readonly": {
+      "foreground": "#cbd5e1",
+      "fontStyle": "bold italic"
+    },
+
+    // 被修改的变量
+    "variable.modification": {
+      "foreground": "#cbd5e1",
+      "fontStyle": "underline"
+    },
+
+    // 内置库符号（保留原色，加粗）
+    "*.defaultLibrary": {
+      "fontStyle": "bold"
+    },
+
+    // 类型构造器修饰符（需要语言服务器支持）
+    "variable.array": "#cbd5e1",
+    "variable.pointer": {
+      "foreground": "#cbd5e1",
+      "fontStyle": "underline"
+    }
   }
 }
