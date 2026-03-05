@@ -1,5 +1,59 @@
 # 更新日志 | Changelog
 
+## [1.4.0] - 2026-03-05
+
+### ✨ 白天可读性优化：让月光穿透环境光
+- **注释提亮**：`#94a3b8` → `#a5b4cb`，强光下依然清晰，夜间依然退后
+- **操作符提亮**：`#64748b` → `#8596a5`，逻辑骨架不再“消失”
+- **变量微调**：`#cbd5e1` → `#d4dcee`，主体文字更扎实
+- **函数优化**：`#7dd3fc` → `#87cefa`，温润的荧光蓝，日夜兼顾
+- **冒号/点操作符统一提亮**：从 `#64748b` 提升至 `#8596a5`，细小符号不再丢失
+- **状态栏前景提亮**：`#94a3b8` → `#cbd5e1`，信息易读，仍保持沉降
+- **选中文本添加边框**：`editor.selectionHighlightBorder: #3b82f680`，操作更精准
+- **属性颜色统一**：成员属性与语义高亮一致为 `#94a3b8`，消除不一致
+- **异步函数颜色同步**：统一为 `#87cefa`，保留加粗斜体，语义不变
+
+### ✨ 搜索结果高亮分层
+- **当前选中匹配项**：主蓝半透明背景 + 边框，一眼定位
+- **其他匹配项**：更淡的背景，层次分明
+
+### ✨ 视觉契约：Moongate 的硬件适配哲学
+Moongate Dark 不是为了“亮”而设计的，它是为了“对比度”设计的。在物理亮度极低的环境下，对比度就是你眼睛的最后一道防线。本次更新我们同步发布了 **《Moongate 视觉契约》**，帮助你校准显示器，让月光在你的屏幕上准确还原。你可以在 `extras/` 目录中找到这份指南，或直接阅读 README。
+
+### 🔧 修复与优化
+- 修复了部分场景下属性颜色不一致的问题
+- 优化了 Python 装饰器的显示效果
+- 微调了 JSDoc 标签的亮度，与主语义色对齐
+
+---
+
+## [1.4.0] - 2026-03-05
+
+### ✨ Daylight Readability Optimization: Let Moonlight Pierce the Ambient Light
+- **Comments brightened**: `#94a3b8` → `#a5b4cb` — clear in bright light, still receding at night
+- **Operators brightened**: `#64748b` → `#8596a5` — logical skeleton never disappears
+- **Variables fine‑tuned**: `#cbd5e1` → `#d4dcee` — body text more solid
+- **Functions refined**: `#7dd3fc` → `#87cefa` — a warm, glowing blue, balanced day and night
+- **Colon/dot operators unified**: from `#64748b` to `#8596a5` — tiny symbols no longer lost
+- **Status bar foreground brightened**: `#94a3b8` → `#cbd5e1` — information readable, still settled
+- **Selection border added**: `editor.selectionHighlightBorder: #3b82f680` — more precise interaction
+- **Property color unified**: member properties now `#94a3b8` (matching semantic highlighting), eliminating inconsistency
+- **Async function color synchronized**: now `#87cefa`, keeping bold italic for semantic distinction
+
+### ✨ Search Result Layering
+- **Current match**: primary blue translucent background + border — instantly locatable
+- **Other matches**: lighter background — clear hierarchy
+
+### ✨ The Visual Contract: Moongate’s Hardware Adaptation Philosophy
+Moongate Dark is not designed for “brightness”; it is designed for **contrast**. In extremely low physical brightness, contrast is the last line of defense for your eyes. With this release, we are also introducing the **“Moongate Visual Contract”** — a guide to help you calibrate your monitor so that the moonlight renders accurately on your screen. You can find it in the `extras/` directory or read it directly in the README.
+
+### 🔧 Fixes & Optimizations
+- Fixed property color inconsistencies in some scenarios
+- Improved Python decorator display
+- Slightly adjusted JSDoc tag brightness to align with primary semantic colors
+
+---
+
 ## [1.3.0] - 2026-03-03
 
 ### ✨ 语义修饰符深度定制

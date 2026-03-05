@@ -38,7 +38,7 @@
 
     /* ===== 状态栏 - 极简沉降版 ===== */
     "statusBar.background": "#0f172a",
-    "statusBar.foreground": "#94a3b8",
+    "statusBar.foreground": "#cbd5e1",
     "statusBar.border": "#2d3748",
     "statusBar.noFolderBackground": "#0f172a",
     "statusBar.noFolderForeground": "#94a3b8",
@@ -136,9 +136,14 @@
     "editorLineNumber.activeForeground": "#e2e8f0",
     "editorCursor.foreground": "#3b82f6",
     "editor.selectionBackground": "#3b82f640",
+    "editor.selectionHighlightBorder": "#3b82f680",
     "editor.selectionHighlightBackground": "#3b82f220",
-    "editor.findMatchBackground": "#3b82f660",
-    "editor.findMatchHighlightBackground": "#3b82f230",
+    "editor.findMatchBackground": "#3b82f640",
+    "editor.findMatchBorder": "#3b82f6",
+    "editor.findMatchHighlightBackground": "#3b82f220",
+    "editor.findMatchHighlightBorder": "#3b82f600",
+    "editor.findRangeHighlightBackground": "#3b82f210",
+    "editor.findRangeHighlightBorder": "#3b82f600",
     "editor.wordHighlightBackground": "#3b82f230",
     "editor.wordHighlightStrongBackground": "#3b82f250",
     "editorWhitespace.foreground": "#2d3748",
@@ -252,7 +257,7 @@
     "editorBracketHighlight.foreground6": "#94a3b8", // 第6层：月影灰（注释色）
 
     // 未匹配括号（错误情况）
-    "editorBracketHighlight.unexpectedBracket.foreground": "#f87171", // 红月
+    "editorBracketHighlight.unexpectedBracket.foreground": "#f87171" // 红月
   },
   "tokenColors": [
     // === 基础规则 ===
@@ -261,7 +266,7 @@
       "scope": ["comment", "punctuation.definition.comment"],
       "settings": {
         "fontStyle": "italic",
-        "foreground": "#94a3b8"
+        "foreground": "#a5b4cb"
       }
     },
     {
@@ -276,7 +281,7 @@
       "name": "Operator - 视觉退后",
       "scope": ["keyword.operator", "punctuation", "meta.brace"],
       "settings": {
-        "foreground": "#64748b"
+        "foreground": "#8596a5"
       }
     },
     {
@@ -288,7 +293,7 @@
         "support.function"
       ],
       "settings": {
-        "foreground": "#7dd3fc"
+        "foreground": "#87cefa"
       }
     },
     {
@@ -410,7 +415,7 @@
         "variable.other.readwrite"
       ],
       "settings": {
-        "foreground": "#cbd5e1"
+        "foreground": "#d4dcee"
       }
     },
     {
@@ -437,7 +442,7 @@
       "name": "Variables - 成员属性",
       "scope": ["variable.other.property", "variable.other.member"],
       "settings": {
-        "foreground": "#cbd5e1"
+        "foreground": "#94a3b8"
       }
     },
     {
@@ -484,7 +489,7 @@
         "punctuation.separator.mapping.key-value"
       ],
       "settings": {
-        "foreground": "#64748b"
+        "foreground": "#8596a5"
       }
     },
 
@@ -523,7 +528,7 @@
       "name": "Method Chain Separator - 点操作符",
       "scope": ["punctuation.accessor", "punctuation.separator.dot"],
       "settings": {
-        "foreground": "#64748b"
+        "foreground": "#8596a5"
       }
     },
 
@@ -875,7 +880,7 @@
   ],
   "semanticTokenColors": {
     // 变量（局部变量、全局变量等）调暗
-    "variable": "#cbd5e1",
+    "variable": "#d4dcee",
     "variable.readonly": {
       "foreground": "#cbd5e1",
       "fontStyle": "italic"
@@ -897,20 +902,20 @@
     "enumMember": "#e2e8f0",
 
     // 函数调用（普通）
-    "function": "#7dd3fc",
+    "function": "#87cefa",
 
     // 函数定义（加粗）
     "function.declaration": {
-      "foreground": "#7dd3fc",
+      "foreground": "#87cefa",
       "fontStyle": "bold"
     },
 
     // 方法调用（普通）
-    "method": "#7dd3fc",
+    "method": "#87cefa",
 
     // 方法定义（加粗）
     "method.declaration": {
-      "foreground": "#7dd3fc",
+      "foreground": "#87cefa",
       "fontStyle": "bold"
     },
 
@@ -962,11 +967,11 @@
 
     // 异步函数
     "function.async": {
-      "foreground": "#7dd3fc",
+      "foreground": "#87cefa",
       "fontStyle": "bold italic"
     },
     "method.async": {
-      "foreground": "#7dd3fc",
+      "foreground": "#87cefa",
       "fontStyle": "bold italic"
     },
 
