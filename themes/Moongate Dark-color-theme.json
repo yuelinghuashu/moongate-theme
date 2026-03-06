@@ -161,6 +161,10 @@
     "editorWarning.foreground": "#fbbf24",
     "editorInfo.foreground": "#3b82f6",
     "editorHint.foreground": "#94a3b8",
+
+    "editorError.border": "#f8717180", // 半透明红
+    "editorWarning.border": "#fbbf2480", // 半透明黄
+
     "editorGutter.modifiedBackground": "#fbbf24",
     "editorGutter.addedBackground": "#34d399",
     "editorGutter.deletedBackground": "#f87171",
@@ -207,6 +211,11 @@
     "gitDecoration.untrackedResourceForeground": "#94a3b8",
     "gitDecoration.ignoredResourceForeground": "#2d3748",
     "gitDecoration.conflictingResourceForeground": "#fbbf24",
+
+    "editorInlayHint.foreground": "#64748b", // 月影灰，比注释 #94a3b8 更暗
+    "editorInlayHint.background": "#1e293b40", // 极淡的背景，增加辨识度
+    "editorInlayHint.typeForeground": "#64748b", // 类型提示
+    "editorInlayHint.parameterForeground": "#64748b", // 参数提示
 
     /* ===== 终端颜色同步（基于 Moongate 月语义）===== */
     "terminal.background": "#0f172a",

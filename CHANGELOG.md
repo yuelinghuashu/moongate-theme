@@ -1,5 +1,29 @@
 # 更新日志 | Changelog
 
+## [1.5.0] - 2026-03-06
+
+### ✨ 新语法支持
+- **Python 嵌套 f-string**：多层嵌套下变量、字符串、表达式着色准确
+
+### ✨ 语义增强
+- **Inlay Hints 视觉优化**：内嵌提示使用月影灰（`#64748b`）退后，不干扰主逻辑
+- **诊断信息边框**：错误、警告、信息添加半透明边框，夜间更柔和
+
+### 🔧 优化
+- 微调了部分颜色的亮度阶梯
+
+## [1.5.0] - 2026-03-06
+
+### ✨ New Syntax Support
+- **Python nested f-strings**: Accurate coloring of variables, strings, and expressions in multi‑level nested f‑strings
+
+### ✨ Semantic Enhancements
+- **Inlay Hints visual refinement**: Inlay hints now recede with moon shadow gray (`#64748b`), keeping them from interfering with the main logic
+- **Diagnostic borders**: Errors, warnings, and information now have translucent borders, making them gentler at night
+
+### 🔧 Optimizations
+- Fine‑tuned the brightness ladder for some colors
+
 ## [1.4.0] - 2026-03-05
 
 ### ✨ 白天可读性优化：让月光穿透环境光
