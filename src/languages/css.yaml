@@ -1,0 +1,43 @@
+# CSS / SCSS 特定规则
+tokenColors:
+  - name: CSS Properties
+    scope: ["support.type.property-name.css", "meta.property-name.css"]
+    settings:
+      foreground: "${highlight}"
+
+  - name: CSS Units
+    scope: ["keyword.other.unit.css", "keyword.other.unit.rem.css", "keyword.other.unit.px.css", "keyword.other.unit.em.css", "keyword.other.unit.percent.css"]
+    settings:
+      foreground: "${warning}"
+
+  - name: CSS Variable Definitions
+    scope: ["meta.property-list.css variable", "source.css variable", "variable.css"]
+    settings:
+      foreground: "${highlight}"
+
+  - name: CSS Variable Usage
+    scope: ["meta.function.css variable", "support.constant.property-value.css"]
+    settings:
+      foreground: "${highlight}"
+
+  - name: CSS Selectors
+    scope: ["entity.other.attribute-name.class.css", "entity.other.attribute-name.id.css", "entity.name.tag.css"]
+    settings:
+      foreground: "${primary}"
+
+  - name: CSS Pseudo
+    scope: ["entity.other.attribute-name.pseudo-class.css", "entity.other.attribute-name.pseudo-element.css"]
+    settings:
+      foreground: "${highlight}"
+      fontStyle: "italic"
+
+  - name: CSS At-rules
+    scope: ["keyword.control.at-rule.css", "meta.at-rule.css keyword"]
+    settings:
+      foreground: "${primary}"
+      fontStyle: "bold"
+
+  - name: CSS Numbers
+    scope: ["constant.numeric.css"]
+    settings:
+      foreground: "${warning}"

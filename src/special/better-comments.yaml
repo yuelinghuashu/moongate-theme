@@ -1,0 +1,37 @@
+# Better Comments 插件特殊注释规则
+tokenColors:
+  - name: Better Comments - TODO
+    scope: ["comment.todo"]
+    settings:
+      foreground: "${warning}"
+      fontStyle: "bold"
+
+  - name: Better Comments - FIXME
+    scope: ["comment.fixme"]
+    settings:
+      foreground: "${error}"
+      fontStyle: "bold italic"
+
+  - name: Better Comments - NOTE
+    scope: ["comment.note"]
+    settings:
+      foreground: "${highlight}"
+      fontStyle: "italic"
+
+  - name: Better Comments - HACK
+    scope: ["comment.hack"]
+    settings:
+      foreground: "${purple}"
+      fontStyle: "bold"
+
+  - name: Better Comments - BUG
+    scope: ["comment.bug"]
+    settings:
+      foreground: "${error}"
+      fontStyle: "bold underline"
+
+  - name: Better Comments - XXX
+    scope: ["comment.xxx"]
+    settings:
+      foreground: "${warning}"
+      fontStyle: "bold"

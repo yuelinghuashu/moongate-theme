@@ -1,0 +1,40 @@
+# Markdown 特定规则
+tokenColors:
+  - name: Markdown Heading
+    scope: ["markdown.heading", "markup.heading"]
+    settings:
+      foreground: "${success}"
+      fontStyle: "bold"
+
+  - name: Markdown Link
+    scope: ["string.other.link.title.markdown"]
+    settings:
+      foreground: "${highlight}"
+
+  - name: Markup Italic
+    scope: ["markup.italic"]
+    settings:
+      fontStyle: "italic"
+      foreground: "${variableDim}"
+
+  - name: Markup Bold
+    scope: ["markup.bold"]
+    settings:
+      fontStyle: "bold"
+      foreground: "${text}"
+
+  - name: Markdown - Raw Block
+    scope: ["markup.raw.block"]
+    settings:
+      foreground: "${primary}"
+
+  - name: Markdown - Fenced Language
+    scope: ["variable.language.fenced.markdown"]
+    settings:
+      foreground: "${textMuted}"
+
+  - name: Markdown Fenced Code Language Identifier
+    scope: "fenced_code.block.language.markdown"
+    settings:
+      foreground: "${purple}"
+      fontStyle: "italic"

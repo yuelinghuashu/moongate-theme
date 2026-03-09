@@ -16,7 +16,7 @@
       {
         "label": "Moongate Dark",
         "uiTheme": "vs-dark",
-        "path": "./themes/Moongate Dark-color-theme.json"
+        "path": "./themes/moongate-dark.json"
       }
     ]
   },
@@ -25,10 +25,18 @@
     "url": "https://github.com/yuelinghuashu/moongate-theme.git"
   },
   "keywords": [
+    "dark",
     "moongate",
     "dark theme",
     "minimal",
     "scifi",
     "terminal"
-  ]
+  ],
+  "scripts": {
+    "build": "node scripts/build.js",
+    "prepublishOnly": "pnpm run build"
+  },
+  "devDependencies": {
+    "js-yaml": "^4.1.1"
+  }
 }

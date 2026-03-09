@@ -1,25 +1,19 @@
 {
   "name": "Moongate Dark",
+  "type": "dark",
   "colors": {
-    /* ===== 基础环境 ===== */
     "editor.background": "#0f172a",
     "editor.foreground": "#e2e8f0",
-
-    /* ===== 标题栏 ===== */
     "titleBar.activeBackground": "#0f172a",
     "titleBar.activeForeground": "#e2e8f0",
     "titleBar.inactiveBackground": "#1e293b",
     "titleBar.inactiveForeground": "#94a3b8",
     "titleBar.border": "#2d3748",
-
-    /* ===== 菜单栏 ===== */
     "menu.background": "#1e293b",
     "menu.foreground": "#e2e8f0",
     "menu.selectionBackground": "#3b82f6",
     "menu.selectionForeground": "#ffffff",
     "menu.border": "#2d3748",
-
-    /* ===== 活动栏（最左侧） ===== */
     "activityBar.background": "#1e293b",
     "activityBar.foreground": "#e2e8f0",
     "activityBar.inactiveForeground": "#94a3b8",
@@ -27,16 +21,12 @@
     "activityBar.activeBorder": "#3b82f6",
     "activityBarBadge.background": "#3b82f6",
     "activityBarBadge.foreground": "#ffffff",
-
-    /* ===== 侧边栏 ===== */
     "sideBar.background": "#1e293b",
     "sideBar.foreground": "#e2e8f0",
     "sideBar.border": "#2d3748",
     "sideBarTitle.foreground": "#94a3b8",
     "sideBarSectionHeader.background": "#0f172a",
     "sideBarSectionHeader.foreground": "#e2e8f0",
-
-    /* ===== 状态栏 - 极简沉降版 ===== */
     "statusBar.background": "#0f172a",
     "statusBar.foreground": "#cbd5e1",
     "statusBar.border": "#2d3748",
@@ -50,8 +40,6 @@
     "statusBarItem.prominentHoverBackground": "#252e40",
     "statusBarItem.remoteBackground": "#0f172a",
     "statusBarItem.remoteForeground": "#94a3b8",
-
-    /* ===== 选项卡 ===== */
     "tab.activeBackground": "#0f172a",
     "tab.activeForeground": "#e2e8f0",
     "tab.activeBorder": "#3b82f6",
@@ -60,19 +48,13 @@
     "tab.border": "#2d3748",
     "tab.hoverBackground": "#252e40",
     "tab.hoverForeground": "#e2e8f0",
-
-    /* ===== 编辑器组 ===== */
     "editorGroup.border": "#2d3748",
     "editorGroupHeader.tabsBackground": "#1e293b",
-
-    /* ===== 面板 ===== */
     "panel.background": "#0f172a",
     "panel.border": "#2d3748",
     "panelTitle.activeBorder": "#3b82f6",
     "panelTitle.activeForeground": "#e2e8f0",
     "panelTitle.inactiveForeground": "#94a3b8",
-
-    /* ===== 输入框 ===== */
     "input.background": "#1e293b",
     "input.foreground": "#e2e8f0",
     "input.border": "#2d3748",
@@ -85,30 +67,20 @@
     "inputValidation.infoBorder": "#3b82f6",
     "inputValidation.warningBackground": "#fbbf24",
     "inputValidation.warningBorder": "#fbbf24",
-
-    /* ===== 下拉框 ===== */
     "dropdown.background": "#1e293b",
     "dropdown.foreground": "#e2e8f0",
     "dropdown.border": "#2d3748",
-
-    /* ===== 按钮 ===== */
     "button.background": "#3b82f6",
     "button.foreground": "#ffffff",
     "button.hoverBackground": "#2563eb",
     "button.secondaryBackground": "#1e293b",
     "button.secondaryForeground": "#e2e8f0",
-
-    /* ===== 徽章 ===== */
     "badge.background": "#3b82f6",
     "badge.foreground": "#ffffff",
-
-    /* ===== 滚动条 ===== */
     "scrollbar.shadow": "#0f172a",
     "scrollbarSlider.background": "#3b82f660",
     "scrollbarSlider.hoverBackground": "#3b82f680",
     "scrollbarSlider.activeBackground": "#3b82f6",
-
-    /* ===== 列表/树 ===== */
     "list.activeSelectionBackground": "#1e3a8a",
     "list.activeSelectionForeground": "#e2e8f0",
     "list.hoverBackground": "#252e40",
@@ -120,38 +92,32 @@
     "list.highlightForeground": "#3b82f6",
     "list.errorForeground": "#f87171",
     "list.warningForeground": "#fbbf24",
-
-    /* ===== 树 ===== */
     "tree.indentGuidesStroke": "#2d3748",
-
-    /* ===== 快速选择器 ===== */
     "quickInput.background": "#1e293b",
     "quickInput.foreground": "#e2e8f0",
     "quickInputTitle.background": "#0f172a",
     "pickerGroup.border": "#2d3748",
     "pickerGroup.foreground": "#94a3b8",
-
-    /* ===== 编辑器细节 ===== */
     "editorLineNumber.foreground": "#94a3b8",
     "editorLineNumber.activeForeground": "#e2e8f0",
     "editorCursor.foreground": "#3b82f6",
     "editor.selectionBackground": "#3b82f640",
     "editor.selectionHighlightBorder": "#3b82f680",
-    "editor.selectionHighlightBackground": "#3b82f220",
+    "editor.selectionHighlightBackground": "#3b82f620",
     "editor.findMatchBackground": "#3b82f640",
     "editor.findMatchBorder": "#3b82f6",
-    "editor.findMatchHighlightBackground": "#3b82f220",
+    "editor.findMatchHighlightBackground": "#3b82f620",
     "editor.findMatchHighlightBorder": "#3b82f600",
-    "editor.findRangeHighlightBackground": "#3b82f210",
+    "editor.findRangeHighlightBackground": "#3b82f610",
     "editor.findRangeHighlightBorder": "#3b82f600",
-    "editor.wordHighlightBackground": "#3b82f230",
-    "editor.wordHighlightStrongBackground": "#3b82f250",
+    "editor.wordHighlightBackground": "#3b82f630",
+    "editor.wordHighlightStrongBackground": "#3b82f650",
     "editorWhitespace.foreground": "#2d3748",
     "editorIndentGuide.background1": "#2d3748",
     "editorIndentGuide.activeBackground1": "#3b82f6",
     "editorRuler.foreground": "#2d3748",
     "editorCodeLens.foreground": "#94a3b8",
-    "editorBracketMatch.background": "#3b82f230",
+    "editorBracketMatch.background": "#3b82f630",
     "editorBracketMatch.border": "#3b82f6",
     "editorOverviewRuler.border": "#2d3748",
     "editorOverviewRuler.modifiedForeground": "#fbbf24",
@@ -161,26 +127,15 @@
     "editorWarning.foreground": "#fbbf24",
     "editorInfo.foreground": "#3b82f6",
     "editorHint.foreground": "#94a3b8",
-
-    "editorError.border": "#f8717180", // 半透明红
-    "editorWarning.border": "#fbbf2480", // 半透明黄
-
-    "editorGutter.modifiedBackground": "#fbbf24",
-    "editorGutter.addedBackground": "#34d399",
-    "editorGutter.deletedBackground": "#f87171",
-
-    /* ===== 差异编辑器 ===== */
+    "editorError.border": "#f8717180",
+    "editorWarning.border": "#fbbf2480",
     "diffEditor.insertedTextBackground": "#34d39920",
     "diffEditor.removedTextBackground": "#f8717120",
     "diffEditor.border": "#2d3748",
-
-    /* ===== 面包屑 ===== */
     "breadcrumb.background": "#0f172a",
     "breadcrumb.foreground": "#94a3b8",
     "breadcrumb.focusForeground": "#e2e8f0",
     "breadcrumbPicker.background": "#1e293b",
-
-    /* ===== 编辑器小部件 ===== */
     "editorWidget.background": "#1e293b",
     "editorWidget.foreground": "#e2e8f0",
     "editorWidget.border": "#2d3748",
@@ -192,8 +147,6 @@
     "editorHoverWidget.background": "#1e293b",
     "editorHoverWidget.foreground": "#e2e8f0",
     "editorHoverWidget.border": "#2d3748",
-
-    /* ===== 调试 ===== */
     "debugToolBar.background": "#1e293b",
     "debugToolBar.border": "#2d3748",
     "debugIcon.startForeground": "#34d399",
@@ -203,28 +156,21 @@
     "debugIcon.continueForeground": "#34d399",
     "debugIcon.breakpointForeground": "#f87171",
     "debugIcon.breakpointDisabledForeground": "#94a3b8",
-
-    /* ===== Git 装饰 ===== */
     "gitDecoration.addedResourceForeground": "#34d399",
     "gitDecoration.modifiedResourceForeground": "#fbbf24",
     "gitDecoration.deletedResourceForeground": "#f87171",
     "gitDecoration.untrackedResourceForeground": "#94a3b8",
     "gitDecoration.ignoredResourceForeground": "#2d3748",
     "gitDecoration.conflictingResourceForeground": "#fbbf24",
-
-    "editorInlayHint.foreground": "#64748b", // 月影灰，比注释 #94a3b8 更暗
-    "editorInlayHint.background": "#1e293b40", // 极淡的背景，增加辨识度
-    "editorInlayHint.typeForeground": "#64748b", // 类型提示
-    "editorInlayHint.parameterForeground": "#64748b", // 参数提示
-
-    /* ===== 终端颜色同步（基于 Moongate 月语义）===== */
+    "editorInlayHint.foreground": "#64748b",
+    "editorInlayHint.background": "#1e293b40",
+    "editorInlayHint.typeForeground": "#64748b",
+    "editorInlayHint.parameterForeground": "#64748b",
     "terminal.background": "#0f172a",
     "terminal.foreground": "#e2e8f0",
     "terminalCursor.foreground": "#3b82f6",
     "terminal.selectionBackground": "#3b82f640",
     "terminal.border": "#2d3748",
-
-    // ANSI 16色配置
     "terminal.ansiBlack": "#1e293b",
     "terminal.ansiRed": "#f87171",
     "terminal.ansiGreen": "#34d399",
@@ -233,8 +179,6 @@
     "terminal.ansiMagenta": "#c084fc",
     "terminal.ansiCyan": "#22d3ee",
     "terminal.ansiWhite": "#e2e8f0",
-
-    // 亮色版本（Bright）
     "terminal.ansiBrightBlack": "#2d3748",
     "terminal.ansiBrightRed": "#f87171",
     "terminal.ansiBrightGreen": "#34d399",
@@ -243,36 +187,28 @@
     "terminal.ansiBrightMagenta": "#c084fc",
     "terminal.ansiBrightCyan": "#22d3ee",
     "terminal.ansiBrightWhite": "#ffffff",
-
-    /* ===== 通知 ===== */
     "notifications.background": "#1e293b",
     "notifications.foreground": "#e2e8f0",
     "notifications.border": "#2d3748",
-
-    /* ===== 扩展 ===== */
     "extensionButton.prominentBackground": "#3b82f6",
     "extensionButton.prominentForeground": "#ffffff",
     "extensionButton.prominentHoverBackground": "#2563eb",
-
-    /* ===== 进度条 ===== */
     "progressBar.background": "#3b82f6",
-
-    /* ===== 括号高亮优化（与月语义融合）===== */
-    "editorBracketHighlight.foreground1": "#7dd3fc", // 第1层：发光蓝（函数色）
-    "editorBracketHighlight.foreground2": "#34d399", // 第2层：月灵花绿（字符串色）
-    "editorBracketHighlight.foreground3": "#fbbf24", // 第3层：月光黄（数字色）
-    "editorBracketHighlight.foreground4": "#c084fc", // 第4层：月虹紫（装饰器色）
-    "editorBracketHighlight.foreground5": "#3b82f6", // 第5层：主蓝（关键字色）
-    "editorBracketHighlight.foreground6": "#94a3b8", // 第6层：月影灰（注释色）
-
-    // 未匹配括号（错误情况）
-    "editorBracketHighlight.unexpectedBracket.foreground": "#f87171" // 红月
+    "editorBracketHighlight.foreground1": "#7dd3fc",
+    "editorBracketHighlight.foreground2": "#34d399",
+    "editorBracketHighlight.foreground3": "#fbbf24",
+    "editorBracketHighlight.foreground4": "#c084fc",
+    "editorBracketHighlight.foreground5": "#3b82f6",
+    "editorBracketHighlight.foreground6": "#94a3b8",
+    "editorBracketHighlight.unexpectedBracket.foreground": "#f87171"
   },
   "tokenColors": [
-    // === 基础规则 ===
     {
       "name": "Comment",
-      "scope": ["comment", "punctuation.definition.comment"],
+      "scope": [
+        "comment",
+        "punctuation.definition.comment"
+      ],
       "settings": {
         "fontStyle": "italic",
         "foreground": "#a5b4cb"
@@ -280,7 +216,11 @@
     },
     {
       "name": "Keyword - 主蓝加粗",
-      "scope": ["keyword", "storage.type", "storage.modifier"],
+      "scope": [
+        "keyword",
+        "storage.type",
+        "storage.modifier"
+      ],
       "settings": {
         "foreground": "#3b82f6",
         "fontStyle": "bold"
@@ -288,7 +228,11 @@
     },
     {
       "name": "Operator - 视觉退后",
-      "scope": ["keyword.operator", "punctuation", "meta.brace"],
+      "scope": [
+        "keyword.operator",
+        "punctuation",
+        "meta.brace"
+      ],
       "settings": {
         "foreground": "#8596a5"
       }
@@ -307,7 +251,11 @@
     },
     {
       "name": "Number, Constant - 月光黄",
-      "scope": ["constant.numeric", "constant.language", "support.constant"],
+      "scope": [
+        "constant.numeric",
+        "constant.language",
+        "support.constant"
+      ],
       "settings": {
         "foreground": "#fbbf24"
       }
@@ -337,7 +285,11 @@
     },
     {
       "name": "Class, Type - 暖色点缀",
-      "scope": ["entity.name.type", "support.type", "support.class"],
+      "scope": [
+        "entity.name.type",
+        "support.type",
+        "support.class"
+      ],
       "settings": {
         "foreground": "#fbbf24"
       }
@@ -366,56 +318,72 @@
     },
     {
       "name": "Regular Expressions - 青色点缀",
-      "scope": ["string.regexp"],
+      "scope": [
+        "string.regexp"
+      ],
       "settings": {
         "foreground": "#22d3ee"
       }
     },
     {
       "name": "URL - 下划线",
-      "scope": ["*url*", "*link*", "*uri*"],
+      "scope": [
+        "*url*",
+        "*link*",
+        "*uri*"
+      ],
       "settings": {
         "fontStyle": "underline"
       }
     },
     {
       "name": "Invalid",
-      "scope": ["invalid", "invalid.illegal"],
+      "scope": [
+        "invalid",
+        "invalid.illegal"
+      ],
       "settings": {
         "foreground": "#f87171"
       }
     },
     {
       "name": "Inserted",
-      "scope": ["markup.inserted"],
+      "scope": [
+        "markup.inserted"
+      ],
       "settings": {
         "foreground": "#34d399"
       }
     },
     {
       "name": "Deleted",
-      "scope": ["markup.deleted"],
+      "scope": [
+        "markup.deleted"
+      ],
       "settings": {
         "foreground": "#f87171"
       }
     },
     {
       "name": "Changed",
-      "scope": ["markup.changed"],
+      "scope": [
+        "markup.changed"
+      ],
       "settings": {
         "foreground": "#fbbf24"
       }
     },
     {
       "name": "TODO Highlight",
-      "scope": ["comment.line.todo", "comment.block.todo"],
+      "scope": [
+        "comment.line.todo",
+        "comment.block.todo"
+      ],
       "settings": {
-        "fontStyle": "bold",
-        "foreground": "#fbbf24"
+        "foreground": "#fbbf24",
+        "fontStyle": "bold"
       }
     },
-
-    // === 变量分层（替换原 Variables 规则）===
     {
       "name": "Variables - 局部变量 (退后)",
       "scope": [
@@ -429,7 +397,10 @@
     },
     {
       "name": "Variables - 参数 (斜体退后)",
-      "scope": ["variable.parameter", "variable.other.parameter"],
+      "scope": [
+        "variable.parameter",
+        "variable.other.parameter"
+      ],
       "settings": {
         "fontStyle": "italic",
         "foreground": "#cbd5e1"
@@ -449,20 +420,23 @@
     },
     {
       "name": "Variables - 成员属性",
-      "scope": ["variable.other.property", "variable.other.member"],
+      "scope": [
+        "variable.other.property",
+        "variable.other.member"
+      ],
       "settings": {
         "foreground": "#94a3b8"
       }
     },
     {
       "name": "Destructuring - 解构变量",
-      "scope": ["variable.other.destructuring"],
+      "scope": [
+        "variable.other.destructuring"
+      ],
       "settings": {
         "foreground": "#cbd5e1"
       }
     },
-
-    // === 键值对优化 ===
     {
       "name": "Object Keys - 普通键名 (退后)",
       "scope": [
@@ -478,7 +452,10 @@
     },
     {
       "name": "Object Keys - 常量键名 (保持亮度)",
-      "scope": ["meta.object.key constant", "meta.object.key constant.other"],
+      "scope": [
+        "meta.object.key constant",
+        "meta.object.key constant.other"
+      ],
       "settings": {
         "foreground": "#e2e8f0",
         "fontStyle": "bold"
@@ -486,7 +463,10 @@
     },
     {
       "name": "Object Keys - 嵌套键名 (更退后)",
-      "scope": ["meta.object.key meta.object.key", "meta.object.key.nested"],
+      "scope": [
+        "meta.object.key meta.object.key",
+        "meta.object.key.nested"
+      ],
       "settings": {
         "foreground": "#94a3b8"
       }
@@ -501,8 +481,6 @@
         "foreground": "#8596a5"
       }
     },
-
-    // === 链式编程优化 ===
     {
       "name": "Method Call - 第一层 (发光感)",
       "scope": [
@@ -535,31 +513,42 @@
     },
     {
       "name": "Method Chain Separator - 点操作符",
-      "scope": ["punctuation.accessor", "punctuation.separator.dot"],
+      "scope": [
+        "punctuation.accessor",
+        "punctuation.separator.dot"
+      ],
       "settings": {
         "foreground": "#8596a5"
       }
     },
-
-    // === 数组元素 ===
     {
       "name": "Array - 元素",
-      "scope": ["meta.array.element"],
+      "scope": [
+        "meta.array.element"
+      ],
       "settings": {
         "foreground": "#cbd5e1"
       }
     },
-
-    // === HTML / Vue 模板（保持不变）===
     {
       "name": "HTML Doctype",
-      "scope": ["meta.tag.sgml.html", "entity.name.tag.doctype.html"],
-      "settings": { "foreground": "#64748b" }
+      "scope": [
+        "meta.tag.sgml.html",
+        "entity.name.tag.doctype.html"
+      ],
+      "settings": {
+        "foreground": "#2d3748"
+      }
     },
     {
       "name": "HTML Attribute Value",
-      "scope": ["string.quoted.double.html", "string.quoted.single.html"],
-      "settings": { "foreground": "#34d399" }
+      "scope": [
+        "string.quoted.double.html",
+        "string.quoted.single.html"
+      ],
+      "settings": {
+        "foreground": "#34d399"
+      }
     },
     {
       "name": "HTML/Vue Text Content",
@@ -568,56 +557,48 @@
         "text.html.vue text",
         "text.html.derivative"
       ],
-      "settings": { "foreground": "#cbd5e1" }
+      "settings": {
+        "foreground": "#cbd5e1"
+      }
     },
     {
       "name": "HTML Comment",
-      "scope": ["comment.block.html", "comment.html"],
-      "settings": { "fontStyle": "italic", "foreground": "#94a3b8" }
+      "scope": [
+        "comment.block.html",
+        "comment.html"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#94a3b8"
+      }
     },
     {
       "name": "HTML Script Tag Content",
-      "scope": ["source.js.embedded.html"],
-      "settings": { "foreground": "#e2e8f0" }
+      "scope": [
+        "source.js.embedded.html"
+      ],
+      "settings": {
+        "foreground": "#e2e8f0"
+      }
     },
     {
       "name": "HTML Style Tag Content",
-      "scope": ["source.css.embedded.html"],
-      "settings": { "foreground": "#e2e8f0" }
-    },
-    {
-      "name": "Vue Directives",
       "scope": [
-        "entity.other.attribute-name.html.vue",
-        "meta.directive.vue",
-        "punctuation.definition.directive.vue"
+        "source.css.embedded.html"
       ],
-      "settings": { "foreground": "#c084fc", "fontStyle": "bold" }
+      "settings": {
+        "foreground": "#e2e8f0"
+      }
     },
-    {
-      "name": "Vue Interpolation",
-      "scope": [
-        "expression.embbeded.vue",
-        "punctuation.definition.expression.vue"
-      ],
-      "settings": { "foreground": "#7dd3fc" }
-    },
-    {
-      "name": "Vue Composition API",
-      "scope": ["support.function.vue", "meta.function-call.vue"],
-      "settings": { "foreground": "#7dd3fc" }
-    },
-    {
-      "name": "Vue Lifecycle Hooks",
-      "scope": ["support.function.vue.lifecycle"],
-      "settings": { "foreground": "#c084fc", "fontStyle": "italic" }
-    },
-
-    // === CSS（保持不变）===
     {
       "name": "CSS Properties",
-      "scope": ["support.type.property-name.css", "meta.property-name.css"],
-      "settings": { "foreground": "#7dd3fc" }
+      "scope": [
+        "support.type.property-name.css",
+        "meta.property-name.css"
+      ],
+      "settings": {
+        "foreground": "#7dd3fc"
+      }
     },
     {
       "name": "CSS Units",
@@ -628,7 +609,9 @@
         "keyword.other.unit.em.css",
         "keyword.other.unit.percent.css"
       ],
-      "settings": { "foreground": "#fbbf24" }
+      "settings": {
+        "foreground": "#fbbf24"
+      }
     },
     {
       "name": "CSS Variable Definitions",
@@ -637,7 +620,9 @@
         "source.css variable",
         "variable.css"
       ],
-      "settings": { "foreground": "#7dd3fc" }
+      "settings": {
+        "foreground": "#7dd3fc"
+      }
     },
     {
       "name": "CSS Variable Usage",
@@ -645,7 +630,9 @@
         "meta.function.css variable",
         "support.constant.property-value.css"
       ],
-      "settings": { "foreground": "#7dd3fc" }
+      "settings": {
+        "foreground": "#7dd3fc"
+      }
     },
     {
       "name": "CSS Selectors",
@@ -654,7 +641,9 @@
         "entity.other.attribute-name.id.css",
         "entity.name.tag.css"
       ],
-      "settings": { "foreground": "#3b82f6" }
+      "settings": {
+        "foreground": "#3b82f6"
+      }
     },
     {
       "name": "CSS Pseudo",
@@ -662,49 +651,157 @@
         "entity.other.attribute-name.pseudo-class.css",
         "entity.other.attribute-name.pseudo-element.css"
       ],
-      "settings": { "foreground": "#7dd3fc", "fontStyle": "italic" }
+      "settings": {
+        "foreground": "#7dd3fc",
+        "fontStyle": "italic"
+      }
     },
     {
       "name": "CSS At-rules",
-      "scope": ["keyword.control.at-rule.css", "meta.at-rule.css keyword"],
-      "settings": { "foreground": "#3b82f6", "fontStyle": "bold" }
+      "scope": [
+        "keyword.control.at-rule.css",
+        "meta.at-rule.css keyword"
+      ],
+      "settings": {
+        "foreground": "#3b82f6",
+        "fontStyle": "bold"
+      }
     },
     {
       "name": "CSS Numbers",
-      "scope": ["constant.numeric.css"],
-      "settings": { "foreground": "#fbbf24" }
+      "scope": [
+        "constant.numeric.css"
+      ],
+      "settings": {
+        "foreground": "#fbbf24"
+      }
     },
-
-    // === Markdown（保持不变）===
+    {
+      "name": "Vue Directives",
+      "scope": [
+        "entity.other.attribute-name.html.vue",
+        "meta.directive.vue",
+        "punctuation.definition.directive.vue"
+      ],
+      "settings": {
+        "foreground": "#c084fc",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Vue Interpolation",
+      "scope": [
+        "expression.embbeded.vue",
+        "punctuation.definition.expression.vue"
+      ],
+      "settings": {
+        "foreground": "#7dd3fc"
+      }
+    },
+    {
+      "name": "Vue Composition API",
+      "scope": [
+        "support.function.vue",
+        "meta.function-call.vue"
+      ],
+      "settings": {
+        "foreground": "#7dd3fc"
+      }
+    },
+    {
+      "name": "Vue Lifecycle Hooks",
+      "scope": [
+        "support.function.vue.lifecycle"
+      ],
+      "settings": {
+        "foreground": "#c084fc",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "JSON Key - Level 0",
+      "scope": [
+        "source.json meta.structure.dictionary.json support.type.property-name.json"
+      ],
+      "settings": {
+        "foreground": "#3b82f6"
+      }
+    },
+    {
+      "name": "JSON Key - Level 1",
+      "scope": [
+        "source.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"
+      ],
+      "settings": {
+        "foreground": "#fbbf24"
+      }
+    },
+    {
+      "name": "JSON Key - Level 2",
+      "scope": [
+        "source.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"
+      ],
+      "settings": {
+        "foreground": "#f87171"
+      }
+    },
     {
       "name": "Markdown Heading",
-      "scope": ["markdown.heading", "markup.heading"],
-      "settings": { "foreground": "#34d399", "fontStyle": "bold" }
+      "scope": [
+        "markdown.heading",
+        "markup.heading"
+      ],
+      "settings": {
+        "foreground": "#34d399",
+        "fontStyle": "bold"
+      }
     },
     {
       "name": "Markdown Link",
-      "scope": ["string.other.link.title.markdown"],
-      "settings": { "foreground": "#7dd3fc" }
+      "scope": [
+        "string.other.link.title.markdown"
+      ],
+      "settings": {
+        "foreground": "#7dd3fc"
+      }
     },
     {
       "name": "Markup Italic",
-      "scope": ["markup.italic"],
-      "settings": { "fontStyle": "italic", "foreground": "#cbd5e1" }
+      "scope": [
+        "markup.italic"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#cbd5e1"
+      }
     },
     {
       "name": "Markup Bold",
-      "scope": ["markup.bold"],
-      "settings": { "fontStyle": "bold", "foreground": "#e2e8f0" }
+      "scope": [
+        "markup.bold"
+      ],
+      "settings": {
+        "fontStyle": "bold",
+        "foreground": "#e2e8f0"
+      }
     },
     {
       "name": "Markdown - Raw Block",
-      "scope": ["markup.raw.block"],
-      "settings": { "foreground": "#3b82f6" }
+      "scope": [
+        "markup.raw.block"
+      ],
+      "settings": {
+        "foreground": "#3b82f6"
+      }
     },
     {
       "name": "Markdown - Fenced Language",
-      "scope": ["variable.language.fenced.markdown"],
-      "settings": { "foreground": "#94a3b8" }
+      "scope": [
+        "variable.language.fenced.markdown"
+      ],
+      "settings": {
+        "foreground": "#94a3b8"
+      }
     },
     {
       "name": "Markdown Fenced Code Language Identifier",
@@ -714,40 +811,21 @@
         "fontStyle": "italic"
       }
     },
-
-    // === JSON（保持不变）===
-    {
-      "name": "JSON Key - Level 0",
-      "scope": [
-        "source.json meta.structure.dictionary.json support.type.property-name.json"
-      ],
-      "settings": { "foreground": "#3b82f6" }
-    },
-    {
-      "name": "JSON Key - Level 1",
-      "scope": [
-        "source.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"
-      ],
-      "settings": { "foreground": "#fbbf24" }
-    },
-    {
-      "name": "JSON Key - Level 2",
-      "scope": [
-        "source.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"
-      ],
-      "settings": { "foreground": "#f87171" }
-    },
-    // === Python 专用优化（包含兜底规则）===
     {
       "name": "Python Local Variables - 局部变量退后",
-      "scope": ["variable.other.readwrite.python", "variable.other.python"],
+      "scope": [
+        "variable.other.readwrite.python",
+        "variable.other.python"
+      ],
       "settings": {
         "foreground": "#cbd5e1"
       }
     },
     {
       "name": "Python Function Parameters - 参数斜体退后",
-      "scope": ["variable.parameter.python"],
+      "scope": [
+        "variable.parameter.python"
+      ],
       "settings": {
         "fontStyle": "italic",
         "foreground": "#cbd5e1"
@@ -755,7 +833,10 @@
     },
     {
       "name": "Python Constants - 全局常量保持亮度",
-      "scope": ["constant.other.python", "variable.other.constant.python"],
+      "scope": [
+        "constant.other.python",
+        "variable.other.constant.python"
+      ],
       "settings": {
         "foreground": "#e2e8f0",
         "fontStyle": "bold"
@@ -763,14 +844,19 @@
     },
     {
       "name": "Python Instance Attributes - 成员属性退后",
-      "scope": ["variable.other.property.python"],
+      "scope": [
+        "variable.other.property.python"
+      ],
       "settings": {
         "foreground": "#cbd5e1"
       }
     },
     {
       "name": "Python Dictionary Keys - 字典键退后",
-      "scope": ["meta.mapping.key.python", "string.unquoted.key.python"],
+      "scope": [
+        "meta.mapping.key.python",
+        "string.unquoted.key.python"
+      ],
       "settings": {
         "foreground": "#cbd5e1"
       }
@@ -786,61 +872,13 @@
         "fontStyle": "italic"
       }
     },
-    // 兜底规则：针对所有 source.python 中的未匹配变量
     {
       "name": "Python Variables - 通用兜底",
-      "scope": ["source.python variable.other"],
+      "scope": [
+        "source.python variable.other"
+      ],
       "settings": {
         "foreground": "#cbd5e1"
-      }
-    },
-    // 特殊注释
-    {
-      "name": "Better Comments - TODO",
-      "scope": ["comment.todo"],
-      "settings": {
-        "foreground": "#fbbf24",
-        "fontStyle": "bold"
-      }
-    },
-    {
-      "name": "Better Comments - FIXME",
-      "scope": ["comment.fixme"],
-      "settings": {
-        "foreground": "#f87171",
-        "fontStyle": "bold italic"
-      }
-    },
-    {
-      "name": "Better Comments - NOTE",
-      "scope": ["comment.note"],
-      "settings": {
-        "foreground": "#7dd3fc",
-        "fontStyle": "italic"
-      }
-    },
-    {
-      "name": "Better Comments - HACK",
-      "scope": ["comment.hack"],
-      "settings": {
-        "foreground": "#c084fc",
-        "fontStyle": "bold"
-      }
-    },
-    {
-      "name": "Better Comments - BUG",
-      "scope": ["comment.bug"],
-      "settings": {
-        "foreground": "#f87171",
-        "fontStyle": "bold underline"
-      }
-    },
-    {
-      "name": "Better Comments - XXX",
-      "scope": ["comment.xxx"],
-      "settings": {
-        "foreground": "#fbbf24",
-        "fontStyle": "bold"
       }
     },
     {
@@ -885,80 +923,110 @@
       "settings": {
         "foreground": "#64748b"
       }
+    },
+    {
+      "name": "Better Comments - TODO",
+      "scope": [
+        "comment.todo"
+      ],
+      "settings": {
+        "foreground": "#fbbf24",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Better Comments - FIXME",
+      "scope": [
+        "comment.fixme"
+      ],
+      "settings": {
+        "foreground": "#f87171",
+        "fontStyle": "bold italic"
+      }
+    },
+    {
+      "name": "Better Comments - NOTE",
+      "scope": [
+        "comment.note"
+      ],
+      "settings": {
+        "foreground": "#7dd3fc",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Better Comments - HACK",
+      "scope": [
+        "comment.hack"
+      ],
+      "settings": {
+        "foreground": "#c084fc",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Better Comments - BUG",
+      "scope": [
+        "comment.bug"
+      ],
+      "settings": {
+        "foreground": "#f87171",
+        "fontStyle": "bold underline"
+      }
+    },
+    {
+      "name": "Better Comments - XXX",
+      "scope": [
+        "comment.xxx"
+      ],
+      "settings": {
+        "foreground": "#fbbf24",
+        "fontStyle": "bold"
+      }
     }
   ],
   "semanticTokenColors": {
-    // 变量（局部变量、全局变量等）调暗
     "variable": "#d4dcee",
     "variable.readonly": {
       "foreground": "#cbd5e1",
       "fontStyle": "italic"
     },
     "variable.readwrite": "#cbd5e1",
-
-    // 函数参数斜体调暗
     "parameter": {
       "foreground": "#cbd5e1",
       "fontStyle": "italic"
     },
-
-    // 属性（如对象属性、类成员）调暗
     "property": "#94a3b8",
-
-    // 常量（包括枚举成员）保持亮度（但也可根据需要调暗）
     "constant": "#e2e8f0",
     "constant.builtin": "#e2e8f0",
     "enumMember": "#e2e8f0",
-
-    // 函数调用（普通）
     "function": "#87cefa",
-
-    // 函数定义（加粗）
     "function.declaration": {
       "foreground": "#87cefa",
       "fontStyle": "bold"
     },
-
-    // 方法调用（普通）
     "method": "#87cefa",
-
-    // 方法定义（加粗）
     "method.declaration": {
       "foreground": "#87cefa",
       "fontStyle": "bold"
     },
-
-    // 类名（普通）
     "class": "#fbbf24",
-
-    // 类定义（加粗）
     "class.declaration": {
       "foreground": "#fbbf24",
       "fontStyle": "bold"
     },
     "struct": "#fbbf24",
-
-    // 接口/类型别名可用主蓝
     "interface": "#3b82f6",
     "type": "#3b82f6",
     "typeParameter": "#22d3ee",
-
-    // 命名空间/模块用柔和灰
     "namespace": "#94a3b8",
-
-    // 装饰器/注解用紫色（月虹）
     "*.decorator": {
       "foreground": "#c084fc",
       "fontStyle": "italic"
     },
     "annotation": "#c084fc",
-
-    // 宏（如 Rust）用紫色
     "macro": "#c084fc",
-
-    // 标签（如 goto 标签）用错误红
     "label": "#f87171",
-    // 静态成员
     "method.static": {
       "foreground": "#7dd3fc",
       "fontStyle": "italic"
@@ -967,14 +1035,10 @@
       "foreground": "#94a3b8",
       "fontStyle": "italic"
     },
-
-    // 废弃标记（所有类型）
     "*.deprecated": {
       "foreground": "#64748b",
       "fontStyle": "strikethrough"
     },
-
-    // 异步函数
     "function.async": {
       "foreground": "#87cefa",
       "fontStyle": "bold italic"
@@ -983,8 +1047,6 @@
       "foreground": "#87cefa",
       "fontStyle": "bold italic"
     },
-
-    // 抽象成员
     "class.abstract": {
       "foreground": "#fbbf24",
       "fontStyle": "italic"
@@ -993,25 +1055,17 @@
       "foreground": "#7dd3fc",
       "fontStyle": "italic"
     },
-
-    // 只读参数
     "parameter.readonly": {
       "foreground": "#cbd5e1",
       "fontStyle": "bold italic"
     },
-
-    // 被修改的变量
     "variable.modification": {
       "foreground": "#cbd5e1",
       "fontStyle": "underline"
     },
-
-    // 内置库符号（保留原色，加粗）
     "*.defaultLibrary": {
       "fontStyle": "bold"
     },
-
-    // 类型构造器修饰符（需要语言服务器支持）
     "variable.array": "#cbd5e1",
     "variable.pointer": {
       "foreground": "#cbd5e1",

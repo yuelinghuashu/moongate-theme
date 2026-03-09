@@ -1,0 +1,259 @@
+# Moongate Dark 编辑器 UI 颜色
+# 所有颜色值引用 src/core/colors.yaml 中的变量
+
+# 基础环境
+editor.background: "${bg}"
+editor.foreground: "${text}"
+
+# 标题栏
+titleBar.activeBackground: "${bg}"
+titleBar.activeForeground: "${text}"
+titleBar.inactiveBackground: "${bgMuted}"
+titleBar.inactiveForeground: "${textInactive}"
+titleBar.border: "${border}"
+
+# 菜单栏
+menu.background: "${bgMuted}"
+menu.foreground: "${text}"
+menu.selectionBackground: "${primary}"
+menu.selectionForeground: "${white}"
+menu.border: "${border}"
+
+# 活动栏
+activityBar.background: "${bgMuted}"
+activityBar.foreground: "${text}"
+activityBar.inactiveForeground: "${textInactive}"
+activityBar.border: "${border}"
+activityBar.activeBorder: "${primary}"
+activityBarBadge.background: "${primary}"
+activityBarBadge.foreground: "${white}"
+
+# 侧边栏
+sideBar.background: "${bgMuted}"
+sideBar.foreground: "${text}"
+sideBar.border: "${border}"
+sideBarTitle.foreground: "${textInactive}"
+sideBarSectionHeader.background: "${bg}"
+sideBarSectionHeader.foreground: "${text}"
+
+# 状态栏
+statusBar.background: "${bg}"
+statusBar.foreground: "${textDim}"
+statusBar.border: "${border}"
+statusBar.noFolderBackground: "${bg}"
+statusBar.noFolderForeground: "${textInactive}"
+statusBar.debuggingBackground: "${success}"
+statusBar.debuggingForeground: "${bg}"
+statusBarItem.activeBackground: "${bgHover}"                     # #3b82f620
+statusBarItem.hoverBackground: "${primary}10"                    # #3b82f610
+statusBarItem.prominentBackground: "${bgMuted}"
+statusBarItem.prominentHoverBackground: "${hoverBg}"
+statusBarItem.remoteBackground: "${bg}"
+statusBarItem.remoteForeground: "${textInactive}"
+
+# 选项卡
+tab.activeBackground: "${bg}"
+tab.activeForeground: "${text}"
+tab.activeBorder: "${primary}"
+tab.inactiveBackground: "${bgMuted}"
+tab.inactiveForeground: "${textInactive}"
+tab.border: "${border}"
+tab.hoverBackground: "${hoverBg}"
+tab.hoverForeground: "${text}"
+
+# 编辑器组
+editorGroup.border: "${border}"
+editorGroupHeader.tabsBackground: "${bgMuted}"
+
+# 面板
+panel.background: "${bg}"
+panel.border: "${border}"
+panelTitle.activeBorder: "${primary}"
+panelTitle.activeForeground: "${text}"
+panelTitle.inactiveForeground: "${textInactive}"
+
+# 输入框
+input.background: "${bgMuted}"
+input.foreground: "${text}"
+input.border: "${border}"
+input.placeholderForeground: "${textInactive}"
+inputOption.activeBackground: "${primary}"
+inputOption.activeForeground: "${white}"
+inputValidation.errorBackground: "${error}"
+inputValidation.errorBorder: "${error}"
+inputValidation.infoBackground: "${primary}"
+inputValidation.infoBorder: "${primary}"
+inputValidation.warningBackground: "${warning}"
+inputValidation.warningBorder: "${warning}"
+
+# 下拉框
+dropdown.background: "${bgMuted}"
+dropdown.foreground: "${text}"
+dropdown.border: "${border}"
+
+# 按钮
+button.background: "${primary}"
+button.foreground: "${white}"
+button.hoverBackground: "${buttonHoverBg}"
+button.secondaryBackground: "${bgMuted}"
+button.secondaryForeground: "${text}"
+
+# 徽章
+badge.background: "${primary}"
+badge.foreground: "${white}"
+
+# 滚动条
+scrollbar.shadow: "${bg}"
+scrollbarSlider.background: "${scrollbar}60"
+scrollbarSlider.hoverBackground: "${scrollbar}80"
+scrollbarSlider.activeBackground: "${scrollbar}"
+
+# 列表/树
+list.activeSelectionBackground: "${selectedBg}"
+list.activeSelectionForeground: "${text}"
+list.hoverBackground: "${hoverBg}"
+list.hoverForeground: "${text}"
+list.focusBackground: "${selectedBg}"
+list.focusForeground: "${text}"
+list.inactiveSelectionBackground: "${bgMuted}"
+list.inactiveSelectionForeground: "${textInactive}"
+list.highlightForeground: "${primary}"
+list.errorForeground: "${error}"
+list.warningForeground: "${warning}"
+
+# 树
+tree.indentGuidesStroke: "${border}"
+
+# 快速选择器
+quickInput.background: "${bgMuted}"
+quickInput.foreground: "${text}"
+quickInputTitle.background: "${bg}"
+pickerGroup.border: "${border}"
+pickerGroup.foreground: "${textInactive}"
+
+# 编辑器细节
+editorLineNumber.foreground: "${textInactive}"
+editorLineNumber.activeForeground: "${text}"
+editorCursor.foreground: "${primary}"
+editor.selectionBackground: "${primary}40"                       # #3b82f640
+editor.selectionHighlightBorder: "${primary}80"                   # #3b82f680
+editor.selectionHighlightBackground: "${primary}20"               # #3b82f220
+editor.findMatchBackground: "${primary}40"                         # #3b82f640
+editor.findMatchBorder: "${primary}"
+editor.findMatchHighlightBackground: "${primary}20"                # #3b82f220
+editor.findMatchHighlightBorder: "${primary}00"
+editor.findRangeHighlightBackground: "${primary}10"                # #3b82f610
+editor.findRangeHighlightBorder: "${primary}00"
+editor.wordHighlightBackground: "${primary}30"                     # #3b82f630
+editor.wordHighlightStrongBackground: "${primary}50"               # #3b82f650
+editorWhitespace.foreground: "${border}"
+editorIndentGuide.background1: "${border}"
+editorIndentGuide.activeBackground1: "${primary}"
+editorRuler.foreground: "${border}"
+editorCodeLens.foreground: "${textInactive}"
+editorBracketMatch.background: "${primary}30"                      # #3b82f630
+editorBracketMatch.border: "${primary}"
+editorOverviewRuler.border: "${border}"
+editorOverviewRuler.modifiedForeground: "${warning}"
+editorOverviewRuler.addedForeground: "${success}"
+editorOverviewRuler.deletedForeground: "${error}"
+editorError.foreground: "${error}"
+editorWarning.foreground: "${warning}"
+editorInfo.foreground: "${primary}"
+editorHint.foreground: "${textInactive}"
+editorError.border: "${error}80"                                   # #f8717180
+editorWarning.border: "${warning}80"                               # #fbbf2480
+
+# 差异编辑器
+diffEditor.insertedTextBackground: "${success}20"                  # #34d39920
+diffEditor.removedTextBackground: "${error}20"                     # #f8717120
+diffEditor.border: "${border}"
+
+# 面包屑
+breadcrumb.background: "${bg}"
+breadcrumb.foreground: "${textInactive}"
+breadcrumb.focusForeground: "${text}"
+breadcrumbPicker.background: "${bgMuted}"
+
+# 编辑器小部件
+editorWidget.background: "${bgMuted}"
+editorWidget.foreground: "${text}"
+editorWidget.border: "${border}"
+editorSuggestWidget.background: "${bgMuted}"
+editorSuggestWidget.border: "${border}"
+editorSuggestWidget.foreground: "${text}"
+editorSuggestWidget.highlightForeground: "${primary}"
+editorSuggestWidget.selectedBackground: "${selectedBg}"
+editorHoverWidget.background: "${bgMuted}"
+editorHoverWidget.foreground: "${text}"
+editorHoverWidget.border: "${border}"
+
+# 调试
+debugToolBar.background: "${bgMuted}"
+debugToolBar.border: "${border}"
+debugIcon.startForeground: "${debugStart}"
+debugIcon.pauseForeground: "${debugPause}"
+debugIcon.stopForeground: "${debugStop}"
+debugIcon.disconnectForeground: "${error}"
+debugIcon.continueForeground: "${debugStart}"
+debugIcon.breakpointForeground: "${error}"
+debugIcon.breakpointDisabledForeground: "${textInactive}"
+
+# Git 装饰
+gitDecoration.addedResourceForeground: "${gitAdded}"
+gitDecoration.modifiedResourceForeground: "${gitModified}"
+gitDecoration.deletedResourceForeground: "${gitDeleted}"
+gitDecoration.untrackedResourceForeground: "${gitUntracked}"
+gitDecoration.ignoredResourceForeground: "${gitIgnored}"
+gitDecoration.conflictingResourceForeground: "${gitModified}"
+
+# 内嵌提示
+editorInlayHint.foreground: "${punctuation}"
+editorInlayHint.background: "${bgMuted}40"                         # #1e293b40
+editorInlayHint.typeForeground: "${punctuation}"
+editorInlayHint.parameterForeground: "${punctuation}"
+
+# 终端
+terminal.background: "${bg}"
+terminal.foreground: "${text}"
+terminalCursor.foreground: "${primary}"
+terminal.selectionBackground: "${primary}40"
+terminal.border: "${border}"
+terminal.ansiBlack: "${ansiBlack}"
+terminal.ansiRed: "${ansiRed}"
+terminal.ansiGreen: "${ansiGreen}"
+terminal.ansiYellow: "${ansiYellow}"
+terminal.ansiBlue: "${ansiBlue}"
+terminal.ansiMagenta: "${ansiMagenta}"
+terminal.ansiCyan: "${ansiCyan}"
+terminal.ansiWhite: "${ansiWhite}"
+terminal.ansiBrightBlack: "${ansiBrightBlack}"
+terminal.ansiBrightRed: "${ansiBrightRed}"
+terminal.ansiBrightGreen: "${ansiBrightGreen}"
+terminal.ansiBrightYellow: "${ansiBrightYellow}"
+terminal.ansiBrightBlue: "${ansiBrightBlue}"
+terminal.ansiBrightMagenta: "${ansiBrightMagenta}"
+terminal.ansiBrightCyan: "${ansiBrightCyan}"
+terminal.ansiBrightWhite: "${ansiBrightWhite}"
+
+# 通知
+notifications.background: "${bgMuted}"
+notifications.foreground: "${text}"
+notifications.border: "${border}"
+
+# 扩展
+extensionButton.prominentBackground: "${primary}"
+extensionButton.prominentForeground: "${white}"
+extensionButton.prominentHoverBackground: "${buttonHoverBg}"
+
+# 进度条
+progressBar.background: "${primary}"
+
+# 括号高亮
+editorBracketHighlight.foreground1: "${bracket1}"
+editorBracketHighlight.foreground2: "${bracket2}"
+editorBracketHighlight.foreground3: "${bracket3}"
+editorBracketHighlight.foreground4: "${bracket4}"
+editorBracketHighlight.foreground5: "${bracket5}"
+editorBracketHighlight.foreground6: "${bracket6}"
+editorBracketHighlight.unexpectedBracket.foreground: "${error}"

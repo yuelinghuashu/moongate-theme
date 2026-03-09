@@ -1,0 +1,32 @@
+# HTML 特定规则
+tokenColors:
+  - name: HTML Doctype
+    scope: ["meta.tag.sgml.html", "entity.name.tag.doctype.html"]
+    settings:
+      foreground: "${border}"                     # #2d3748
+
+  - name: HTML Attribute Value
+    scope: ["string.quoted.double.html", "string.quoted.single.html"]
+    settings:
+      foreground: "${success}"
+
+  - name: HTML/Vue Text Content
+    scope: ["text.html.basic", "text.html.vue text", "text.html.derivative"]
+    settings:
+      foreground: "${variableDim}"
+
+  - name: HTML Comment
+    scope: ["comment.block.html", "comment.html"]
+    settings:
+      fontStyle: "italic"
+      foreground: "${textMuted}"
+
+  - name: HTML Script Tag Content
+    scope: ["source.js.embedded.html"]
+    settings:
+      foreground: "${text}"
+
+  - name: HTML Style Tag Content
+    scope: ["source.css.embedded.html"]
+    settings:
+      foreground: "${text}"

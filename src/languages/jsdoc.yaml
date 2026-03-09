@@ -1,0 +1,36 @@
+# JSDoc/TSDoc 注释特定规则
+tokenColors:
+  - name: JSDoc - Tags
+    scope:
+      [
+        "comment.block.documentation keyword.other.documentation",
+        "storage.type.class.jsdoc",
+        "entity.name.type.instance.jsdoc",
+      ]
+    settings:
+      foreground: "${primary}"
+      fontStyle: "bold"
+
+  - name: JSDoc - Parameter names
+    scope: ["variable.other.jsdoc", "entity.name.type.instance.jsdoc variable"]
+    settings:
+      foreground: "${success}"
+      fontStyle: "italic"
+
+  - name: JSDoc - Types
+    scope:
+      [
+        "comment.block.documentation storage.type",
+        "comment.block.documentation entity.name.type",
+      ]
+    settings:
+      foreground: "${highlight}"
+
+  - name: JSDoc - Other (brackets, punctuation)
+    scope:
+      [
+        "punctuation.definition.block.tag.jsdoc",
+        "punctuation.definition.bracket.curly.jsdoc",
+      ]
+    settings:
+      foreground: "${punctuation}"

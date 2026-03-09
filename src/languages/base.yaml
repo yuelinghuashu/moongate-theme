@@ -1,0 +1,166 @@
+# 通用语法高亮规则（跨语言）
+tokenColors:
+  - name: Comment
+    scope: ["comment", "punctuation.definition.comment"]
+    settings:
+      fontStyle: "italic"
+      foreground: "${comment}"
+
+  - name: Keyword - 主蓝加粗
+    scope: ["keyword", "storage.type", "storage.modifier"]
+    settings:
+      foreground: "${primary}"
+      fontStyle: "bold"
+
+  - name: Operator - 视觉退后
+    scope: ["keyword.operator", "punctuation", "meta.brace"]
+    settings:
+      foreground: "${operator}"
+
+  - name: Function - 发光感
+    scope: ["entity.name.function", "meta.function-call", "variable.function", "support.function"]
+    settings:
+      foreground: "${function}"
+
+  - name: Number, Constant - 月光黄
+    scope: ["constant.numeric", "constant.language", "support.constant"]
+    settings:
+      foreground: "${warning}"
+
+  - name: String - 月灵花绿
+    scope: ["string", "string.quoted.single", "string.quoted.double", "text.html.vue string"]
+    settings:
+      foreground: "${success}"
+
+  - name: String Interpolation - 发光蓝
+    scope: ["meta.embedded", "source.js.embedded", "string.template meta.template.expression"]
+    settings:
+      foreground: "${highlight}"
+
+  - name: Class, Type - 暖色点缀
+    scope: ["entity.name.type", "support.type", "support.class"]
+    settings:
+      foreground: "${warning}"
+
+  - name: Tag - 错误红
+    scope: ["entity.name.tag", "meta.tag.sgml", "text.html.vue entity.name.tag", "meta.tag.vue"]
+    settings:
+      foreground: "${error}"
+
+  - name: Attributes - 主蓝
+    scope: ["entity.other.attribute-name", "text.html.vue entity.other.attribute-name"]
+    settings:
+      foreground: "${primary}"
+
+  - name: Regular Expressions - 青色点缀
+    scope: ["string.regexp"]
+    settings:
+      foreground: "${cyan}"
+
+  - name: URL - 下划线
+    scope: ["*url*", "*link*", "*uri*"]
+    settings:
+      fontStyle: "underline"
+
+  - name: Invalid
+    scope: ["invalid", "invalid.illegal"]
+    settings:
+      foreground: "${error}"
+
+  - name: Inserted
+    scope: ["markup.inserted"]
+    settings:
+      foreground: "${success}"
+
+  - name: Deleted
+    scope: ["markup.deleted"]
+    settings:
+      foreground: "${error}"
+
+  - name: Changed
+    scope: ["markup.changed"]
+    settings:
+      foreground: "${warning}"
+
+  - name: TODO Highlight
+    scope: ["comment.line.todo", "comment.block.todo"]
+    settings:
+      foreground: "${warning}"
+      fontStyle: "bold"
+
+  # === 变量分层 ===
+  - name: Variables - 局部变量 (退后)
+    scope: ["variable.other.readwrite.local", "variable.other.local", "variable.other.readwrite"]
+    settings:
+      foreground: "${variable}"
+
+  - name: Variables - 参数 (斜体退后)
+    scope: ["variable.parameter", "variable.other.parameter"]
+    settings:
+      fontStyle: "italic"
+      foreground: "${variableDim}"
+
+  - name: Variables - 常量/全局 (保持亮度)
+    scope: ["variable.other.constant", "variable.other.global", "variable.other.readwrite.global"]
+    settings:
+      foreground: "${text}"
+      fontStyle: "bold"
+
+  - name: Variables - 成员属性
+    scope: ["variable.other.property", "variable.other.member"]
+    settings:
+      foreground: "${textMuted}"
+
+  - name: Destructuring - 解构变量
+    scope: ["variable.other.destructuring"]
+    settings:
+      foreground: "${variableDim}"
+
+  # === 键值对优化 ===
+  - name: Object Keys - 普通键名 (退后)
+    scope: ["meta.object.key", "meta.object-literal.key", "string.unquoted.label", "meta.object.key.js", "meta.object.key.ts"]
+    settings:
+      foreground: "${variableDim}"
+
+  - name: Object Keys - 常量键名 (保持亮度)
+    scope: ["meta.object.key constant", "meta.object.key constant.other"]
+    settings:
+      foreground: "${text}"
+      fontStyle: "bold"
+
+  - name: Object Keys - 嵌套键名 (更退后)
+    scope: ["meta.object.key meta.object.key", "meta.object.key.nested"]
+    settings:
+      foreground: "${textMuted}"
+
+  - name: Key-Value Separator - 冒号 (视觉退后)
+    scope: ["punctuation.separator.key-value", "punctuation.separator.mapping.key-value"]
+    settings:
+      foreground: "${operator}"
+
+  # === 链式编程优化 ===
+  - name: Method Call - 第一层 (发光感)
+    scope: ["meta.method-call entity.name.function", "meta.function-call entity.name.function"]
+    settings:
+      foreground: "${highlight}"
+
+  - name: Method Call - 链式后续 (退后)
+    scope: ["meta.method-call meta.method-call entity.name.function", "meta.function-call meta.function-call entity.name.function", "meta.chain entity.name.function"]
+    settings:
+      foreground: "${variableDim}"
+
+  - name: Method Call - 深层链式 (更退后)
+    scope: ["meta.method-call meta.method-call meta.method-call entity.name.function"]
+    settings:
+      foreground: "${textMuted}"
+
+  - name: Method Chain Separator - 点操作符
+    scope: ["punctuation.accessor", "punctuation.separator.dot"]
+    settings:
+      foreground: "${operator}"
+
+  # === 数组元素 ===
+  - name: Array - 元素
+    scope: ["meta.array.element"]
+    settings:
+      foreground: "${variableDim}"

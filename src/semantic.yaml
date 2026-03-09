@@ -1,0 +1,110 @@
+# 语义高亮规则（semanticTokenColors）
+# 引用 colors.yaml 中的变量
+
+# 变量（局部变量、全局变量等）
+variable: "${variable}"
+variable.readonly:
+  foreground: "${variableDim}"
+  fontStyle: "italic"
+variable.readwrite: "${variableDim}"
+
+# 函数参数
+parameter:
+  foreground: "${variableDim}"
+  fontStyle: "italic"
+
+# 属性
+property: "${textMuted}"
+
+# 常量
+constant: "${text}"
+constant.builtin: "${text}"
+enumMember: "${text}"
+
+# 函数调用（普通）
+function: "${function}"
+function.declaration:
+  foreground: "${function}"
+  fontStyle: "bold"
+
+# 方法调用
+method: "${function}"
+method.declaration:
+  foreground: "${function}"
+  fontStyle: "bold"
+
+# 类
+class: "${warning}"
+class.declaration:
+  foreground: "${warning}"
+  fontStyle: "bold"
+struct: "${warning}"
+
+# 接口/类型别名
+interface: "${primary}"
+type: "${primary}"
+typeParameter: "${cyan}"
+
+# 命名空间/模块
+namespace: "${textMuted}"
+
+# 装饰器/注解（注意：带星号的键需加引号）
+"*.decorator":
+  foreground: "${purple}"
+  fontStyle: "italic"
+annotation: "${purple}"
+
+# 宏
+macro: "${purple}"
+
+# 标签
+label: "${error}"
+
+# 静态成员
+method.static:
+  foreground: "${highlight}"
+  fontStyle: "italic"
+property.static:
+  foreground: "${textMuted}"
+  fontStyle: "italic"
+
+# 废弃标记
+"*.deprecated":
+  foreground: "${punctuation}"
+  fontStyle: "strikethrough"
+
+# 异步函数
+function.async:
+  foreground: "${function}"
+  fontStyle: "bold italic"
+method.async:
+  foreground: "${function}"
+  fontStyle: "bold italic"
+
+# 抽象成员
+class.abstract:
+  foreground: "${warning}"
+  fontStyle: "italic"
+method.abstract:
+  foreground: "${highlight}"
+  fontStyle: "italic"
+
+# 只读参数
+parameter.readonly:
+  foreground: "${variableDim}"
+  fontStyle: "bold italic"
+
+# 被修改的变量
+variable.modification:
+  foreground: "${variableDim}"
+  fontStyle: "underline"
+
+# 内置库符号
+"*.defaultLibrary":
+  fontStyle: "bold"
+
+# 类型构造器修饰符（需要语言服务器支持）
+variable.array: "${variableDim}"
+variable.pointer:
+  foreground: "${variableDim}"
+  fontStyle: "underline"

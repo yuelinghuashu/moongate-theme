@@ -1,0 +1,23 @@
+# Vue 单文件组件特定规则
+tokenColors:
+  - name: Vue Directives
+    scope: ["entity.other.attribute-name.html.vue", "meta.directive.vue", "punctuation.definition.directive.vue"]
+    settings:
+      foreground: "${purple}"
+      fontStyle: "bold"
+
+  - name: Vue Interpolation
+    scope: ["expression.embbeded.vue", "punctuation.definition.expression.vue"]
+    settings:
+      foreground: "${highlight}"
+
+  - name: Vue Composition API
+    scope: ["support.function.vue", "meta.function-call.vue"]
+    settings:
+      foreground: "${highlight}"
+
+  - name: Vue Lifecycle Hooks
+    scope: ["support.function.vue.lifecycle"]
+    settings:
+      foreground: "${purple}"
+      fontStyle: "italic"

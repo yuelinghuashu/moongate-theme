@@ -1,0 +1,39 @@
+# Python 特定规则
+tokenColors:
+  - name: Python Local Variables - 局部变量退后
+    scope: ["variable.other.readwrite.python", "variable.other.python"]
+    settings:
+      foreground: "${variableDim}"
+
+  - name: Python Function Parameters - 参数斜体退后
+    scope: ["variable.parameter.python"]
+    settings:
+      fontStyle: "italic"
+      foreground: "${variableDim}"
+
+  - name: Python Constants - 全局常量保持亮度
+    scope: ["constant.other.python", "variable.other.constant.python"]
+    settings:
+      foreground: "${text}"
+      fontStyle: "bold"
+
+  - name: Python Instance Attributes - 成员属性退后
+    scope: ["variable.other.property.python"]
+    settings:
+      foreground: "${variableDim}"
+
+  - name: Python Dictionary Keys - 字典键退后
+    scope: ["meta.mapping.key.python", "string.unquoted.key.python"]
+    settings:
+      foreground: "${variableDim}"
+
+  - name: Python Decorators - 装饰器用紫色
+    scope: ["entity.name.function.decorator.python", "meta.decorator.python"]
+    settings:
+      foreground: "${purple}"
+      fontStyle: "italic"
+
+  - name: Python Variables - 通用兜底
+    scope: ["source.python variable.other"]
+    settings:
+      foreground: "${variableDim}"

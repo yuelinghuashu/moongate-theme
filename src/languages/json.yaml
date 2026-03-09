@@ -1,0 +1,16 @@
+# JSON 特定规则
+tokenColors:
+  - name: JSON Key - Level 0
+    scope: ["source.json meta.structure.dictionary.json support.type.property-name.json"]
+    settings:
+      foreground: "${primary}"
+
+  - name: JSON Key - Level 1
+    scope: ["source.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"]
+    settings:
+      foreground: "${warning}"
+
+  - name: JSON Key - Level 2
+    scope: ["source.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"]
+    settings:
+      foreground: "${error}"
