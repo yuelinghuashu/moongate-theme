@@ -11,14 +11,14 @@
 
 | 语言 | 深色 (Night Sky) | 浅色 (Dawn) |
 |------|------------------|-------------|
-| HTML | ![HTML 深色](./images/html-dark.png) | ![HTML 浅色](./images/html-light.png) |
-| JavaScript | ![JS 深色](./images/javascript-dark.png) | ![JS 浅色](./images/javascript-light.png) |
-| TypeScript | ![TS 深色](./images/typescript-dark.png) | ![TS 浅色](./images/typescript-light.png) |
-| Vue | ![Vue 深色](./images/vue-dark.png) | ![Vue 浅色](./images/vue-light.png) |
-| React | ![React 深色](./images/react-dark.png) | ![React 浅色](./images/react-light.png) |
-| Python | ![Python 深色](./images/python-dark.png) | ![Python 浅色](./images/python-light.png) |
-| JSON | ![JSON 深色](./images/json-dark.png) | ![JSON 浅色](./images/json-light.png) |
-| Markdown | ![Markdown 深色](./images/markdown-dark.png) | ![Markdown 浅色](./images/markdown-light.png) |
+| HTML | ![HTML 深色](https://github.com/yuelinghuashu/moongate-theme/raw/HEAD/images/html-dark.png) | ![HTML 浅色](https://github.com/yuelinghuashu/moongate-theme/raw/HEAD/images/html-light.png) |
+| JavaScript | ![JS 深色](https://github.com/yuelinghuashu/moongate-theme/raw/HEAD/images/javascript-dark.png) | ![JS 浅色](https://github.com/yuelinghuashu/moongate-theme/raw/HEAD/images/javascript-light.png) |
+| TypeScript | ![TS 深色](https://github.com/yuelinghuashu/moongate-theme/raw/HEAD/images/typescript-dark.png) | ![TS 浅色](https://github.com/yuelinghuashu/moongate-theme/raw/HEAD/images/typescript-light.png) |
+| Vue | ![Vue 深色](https://github.com/yuelinghuashu/moongate-theme/raw/HEAD/images/vue-dark.png) | ![Vue 浅色](https://github.com/yuelinghuashu/moongate-theme/raw/HEAD/images/vue-light.png) |
+| React | ![React 深色](https://github.com/yuelinghuashu/moongate-theme/raw/HEAD/images/react-dark.png) | ![React 浅色](https://github.com/yuelinghuashu/moongate-theme/raw/HEAD/images/react-light.png) |
+| Python | ![Python 深色](https://github.com/yuelinghuashu/moongate-theme/raw/HEAD/images/python-dark.png) | ![Python 浅色](https://github.com/yuelinghuashu/moongate-theme/raw/HEAD/images/python-light.png) |
+| JSON | ![JSON 深色](https://github.com/yuelinghuashu/moongate-theme/raw/HEAD/images/json-dark.png) | ![JSON 浅色](https://github.com/yuelinghuashu/moongate-theme/raw/HEAD/images/json-light.png) |
+| Markdown | ![Markdown 深色](https://github.com/yuelinghuashu/moongate-theme/raw/HEAD/images/markdown-dark.png) | ![Markdown 浅色](https://github.com/yuelinghuashu/moongate-theme/raw/HEAD/images/markdown-light.png) |
 
 > 💡 以上预览图为 v2.0 版本实际截图。建议将主题切换为对应模式后对比查看。
 
@@ -98,13 +98,13 @@ Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而
 - **视觉契约**：随主题提供显示器校准指南，确保月光在您屏幕上准确还原
 - **更多优化**：完善了私有字段、泛型参数、只读变量等语义标记
 
-[📜 查看完整更新日志](./CHANGELOG.md)
+[📜 查看完整更新日志](https://github.com/yuelinghuashu/moongate-theme/blob/HEAD/CHANGELOG.md)
 
 ## ⚙️ 推荐配置
 
 ### 显示器校准
 
-为了确保 Moongate 的月光能在你的屏幕上准确还原，我们准备了一份 **《视觉契约》** 显示器校准指南，帮助你找到最适合硬件的设置。详见 `extras/VISUAL_CONTRACT.md` 或 [在线查看](./extras/VISUAL_CONTRACT.md)。
+为了确保 Moongate 的月光能在你的屏幕上准确还原，我们准备了一份 **《视觉契约》** 显示器校准指南，帮助你找到最适合硬件的设置。详见 `extras/VISUAL_CONTRACT.md` 或 [在线查看](https://github.com/yuelinghuashu/moongate-theme/blob/HEAD/extras/VISUAL_CONTRACT.md)。
 
 ### 语义高亮
 
@@ -208,13 +208,13 @@ Moongate is a VS Code theme born from my personal blog [moongate.top](https://mo
 - **Visual Contract**: Monitor calibration guide included to ensure accurate moonlight rendering on your screen
 - **More Polish**: Enhanced semantic markers for private fields, generics, read‑only variables, etc.
 
-[📜 View full changelog](./CHANGELOG.md)
+[📜 View full changelog](https://github.com/yuelinghuashu/moongate-theme/blob/HEAD/CHANGELOG.md)
 
 ## ⚙️ Recommended Setup
 
 ### Monitor Calibration
 
-To ensure Moongate’s moonlight renders faithfully on your screen, we have prepared a monitor calibration guide – the **Visual Contract**. It helps you find the settings that best suit your hardware. See `extras/VISUAL_CONTRACT.md` or [view online](./extras/VISUAL_CONTRACT.md).
+To ensure Moongate’s moonlight renders faithfully on your screen, we have prepared a monitor calibration guide – the **Visual Contract**. It helps you find the settings that best suit your hardware. See `extras/VISUAL_CONTRACT.md` or [view online](https://github.com/yuelinghuashu/moongate-theme/blob/HEAD/extras/VISUAL_CONTRACT.md).
 
 ### Semantic Highlighting
 
