@@ -1,5 +1,24 @@
 # 更新日志 | Changelog
 
+## [2.1.0] - 2026-03-14
+
+### ✨ 海拔系统：让界面拥有物理深度
+
+- **引入海拔变量**：新增 `surfaceGround`、`surfaceRaised`、`surfaceFloating`、`surfaceTooltip` 四层海拔阶梯，为 UI 赋予清晰的物理层次。
+- **深色模式**：侧边栏、活动栏等次级区域（`surfaceRaised`）比编辑器背景（`surfaceGround`）亮约 5%，形成微微隆起的“面板感”；弹窗、菜单等浮层（`surfaceFloating`）再提升 5%，并带有半透明主色边框（`borderFloating`），边界更清晰。
+- **浅色模式**：基于重力补偿原则，次级区域比编辑器背景暗约 3%，浮层再暗 3%，在保持通透感的同时，通过明度差异实现“纸张层叠”的优雅分离。
+- **全 UI 适配**：对侧边栏、活动栏、状态栏、输入框、下拉菜单、通知中心、快速输入等 20+ 个区域进行了海拔映射，视觉层次全面提升。
+
+### ✨ Elevation System: Giving the Interface Physical Depth
+
+- **Introduced elevation variables**: Added `surfaceGround`, `surfaceRaised`, `surfaceFloating`, and `surfaceTooltip` – a four‑layer elevation ladder that gives the UI a clear physical hierarchy.
+- **Dark mode**: Secondary areas like the sidebar and activity bar (`surfaceRaised`) are now about 5% brighter than the editor background (`surfaceGround`), creating a subtle “raised panel” feel. Floating elements such as menus and notifications (`surfaceFloating`) are another 5% brighter and feature a semi‑transparent primary‑color border (`borderFloating`) for sharper boundaries.
+- **Light mode**: Following the gravity‑compensation principle, secondary areas are about 3% darker than the editor background, and floating layers another 3% darker. This achieves an elegant “paper stack” separation without sacrificing translucency.
+- **Full UI coverage**: Mapped elevations to 20+ areas including the sidebar, activity bar, status bar, input fields, dropdowns, notifications, and quick pick – elevating the entire visual hierarchy.
+
+---
+
+
 ## [2.0.0] - 2026-03-11
 
 ### 🌗 昼夜双子：工程化重构与浅色主题发布

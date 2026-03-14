@@ -16,18 +16,12 @@ const PATHS = {
 
 // ==================== 辅助函数 ====================
 
-/**
- * 确保文件存在，否则抛出错误
- */
 function ensureFileExists(filePath, description) {
   if (!fs.existsSync(filePath)) {
     throw new Error(`❌ 未找到 ${description} 文件: ${filePath}`)
   }
 }
 
-/**
- * 安全加载 YAML 文件，失败时返回 null 并打印错误
- */
 function safeLoadYaml(filePath, description) {
   try {
     return yaml.load(fs.readFileSync(filePath, "utf8"))
@@ -37,13 +31,8 @@ function safeLoadYaml(filePath, description) {
   }
 }
 
-/**
- * 增强版变量替换函数
- * 支持变量名包含连字符，智能处理透明度
- */
 function replaceVariables(obj, colors) {
   if (typeof obj === "string") {
-    // 正则匹配 ${变量名} 后可选两位十六进制透明度
     return obj.replace(
       /\$\{([a-zA-Z0-9_-]+)\}([0-9a-fA-F]{2})?/g,
       (match, key, alpha) => {
@@ -53,36 +42,28 @@ function replaceVariables(obj, colors) {
           return match
         }
 
-        // 处理透明度
         if (alpha) {
-          // 如果变量本身已经是 8 位色值（含透明度）
           if (/^#[0-9a-fA-F]{8}$/.test(value)) {
             console.warn(
               `⚠️ 警告: 变量 "${key}" 值 ${value} 已包含透明度，忽略后缀 "${alpha}"`,
             )
             return value
           }
-          // 如果变量是 6 位标准色值，拼接透明度
           if (/^#[0-9a-fA-F]{6}$/.test(value)) {
             return value + alpha
           }
-          // 其他情况（非标准格式）发出警告并原样返回
           console.warn(
             `⚠️ 警告: 变量 "${key}" 值 ${value} 格式异常，无法处理透明度`,
           )
           return value
         }
-
-        // 无透明度后缀，直接返回值
         return value
       },
     )
   }
-
   if (Array.isArray(obj)) {
     return obj.map((item) => replaceVariables(item, colors))
   }
-
   if (obj && typeof obj === "object") {
     const result = {}
     for (const [k, v] of Object.entries(obj)) {
@@ -90,13 +71,9 @@ function replaceVariables(obj, colors) {
     }
     return result
   }
-
   return obj
 }
 
-/**
- * 从 package.json 读取主题基本信息
- */
 function getThemeInfo() {
   const pkgPath = path.join(ROOT_DIR, "package.json")
   if (!fs.existsSync(pkgPath)) {
@@ -104,7 +81,6 @@ function getThemeInfo() {
   }
   try {
     const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf8"))
-    // 使用 displayName 若存在，否则使用 name（去掉可能的 @scope/ 前缀）
     let displayName = pkg.displayName || pkg.name || "Your Theme"
     if (displayName.startsWith("@") && displayName.includes("/")) {
       displayName = displayName.split("/")[1]
@@ -116,6 +92,15 @@ function getThemeInfo() {
   } catch {
     return { name: "your-theme", displayName: "Your Theme" }
   }
+}
+
+// 主题显示名称和 uiTheme 映射
+const themeDisplayMap = {
+  dark: { suffix: "Dark", uiTheme: "vs-dark" },
+  light: { suffix: "Light", uiTheme: "vs" },
+  "hc-black": { suffix: "High Contrast (Black)", uiTheme: "hc-black" },
+  "hc-light": { suffix: "High Contrast (Light)", uiTheme: "hc-light" },
+  // 可根据需要扩展
 }
 
 // ==================== 主流程 ====================
@@ -140,16 +125,14 @@ function main() {
     process.exit(1)
   }
 
-  // 3. 收集语言规则（自动扫描 languages 目录，可按需排序）
+  // 3. 收集语言规则
   console.log("📚 加载语言规则...")
   let tokenColorsRaw = []
   if (fs.existsSync(PATHS.langDir)) {
-    // 获取所有 yaml 文件并按文件名排序（也可自定义顺序）
     const langFiles = fs
       .readdirSync(PATHS.langDir)
       .filter((f) => f.endsWith(".yaml"))
-      .sort() // 按字母顺序排序，确保一致性
-
+      .sort()
     langFiles.forEach((file) => {
       const filePath = path.join(PATHS.langDir, file)
       const langRules = safeLoadYaml(filePath, `语言规则 ${file}`)
@@ -159,16 +142,15 @@ function main() {
       }
     })
   } else {
-    console.warn("⚠️  languages 目录不存在，跳过语言规则加载")
+    console.warn("⚠️ languages 目录不存在，跳过语言规则加载")
   }
 
-  // 4. 加载特殊规则（如 better-comments 等）
+  // 4. 加载特殊规则
   console.log("✨ 加载特殊规则...")
   if (fs.existsSync(PATHS.specialDir)) {
     const specialFiles = fs
       .readdirSync(PATHS.specialDir)
       .filter((f) => f.endsWith(".yaml"))
-
     specialFiles.forEach((file) => {
       const filePath = path.join(PATHS.specialDir, file)
       const specialRules = safeLoadYaml(filePath, `特殊规则 ${file}`)
@@ -178,7 +160,7 @@ function main() {
       }
     })
   } else {
-    console.log("ℹ️  special 目录不存在，跳过特殊规则")
+    console.log("ℹ️ special 目录不存在，跳过特殊规则")
   }
 
   // 5. 获取颜色变量文件
@@ -194,18 +176,14 @@ function main() {
 
   // 6. 读取主题信息
   const themeInfo = getThemeInfo()
-  let baseName = themeInfo.name.replace(/[^a-z0-9-]/gi, "-").toLowerCase() // 净化文件名
-  console.log("原始 baseName:", baseName) // 添加这行
-  // 移除末尾的 "-theme" 后缀（如果存在），使文件名不包含 "theme"
-  baseName = baseName.replace(/-theme$/, "")
-  console.log("处理后 baseName:", baseName) // 添加这行
+  let baseName = themeInfo.name.replace(/[^a-z0-9-]/gi, "-").toLowerCase()
 
   // 7. 为每个颜色文件构建主题
   console.log(`\n🔨 开始构建主题 (基础名称: ${baseName})...\n`)
   colorFiles.forEach((colorFile) => {
     const match = colorFile.match(/^colors-(.+)\.yaml$/)
     if (!match) return
-    const themeType = match[1] // "dark" 或 "light"
+    const themeType = match[1] // 如 'dark', 'light', 'hc-black'
     const outputFile = path.join(
       PATHS.outputDir,
       `${baseName}-${themeType}.json`,
@@ -224,10 +202,18 @@ function main() {
     const semanticColors = replaceVariables(semanticRaw, colors)
     const tokenColors = replaceVariables(tokenColorsRaw, colors)
 
-    // 构建主题对象
+    // 确定显示名称和 uiTheme
+    const display = themeDisplayMap[themeType] || {
+      suffix: themeType,
+      uiTheme: "vs-dark",
+    }
+    const themeName = `${themeInfo.displayName} ${display.suffix}`
+    // 推断主题类型（用于 theme.type 字段）
+    const type = themeType.includes("light") ? "light" : "dark"
+
     const theme = {
-      name: `${themeInfo.displayName} ${themeType === "dark" ? "Dark" : "Light"}`,
-      type: themeType,
+      name: themeName,
+      type: type,
       colors: uiColors,
       tokenColors: tokenColors,
       semanticTokenColors: semanticColors,
@@ -245,5 +231,4 @@ function main() {
   console.log("\n🎉 所有主题构建完毕！")
 }
 
-// 执行主函数
 main()

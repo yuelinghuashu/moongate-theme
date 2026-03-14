@@ -29,6 +29,13 @@ bgActive: "#0284c725"        # 激活背景 - 稍深的蓝叠加
 hoverBg: "#f1f5f9"           # 列表悬停色
 selectedBg: "#e2e8f0"        # 列表选中色
 
+# ==================== 海拔系统（新增） ====================
+surfaceGround: "#f9fafb"      # 月面（0dp）- 编辑器背景（与 bg 一致）
+surfaceRaised: "#f2f4f8"      # 隆起（2dp）- 侧边栏、活动栏，比 ground 暗约 3%
+surfaceFloating: "#e9edf3"    # 漂浮（8dp）- 弹窗、菜单，比 raised 再暗 3%
+surfaceTooltip: "#dfe5ee"     # 提示（12dp）- 工具提示，最深层
+borderFloating: "#0284c780"   # 半透明晨曦蓝，用于弹窗边框，增加边界清晰度
+
 # ==================== 文本层级 ====================
 text: "#1e293b"              # 正文 - 核心深度（Slate 900）
 textDim: "#475569"           # 次要正文

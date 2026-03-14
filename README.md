@@ -1,4 +1,4 @@
-[![Version](https://img.shields.io/badge/version-2.0.0-blue)]()
+[![Version](https://img.shields.io/badge/version-2.1.0-blue)]()
 [![Marketplace](https://img.shields.io/badge/vscode-marketplace-brightgreen)]()
 
 [中文](#Chinese) | [English](#English)
@@ -20,8 +20,6 @@
 | JSON | ![JSON 深色](./images/json-dark.png) | ![JSON 浅色](./images/json-light.png) |
 | Markdown | ![Markdown 深色](./images/markdown-dark.png) | ![Markdown 浅色](./images/markdown-light.png) |
 
-> 💡 以上预览图为 v2.0 版本实际截图。建议将主题切换为对应模式后对比查看。
-
 ---
 
 ## <span id="Chinese">中文</span>
@@ -29,21 +27,24 @@
 > 从博客到编辑器，让代码栖息在月光里
 
 Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而来的 VS Code 主题，它将博客的视觉语言带到了代码编辑器中。  
-**v2.0 双子星版本** 首次带来完整的昼夜双主题：深色“晴夜”与浅色“晨曦”，通过**重力补偿**原则，让两种模式下语义一致、视觉重量对等。
+**v2.0 双子星版本** 首次带来完整的昼夜双主题：深色“晴夜”与浅色“晨曦”，通过**重力补偿**原则，让两种模式下语义一致、视觉重量对等。  
+**v2.1.0 海拔系统** 进一步为 UI 注入物理深度，让界面层次从平面走向立体。
 
 ## ✨ 设计理念
 
 - **月光般的柔和**：长时间 coding 不刺眼  
 - **门扉般的边界**：清晰的视觉层次  
-- **明暗两相宜**：无论白天黑夜，始终舒适如一  
+- **明暗两相宜**：无论白天黑夜，始终舒适如一
+- **🏔️ 物理海拔**：通过微妙的明度阶梯，让界面元素拥有真实的深度——侧边栏微微隆起，弹窗轻盈浮现，代码区沉静深邃  
 
 ## 🎨 配色系统
 
 - **主色**：取自月光的冷调蓝系（深色 `#3b82f6`，浅色 `#0284c7`）
 - **背景**：深空 `#0f172a` / 冷月白 `#f9fafb`
 - **强调色**：根据语义分层，形成亮度阶梯
+- **🏔️ 海拔色**：新增四层明度阶梯（地面 `surfaceGround`、隆起 `surfaceRaised`、漂浮 `surfaceFloating`、提示 `surfaceTooltip`），让界面拥有真实的物理深度
 
-## 🧠 你可能没注意到，但我们已经考虑过的细节（v2.0 新增/优化）
+## 🧠 你可能没注意到，但我们已经考虑过的细节
 
 | 优化项 | 常见主题的问题 | Moongate 的解法 |
 |--------|----------------|------------------|
@@ -54,6 +55,7 @@ Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而
 | **泛型参数识别** | TypeScript 泛型淹没在类型中 | 泛型参数用青色 `#22d3ee`，特殊语法一眼可辨 |
 | **装饰器突出** | Python 装饰器与普通函数混同 | 装饰器用紫色 `#c084fc` + 斜体，元数据显性化 |
 | **终端颜色同步** | 终端输出与编辑器配色割裂 | 16 色 ANSI 完全映射到主题语义色，输出即代码 |
+| **界面层次感** | UI 元素（侧边栏、弹窗）与背景粘连，缺乏深度 | **海拔系统**：为不同 UI 区域分配明度阶梯（`surfaceGround` → `surfaceRaised` → `surfaceFloating`），深色模式逐级增亮，浅色模式逐级加深，实现自然的“纸张层叠” |
 
 <details>
 <summary>📋 点击查看 Moongate 完整优化项清单（共 20+ 项）</summary>
@@ -90,13 +92,12 @@ Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而
 
 </details>
 
-## ✨ v2.0.0 版本亮点
+## ✨ v2.1.0 版本亮点
 
-- **昼夜双子**：首次发布浅色主题 (Moongate Light)，基于重力补偿原则，与深色版保持 1:1 视觉权重
-- **工程化重构**：从单体 JSON 升级为 YAML 模块化系统，支持一键构建双主题
-- **JSON 嵌套色阶**：蓝 → 青 → 紫，让深层结构一目了然
-- **视觉契约**：随主题提供显示器校准指南，确保月光在您屏幕上准确还原
-- **更多优化**：完善了私有字段、泛型参数、只读变量等语义标记
+- **🏔️ 海拔系统**：引入四层明度阶梯，侧边栏、活动栏、弹窗等 UI 区域拥有清晰物理层次，深/浅模式下均实现优雅的“纸张层叠”效果。
+- **全 UI 适配**：对侧边栏、菜单、输入框、通知等 20+ 区域完成海拔映射，界面深度全面提升。
+- **边框强化**：浮层元素（弹窗、下拉框）添加半透明主色边框，边界更清晰。
+- **构建脚本优化**：完善变量替换安全网，透明度处理更智能。
 
 [📜 查看完整更新日志](./CHANGELOG.md)
 
@@ -139,21 +140,24 @@ Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而
 > From blog to editor, let your code rest in moonlight
 
 Moongate is a VS Code theme born from my personal blog [moongate.top](https://moongate.top). It brings the same visual language you loved on my blog into your code editor — minimalist, sci-fi, terminal-inspired.  
-**v2.0 Gemini Release** introduces a complete dual‑theme system for the first time: dark “Night Sky” and light “Dawn”. Through the principle of **gravity compensation**, both modes share identical semantics with equal visual weight.
+**v2.0 Gemini Release** introduced a complete dual‑theme system: dark “Night Sky” and light “Dawn”. Through **gravity compensation**, both modes share identical semantics with equal visual weight.  
+**v2.1.0 Elevation System** now brings physical depth to the UI, taking the interface from flat to layered.
 
 ## ✨ Design Philosophy
 
 - **Soft as moonlight**: Easy on the eyes during long coding sessions
 - **Clear as a gate**: Visual hierarchy that doesn't get in your way
 - **Day and night**: Thoughtfully balanced for both dark and light environments
+- **🏔️ Physical elevation**: Subtle lightness steps give real depth – sidebars gently lift, popups float, the editor recedes.
 
 ## 🎨 Color System
 
 - **Primary**: Cool blues inspired by moonlight (dark `#3b82f6`, light `#0284c7`)
 - **Background**: Deep night sky `#0f172a` / cold moon white `#f9fafb`
 - **Accents**: Layered by semantics, forming a brightness ladder
+- **🏔️ Elevation colors**: Four new lightness steps (`surfaceGround`, `surfaceRaised`, `surfaceFloating`, `surfaceTooltip`) bring authentic physical depth to the interface.
 
-## 🧠 The Details That Make a Difference (v2.0 New/Optimized)
+## 🧠 The Details That Make a Difference
 
 | What You Might Have Missed | The Problem with Most Themes | How Moongate Fixes It |
 |----------------------------|------------------------------|------------------------|
@@ -164,6 +168,7 @@ Moongate is a VS Code theme born from my personal blog [moongate.top](https://mo
 | **Generic Parameter Recognition** | TypeScript generics get lost in a sea of types | Generics stand out in cyan `#22d3ee` |
 | **Decorator Emphasis** | Python decorators blend with regular functions | Decorators are purple `#c084fc` + italic – metadata you can actually see |
 | **Terminal Color Sync** | Terminal output feels disconnected from the editor | 16‑color ANSI fully mapped to theme semantics – output matches code |
+| **UI Layering** | UI elements (sidebar, popups) stick to the background, lacking depth | **Elevation System**: lightness steps (`surfaceGround` → `surfaceRaised` → `surfaceFloating`) create a natural paper‑stack effect in both dark and light modes. |
 
 <details>
 <summary>📋 Click to view Moongate's complete optimization list (20+ items)</summary>
@@ -200,13 +205,12 @@ Moongate is a VS Code theme born from my personal blog [moongate.top](https://mo
 
 </details>
 
-## ✨ v2.0.0 Highlights
+## ✨ v2.1.0 Highlights
 
-- **Gemini Release**: First ever light theme (Moongate Light), designed with gravity compensation – 1:1 visual weight with the dark version
-- **Engineering Overhaul**: Upgraded from a monolithic JSON to a YAML‑based modular system, one‑click dual‑theme generation
-- **JSON Nesting Gradient**: Blue → Cyan → Purple – instant depth perception
-- **Visual Contract**: Monitor calibration guide included to ensure accurate moonlight rendering on your screen
-- **More Polish**: Enhanced semantic markers for private fields, generics, read‑only variables, etc.
+- **🏔️ Elevation System**: Four lightness steps give clear physical layering to sidebars, activity bars, popups, and 20+ other UI regions – a refined paper‑stack effect in both dark and light modes.
+- **Full UI Coverage**: Mapped elevations to all major areas including menus, input fields, notifications, and quick pick.
+- **Border Enhancement**: Floating elements (popups, dropdowns) now feature a semi‑transparent primary border for sharper boundaries.
+- **Build Script Polish**: Improved variable replacement safety net and smarter alpha handling.
 
 [📜 View full changelog](./CHANGELOG.md)
 
