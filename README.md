@@ -1,4 +1,4 @@
-[![Version](https://img.shields.io/badge/version-2.1.0-blue)]()
+[![Version](https://img.shields.io/badge/version-2.2.0-blue)]()
 [![Marketplace](https://img.shields.io/badge/vscode-marketplace-brightgreen)]()
 
 [中文](#Chinese) | [English](#English)
@@ -28,7 +28,8 @@
 
 Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而来的 VS Code 主题，它将博客的视觉语言带到了代码编辑器中。  
 **v2.0 双子星版本** 首次带来完整的昼夜双主题：深色“晴夜”与浅色“晨曦”，通过**重力补偿**原则，让两种模式下语义一致、视觉重量对等。  
-**v2.1.0 海拔系统** 进一步为 UI 注入物理深度，让界面层次从平面走向立体。
+**v2.1.0 海拔系统** 进一步为 UI 注入物理深度，让界面层次从平面走向立体。  
+**v2.2.0 工业级工程升级** 引入 DTCG 设计令牌标准，自动生成跨平台 CSS 变量，并内置 WCAG 对比度质检，确保设计系统严谨可靠。
 
 ## ✨ 设计理念
 
@@ -36,6 +37,7 @@ Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而
 - **门扉般的边界**：清晰的视觉层次  
 - **明暗两相宜**：无论白天黑夜，始终舒适如一
 - **🏔️ 物理海拔**：通过微妙的明度阶梯，让界面元素拥有真实的深度——侧边栏微微隆起，弹窗轻盈浮现，代码区沉静深邃  
+- **📐 工程校准**：所有色值经过工业级校验，符合 WCAG 对比度标准，保证在任何屏幕上清晰可读
 
 ## 🎨 配色系统
 
@@ -43,6 +45,12 @@ Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而
 - **背景**：深空 `#0f172a` / 冷月白 `#f9fafb`
 - **强调色**：根据语义分层，形成亮度阶梯
 - **🏔️ 海拔色**：新增四层明度阶梯（地面 `surfaceGround`、隆起 `surfaceRaised`、漂浮 `surfaceFloating`、提示 `surfaceTooltip`），让界面拥有真实的物理深度
+- **🎨 设计令牌**：基于 DTCG 标准，原始值、语义层、组件层分离，自动生成 CSS 变量供博客和 UI 组件库使用
+
+## 📐 设计系统
+
+Moongate 基于 DTCG 设计令牌标准构建，所有颜色、海拔层级、对比度数据均已文档化，确保设计语言在各平台保持一致。  
+👉 [查看完整设计系统文档](./docs/DESIGN_SYSTEM.md)
 
 ## 🧠 你可能没注意到，但我们已经考虑过的细节
 
@@ -56,6 +64,7 @@ Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而
 | **装饰器突出** | Python 装饰器与普通函数混同 | 装饰器用紫色 `#c084fc` + 斜体，元数据显性化 |
 | **终端颜色同步** | 终端输出与编辑器配色割裂 | 16 色 ANSI 完全映射到主题语义色，输出即代码 |
 | **界面层次感** | UI 元素（侧边栏、弹窗）与背景粘连，缺乏深度 | **海拔系统**：为不同 UI 区域分配明度阶梯（`surfaceGround` → `surfaceRaised` → `surfaceFloating`），深色模式逐级增亮，浅色模式逐级加深，实现自然的“纸张层叠” |
+| **设计系统一致性** | 博客、UI 组件库与编辑器颜色脱节 | **DTCG 设计令牌**：自动生成 CSS 变量（`moongate-tokens.css`），一套颜色贯穿所有数字产品 |
 
 <details>
 <summary>📋 点击查看 Moongate 完整优化项清单（共 20+ 项）</summary>
@@ -92,12 +101,13 @@ Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而
 
 </details>
 
-## ✨ v2.1.0 版本亮点
+## ✨ v2.2.0 版本亮点
 
-- **🏔️ 海拔系统**：引入四层明度阶梯，侧边栏、活动栏、弹窗等 UI 区域拥有清晰物理层次，深/浅模式下均实现优雅的“纸张层叠”效果。
-- **全 UI 适配**：对侧边栏、菜单、输入框、通知等 20+ 区域完成海拔映射，界面深度全面提升。
-- **边框强化**：浮层元素（弹窗、下拉框）添加半透明主色边框，边界更清晰。
-- **构建脚本优化**：完善变量替换安全网，透明度处理更智能。
+- **🎨 DTCG 设计令牌标准**：三层架构（原始值 → 语义层 → 组件层），颜色管理规范化，为跨平台复用（博客、UI 组件库）奠定基础。
+- **🏔️ 海拔系统深度优化**：浅色模式采用“越高越亮”原则，侧边栏纯白，编辑器微冷白，弹窗边框更清晰；深色模式层次进一步强化。
+- **🛠️ 工业级构建脚本**：内置颜色标准化、循环引用检测、透明度安全网；自动校验 WCAG 对比度，不合格即中断构建，保证主题可读性。
+- **📄 自动生成设计资产**：输出 `moongate-tokens.css`（供博客/组件库使用）和 `DESIGN_SYSTEM.md`（完整设计系统文档），实现设计语言统一。
+- **🔧 终端可读性增强**：浅色模式下 `ansiWhite` 调整为浅灰，避免文字消失。
 
 [📜 查看完整更新日志](./CHANGELOG.md)
 
@@ -141,7 +151,8 @@ Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而
 
 Moongate is a VS Code theme born from my personal blog [moongate.top](https://moongate.top). It brings the same visual language you loved on my blog into your code editor — minimalist, sci-fi, terminal-inspired.  
 **v2.0 Gemini Release** introduced a complete dual‑theme system: dark “Night Sky” and light “Dawn”. Through **gravity compensation**, both modes share identical semantics with equal visual weight.  
-**v2.1.0 Elevation System** now brings physical depth to the UI, taking the interface from flat to layered.
+**v2.1.0 Elevation System** brought physical depth to the UI, taking the interface from flat to layered.  
+**v2.2.0 Industrial‑Grade Engineering** introduces the DTCG design token standard, automatically generates cross‑platform CSS variables, and includes built‑in WCAG contrast validation – ensuring a robust design system.
 
 ## ✨ Design Philosophy
 
@@ -149,6 +160,7 @@ Moongate is a VS Code theme born from my personal blog [moongate.top](https://mo
 - **Clear as a gate**: Visual hierarchy that doesn't get in your way
 - **Day and night**: Thoughtfully balanced for both dark and light environments
 - **🏔️ Physical elevation**: Subtle lightness steps give real depth – sidebars gently lift, popups float, the editor recedes.
+- **📐 Engineering calibration**: Every color value is validated against WCAG standards, guaranteeing legibility on any screen.
 
 ## 🎨 Color System
 
@@ -156,6 +168,13 @@ Moongate is a VS Code theme born from my personal blog [moongate.top](https://mo
 - **Background**: Deep night sky `#0f172a` / cold moon white `#f9fafb`
 - **Accents**: Layered by semantics, forming a brightness ladder
 - **🏔️ Elevation colors**: Four new lightness steps (`surfaceGround`, `surfaceRaised`, `surfaceFloating`, `surfaceTooltip`) bring authentic physical depth to the interface.
+- **🎨 Design tokens**: DTCG‑based architecture with primitives, semantics, and components – automatically generates CSS variables for use in blogs and UI component libraries.
+
+
+## 📐 Design System
+
+Moongate is built on the DTCG design token standard. All colors, elevation layers, and contrast data are fully documented, ensuring a consistent design language across platforms.  
+👉 [View the complete design system documentation](./docs/DESIGN_SYSTEM.md)
 
 ## 🧠 The Details That Make a Difference
 
@@ -169,6 +188,7 @@ Moongate is a VS Code theme born from my personal blog [moongate.top](https://mo
 | **Decorator Emphasis** | Python decorators blend with regular functions | Decorators are purple `#c084fc` + italic – metadata you can actually see |
 | **Terminal Color Sync** | Terminal output feels disconnected from the editor | 16‑color ANSI fully mapped to theme semantics – output matches code |
 | **UI Layering** | UI elements (sidebar, popups) stick to the background, lacking depth | **Elevation System**: lightness steps (`surfaceGround` → `surfaceRaised` → `surfaceFloating`) create a natural paper‑stack effect in both dark and light modes. |
+| **Design System Consistency** | Blog and UI component colors diverge from the editor | **DTCG Design Tokens**: Automatically generate CSS variables (`moongate-tokens.css`) – one color language across all your digital products. |
 
 <details>
 <summary>📋 Click to view Moongate's complete optimization list (20+ items)</summary>
@@ -205,12 +225,13 @@ Moongate is a VS Code theme born from my personal blog [moongate.top](https://mo
 
 </details>
 
-## ✨ v2.1.0 Highlights
+## ✨ v2.2.0 Highlights
 
-- **🏔️ Elevation System**: Four lightness steps give clear physical layering to sidebars, activity bars, popups, and 20+ other UI regions – a refined paper‑stack effect in both dark and light modes.
-- **Full UI Coverage**: Mapped elevations to all major areas including menus, input fields, notifications, and quick pick.
-- **Border Enhancement**: Floating elements (popups, dropdowns) now feature a semi‑transparent primary border for sharper boundaries.
-- **Build Script Polish**: Improved variable replacement safety net and smarter alpha handling.
+- **🎨 DTCG Design Token Standard**: Three‑layer architecture (Primitives → Semantics → Components) – standardized color management, ready for cross‑platform reuse.
+- **🏔️ Elevation System Refinements**: Light mode now uses “higher = brighter” logic – pure white sidebars, subtle cool‑white editor, sharper popup borders. Dark mode layering is further enhanced.
+- **🛠️ Industrial‑Grade Build Script**: Includes color normalization, circular reference detection, alpha‑safety net, and WCAG contrast validation – any failing check halts the build.
+- **📄 Automated Design Assets**: Generates `moongate-tokens.css` (for blogs/UI libraries) and `DESIGN_SYSTEM.md` (complete design system documentation) – one source of truth for all products.
+- **🔧 Terminal Readability**: Light mode `ansiWhite` adjusted to light gray to prevent invisible text.
 
 [📜 View full changelog](./CHANGELOG.md)
 

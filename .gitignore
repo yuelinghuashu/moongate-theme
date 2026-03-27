@@ -2,3 +2,4 @@ node_modules
 *.vsix
 .env
 pnpm-lock.yaml
+moongate-theme*.vsix

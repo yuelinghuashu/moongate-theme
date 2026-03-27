@@ -1,0 +1,88 @@
+# ==================== 浅色语义层 ====================
+# 基于“越高越亮”原则，侧边栏纯白，编辑器微冷白
+
+# 月语义主色
+primary: "{blue-700}"
+success: "{green-600}"
+warning: "{yellow-700}"
+error: "{red-700}"
+highlight: "{blue-800}"
+cyan: "{cyan-700}"
+purple: "{purple-700}"
+
+# 功能色（墨迹感语法）
+function: "{blue-800}"
+operator: "{gray-600}"
+comment: "{gray-600}"
+variable: "{gray-900}"
+variableDim: "{gray-600}"
+textMuted: "{gray-600}"
+punctuation: "{gray-400}"
+
+# 背景层级（冰月白质感）
+bg: "{gray-50}"
+bgElevated: "{white}"
+bgMuted: "{gray-100}"
+bgHover: "{blue-700}15"
+bgActive: "{blue-700}25"
+hoverBg: "{gray-100}"
+selectedBg: "{gray-300}"
+
+# 海拔系统（重力补偿）
+surfaceGround: "{gray-50}"
+surfaceRaised: "{white}"
+surfaceFloating: "{gray-100}"
+surfaceTooltip: "{gray-200}"
+borderFloating: "{blue-700}80"
+
+# 文本层级
+text: "{gray-900}"
+textDim: "{gray-600}"
+textInactive: "{gray-400}"
+
+# 边框（折痕感）
+border: "{gray-300}"
+borderHover: "{blue-700}"
+borderDim: "{gray-400}"
+
+# 交互控件
+buttonHoverBg: "{blue-700}"
+white: "{white}"
+
+# 终端 ANSI 色（修正版）
+ansiBlack: "{gray-900}"
+ansiRed: "{red-700}"
+ansiGreen: "{green-600}"
+ansiYellow: "{yellow-700}"
+ansiBlue: "{blue-700}"
+ansiMagenta: "{purple-700}"
+ansiCyan: "{cyan-700}"
+ansiWhite: "{gray-200}" # 修正：避免白色背景上消失
+
+ansiBrightBlack: "{gray-500}"
+ansiBrightRed: "{red-400}"
+ansiBrightGreen: "{green-400}"
+ansiBrightYellow: "{yellow-400}"
+ansiBrightBlue: "{blue-600}"
+ansiBrightMagenta: "{purple-400}"
+ansiBrightCyan: "{cyan-400}"
+ansiBrightWhite: "{white}"
+
+# 括号高亮
+bracket1: "{blue-700}"
+bracket2: "{green-600}"
+bracket3: "{yellow-700}"
+bracket4: "{purple-700}"
+bracket5: "{cyan-700}"
+bracket6: "{gray-500}"
+
+# 其他
+scrollbar: "{blue-700}"
+gitAdded: "{green-600}"
+gitModified: "{yellow-700}"
+gitDeleted: "{red-700}"
+gitUntracked: "{gray-500}"
+gitIgnored: "{gray-400}"
+debugStart: "{green-600}"
+debugPause: "{yellow-700}"
+debugStop: "{red-700}"

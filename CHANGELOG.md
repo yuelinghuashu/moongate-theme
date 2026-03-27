@@ -1,5 +1,59 @@
 # 更新日志 | Changelog
 
+## [2.2.0] - 2026-03-27
+
+### 🎨 DTCG 设计令牌标准：从主题到设计系统
+
+- **三层架构**：引入原始值（Primitives）、语义层（Semantics）、组件层（Components），颜色管理彻底规范化。原始值按色相-明度命名（如 `blue-500`、`gray-900`），语义层定义角色（如 `primary`、`bg`），组件层直接对应 UI 元素。
+- **自动生成设计资产**：构建脚本自动生成 `moongate-tokens.css`（CSS 变量文件）和 `DESIGN_SYSTEM.md`（完整设计系统文档），供博客、UI 组件库复用，实现设计语言统一。
+- **跨平台就绪**：所有颜色变量可一键导出为 CSS、SCSS、JS 模块，为未来多平台扩展奠定基础。
+
+### 🏔️ 海拔系统深度优化
+
+- **浅色模式“越高越亮”**：侧边栏（`surfaceRaised`）采用纯白 `#ffffff`，编辑器背景（`surfaceGround`）保持微冷白 `#f9fafb`，形成纸张层叠的通透感；浮层（`surfaceFloating`）使用 `#f1f5f9`，配合半透明主色边框，边界更清晰。
+- **深色模式层次增强**：侧边栏明度从 `#131c31` 提升至 `#1a2538`，弹窗从 `#1e293b` 提升至 `#25364a`，层次对比更明显。
+- **终端可读性修复**：浅色模式下 `ansiWhite` 调整为浅灰 `#e2e8f0`，避免白色文字在浅色背景上消失。
+
+### 🛠️ 工业级构建脚本
+
+- **颜色标准化**：自动补全 3 位/4 位 Hex，校验非法色值，确保所有色值符合 6 位或 8 位规范。
+- **循环引用检测**：令牌嵌套深度超过 20 层时熔断并输出引用链，防止构建死循环。
+- **透明度安全网**：智能识别 `rgba()`、已含透明度的 8 位 Hex，避免非法拼接。
+- **WCAG 对比度质检**：自动校验正文、次要文字、注释等关键角色的对比度，低于标准则中断构建，保证主题在任何环境下清晰可读。
+
+### 📄 工程化文档与资产
+
+- **`moongate-tokens.css`**：自动生成的 CSS 变量文件，供博客、UI 组件库直接引用，实现深浅模式无缝切换。
+- **`DESIGN_SYSTEM.md`**：完整的设计系统文档，包含色板预览、海拔系统说明、语义层对比度数据，可作为团队协作的真理来源。
+
+---
+
+## [2.2.0] - 2026-03-27
+
+### 🎨 DTCG Design Token Standard: From Theme to Design System
+
+- **Three‑layer architecture**: Primitives, Semantics, and Components – color management is now fully standardized. Primitives use hue‑lightness naming (e.g., `blue-500`, `gray-900`), semantics define roles (e.g., `primary`, `bg`), and components map directly to UI elements.
+- **Automated design assets**: The build script now generates `moongate-tokens.css` (CSS variables) and `DESIGN_SYSTEM.md` (complete design system documentation) – one source of truth for blogs and UI component libraries.
+- **Cross‑platform ready**: All color variables can be exported as CSS, SCSS, or JavaScript modules, laying the foundation for future multi‑platform expansion.
+
+### 🏔️ Elevation System Refinements
+
+- **Light mode “higher = brighter”**: Sidebars (`surfaceRaised`) now use pure white `#ffffff`, while the editor background (`surfaceGround`) remains cool‑white `#f9fafb`, creating a crisp paper‑stack effect. Floating elements (`surfaceFloating`) use `#f1f5f9` with a semi‑transparent primary border for sharper boundaries.
+- **Dark mode layering enhanced**: Sidebar brightness increased from `#131c31` to `#1a2538`, popups from `#1e293b` to `#25364a`, making the visual hierarchy more pronounced.
+- **Terminal readability fix**: In light mode, `ansiWhite` is now light gray `#e2e8f0` to prevent white text from disappearing against the light background.
+
+### 🛠️ Industrial‑Grade Build Script
+
+- **Color normalization**: Automatically expands 3‑digit/4‑digit Hex, validates illegal color values, and ensures all colors comply with 6‑digit or 8‑digit hex standards.
+- **Circular reference detection**: Token nesting exceeding 20 levels triggers a fatal error with the reference chain, preventing infinite loops.
+- **Alpha safety net**: Intelligently detects `rgba()`, 8‑digit hex with transparency, and avoids illegal concatenation.
+- **WCAG contrast validation**: Automatically checks critical text roles (body, secondary, comment, etc.) against WCAG AA standards – any failure halts the build, guaranteeing legibility under all conditions.
+
+### 📄 Engineering Documentation & Assets
+
+- **`moongate-tokens.css`**: Automatically generated CSS variables for blogs and UI component libraries, enabling seamless dark/light mode switching.
+- **`DESIGN_SYSTEM.md`**: A complete design system document including color swatches, elevation system explanations, and contrast data – serving as the single source of truth for teams.
+
 ## [2.1.0] - 2026-03-14
 
 ### ✨ 海拔系统：让界面拥有物理深度
@@ -17,7 +71,6 @@
 - **Full UI coverage**: Mapped elevations to 20+ areas including the sidebar, activity bar, status bar, input fields, dropdowns, notifications, and quick pick – elevating the entire visual hierarchy.
 
 ---
-
 
 ## [2.0.0] - 2026-03-11
 

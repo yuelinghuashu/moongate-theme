@@ -1,0 +1,87 @@
+# ==================== 深色语义层 ====================
+# 引用原始值，定义语义角色
+
+# 月语义主色
+primary: "{blue-500}"
+success: "{green-400}"
+warning: "{yellow-400}"
+error: "{red-400}"
+highlight: "{blue-glow}"
+cyan: "{cyan-400}"
+purple: "{purple-400}"
+
+# 功能色（语法）
+function: "{blue-glow-dark}"
+operator: "{gray-600}"
+comment: "{gray-525}"                 # 使用专用注释色
+variable: "{gray-200}"
+variableDim: "{gray-300}"
+textMuted: "{gray-400}"
+punctuation: "{gray-400}"
+
+# 背景层级
+bg: "{gray-900}"
+bgElevated: "{gray-850}"
+bgMuted: "{gray-800}"
+bgHover: "{blue-500}20"
+bgActive: "{blue-500}40"
+hoverBg: "{gray-750}"
+selectedBg: "{blue-600}"
+
+# 海拔系统
+surfaceGround: "{gray-900}"
+surfaceRaised: "{gray-850}"
+surfaceFloating: "{gray-800}"
+surfaceTooltip: "{gray-750}"
+borderFloating: "{blue-500}40"
+
+# 文本层级
+text: "{gray-200}"
+textDim: "{gray-300}"
+textInactive: "{gray-400}"
+
+# 边框
+border: "{gray-700}"
+borderHover: "{blue-500}"
+borderDim: "{gray-600}"
+
+# 交互控件
+buttonHoverBg: "{blue-600}"
+white: "{white}"
+
+# 终端 ANSI 色
+ansiBlack: "{gray-800}"
+ansiRed: "{red-400}"
+ansiGreen: "{green-400}"
+ansiYellow: "{yellow-400}"
+ansiBlue: "{blue-500}"
+ansiMagenta: "{purple-400}"
+ansiCyan: "{cyan-400}"
+ansiWhite: "{gray-200}"
+ansiBrightBlack: "{gray-700}"
+ansiBrightRed: "{red-400}"
+ansiBrightGreen: "{green-400}"
+ansiBrightYellow: "{yellow-400}"
+ansiBrightBlue: "{blue-500}"
+ansiBrightMagenta: "{purple-400}"
+ansiBrightCyan: "{cyan-400}"
+ansiBrightWhite: "{white}"
+
+# 括号高亮
+bracket1: "{blue-glow}"
+bracket2: "{green-400}"
+bracket3: "{yellow-400}"
+bracket4: "{purple-400}"
+bracket5: "{blue-500}"
+bracket6: "{gray-400}"
+
+# 其他
+scrollbar: "{blue-500}"
+gitAdded: "{green-400}"
+gitModified: "{yellow-400}"
+gitDeleted: "{red-400}"
+gitUntracked: "{gray-400}"
+gitIgnored: "{gray-700}"
+debugStart: "{green-400}"
+debugPause: "{yellow-400}"
+debugStop: "{red-400}"

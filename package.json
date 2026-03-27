@@ -4,7 +4,7 @@
   "description": "Where Moon Meets Code",
   "publisher": "yuelinghuashu",
   "icon": "images/icon.png",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "engines": {
     "vscode": "^1.109.0"
   },
@@ -16,12 +16,12 @@
       {
         "label": "Moongate Dark",
         "uiTheme": "vs-dark",
-        "path": "./themes/moongate-dark.json"
+        "path": "./themes/moongate-theme-dark.json"
       },
       {
         "label": "Moongate Light",
         "uiTheme": "vs",
-        "path": "./themes/moongate-light.json"
+        "path": "./themes/moongate-theme-light.json"
       }
     ]
   },
@@ -56,6 +56,7 @@
   },
   "devDependencies": {
     "js-yaml": "^4.1.1",
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "wcag-contrast": "^3.0.0"
   }
 }

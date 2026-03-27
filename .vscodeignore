@@ -6,3 +6,5 @@ node_modules
 pnpm-lock.yaml
 src/**
 scripts/**
+docs/
+themes/*.css
