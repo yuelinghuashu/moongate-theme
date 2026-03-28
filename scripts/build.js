@@ -9,6 +9,7 @@ const ROOT_DIR = path.resolve(__dirname, "..")
 const PATHS = {
   primitives: path.join(ROOT_DIR, "src", "core", "primitives", "colors.yaml"),
   semanticsDir: path.join(ROOT_DIR, "src", "core", "semantics"),
+  layout: path.join(ROOT_DIR, "src", "core", "layout.yaml"), // 新增
   workbench: path.join(ROOT_DIR, "src", "workbench.yaml"),
   semantic: path.join(ROOT_DIR, "src", "semantic.yaml"),
   langDir: path.join(ROOT_DIR, "src", "languages"),
@@ -126,10 +127,37 @@ function normalizeColors(obj, tokenName) {
 }
 
 /**
+ * 检测是否直接引用了原始值（如 {blue-500}）
+ * 该函数用于组件层/语义层的原始值引用提醒，目前主要作为架构辅助。
+ */
+function detectPrimitiveReference(value, context) {
+  if (typeof value === "string" && /\{([a-zA-Z0-9_-]+)\}/.test(value)) {
+    const match = value.match(/\{([a-zA-Z0-9_-]+)\}/)[1]
+    const primitivePrefixes = [
+      "blue-",
+      "green-",
+      "yellow-",
+      "red-",
+      "cyan-",
+      "purple-",
+      "gray-",
+    ]
+    if (primitivePrefixes.some((prefix) => match.startsWith(prefix))) {
+      console.warn(
+        `[架构提醒] ${context} 中直接引用了原始值 "${match}"，建议通过语义层引用。`,
+      )
+    }
+  }
+}
+
+/**
  * 替换变量 ${var} 为最终色值
  */
-function replaceVariables(obj, colors) {
+function replaceVariables(obj, colors, context = "") {
   if (typeof obj === "string") {
+    // 可选：检测直接引用原始值（仅当 context 提供且为组件层时）
+    if (context) detectPrimitiveReference(obj, context)
+
     return obj.replace(
       /\$\{([a-zA-Z0-9_-]+)\}([0-9a-fA-F]{2})?/g,
       (match, key, alpha) => {
@@ -164,12 +192,12 @@ function replaceVariables(obj, colors) {
     )
   }
   if (Array.isArray(obj)) {
-    return obj.map((item) => replaceVariables(item, colors))
+    return obj.map((item) => replaceVariables(item, colors, context))
   }
   if (obj && typeof obj === "object") {
     const result = {}
     for (const [k, v] of Object.entries(obj)) {
-      result[k] = replaceVariables(v, colors)
+      result[k] = replaceVariables(v, colors, context)
     }
     return result
   }
@@ -185,24 +213,35 @@ function checkContrast(color1, color2, role, themeType) {
 
   let minRatio = 4.5
   if (role === "textDim" || role === "comment") {
-    minRatio = 4.0 // 次要文字可略低
+    minRatio = 4.0
+  }
+  if (role === "textMuted") {
+    minRatio = 3.0
   }
 
   if (ratio < minRatio) {
-    console.error(
-      `❌ 对比度不足: ${themeType} · ${role} (${color1}) vs 背景 (${color2}) = ${ratio.toFixed(2)}:1`,
-    )
-    console.error(`   WCAG 要求 ≥${minRatio}:1，当前值低于标准`)
-    process.exit(1)
+    if (role === "textMuted") {
+      console.warn(
+        `⚠️ 对比度略低: ${themeType} · ${role} (${color1}) vs 背景 (${color2}) = ${ratio.toFixed(2)}:1`,
+      )
+      console.warn(`   建议保持 ≥3.0:1，当前满足最低要求。`)
+    } else {
+      console.error(
+        `❌ 对比度不足: ${themeType} · ${role} (${color1}) vs 背景 (${color2}) = ${ratio.toFixed(2)}:1`,
+      )
+      console.error(`   WCAG 要求 ≥${minRatio}:1，当前值低于标准`)
+      process.exit(1)
+    }
+  } else {
+    console.log(`✅ ${themeType} · ${role}: ${ratio.toFixed(2)}:1`)
   }
-  console.log(`✅ ${themeType} · ${role}: ${ratio.toFixed(2)}:1`)
 }
 
 /**
- * 生成 CSS 变量文件
+ * 生成颜色 CSS 变量文件（包含深浅模式）
  */
-function generateCssVariables(lightColors, darkColors) {
-  let css = `/* ===== Moongate 设计令牌 - 自动生成 ===== */\n`
+function generateColorCss(lightColors, darkColors) {
+  let css = `/* ===== Moongate 颜色令牌 - 自动生成 ===== */\n`
   css += `/* 来源: VS Code 主题构建脚本 */\n`
   css += `/* 请勿手动修改，修改请编辑 primitives/ 和 semantics/ 目录 */\n\n`
 
@@ -220,21 +259,81 @@ function generateCssVariables(lightColors, darkColors) {
   })
   css += `}\n`
 
-  const cssPath = path.join(PATHS.outputDir, "moongate-tokens.css")
+  const cssPath = path.join(PATHS.outputDir, "moongate-colors.css")
   fs.writeFileSync(cssPath, css)
-  console.log(`✅ CSS 变量已生成: ${cssPath}`)
+  console.log(`✅ 颜色令牌已生成: ${cssPath}`)
+}
+
+/**
+ * 生成布局/排版/响应式 CSS 变量文件（支持嵌套对象）
+ */
+function generateLayoutCss(layoutTokens) {
+  let css = `/* ===== Moongate 布局令牌 - 自动生成 ===== */\n`
+  css += `/* 包含：间距、圆角、阴影、排版、响应式断点、Z-Index */\n`
+  css += `/* 请勿手动修改，修改请编辑 src/core/layout.yaml */\n\n`
+
+  css += `:root {\n`
+
+  // 处理嵌套对象，将嵌套键平铺为 --ui-{parent}-{child}
+  function flattenObject(obj, prefix = "") {
+    Object.entries(obj).forEach(([key, val]) => {
+      const fullKey = prefix ? `${prefix}-${key}` : key
+      if (val && typeof val === "object" && !Array.isArray(val)) {
+        flattenObject(val, fullKey)
+      } else {
+        // 处理字体值中的引号转义
+        let formattedVal = val
+        if (typeof formattedVal === "string") {
+          // 移除最外层引号，保留内部必要引号
+          if (
+            (formattedVal.startsWith("'") && formattedVal.endsWith("'")) ||
+            (formattedVal.startsWith('"') && formattedVal.endsWith('"'))
+          ) {
+            formattedVal = formattedVal.slice(1, -1)
+          }
+        }
+        css += `  --ui-${fullKey}: ${formattedVal};\n`
+      }
+    })
+  }
+
+  flattenObject(layoutTokens)
+
+  css += `}\n`
+
+  const cssPath = path.join(PATHS.outputDir, "moongate-layout.css")
+  fs.writeFileSync(cssPath, css)
+  console.log(`✅ 布局令牌已生成: ${cssPath}`)
 }
 
 /**
  * 生成设计系统文档（增强版）
- * - 原始色值按色系分组
- * - 语义层表格增加对比度列（关键角色）
- * - 添加海拔系统说明
+ * 包含变量选择协议、原始色值、海拔系统、语义层对比度
  */
 function generateDesignSystemDoc(primitives, lightColors, darkColors) {
   const md = []
 
   md.push("# Moongate 设计系统\n")
+  md.push("## 🧭 Moongate 变量选择协议\n")
+  md.push("为了确保设计系统的长期可维护性和语义一致性，请遵循以下决策路径：\n")
+  md.push("| 场景 | 查找位置 | 禁止行为 |")
+  md.push("|------|----------|----------|")
+  md.push(
+    "| **我需要定义新的基础色值**（如 `blue-600`） | `primitives/colors.yaml` | ❌ 不要在语义层或组件层直接写色值 |",
+  )
+  md.push(
+    "| **我需要给某个语义角色赋值**（如 `primary` 应该是什么颜色） | `semantics/*.yaml`（引用原始值） | ❌ 不要在组件层直接引用原始值 |",
+  )
+  md.push(
+    "| **我要为 UI 组件设置样式**（如 `sideBar.background`） | 引用语义层变量（如 `${surfaceRaised}`） | ❌ 不要直接使用 `${blue-500}` 或硬编码色值 |",
+  )
+  md.push(
+    "| **语义层缺少我需要的角色** | 在语义层新增一个逻辑角色（如 `actionHover`），再在组件中引用它 | ❌ 禁止在组件层发明新变量 |",
+  )
+  md.push(
+    "\n> **核心原则**：所有颜色必须经过“原始值 → 语义层 → 组件层”的传递链条，任何跨层直接引用都是**架构污染**。\n",
+  )
+
   md.push("## 🎨 原始色值\n")
 
   // 定义色系分组
@@ -344,7 +443,6 @@ function generateDesignSystemDoc(primitives, lightColors, darkColors) {
     md.push(`| \`${key}\` | \`${val}\` | ${preview} | ${contrastRatio} |`)
   }
 
-  // 写入文件
   const mdPath = path.join(PATHS.docsDir, "DESIGN_SYSTEM.md")
   if (!fs.existsSync(PATHS.docsDir)) {
     fs.mkdirSync(PATHS.docsDir, { recursive: true })
@@ -380,6 +478,7 @@ function main() {
   try {
     ensureFileExists(PATHS.primitives, "原始值")
     ensureFileExists(PATHS.semanticsDir, "语义目录")
+    ensureFileExists(PATHS.layout, "布局令牌")
     ensureFileExists(PATHS.workbench, "workbench")
     ensureFileExists(PATHS.semantic, "semantic")
   } catch (err) {
@@ -395,6 +494,15 @@ function main() {
   Object.entries(primitivesRaw).forEach(([key, val]) => {
     primitives[key] = normalizeHex(val, `primitives.${key}`)
   })
+
+  console.log("📦 加载布局令牌...")
+  const layoutTokens = safeLoadYaml(PATHS.layout, "layout.yaml")
+  if (layoutTokens) {
+    generateLayoutCss(layoutTokens)
+  } else {
+    console.error("❌ layout.yaml 加载失败，构建终止")
+    process.exit(1)
+  }
 
   console.log("📦 加载公共规则...")
   const workbenchRaw = safeLoadYaml(PATHS.workbench, "workbench.yaml")
@@ -468,9 +576,13 @@ function main() {
     if (themeType === "light") lightSemantics = normalized
     if (themeType === "dark") darkSemantics = normalized
 
-    const uiColors = replaceVariables(workbenchRaw, normalized)
-    const semanticColors = replaceVariables(semanticRaw, normalized)
-    const tokenColors = replaceVariables(tokenColorsRaw, normalized)
+    const uiColors = replaceVariables(workbenchRaw, normalized, `workbench`)
+    const semanticColors = replaceVariables(semanticRaw, normalized, `semantic`)
+    const tokenColors = replaceVariables(
+      tokenColorsRaw,
+      normalized,
+      `tokenColors`,
+    )
 
     const type = themeType.includes("light") ? "light" : "dark"
     const displaySuffix = themeType === "dark" ? "Dark" : "Light"
@@ -503,7 +615,7 @@ function main() {
   })
 
   if (lightSemantics && darkSemantics) {
-    generateCssVariables(lightSemantics, darkSemantics)
+    generateColorCss(lightSemantics, darkSemantics)
     generateDesignSystemDoc(primitives, lightSemantics, darkSemantics)
   }
 

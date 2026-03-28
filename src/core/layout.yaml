@@ -1,0 +1,42 @@
+# ==================== 布局令牌 ====================
+# 包含间距、圆角、阴影、排版、响应式断点、Z-Index
+
+spacing:
+  base: "4px"
+  xs: "4px"
+  sm: "8px"
+  md: "16px"
+  lg: "24px"
+  xl: "32px"
+  "2xl": "48px"
+
+radius:
+  none: "0px"
+  sm: "0px"
+  md: "0px"
+  lg: "0px"
+
+shadow:
+  none: "none"
+  border: "0 0 0 1px"
+
+typography:
+  family-mono: "'JetBrains Mono', 'Fira Code', monospace"
+  family-sans: "Inter, system-ui, -apple-system, sans-serif"
+  size-code: "13px"
+  size-body: "14px"
+  size-small: "12px"
+  line-height: "1.5"
+
+breakpoints:
+  mobile: "640px"
+  tablet: "768px"
+  desktop: "1024px"
+  wide: "1280px"
+
+z-index:
+  base: 1
+  sticky: 100
+  overlay: 500
+  modal: 1000
+  tooltip: 1500

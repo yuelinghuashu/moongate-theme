@@ -49,6 +49,11 @@ borderDim: "{gray-400}"
 buttonHoverBg: "{blue-700}"
 white: "{white}"
 
+# 中性色（用于组件库）
+fillSubtle: "{gray-100}"
+fillMedium: "{gray-200}"
+borderSubtle: "{gray-300}"
+
 # 终端 ANSI 色（修正版）
 ansiBlack: "{gray-900}"
 ansiRed: "{red-700}"

@@ -1,0 +1,34 @@
+/* ===== Moongate 布局令牌 - 自动生成 ===== */
+/* 包含：间距、圆角、阴影、排版、响应式断点、Z-Index */
+/* 请勿手动修改，修改请编辑 src/core/layout.yaml */
+
+:root {
+  --ui-spacing-base: 4px;
+  --ui-spacing-xs: 4px;
+  --ui-spacing-sm: 8px;
+  --ui-spacing-md: 16px;
+  --ui-spacing-lg: 24px;
+  --ui-spacing-xl: 32px;
+  --ui-spacing-2xl: 48px;
+  --ui-radius-none: 0px;
+  --ui-radius-sm: 0px;
+  --ui-radius-md: 0px;
+  --ui-radius-lg: 0px;
+  --ui-shadow-none: none;
+  --ui-shadow-border: 0 0 0 1px;
+  --ui-typography-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --ui-typography-family-sans: Inter, system-ui, -apple-system, sans-serif;
+  --ui-typography-size-code: 13px;
+  --ui-typography-size-body: 14px;
+  --ui-typography-size-small: 12px;
+  --ui-typography-line-height: 1.5;
+  --ui-breakpoints-mobile: 640px;
+  --ui-breakpoints-tablet: 768px;
+  --ui-breakpoints-desktop: 1024px;
+  --ui-breakpoints-wide: 1280px;
+  --ui-z-index-base: 1;
+  --ui-z-index-sticky: 100;
+  --ui-z-index-overlay: 500;
+  --ui-z-index-modal: 1000;
+  --ui-z-index-tooltip: 1500;
+}
