@@ -13,7 +13,7 @@ purple: "{purple-400}"
 # 功能色（语法）
 function: "{blue-glow-dark}"
 operator: "{gray-600}"
-comment: "{gray-525}"                 # 使用专用注释色
+comment: "{gray-525}" # 使用专用注释色
 variable: "{gray-200}"
 variableDim: "{gray-300}"
 textMuted: "{gray-400}"
