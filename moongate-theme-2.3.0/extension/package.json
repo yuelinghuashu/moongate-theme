@@ -1,0 +1,88 @@
+{
+  "name": "moongate-theme",
+  "displayName": "Moongate Theme",
+  "description": "Where Moon Meets Code",
+  "publisher": "yuelinghuashu",
+  "icon": "images/icon.png",
+  "version": "2.3.0",
+  "engines": {
+    "vscode": "^1.109.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "galleryBanner": {
+    "color": "#0f172a",
+    "theme": "dark"
+  },
+  "badges": [
+    {
+      "url": "https://img.shields.io/badge/Go-supported-00ADD8",
+      "href": "https://github.com/yuelinghuashu/moongate-theme",
+      "description": "Go language fully supported"
+    },
+    {
+      "url": "https://img.shields.io/badge/DTCG-Industrial%20Grade-blue",
+      "href": "https://github.com/yuelinghuashu/moongate-theme/blob/main/docs/DESIGN_SYSTEM.md",
+      "description": "DTCG design token standard with WCAG validation"
+    }
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Moongate Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/moongate-theme-dark.json"
+      },
+      {
+        "label": "Moongate Light",
+        "uiTheme": "vs",
+        "path": "./themes/moongate-theme-light.json"
+      }
+    ],
+    "configurationDefaults": {
+      "editor.semanticHighlighting.enabled": true
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yuelinghuashu/moongate-theme.git"
+  },
+  "keywords": [
+    "moongate",
+    "dark theme",
+    "light theme",
+    "dark",
+    "light",
+    "minimal",
+    "scifi",
+    "terminal",
+    "semantic highlighting",
+    "semantic",
+    "python",
+    "golang",
+    "typescript",
+    "javascript",
+    "vue",
+    "react",
+    "html",
+    "css",
+    "go",
+    "moon",
+    "night"
+  ],
+  "scripts": {
+    "build": "node scripts/build.js",
+    "watch": "nodemon --watch src -e yaml --exec \"pnpm run build\"",
+    "dev": "pnpm run watch",
+    "prepublishOnly": "pnpm run build"
+  },
+  "devDependencies": {
+    "js-yaml": "^4.1.1",
+    "nodemon": "^3.1.14",
+    "wcag-contrast": "^3.0.0"
+  }
+}
