@@ -100,8 +100,7 @@ variable.modification:
   fontStyle: "underline"
 
 # 内置库符号
-"*.defaultLibrary":
-  fontStyle: "bold"
+"*.defaultLibrary": {}
 
 # 类型构造器修饰符（需要语言服务器支持）
 variable.array: "${variableDim}"

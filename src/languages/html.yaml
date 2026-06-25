@@ -1,9 +1,10 @@
 # HTML 特定规则
+# 只保留 base.yaml 未覆盖的 HTML 独有规则
 tokenColors:
   - name: HTML Doctype
     scope: ["meta.tag.sgml.html", "entity.name.tag.doctype.html"]
     settings:
-      foreground: "${border}"                     # #2d3748
+      foreground: "${border}"
 
   - name: HTML Attribute Value
     scope: ["string.quoted.double.html", "string.quoted.single.html"]
@@ -14,12 +15,6 @@ tokenColors:
     scope: ["text.html.basic", "text.html.vue text", "text.html.derivative"]
     settings:
       foreground: "${variableDim}"
-
-  - name: HTML Comment
-    scope: ["comment.block.html", "comment.html"]
-    settings:
-      fontStyle: "italic"
-      foreground: "${textMuted}"
 
   - name: HTML Script Tag Content
     scope: ["source.js.embedded.html"]

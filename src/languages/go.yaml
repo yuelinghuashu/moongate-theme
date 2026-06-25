@@ -1,6 +1,5 @@
 # Go 语言特定规则
-# 设计决策：函数定义加粗，所有函数调用不加粗（包括标准库）
-# 原因：Go TextMate 无法区分自定义调用和标准库调用，牺牲后者换取定义/调用的清晰区分
+# 只保留 base.yaml 未覆盖的 Go 独有规则
 tokenColors:
   # ========== 包与导入 ==========
   - name: Go - Package Name
@@ -15,13 +14,7 @@ tokenColors:
     settings:
       foreground: "${success}"
 
-  # ========== 类型系统 ==========
-  - name: Go - Structs
-    scope: ["entity.name.type.struct.go"]
-    settings:
-      foreground: "${warning}"
-      fontStyle: "bold"
-
+  # ========== Go 独有类型系统 ==========
   - name: Go - Interfaces
     scope:
       - "support.interface.go"
@@ -34,13 +27,6 @@ tokenColors:
     scope: ["entity.name.type.alias.go"]
     settings:
       foreground: "${cyan}"
-
-  - name: Go - Built-in Types
-    scope:
-      - "support.type.builtin.go"
-      - "support.type.go"
-    settings:
-      foreground: "${warning}"
 
   - name: Go - Pointer Types
     scope: ["storage.type.pointer.go"]
@@ -60,7 +46,8 @@ tokenColors:
     settings:
       foreground: "${cyan}"
 
-  # ========== 函数定义 (加粗) ==========
+  # ========== Go 独有函数规则 ==========
+  # 函数定义加粗（覆盖 base 的 entity.name.function）
   - name: Go - Function Definition
     scope:
       - "entity.name.function.go"
@@ -70,18 +57,15 @@ tokenColors:
       foreground: "${function}"
       fontStyle: "bold"
 
-  # ========== 所有函数调用 (不加粗) ==========
-  # 注：Go TextMate 中自定义调用和标准库调用 scope 相同（entity.name.function.support.go）
-  # 因此统一不加粗，牺牲标准库的加粗，换取定义/调用的清晰区分
+  # Go 函数调用不加粗（覆盖 base 的 meta.function-call）
   - name: Go - Function Calls
     scope:
       - "entity.name.function.support.go"
       - "entity.name.function.support.builtin.go"
     settings:
       foreground: "${function}"
-      # 不加粗
 
-  # ========== 其他 ==========
+  # ========== Go 独有变量/常量 ==========
   - name: Go - Method Receiver
     scope: ["variable.parameter.receiver.go"]
     settings:
@@ -112,15 +96,6 @@ tokenColors:
     settings:
       foreground: "${textMuted}"
       fontStyle: "italic"
-
-  - name: Go - Boolean
-    scope:
-      - "constant.language.boolean.go"
-      - "constant.language.true.go"
-      - "constant.language.false.go"
-    settings:
-      foreground: "${warning}"
-      fontStyle: "bold"
 
   - name: Go - Nil
     scope: ["constant.language.nil.go"]

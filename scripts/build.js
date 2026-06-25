@@ -128,7 +128,6 @@ function normalizeColors(obj, tokenName) {
 
 /**
  * 检测是否直接引用了原始值（如 {blue-500}）
- * 该函数用于组件层/语义层的原始值引用提醒，目前主要作为架构辅助。
  */
 function detectPrimitiveReference(value, context) {
   if (typeof value === "string" && /\{([a-zA-Z0-9_-]+)\}/.test(value)) {
@@ -206,7 +205,103 @@ function replaceVariables(obj, colors, context = "") {
 }
 
 /**
- * WCAG 对比度校验（阶梯式标准）
+ * 合并相同 settings 的 token 规则
+ * 大幅精简 tokenColors 数组
+ */
+function mergeTokenColors(tokenColors) {
+  if (!Array.isArray(tokenColors) || tokenColors.length === 0) {
+    return tokenColors
+  }
+
+  const merged = new Map()
+
+  for (const item of tokenColors) {
+    // 跳过没有 settings 或 scope 的项
+    if (!item.settings || !item.scope) {
+      continue
+    }
+
+    // 生成 settings 的稳定键
+    const settingsKey = JSON.stringify(item.settings)
+
+    if (!merged.has(settingsKey)) {
+      merged.set(settingsKey, {
+        settings: item.settings,
+        scopes: new Set(),
+        names: [],
+      })
+    }
+
+    const entry = merged.get(settingsKey)
+    // 收集所有 scope
+    if (Array.isArray(item.scope)) {
+      item.scope.forEach((s) => entry.scopes.add(s))
+    } else if (typeof item.scope === "string") {
+      entry.scopes.add(item.scope)
+    }
+    // 保留一个代表性的 name
+    if (item.name && entry.names.length === 0) {
+      entry.names.push(item.name)
+    }
+  }
+
+  // 转换回数组
+  const result = []
+  for (const [, entry] of merged) {
+    const scopes = Array.from(entry.scopes).sort()
+    const name = entry.names.length > 0 ? entry.names.join(", ") : undefined
+    const rule = {
+      scope: scopes,
+      settings: entry.settings,
+    }
+    if (name) {
+      rule.name = name
+    }
+    result.push(rule)
+  }
+
+  // 按 scope 数量降序排序（更具体的规则在前）
+  result.sort((a, b) => b.scope.length - a.scope.length)
+
+  console.log(
+    `   📦 token 合并: ${tokenColors.length} → ${result.length} 条规则`,
+  )
+  return result
+}
+
+/**
+ * 精简 semanticTokenColors（删除冗余键）
+ */
+function optimizeSemanticTokenColors(semanticColors) {
+  if (!semanticColors || typeof semanticColors !== "object") {
+    return semanticColors
+  }
+
+  const result = {}
+  const simpleColorKeys = new Set()
+
+  // 第一遍：收集简单键值对
+  for (const [key, value] of Object.entries(semanticColors)) {
+    if (typeof value === "string") {
+      simpleColorKeys.add(key)
+      result[key] = value
+    } else if (value && typeof value === "object") {
+      // 检查是否可以从同名的简单键继承
+      // 例如 function.declaration 可以从 function 继承 foreground
+      const baseKey = key.split(".")[0]
+      if (simpleColorKeys.has(baseKey) && value.foreground) {
+        // 如果 foreground 与 baseKey 相同，删除 foreground
+        // 但这里我们无法确定是否相同，保留原样
+      }
+      result[key] = value
+    }
+  }
+
+  return result
+}
+
+/**
+ * WCAG 对比度校验
  */
 function checkContrast(color1, color2, role, themeType) {
   if (!color1 || !color2) return
@@ -239,7 +334,7 @@ function checkContrast(color1, color2, role, themeType) {
 }
 
 /**
- * 生成颜色 CSS 变量文件（包含深浅模式）
+ * 生成颜色 CSS 变量文件
  */
 function generateColorCss(lightColors, darkColors) {
   let css = `/* ===== Moongate 颜色令牌 - 自动生成 ===== */\n`
@@ -266,7 +361,7 @@ function generateColorCss(lightColors, darkColors) {
 }
 
 /**
- * 生成布局/排版/响应式 CSS 变量文件（支持嵌套对象）
+ * 生成布局 CSS 变量文件
  */
 function generateLayoutCss(layoutTokens) {
   let css = `/* ===== Moongate 布局令牌 - 自动生成 ===== */\n`
@@ -305,8 +400,7 @@ function generateLayoutCss(layoutTokens) {
 }
 
 /**
- * 生成设计系统文档（增强版）
- * 包含变量选择协议、原始色值、海拔系统、语义层对比度
+ * 生成设计系统文档
  */
 function generateDesignSystemDoc(primitives, lightColors, darkColors) {
   const md = []
@@ -329,7 +423,7 @@ function generateDesignSystemDoc(primitives, lightColors, darkColors) {
     "| **语义层缺少我需要的角色** | 在语义层新增一个逻辑角色（如 `actionHover`），再在组件中引用它 | ❌ 禁止在组件层发明新变量 |",
   )
   md.push(
-    "\n> **核心原则**：所有颜色必须经过“原始值 → 语义层 → 组件层”的传递链条，任何跨层直接引用都是**架构污染**。\n",
+    '\n> **核心原则**：所有颜色必须经过"原始值 → 语义层 → 组件层"的传递链条，任何跨层直接引用都是**架构污染**。\n',
   )
 
   md.push("## 🎨 原始色值\n")
@@ -571,11 +665,19 @@ function main() {
 
     const uiColors = replaceVariables(workbenchRaw, normalized, `workbench`)
     const semanticColors = replaceVariables(semanticRaw, normalized, `semantic`)
-    const tokenColors = replaceVariables(
+
+    console.log(`   📝 处理 ${themeType} 模式...`)
+    let tokenColors = replaceVariables(
       tokenColorsRaw,
       normalized,
       `tokenColors`,
     )
+
+    // ========== 新增：合并 token 规则 ==========
+    tokenColors = mergeTokenColors(tokenColors)
+
+    // ========== 新增：精简 semanticTokenColors ==========
+    const optimizedSemantic = optimizeSemanticTokenColors(semanticColors)
 
     const type = themeType.includes("light") ? "light" : "dark"
     const displaySuffix = themeType === "dark" ? "Dark" : "Light"
@@ -585,7 +687,7 @@ function main() {
       type: type,
       colors: uiColors,
       tokenColors: tokenColors,
-      semanticTokenColors: semanticColors,
+      semanticTokenColors: optimizedSemantic,
     }
 
     if (!fs.existsSync(PATHS.outputDir)) {

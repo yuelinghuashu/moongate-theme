@@ -1,6 +1,7 @@
 # Python 特定规则
+# 只保留 base.yaml 未覆盖的 Python 独有规则
 tokenColors:
-  # ========== 函数定义 (加粗) ==========
+  # ========== 函数定义（覆盖 base，加粗） ==========
   - name: Python - Function Definition
     scope:
       - "entity.name.function.python"
@@ -9,53 +10,24 @@ tokenColors:
       foreground: "${function}"
       fontStyle: "bold"
 
-  # ========== 函数调用 (不加粗) ==========
-  # 注意：Python 调用时只有 meta.function-call，没有 entity.name.function
+  # ========== 函数调用（覆盖 base，不加粗） ==========
   - name: Python - Function Calls
     scope:
       - "meta.function-call.python"
       - "meta.function-call.generic.python"
-      - "support.function.python" # 内置函数如 print, len
+      - "support.function.python"
       - "support.function.builtin.python"
     settings:
       foreground: "${function}"
-      # 不加粗
 
-  # ========== 原有规则 ==========
-  - name: Python Local Variables - 局部变量退后
-    scope: ["variable.other.readwrite.python", "variable.other.python"]
-    settings:
-      foreground: "${variableDim}"
-
-  - name: Python Function Parameters - 参数斜体退后
-    scope: ["variable.parameter.python"]
-    settings:
-      fontStyle: "italic"
-      foreground: "${variableDim}"
-
-  - name: Python Constants - 全局常量保持亮度
-    scope: ["constant.other.python", "variable.other.constant.python"]
-    settings:
-      foreground: "${text}"
-      fontStyle: "bold"
-
-  - name: Python Instance Attributes - 成员属性退后
-    scope: ["variable.other.property.python"]
-    settings:
-      foreground: "${variableDim}"
-
-  - name: Python Dictionary Keys - 字典键退后
-    scope: ["meta.mapping.key.python", "string.unquoted.key.python"]
-    settings:
-      foreground: "${variableDim}"
-
-  - name: Python Decorators - 装饰器用紫色
+  # ========== Python 独有 ==========
+  - name: Python Decorators
     scope: ["entity.name.function.decorator.python", "meta.decorator.python"]
     settings:
       foreground: "${purple}"
       fontStyle: "italic"
 
-  - name: Python Variables - 通用兜底
-    scope: ["source.python variable.other"]
+  - name: Python Dictionary Keys
+    scope: ["meta.mapping.key.python", "string.unquoted.key.python"]
     settings:
       foreground: "${variableDim}"

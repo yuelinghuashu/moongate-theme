@@ -1,7 +1,12 @@
 # Vue 单文件组件特定规则
 tokenColors:
   - name: Vue Directives
-    scope: ["entity.other.attribute-name.html.vue", "meta.directive.vue", "punctuation.definition.directive.vue"]
+    scope:
+      [
+        "entity.other.attribute-name.html.vue",
+        "meta.directive.vue",
+        "punctuation.definition.directive.vue",
+      ]
     settings:
       foreground: "${purple}"
       fontStyle: "bold"

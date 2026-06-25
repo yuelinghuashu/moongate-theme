@@ -1,0 +1,103 @@
+# Rust 特定规则
+# 注意：Rust TextMate 语法中函数定义和调用的 scope 相同（entity.name.function.rust）
+# 无法区分定义与调用，因此统一加粗
+tokenColors:
+  # ========== Rust 独有类型 ==========
+  - name: Rust - Generic Parameters
+    scope:
+      - "meta.generic.rust entity.name.type"
+      - "meta.generic.rust support.type"
+      - "entity.name.type.generic.rust"
+    settings:
+      foreground: "${cyan}"
+
+  - name: Rust - Lifetimes
+    scope:
+      - "entity.name.lifetime.rust"
+      - "punctuation.definition.lifetime.rust"
+    settings:
+      foreground: "${cyan}"
+      fontStyle: "italic"
+
+  - name: Rust - Attributes
+    scope:
+      - "meta.attribute.rust"
+      - "entity.name.attribute.rust"
+      - "punctuation.definition.attribute.rust"
+    settings:
+      foreground: "${purple}"
+      fontStyle: "italic"
+
+  # ========== Rust 函数 (统一加粗) ==========
+  # 注：Rust 无法区分定义与调用，统一加粗
+  - name: Rust - Functions
+    scope:
+      - "entity.name.function.rust"
+      - "meta.function.rust entity.name.function"
+      - "meta.function.definition.rust entity.name.function"
+      - "entity.name.function.definition.rust"
+      - "meta.function.closure.rust entity.name.function"
+      - "meta.function.call.rust entity.name.function"
+    settings:
+      foreground: "${function}"
+      fontStyle: "bold"
+
+  # ========== 宏 (发光蓝不加粗) ==========
+  - name: Rust - Macros
+    scope:
+      - "entity.name.function.macro.rust"
+      - "meta.macro.rust entity.name.function"
+      - "support.macro.rust"
+      - "meta.macro.invocation.rust entity.name.function"
+    settings:
+      foreground: "${function}"
+      # 不加粗
+
+  # ========== Rust 独有变量/常量 ==========
+  - name: Rust - Self
+    scope:
+      - "variable.language.self.rust"
+      - "support.self.rust"
+    settings:
+      foreground: "${primary}"
+      fontStyle: "bold"
+
+  - name: Rust - Constants
+    scope:
+      - "constant.other.rust"
+      - "constant.other.caps.rust"
+    settings:
+      foreground: "${warning}"
+      fontStyle: "bold"
+
+  - name: Rust - Parameters
+    scope:
+      - "variable.parameter.rust"
+      - "meta.function.rust variable.parameter"
+    settings:
+      foreground: "${variableDim}"
+      fontStyle: "italic"
+
+  - name: Rust - Variables
+    scope:
+      - "variable.other.rust"
+      - "variable.other.binding.rust"
+      - "variable.other.mutable.rust"
+      - "meta.function.closure.rust variable.other"
+    settings:
+      foreground: "${variable}"
+
+  - name: Rust - Format Specifiers
+    scope:
+      - "constant.other.placeholder.rust"
+      - "punctuation.definition.placeholder.rust"
+    settings:
+      foreground: "${highlight}"
+
+  - name: Rust - TODO Highlight
+    scope:
+      - "comment.line.double-slash.todo.rust"
+      - "comment.block.todo.rust"
+    settings:
+      foreground: "${warning}"
+      fontStyle: "bold"

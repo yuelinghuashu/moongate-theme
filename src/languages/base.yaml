@@ -141,7 +141,6 @@ tokenColors:
       ]
     settings:
       foreground: "${text}"
-      fontStyle: "bold"
 
   - name: Variables - 成员属性
     scope: ["variable.other.property", "variable.other.member"]
@@ -224,4 +223,3 @@ tokenColors:
     scope: ["meta.array.element"]
     settings:
       foreground: "${variableDim}"
-
