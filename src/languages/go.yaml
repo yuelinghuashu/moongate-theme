@@ -1,0 +1,151 @@
+# Go 语言特定规则
+# 设计决策：函数定义加粗，所有函数调用不加粗（包括标准库）
+# 原因：Go TextMate 无法区分自定义调用和标准库调用，牺牲后者换取定义/调用的清晰区分
+tokenColors:
+  # ========== 包与导入 ==========
+  - name: Go - Package Name
+    scope: ["entity.name.package.go"]
+    settings:
+      foreground: "${variableDim}"
+
+  - name: Go - Import Paths
+    scope:
+      - "string.quoted.double.go meta.import.go"
+      - "string.quoted.double.go meta.import.path.go"
+    settings:
+      foreground: "${success}"
+
+  # ========== 类型系统 ==========
+  - name: Go - Structs
+    scope: ["entity.name.type.struct.go"]
+    settings:
+      foreground: "${warning}"
+      fontStyle: "bold"
+
+  - name: Go - Interfaces
+    scope:
+      - "support.interface.go"
+      - "entity.name.type.interface.go"
+    settings:
+      foreground: "${primary}"
+      fontStyle: "bold"
+
+  - name: Go - Type Aliases
+    scope: ["entity.name.type.alias.go"]
+    settings:
+      foreground: "${cyan}"
+
+  - name: Go - Built-in Types
+    scope:
+      - "support.type.builtin.go"
+      - "support.type.go"
+    settings:
+      foreground: "${warning}"
+
+  - name: Go - Pointer Types
+    scope: ["storage.type.pointer.go"]
+    settings:
+      foreground: "${cyan}"
+      fontStyle: "underline"
+
+  - name: Go - Map Types
+    scope: ["storage.type.map.go"]
+    settings:
+      foreground: "${cyan}"
+
+  - name: Go - Slice/Array Types
+    scope:
+      - "storage.type.slice.go"
+      - "storage.type.array.go"
+    settings:
+      foreground: "${cyan}"
+
+  # ========== 函数定义 (加粗) ==========
+  - name: Go - Function Definition
+    scope:
+      - "entity.name.function.go"
+      - "meta.function.go entity.name.function"
+      - "meta.function.literal.go entity.name.function.go"
+    settings:
+      foreground: "${function}"
+      fontStyle: "bold"
+
+  # ========== 所有函数调用 (不加粗) ==========
+  # 注：Go TextMate 中自定义调用和标准库调用 scope 相同（entity.name.function.support.go）
+  # 因此统一不加粗，牺牲标准库的加粗，换取定义/调用的清晰区分
+  - name: Go - Function Calls
+    scope:
+      - "entity.name.function.support.go"
+      - "entity.name.function.support.builtin.go"
+    settings:
+      foreground: "${function}"
+      # 不加粗
+
+  # ========== 其他 ==========
+  - name: Go - Method Receiver
+    scope: ["variable.parameter.receiver.go"]
+    settings:
+      foreground: "${variableDim}"
+      fontStyle: "italic"
+
+  - name: Go - Struct Fields
+    scope:
+      - "variable.other.property.go"
+      - "meta.struct.field.go"
+    settings:
+      foreground: "${textMuted}"
+
+  - name: Go - Package Variables
+    scope: ["variable.other.global.go"]
+    settings:
+      foreground: "${text}"
+      fontStyle: "bold"
+
+  - name: Go - Error Variables
+    scope: ["variable.other.err.go"]
+    settings:
+      foreground: "${error}"
+      fontStyle: "italic"
+
+  - name: Go - Blank Identifier
+    scope: ["constant.other.blank.go"]
+    settings:
+      foreground: "${textMuted}"
+      fontStyle: "italic"
+
+  - name: Go - Boolean
+    scope:
+      - "constant.language.boolean.go"
+      - "constant.language.true.go"
+      - "constant.language.false.go"
+    settings:
+      foreground: "${warning}"
+      fontStyle: "bold"
+
+  - name: Go - Nil
+    scope: ["constant.language.nil.go"]
+    settings:
+      foreground: "${warning}"
+      fontStyle: "bold"
+
+  - name: Go - Runes
+    scope: ["string.quoted.rune.go"]
+    settings:
+      foreground: "${success}"
+
+  - name: Go - Labels
+    scope: ["entity.name.label.go"]
+    settings:
+      foreground: "${error}"
+
+  - name: Go - Channel Operations
+    scope: ["keyword.operator.channel.go"]
+    settings:
+      foreground: "${cyan}"
+
+  - name: Go - Format Specifiers
+    scope:
+      - "constant.other.placeholder.go"
+      - "punctuation.definition.placeholder.go"
+    settings:
+      foreground: "${highlight}"

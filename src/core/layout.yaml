@@ -1,39 +1,64 @@
-# ==================== 布局令牌 ====================
-# 包含间距、圆角、阴影、排版、响应式断点、Z-Index
+# ============================================================
+# 🌙 Moongate 设计系统 - 布局与动力学令牌 (Layout & Motion)
+# 核心哲学：以月为名的极简秩序 | 直角美学 | 引力补偿
+# ============================================================
 
+# 1. 空间秩序 (Spacing)
+# 基于 4px 原子网格，建立“月面空旷感”的留白体系
 spacing:
   base: "4px"
-  xs: "4px"
-  sm: "8px"
-  md: "16px"
-  lg: "24px"
-  xl: "32px"
-  "2xl": "48px"
+  xs: "4px" # 1x: 极小间隙 (如图标与文字)
+  sm: "8px" # 2x: 组件内紧凑间距
+  md: "12px" # 3x: 列表项/导航项 (DeepSeek 建议：保持信息密度)
+  lg: "16px" # 4x: 标准卡片内补白
+  xl: "24px" # 6x: 正文段落呼吸感 (月球地平线)
+  "2xl": "32px" # 8x: 大区域间距 (深空留白)
+  "3xl": "48px" # 12x: 页面级大留白
 
+# 2. 边界契约 (Radius)
+# 坚守 0px 直角秩序，拒绝圆角的“果冻感”
 radius:
-  none: "0px"
-  sm: "0px"
-  md: "0px"
-  lg: "0px"
+  none: "0px" # 核心：编辑器、卡片、侧边栏、按钮
+  sm: "2px" # 零件：Kbd (键盘键), Tag, 状态点 (模拟精密仪器微倒角)
 
-shadow:
-  none: "none"
-  border: "0 0 0 1px"
+# 3. 光学与引力 (Physics & Optics)
+# 模拟月球物理环境，将“机械位移”转化为“潮汐引力”
+physics:
+  tidal-offset: "4px" # 潮汐位移：悬浮时升起的高度
+  glow-alpha-night: 0.12 # 深色模式：冷月华亮度 (基于 color-mix)
+  glow-alpha-dawn: 0.06 # 浅色模式：晨曦漫反射亮度
+  focus-ring: "2px" # 焦点环：明确的选中边界 (非阴影，纯色块)
+  border-crease: "1px" # 折痕：仅在必要时使用的超细边界
 
+# 4. 分层动力学 (Motion Layers)
+# 解决叙事性与可用性的矛盾：快慢结合，优雅响应
+motion:
+  easing-lunar: "cubic-bezier(0.25, 1, 0.5, 1)" # Quart Out: 模拟真空低重力减速
+
+  # 时长层级
+  duration-neural: "150ms" # 神经反射：按钮变色、文字高亮 (即刻反馈)
+  duration-fluid: "300ms" # 流体感：Tooltips, 下拉菜单, 气泡浮现
+  duration-lunar: "600ms" # 月球引力：卡片悬浮, 容器大位移, 页面入场 (叙事核心)
+
+# 5. 排版系统 (Typography)
+# 视觉远近法：让代码与文字各司其职
 typography:
   family-mono: "'JetBrains Mono', 'Fira Code', monospace"
   family-sans: "Inter, system-ui, -apple-system, sans-serif"
-  size-code: "13px"
-  size-body: "14px"
-  size-small: "12px"
-  line-height: "1.5"
+  size-code: "13px" # 精密代码尺寸
+  size-body: "15px" # 黄金阅读尺寸 (从 14px 提升，增加阅读舒适度)
+  size-small: "12px" # 元数据/辅助信息
+  line-height: "1.6" # 极简核心：呼吸感行高
+  line-height-code: "1.45" # 代码块紧凑度
 
+# 6. 响应式断点 (Breakpoints)
 breakpoints:
   mobile: "640px"
   tablet: "768px"
   desktop: "1024px"
   wide: "1280px"
 
+# 7. 层级深度 (Z-Index)
 z-index:
   base: 1
   sticky: 100

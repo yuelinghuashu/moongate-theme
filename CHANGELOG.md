@@ -1,5 +1,57 @@
 # 更新日志 | Changelog
 
+## [2.3.0] - 2026-06-24
+
+### 🧩 Go 语言语法高亮深度适配
+
+- **新增专属语言规则**：为 Go 语言创建独立的 `go.yaml` 配置文件，覆盖包名、方法接收者、标签、空白标识符、错误变量等 Go 特有语法元素，使代码语义更清晰。
+- **函数定义与调用视觉分离**：函数定义采用发光蓝加粗，与关键字形成清晰的视觉层级；所有函数调用（含标准库 `fmt.Sprintf`、内置函数 `len` 等）保持发光蓝但不加粗，实现“定义醒目、调用轻量”的阅读体验。由于 Go TextMate 语法无法区分自定义调用与标准库调用，两者统一不加粗，牺牲标准库的加粗效果以换取定义与调用的清晰区分。
+- **类型系统精细着色**：结构体、接口、类型别名、指针、切片、Map 分别赋予不同颜色，一望即知元素类型。
+- **错误处理醒目提示**：错误变量（如 `ErrInvalidInput`）采用红色斜体，在代码中快速定位异常路径。
+- **并发原语高亮**：通道操作（`<-`）和 `select`、`go` 等并发关键字得到正确着色，提升并发代码的可读性。
+- **格式化占位符着色**：`fmt.Printf` 等函数中的 `%d`、`%s` 占位符使用发光蓝高亮，与字符串模板内嵌表达式风格统一。
+
+### 🐍 Python 函数调用修复
+
+- **修复 Python 函数调用识别**：修复 Python 函数调用无法区分定义与调用的问题，`meta.function-call.python` 作用域现已正确匹配，函数调用不再加粗，与其他语言行为保持一致。
+
+### 🔧 跨语言一致性
+
+- 统一所有语言的函数名样式：**函数定义加粗，函数调用不加粗**，与 JavaScript、TypeScript、Python、Go 行为保持一致，形成统一的视觉语言体系。
+
+### 📦 工程优化
+
+- **语义高亮自动开启**：`package.json` 新增 `configurationDefaults` 配置，用户安装主题后语义高亮自动生效，无需手动设置。
+- **商店页展示优化**：新增 `galleryBanner` 和 `badges` 配置，插件在 VS Code 扩展市场中展示更专业。
+
+---
+
+## [2.3.0] - 2026-06-24
+
+### 🧩 Go Language Syntax Highlighting Deep Dive
+
+- **Dedicated language rules**: Added a standalone `go.yaml` configuration covering Go‑specific syntax elements — package names, method receivers, labels, blank identifiers, error variables, and more — making code semantics clear at a glance.
+- **Visual separation of definition and calls**: Function definitions use glowing blue with bold weight, establishing a clear visual hierarchy alongside keywords. All function calls (including standard library `fmt.Sprintf` and built‑ins like `len`) remain glowing blue without bold, delivering a "definitions stand out, calls stay light" reading experience. Since Go's TextMate grammar cannot distinguish custom calls from standard library calls, both are left un‑bolded — sacrificing standard library emphasis in exchange for a clear distinction between definitions and calls.
+- **Expressive type system**: Structs, interfaces, type aliases, pointers, slices, and maps each receive distinct colors, enabling instant type identification.
+- **Error handling spotlight**: Error variables (e.g., `ErrInvalidInput`) are styled in red italic, making failure paths quickly discoverable.
+- **Concurrency primitive highlighting**: Channel operations (`<-`) and keywords like `select` and `go` are correctly colored, improving readability of concurrent code.
+- **Format specifier highlighting**: Placeholders like `%d` and `%s` in `fmt.Printf`-style functions are highlighted in glowing blue, consistent with embedded template expressions in strings.
+
+### 🐍 Python Function Call Fix
+
+- **Fixed Python function call recognition**: Python function calls now correctly distinguish definitions from calls — the `meta.function-call.python` scope is now properly matched, and function calls no longer appear bold, consistent with other languages.
+
+### 🔧 Cross‑Language Consistency
+
+- Unified function name styling across all languages: **function definitions are bold, function calls are not** — now consistent across JavaScript, TypeScript, Python, and Go, forming a cohesive visual language system.
+
+### 📦 Engineering Improvements
+
+- **Semantic highlighting auto‑enabled**: Added `configurationDefaults` to `package.json` — semantic highlighting now activates automatically upon theme installation, no manual setup required.
+- **Marketplace presentation polish**: Added `galleryBanner` and `badges` configuration for a more professional appearance in the VS Code extension marketplace.
+
+---
+
 ## [2.2.0] - 2026-03-27
 
 ### 🎨 DTCG 设计令牌标准：从主题到设计系统

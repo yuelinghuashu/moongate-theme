@@ -9,7 +9,7 @@ const ROOT_DIR = path.resolve(__dirname, "..")
 const PATHS = {
   primitives: path.join(ROOT_DIR, "src", "core", "primitives", "colors.yaml"),
   semanticsDir: path.join(ROOT_DIR, "src", "core", "semantics"),
-  layout: path.join(ROOT_DIR, "src", "core", "layout.yaml"), // 新增
+  layout: path.join(ROOT_DIR, "src", "core", "layout.yaml"),
   workbench: path.join(ROOT_DIR, "src", "workbench.yaml"),
   semantic: path.join(ROOT_DIR, "src", "semantic.yaml"),
   langDir: path.join(ROOT_DIR, "src", "languages"),
@@ -141,6 +141,8 @@ function detectPrimitiveReference(value, context) {
       "cyan-",
       "purple-",
       "gray-",
+      "white",
+      "black",
     ]
     if (primitivePrefixes.some((prefix) => match.startsWith(prefix))) {
       console.warn(
@@ -155,7 +157,6 @@ function detectPrimitiveReference(value, context) {
  */
 function replaceVariables(obj, colors, context = "") {
   if (typeof obj === "string") {
-    // 可选：检测直接引用原始值（仅当 context 提供且为组件层时）
     if (context) detectPrimitiveReference(obj, context)
 
     return obj.replace(
@@ -274,17 +275,14 @@ function generateLayoutCss(layoutTokens) {
 
   css += `:root {\n`
 
-  // 处理嵌套对象，将嵌套键平铺为 --ui-{parent}-{child}
   function flattenObject(obj, prefix = "") {
     Object.entries(obj).forEach(([key, val]) => {
       const fullKey = prefix ? `${prefix}-${key}` : key
       if (val && typeof val === "object" && !Array.isArray(val)) {
         flattenObject(val, fullKey)
       } else {
-        // 处理字体值中的引号转义
         let formattedVal = val
         if (typeof formattedVal === "string") {
-          // 移除最外层引号，保留内部必要引号
           if (
             (formattedVal.startsWith("'") && formattedVal.endsWith("'")) ||
             (formattedVal.startsWith('"') && formattedVal.endsWith('"'))
@@ -336,7 +334,6 @@ function generateDesignSystemDoc(primitives, lightColors, darkColors) {
 
   md.push("## 🎨 原始色值\n")
 
-  // 定义色系分组
   const colorGroups = {
     blue: [
       "blue-500",
@@ -370,7 +367,6 @@ function generateDesignSystemDoc(primitives, lightColors, darkColors) {
     md.push("")
   }
 
-  // 海拔系统说明
   md.push("## 🏔️ 海拔系统（Elevation System）\n")
   md.push(
     "海拔系统通过明度差异表达 UI 元素的物理深度，遵循 Material Design 海拔规范。",
@@ -393,7 +389,6 @@ function generateDesignSystemDoc(primitives, lightColors, darkColors) {
     `| \`borderFloating\` | \`${lightColors.borderFloating}\` | \`${darkColors.borderFloating}\` | 浮层边框（半透明主色） |\n`,
   )
 
-  // 辅助函数：计算对比度
   const contrast = (color1, color2) => {
     if (!color1 || !color2) return null
     try {
@@ -403,7 +398,6 @@ function generateDesignSystemDoc(primitives, lightColors, darkColors) {
     }
   }
 
-  // 浅色模式语义层
   md.push("## 🌙 浅色模式语义层\n")
   md.push("| 语义变量 | 色值 | 预览 | WCAG 对比度（vs `bg`） |")
   md.push("|----------|------|------|------------------------|")
@@ -428,7 +422,6 @@ function generateDesignSystemDoc(primitives, lightColors, darkColors) {
     md.push(`| \`${key}\` | \`${val}\` | ${preview} | ${contrastRatio} |`)
   }
 
-  // 深色模式语义层
   md.push("\n## 🌑 深色模式语义层\n")
   md.push("| 语义变量 | 色值 | 预览 | WCAG 对比度（vs `bg`） |")
   md.push("|----------|------|------|------------------------|")
@@ -602,7 +595,6 @@ function main() {
     fs.writeFileSync(outputFile, JSON.stringify(theme, null, 2))
     console.log(`   ✅ 构建完成: ${outputFile}`)
 
-    // 对比度校验
     if (normalized.bg && normalized.text) {
       checkContrast(normalized.text, normalized.bg, "text", themeType)
     }

@@ -617,6 +617,225 @@
       }
     },
     {
+      "name": "Go - Package Name",
+      "scope": [
+        "entity.name.package.go"
+      ],
+      "settings": {
+        "foreground": "#cbd5e1"
+      }
+    },
+    {
+      "name": "Go - Import Paths",
+      "scope": [
+        "string.quoted.double.go meta.import.go",
+        "string.quoted.double.go meta.import.path.go"
+      ],
+      "settings": {
+        "foreground": "#34d399"
+      }
+    },
+    {
+      "name": "Go - Structs",
+      "scope": [
+        "entity.name.type.struct.go"
+      ],
+      "settings": {
+        "foreground": "#fbbf24",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Go - Interfaces",
+      "scope": [
+        "support.interface.go",
+        "entity.name.type.interface.go"
+      ],
+      "settings": {
+        "foreground": "#3b82f6",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Go - Type Aliases",
+      "scope": [
+        "entity.name.type.alias.go"
+      ],
+      "settings": {
+        "foreground": "#22d3ee"
+      }
+    },
+    {
+      "name": "Go - Built-in Types",
+      "scope": [
+        "support.type.builtin.go",
+        "support.type.go"
+      ],
+      "settings": {
+        "foreground": "#fbbf24"
+      }
+    },
+    {
+      "name": "Go - Pointer Types",
+      "scope": [
+        "storage.type.pointer.go"
+      ],
+      "settings": {
+        "foreground": "#22d3ee",
+        "fontStyle": "underline"
+      }
+    },
+    {
+      "name": "Go - Map Types",
+      "scope": [
+        "storage.type.map.go"
+      ],
+      "settings": {
+        "foreground": "#22d3ee"
+      }
+    },
+    {
+      "name": "Go - Slice/Array Types",
+      "scope": [
+        "storage.type.slice.go",
+        "storage.type.array.go"
+      ],
+      "settings": {
+        "foreground": "#22d3ee"
+      }
+    },
+    {
+      "name": "Go - Function Definition",
+      "scope": [
+        "entity.name.function.go",
+        "meta.function.go entity.name.function",
+        "meta.function.literal.go entity.name.function.go"
+      ],
+      "settings": {
+        "foreground": "#87cefa",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Go - Function Calls",
+      "scope": [
+        "entity.name.function.support.go",
+        "entity.name.function.support.builtin.go"
+      ],
+      "settings": {
+        "foreground": "#87cefa"
+      }
+    },
+    {
+      "name": "Go - Method Receiver",
+      "scope": [
+        "variable.parameter.receiver.go"
+      ],
+      "settings": {
+        "foreground": "#cbd5e1",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Go - Struct Fields",
+      "scope": [
+        "variable.other.property.go",
+        "meta.struct.field.go"
+      ],
+      "settings": {
+        "foreground": "#94a3b8"
+      }
+    },
+    {
+      "name": "Go - Package Variables",
+      "scope": [
+        "variable.other.global.go"
+      ],
+      "settings": {
+        "foreground": "#e2e8f0",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Go - Error Variables",
+      "scope": [
+        "variable.other.err.go"
+      ],
+      "settings": {
+        "foreground": "#f87171",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Go - Blank Identifier",
+      "scope": [
+        "constant.other.blank.go"
+      ],
+      "settings": {
+        "foreground": "#94a3b8",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Go - Boolean",
+      "scope": [
+        "constant.language.boolean.go",
+        "constant.language.true.go",
+        "constant.language.false.go"
+      ],
+      "settings": {
+        "foreground": "#fbbf24",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Go - Nil",
+      "scope": [
+        "constant.language.nil.go"
+      ],
+      "settings": {
+        "foreground": "#fbbf24",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Go - Runes",
+      "scope": [
+        "string.quoted.rune.go"
+      ],
+      "settings": {
+        "foreground": "#34d399"
+      }
+    },
+    {
+      "name": "Go - Labels",
+      "scope": [
+        "entity.name.label.go"
+      ],
+      "settings": {
+        "foreground": "#f87171"
+      }
+    },
+    {
+      "name": "Go - Channel Operations",
+      "scope": [
+        "keyword.operator.channel.go"
+      ],
+      "settings": {
+        "foreground": "#22d3ee"
+      }
+    },
+    {
+      "name": "Go - Format Specifiers",
+      "scope": [
+        "constant.other.placeholder.go",
+        "punctuation.definition.placeholder.go"
+      ],
+      "settings": {
+        "foreground": "#7dd3fc"
+      }
+    },
+    {
       "name": "HTML Doctype",
       "scope": [
         "meta.tag.sgml.html",
@@ -810,6 +1029,29 @@
       "settings": {
         "foreground": "#c084fc",
         "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Python - Function Definition",
+      "scope": [
+        "entity.name.function.python",
+        "meta.function.python entity.name.function"
+      ],
+      "settings": {
+        "foreground": "#87cefa",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Python - Function Calls",
+      "scope": [
+        "meta.function-call.python",
+        "meta.function-call.generic.python",
+        "support.function.python",
+        "support.function.builtin.python"
+      ],
+      "settings": {
+        "foreground": "#87cefa"
       }
     },
     {

@@ -4,12 +4,34 @@
   "description": "Where Moon Meets Code",
   "publisher": "yuelinghuashu",
   "icon": "images/icon.png",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "engines": {
     "vscode": "^1.109.0"
   },
   "categories": [
     "Themes"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "galleryBanner": {
+    "color": "#0f172a",
+    "theme": "dark"
+  },
+  "badges": [
+    {
+      "url": "https://img.shields.io/badge/Go-supported-00ADD8",
+      "href": "https://github.com/yuelinghuashu/moongate-theme",
+      "description": "Go language fully supported"
+    },
+    {
+      "url": "https://img.shields.io/badge/DTCG-Industrial%20Grade-blue",
+      "href": "https://github.com/yuelinghuashu/moongate-theme/blob/main/docs/DESIGN_SYSTEM.md",
+      "description": "DTCG design token standard with WCAG validation"
+    }
   ],
   "contributes": {
     "themes": [
@@ -23,7 +45,10 @@
         "uiTheme": "vs",
         "path": "./themes/moongate-theme-light.json"
       }
-    ]
+    ],
+    "configurationDefaults": {
+      "editor.semanticHighlighting.enabled": true
+    }
   },
   "repository": {
     "type": "git",
@@ -41,12 +66,16 @@
     "semantic highlighting",
     "semantic",
     "python",
+    "golang",
     "typescript",
     "javascript",
     "vue",
     "react",
     "html",
-    "css"
+    "css",
+    "go",
+    "moon",
+    "night"
   ],
   "scripts": {
     "build": "node scripts/build.js",

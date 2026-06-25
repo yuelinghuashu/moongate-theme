@@ -1,5 +1,27 @@
 # Python 特定规则
 tokenColors:
+  # ========== 函数定义 (加粗) ==========
+  - name: Python - Function Definition
+    scope:
+      - "entity.name.function.python"
+      - "meta.function.python entity.name.function"
+    settings:
+      foreground: "${function}"
+      fontStyle: "bold"
+
+  # ========== 函数调用 (不加粗) ==========
+  # 注意：Python 调用时只有 meta.function-call，没有 entity.name.function
+  - name: Python - Function Calls
+    scope:
+      - "meta.function-call.python"
+      - "meta.function-call.generic.python"
+      - "support.function.python" # 内置函数如 print, len
+      - "support.function.builtin.python"
+    settings:
+      foreground: "${function}"
+      # 不加粗
+
+  # ========== 原有规则 ==========
   - name: Python Local Variables - 局部变量退后
     scope: ["variable.other.readwrite.python", "variable.other.python"]
     settings:

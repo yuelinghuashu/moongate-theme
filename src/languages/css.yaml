@@ -6,12 +6,20 @@ tokenColors:
       foreground: "${highlight}"
 
   - name: CSS Units
-    scope: ["keyword.other.unit.css", "keyword.other.unit.rem.css", "keyword.other.unit.px.css", "keyword.other.unit.em.css", "keyword.other.unit.percent.css"]
+    scope:
+      [
+        "keyword.other.unit.css",
+        "keyword.other.unit.rem.css",
+        "keyword.other.unit.px.css",
+        "keyword.other.unit.em.css",
+        "keyword.other.unit.percent.css",
+      ]
     settings:
       foreground: "${warning}"
 
   - name: CSS Variable Definitions
-    scope: ["meta.property-list.css variable", "source.css variable", "variable.css"]
+    scope:
+      ["meta.property-list.css variable", "source.css variable", "variable.css"]
     settings:
       foreground: "${highlight}"
 
@@ -21,12 +29,21 @@ tokenColors:
       foreground: "${highlight}"
 
   - name: CSS Selectors
-    scope: ["entity.other.attribute-name.class.css", "entity.other.attribute-name.id.css", "entity.name.tag.css"]
+    scope:
+      [
+        "entity.other.attribute-name.class.css",
+        "entity.other.attribute-name.id.css",
+        "entity.name.tag.css",
+      ]
     settings:
       foreground: "${primary}"
 
   - name: CSS Pseudo
-    scope: ["entity.other.attribute-name.pseudo-class.css", "entity.other.attribute-name.pseudo-element.css"]
+    scope:
+      [
+        "entity.other.attribute-name.pseudo-class.css",
+        "entity.other.attribute-name.pseudo-element.css",
+      ]
     settings:
       foreground: "${highlight}"
       fontStyle: "italic"
