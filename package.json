@@ -14,9 +14,6 @@
   "extensionKind": [
     "ui"
   ],
-  "activationEvents": [
-    "onStartupFinished"
-  ],
   "galleryBanner": {
     "color": "#0f172a",
     "theme": "dark"
