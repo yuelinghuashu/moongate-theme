@@ -13,7 +13,7 @@
 
 Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而来的 VS Code 主题，将博客的视觉语言带到代码编辑器中。
 
-**v2.4.0 代码精简与视觉统一**：语言配置全面精简，Rust 函数样式统一，TypeScript 内置对象视觉一致，构建脚本自动合并 token 规则，JSON 体积减小 16%。
+**v2.4.0 代码精简与语言扩展**：语言配置全面精简，新增 Rust 语言支持，TypeScript 内置对象视觉一致，构建脚本自动合并 token 规则，JSON 体积减小 16%。
 
 ## 📸 预览
 
@@ -52,7 +52,7 @@ Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而
 ## ✨ v2.4.0 亮点
 
 - **🧹 语言配置全面精简**：各语言文件移除与 `base.yaml` 重复的通用规则，Rust 精简 63%、Python 精简 56%、CSS 精简 50%，维护成本大幅降低
-- **🦀 Rust 函数样式统一**：Rust TextMate 无法区分函数定义与调用，统一加粗，与 Go 处理方式保持一致
+- **🦀 新增 Rust 语言支持**：新增 `rust.yaml` 专属配置，覆盖泛型参数、生命周期、属性、宏等 Rust 特有语法元素，函数定义与调用统一加粗
 - **🎯 TypeScript 内置对象一致**：修复 `JSON` 意外加粗问题，所有内置对象（`console`、`Math`、`JSON`）视觉风格统一
 - **📦 构建脚本优化**：自动合并相同颜色的 token 规则，`tokenColors` 从 89 条精简至 34 条（减少 62%），JSON 体积减小 16%
 
@@ -112,7 +112,7 @@ Moongate 基于 DTCG 设计令牌标准构建，提供完整的颜色、布局�
 
 Moongate is a VS Code theme born from [moongate.top](https://moongate.top), bringing the same visual language into your code editor.
 
-**v2.4.0 Code Refinement & Visual Consistency**: Language configs deduplicated, Rust function styling unified, TypeScript built‑in objects consistent, build script auto‑merges token rules, JSON size reduced by 16%.
+**v2.4.0 Code Refinement & Language Expansion**: Language configs deduplicated, Rust language support added, TypeScript built-in objects consistent, build script auto-merges token rules, JSON size reduced by 16%.
 
 ## 📸 Preview
 
@@ -151,7 +151,7 @@ Moongate is a VS Code theme born from [moongate.top](https://moongate.top), brin
 ## ✨ v2.4.0 Highlights
 
 - **🧹 Language configs deduplicated**: Removed rules duplicating `base.yaml` across all language files — Rust down 63%, Python 56%, CSS 50%, significantly reducing maintenance overhead
-- **🦀 Rust function styling unified**: Rust's TextMate grammar cannot distinguish definitions from calls — both are now bold, consistent with Go's approach
+- **🦀 Rust language support added**: New `rust.yaml` configuration covering generic parameters, lifetimes, attributes, macros, and more — function definitions and calls unified as bold
 - **🎯 TypeScript built‑in objects consistent**: Fixed unexpected `JSON` bolding — all built‑ins (`console`, `Math`, `JSON`) now share a consistent visual style
 - **📦 Build script optimized**: Auto‑merges token rules with identical colors — `tokenColors` reduced from 89 to 34 rules (62% decrease), JSON size reduced by 16%
 

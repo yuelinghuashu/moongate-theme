@@ -1,11 +1,10 @@
 # 更新日志 | Changelog
 
-## [2.4.0] - 2026-06-26
+## [2.4.0] - 2026-07-04
 
 ### 🧹 语言配置全面精简
 
 - **大幅精简各语言配置文件**：移除与 `base.yaml` 重复的通用规则，每个语言文件只保留其独有的语法规则，大幅降低维护成本。
-  - Rust：27 → 10 条（精简 63%）
   - Python：9 → 4 条（精简 56%）
   - CSS：8 → 4 条（精简 50%）
   - HTML：6 → 5 条（精简 17%）
@@ -13,9 +12,11 @@
 - **核心原则**：`base.yaml` 已有的通用规则（关键字、字符串、注释、操作符、变量等），语言文件不再重复定义。
 - `javascript.yaml` 和 `typescript.yaml` 保持为空，完全继承 `base.yaml` 的通用规则。
 
-### 🦀 Rust 函数样式统一
+### 🦀 新增 Rust 语言支持
 
-- **修复 Rust 函数调用加粗问题**：由于 Rust TextMate 语法中函数定义与调用的 scope 相同（均为 `entity.name.function.rust`），无法区分两者。现统一将所有 Rust 函数（定义与调用）设为加粗，与 Go 的处理方式保持一致，接受该语法的先天限制。
+- **新增 Rust 专属语言规则**：创建 `rust.yaml` 配置文件，覆盖泛型参数、生命周期、属性、宏、Self 关键字等 Rust 特有语法元素。
+- **Rust 函数样式处理**：由于 Rust TextMate 语法中函数定义与调用的 scope 相同（均为 `entity.name.function.rust`），无法区分两者，统一将所有 Rust 函数（定义与调用）设为加粗，与 Go 的处理方式保持一致，接受该语法的先天限制。
+- **类型系统着色**：泛型参数、生命周期使用青色点缀，属性使用紫色斜体，与主题整体配色风格统一。
 
 ### 🎯 TypeScript 内置对象视觉一致性
 
@@ -31,12 +32,11 @@
 
 ---
 
-## [2.4.0] - 2026-06-25
+## [2.4.0] - 2026-07-04
 
 ### 🧹 Language Configuration Refinement
 
 - **Comprehensive deduplication of language configs**: Removed rules that duplicate `base.yaml` across all language files. Each language file now only contains syntax rules unique to that language, significantly reducing maintenance overhead.
-  - Rust: 27 → 10 rules (63% reduction)
   - Python: 9 → 4 rules (56% reduction)
   - CSS: 8 → 4 rules (50% reduction)
   - HTML: 6 → 5 rules (17% reduction)
@@ -44,9 +44,11 @@
 - **Core principle**: Common rules already in `base.yaml` (keywords, strings, comments, operators, variables, etc.) are no longer duplicated in language files.
 - `javascript.yaml` and `typescript.yaml` remain empty, fully inheriting from `base.yaml`.
 
-### 🦀 Rust Function Styling Unified
+### 🦀 New Rust Language Support
 
-- **Fixed Rust function call bolding**: Rust's TextMate grammar uses the same scope (`entity.name.function.rust`) for both function definitions and calls, making them indistinguishable. Rust functions (both definitions and calls) are now **unified as bold** — consistent with Go's approach, accepting the inherent limitation of the grammar.
+- **Added dedicated Rust language rules**: Created `rust.yaml` configuration covering Rust‑specific syntax elements — generic parameters, lifetimes, attributes, macros, the `Self` keyword, and more.
+- **Rust function styling**: Rust's TextMate grammar uses the same scope (`entity.name.function.rust`) for both function definitions and calls, making them indistinguishable. All Rust functions (both definitions and calls) are now **unified as bold** — consistent with Go's approach, accepting the inherent limitation of the grammar.
+- **Type system coloring**: Generic parameters and lifetimes use cyan accents; attributes use purple italic, maintaining harmony with the theme's overall palette.
 
 ### 🎯 TypeScript Built‑in Object Visual Consistency
 
