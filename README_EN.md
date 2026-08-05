@@ -13,12 +13,12 @@ Moongate is a VS Code theme born from [moongate.top](https://moongate.top), brin
 
 ## 📸 Preview
 
-| Language   | Dark                                     | Light                                      |
-| ---------- | ---------------------------------------- | ------------------------------------------ |
-| JavaScript | ![JS Dark](./images/javascript-dark.png) | ![JS Light](./images/javascript-light.png) |
-| Python     | ![Python Dark](./images/python-dark.png) | ![Python Light](./images/python-light.png) |
-| Go         | ![Go Dark](./images/go-dark.png)         | ![Go Light](./images/go-light.png)         |
-| Vue        | ![Vue Dark](./images/vue-dark.png)       | ![Vue Light](./images/vue-light.png)       |
+| Language   | Dark                                                                                                       | Light                                                                                                        |
+| ---------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| JavaScript | ![JS Dark](https://raw.githubusercontent.com/yuelinghuashu/moongate-theme/main/images/javascript-dark.png) | ![JS Light](https://raw.githubusercontent.com/yuelinghuashu/moongate-theme/main/images/javascript-light.png) |
+| Python     | ![Python Dark](https://raw.githubusercontent.com/yuelinghuashu/moongate-theme/main/images/python-dark.png) | ![Python Light](https://raw.githubusercontent.com/yuelinghuashu/moongate-theme/main/images/python-light.png) |
+| Go         | ![Go Dark](https://raw.githubusercontent.com/yuelinghuashu/moongate-theme/main/images/go-dark.png)         | ![Go Light](https://raw.githubusercontent.com/yuelinghuashu/moongate-theme/main/images/go-light.png)         |
+| Vue        | ![Vue Dark](https://raw.githubusercontent.com/yuelinghuashu/moongate-theme/main/images/vue-dark.png)       | ![Vue Light](https://raw.githubusercontent.com/yuelinghuashu/moongate-theme/main/images/vue-light.png)       |
 
 ## ✨ Design Philosophy
 

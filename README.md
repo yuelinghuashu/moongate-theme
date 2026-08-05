@@ -13,12 +13,12 @@ Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而
 
 ## 📸 预览
 
-| 语言       | 深色                                     | 浅色                                      |
-| ---------- | ---------------------------------------- | ----------------------------------------- |
-| JavaScript | ![JS 深色](./images/javascript-dark.png) | ![JS 浅色](./images/javascript-light.png) |
-| Python     | ![Python 深色](./images/python-dark.png) | ![Python 浅色](./images/python-light.png) |
-| Go         | ![Go 深色](./images/go-dark.png)         | ![Go 浅色](./images/go-light.png)         |
-| Vue        | ![Vue 深色](./images/vue-dark.png)       | ![Vue 浅色](./images/vue-light.png)       |
+| 语言       | 深色                                                                                                       | 浅色                                                                                                        |
+| ---------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| JavaScript | ![JS 深色](https://raw.githubusercontent.com/yuelinghuashu/moongate-theme/main/images/javascript-dark.png) | ![JS 浅色](https://raw.githubusercontent.com/yuelinghuashu/moongate-theme/main/images/javascript-light.png) |
+| Python     | ![Python 深色](https://raw.githubusercontent.com/yuelinghuashu/moongate-theme/main/images/python-dark.png) | ![Python 浅色](https://raw.githubusercontent.com/yuelinghuashu/moongate-theme/main/images/python-light.png) |
+| Go         | ![Go 深色](https://raw.githubusercontent.com/yuelinghuashu/moongate-theme/main/images/go-dark.png)         | ![Go 浅色](https://raw.githubusercontent.com/yuelinghuashu/moongate-theme/main/images/go-light.png)         |
+| Vue        | ![Vue 深色](https://raw.githubusercontent.com/yuelinghuashu/moongate-theme/main/images/vue-dark.png)       | ![Vue 浅色](https://raw.githubusercontent.com/yuelinghuashu/moongate-theme/main/images/vue-light.png)       |
 
 ## ✨ 设计理念
 
