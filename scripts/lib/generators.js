@@ -1,5 +1,6 @@
 import fs from "node:fs"
 import path from "node:path"
+import yaml from "js-yaml"
 import wcag from "wcag-contrast"
 import { PATHS } from "./config.js"
 
@@ -203,4 +204,97 @@ export function generateDesignSystemDoc(primitives, lightColors, darkColors) {
   }
   fs.writeFileSync(mdPath, md.join("\n"), "utf8")
   console.log(`✅ 设计系统文档已生成: ${mdPath}`)
+}
+
+/**
+ * 将驼峰键转换为 SCSS 变量名（如 surfaceGround → surface-ground）
+ */
+function toCssKey(key) {
+  return key.replace(/([A-Z])/g, "-$1").toLowerCase()
+}
+
+/**
+ * 生成 SCSS 令牌文件（Sass 变量 + Maps）
+ */
+export function generateScssTokens(lightColors, darkColors) {
+  let scss = `// ===== Moongate SCSS 令牌 - 自动生成 =====\n`
+  scss += `// 来源: VS Code 主题构建脚本\n`
+  scss += `// 请勿手动修改，修改请编辑 primitives/ 和 semantics/ 目录\n\n`
+
+  // 布局令牌（间距）——从 layout.yaml 读取
+  let layoutSpacing = {}
+  try {
+    if (fs.existsSync(PATHS.layout)) {
+      const layoutTokens = yaml.load(fs.readFileSync(PATHS.layout, "utf8"))
+      layoutSpacing = layoutTokens?.spacing || {}
+    }
+  } catch {
+    // 布局令牌加载失败时静默降级（仅跳过 spacing map 生成）
+  }
+
+  scss += `// 布局令牌\n`
+  scss += `$ui-spacing: (\n`
+  for (const [key, val] of Object.entries(layoutSpacing)) {
+    scss += `  ${key.replace(/([A-Z])/g, "-$1").toLowerCase()}: ${typeof val === "string" && !val.startsWith("#") ? `"${val}"` : val};\n`
+  }
+  scss += `);\n\n`
+
+  // 深色模式颜色
+  scss += `// 深色模式颜色\n`
+  scss += `$ui-colors-dark: (\n`
+  for (const [key, val] of Object.entries(darkColors)) {
+    scss += `  ${toCssKey(key)}: ${val};\n`
+  }
+  scss += `);\n\n`
+
+  // 浅色模式颜色
+  scss += `// 浅色模式颜色\n`
+  scss += `$ui-colors-light: (\n`
+  for (const [key, val] of Object.entries(lightColors)) {
+    scss += `  ${toCssKey(key)}: ${val};\n`
+  }
+  scss += `);\n\n`
+
+  // 便捷变量（直接可用的语义色，深色）
+  scss += `// 深色模式便捷变量\n`
+  for (const [key, val] of Object.entries(darkColors)) {
+    scss += `$ui-${toCssKey(key)}: ${val};\n`
+  }
+
+  const scssPath = path.join(PATHS.outputDir, "_tokens.scss")
+  fs.writeFileSync(scssPath, scss)
+  console.log(`✅ SCSS 令牌已生成: ${scssPath}`)
+}
+
+/**
+ * 生成 TypeScript 令牌文件（结构化导出）
+ */
+export function generateTsTokens(lightColors, darkColors) {
+  let ts = `// ===== Moongate TS 令牌 - 自动生成 =====\n`
+  ts += `// 来源: VS Code 主题构建脚本\n`
+  ts += `// 请勿手动修改，修改请编辑 primitives/ 和 semantics/ 目录\n\n`
+
+  ts += `export interface MoongateTokens {\n`
+  ts += `  dark: Record<string, string>;\n`
+  ts += `  light: Record<string, string>;\n`
+  ts += `}\n\n`
+
+  ts += `export const tokens: MoongateTokens = {\n`
+  ts += `  dark: {\n`
+  for (const [key, val] of Object.entries(darkColors)) {
+    ts += `    "${key}": "${val}",\n`
+  }
+  ts += `  },\n`
+  ts += `  light: {\n`
+  for (const [key, val] of Object.entries(lightColors)) {
+    ts += `    "${key}": "${val}",\n`
+  }
+  ts += `  },\n`
+  ts += `}\n\n`
+
+  ts += `export default tokens\n`
+
+  const tsPath = path.join(PATHS.outputDir, "tokens.ts")
+  fs.writeFileSync(tsPath, ts)
+  console.log(`✅ TS 令牌已生成: ${tsPath}`)
 }

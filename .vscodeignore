@@ -16,3 +16,6 @@ assets/
 images/*-dark.png
 images/*-light.png
 themes/*.css
+# 跨平台令牌（保留 _tokens.scss 和 tokens.ts，供开发者引用）
+# themes/_tokens.scss
+# themes/tokens.ts

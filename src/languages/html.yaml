@@ -1,27 +1,43 @@
 # HTML 特定规则
 # 只保留 base.yaml 未覆盖的 HTML 独有规则
+# scope 来源：VS Code 内置 html.tmLanguage.json（已验证）
 tokenColors:
+  # ========== Doctype 声明 ==========
+  # html.tmLanguage: meta.tag.metadata.doctype.html
   - name: HTML Doctype
-    scope: ["meta.tag.sgml.html", "entity.name.tag.doctype.html"]
+    scope:
+      - "meta.tag.metadata.doctype.html"
     settings:
       foreground: "${border}"
 
+  # ========== HTML Attribute Value ==========
   - name: HTML Attribute Value
-    scope: ["string.quoted.double.html", "string.quoted.single.html"]
+    scope:
+      - "string.quoted.double.html"
+      - "string.quoted.single.html"
     settings:
       foreground: "${success}"
 
-  - name: HTML/Vue Text Content
-    scope: ["text.html.basic", "text.html.vue text", "text.html.derivative"]
+  # ========== HTML 文本内容 ==========
+  # html.tmLanguage: text.html.basic
+  - name: HTML Text Content
+    scope:
+      - "text.html.basic"
     settings:
       foreground: "${variableDim}"
 
-  - name: HTML Script Tag Content
-    scope: ["source.js.embedded.html"]
+  # ========== 内联标签 ==========
+  - name: HTML Inline Tags
+    scope:
+      - "meta.tag.inline.start.html"
+      - "meta.tag.object.start.html"
     settings:
-      foreground: "${text}"
+      foreground: "${operator}"
 
-  - name: HTML Style Tag Content
-    scope: ["source.css.embedded.html"]
+  # ========== 标签标点符号 ==========
+  - name: HTML Tag Punctuation
+    scope:
+      - "punctuation.definition.tag.begin.html"
+      - "punctuation.definition.tag.end.html"
     settings:
-      foreground: "${text}"
+      foreground: "${operator}"

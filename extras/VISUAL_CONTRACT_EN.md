@@ -4,7 +4,7 @@
 
 # 🌙 Moongate Visual Contract v2.0
 
-### ——Let Day and Night Moonlight Both Render Faithfully on Your Screen
+## ——Let Day and Night Moonlight Both Render Faithfully on Your Screen
 
 Moongate 2.0 introduces a complete **dual‑theme system** for the first time: dark “Night Sky” and light “Dawn”. They share the same semantic color mapping, but have undergone **gravity compensation** for different ambient lighting—the dark mode focuses on preserving shadow details, while the light mode optimizes readability and comfort in bright environments.
 

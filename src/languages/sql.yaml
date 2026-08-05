@@ -1,0 +1,95 @@
+# SQL 特定规则
+# 只保留 base.yaml 未覆盖的 SQL 独有规则
+# scope 来源：VS Code 内置 sql.tmLanguage.json（已验证）
+tokenColors:
+  # ========== 注释 ==========
+  # SQL 标准只有 -- 单行注释和 /* */ 块注释；// 和 # 不是标准语法（已移除）
+  - name: SQL - Comments
+    scope:
+      - "comment.line.double-dash.sql"
+      - "comment.block.sql"
+      - "punctuation.definition.comment.sql"
+    settings:
+      fontStyle: "italic"
+      foreground: "${comment}"
+
+  # ========== DML 关键字（SELECT / INSERT / UPDATE / DELETE） ==========
+  # sql.tmLanguage: keyword.other.DML.sql / keyword.other.DML.II.sql
+  - name: SQL - DML Keywords
+    scope:
+      - "keyword.other.DML.sql"
+      - "keyword.other.DML.II.sql"
+    settings:
+      foreground: "${primary}"
+      fontStyle: "bold"
+
+  # ========== DDL 关键字（CREATE / DROP / ALTER） ==========
+  # sql.tmLanguage: keyword.other.DDL.create.II.sql / meta.create.sql 等
+  - name: SQL - DDL Keywords
+    scope:
+      - "keyword.other.DDL.*.sql"
+      - "meta.create.sql"
+      - "meta.drop.sql"
+      - "meta.alter.sql"
+    settings:
+      foreground: "${purple}"
+      fontStyle: "bold"
+
+  # ========== 其他 SQL 关键字（ORDER / ALIAS / LUW / AUTHORIZATION） ==========
+  # sql.tmLanguage: keyword.other.order.sql / keyword.other.alias.sql 等
+  - name: SQL - Keywords
+    scope:
+      - "keyword.other.order.sql"
+      - "keyword.other.alias.sql"
+      - "keyword.other.LUW.sql"
+      - "keyword.other.authorization.sql"
+      - "keyword.other.data-integrity.sql"
+      - "keyword.other.object-comments.sql"
+      - "keyword.other.sql"
+    settings:
+      foreground: "${primary}"
+
+  # ========== 操作符 ==========
+  # sql.tmLanguage: keyword.operator.comparison / math / star / concatenator
+  - name: SQL - Operators
+    scope:
+      - "keyword.operator.comparison.sql"
+      - "keyword.operator.math.sql"
+      - "keyword.operator.star.sql"
+      - "keyword.operator.concatenator.sql"
+    settings:
+      foreground: "${operator}"
+
+  # ========== 存储修饰符（NOT NULL / PRIMARY KEY 等） ==========
+  # sql.tmLanguage: storage.modifier.sql
+  - name: SQL - Storage Modifiers
+    scope:
+      - "storage.modifier.sql"
+    settings:
+      foreground: "${cyan}"
+      fontStyle: "italic"
+
+  # ========== 数字 ==========
+  - name: SQL - Numbers
+    scope:
+      - "constant.numeric.sql"
+    settings:
+      foreground: "${warning}"
+
+  # ========== 文本变量 / 括号文本 ==========
+  # sql.tmLanguage: text.variable / text.bracketed
+  - name: SQL - Text Variables
+    scope:
+      - "text.variable"
+      - "text.bracketed"
+    settings:
+      foreground: "${variableDim}"
+
+  # ========== 字符串 ==========
+  # base.yaml 的 string 规则已覆盖，这里补充 SQL 特有 scope
+  - name: SQL - Strings
+    scope:
+      - "string.quoted.double.sql"
+      - "string.quoted.single.sql"
+    settings:
+      foreground: "${success}"

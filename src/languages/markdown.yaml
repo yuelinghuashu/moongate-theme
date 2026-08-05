@@ -1,40 +1,88 @@
 # Markdown 特定规则
+# 只保留 base.yaml 未覆盖的 Markdown 独有规则
+# scope 来源：VS Code 内置 markdown.tmLanguage.json（已验证）
 tokenColors:
+  # ========== Markdown 标题 ==========
+  # markdown.tmLanguage: heading.1.markdown ~ heading.6.markdown / markup.heading.markdown
   - name: Markdown Heading
-    scope: ["markdown.heading", "markup.heading"]
+    scope:
+      - "heading.1.markdown"
+      - "heading.2.markdown"
+      - "heading.3.markdown"
+      - "heading.4.markdown"
+      - "heading.5.markdown"
+      - "heading.6.markdown"
+      - "markup.heading.markdown"
     settings:
       foreground: "${success}"
       fontStyle: "bold"
 
+  # ========== Markdown 链接标题 ==========
+  # markdown.tmLanguage: string.other.link.title.markdown
   - name: Markdown Link
-    scope: ["string.other.link.title.markdown"]
+    scope:
+      - "string.other.link.title.markdown"
+      - "string.other.link.description.markdown"
     settings:
       foreground: "${highlight}"
 
+  # ========== Markup Italic ==========
   - name: Markup Italic
-    scope: ["markup.italic"]
+    scope:
+      - "markup.italic.markdown"
     settings:
       fontStyle: "italic"
       foreground: "${variableDim}"
 
+  # ========== Markup Bold ==========
   - name: Markup Bold
-    scope: ["markup.bold"]
+    scope:
+      - "markup.bold.markdown"
     settings:
       fontStyle: "bold"
       foreground: "${text}"
 
-  - name: Markdown - Raw Block
-    scope: ["markup.raw.block"]
+  # ========== Markdown 删除线 ==========
+  - name: Markdown Strikethrough
+    scope:
+      - "markup.strikethrough.markdown"
+    settings:
+      foreground: "${textMuted}"
+      fontStyle: "strikethrough"
+
+  # ========== Markdown 引用 ==========
+  - name: Markdown Quote
+    scope:
+      - "markup.quote.markdown"
+    settings:
+      foreground: "${textMuted}"
+      fontStyle: "italic"
+
+  # ========== Markdown 代码块 ==========
+  # markdown.tmLanguage: markup.raw.block.markdown / markup.fenced_code.block.markdown
+  - name: Markdown Raw Block
+    scope:
+      - "markup.raw.block.markdown"
+      - "markup.fenced_code.block.markdown"
     settings:
       foreground: "${primary}"
 
-  - name: Markdown - Fenced Language
-    scope: ["variable.language.fenced.markdown"]
-    settings:
-      foreground: "${textMuted}"
-
-  - name: Markdown Fenced Code Language Identifier
-    scope: "fenced_code.block.language.markdown"
+  # ========== Markdown 代码块语言标识 ==========
+  # markdown.tmLanguage: fenced_code.block.language.markdown
+  - name: Markdown Fenced Language
+    scope:
+      - "fenced_code.block.language.markdown"
+      - "fenced_code.block.language"
     settings:
       foreground: "${purple}"
       fontStyle: "italic"
+
+  # ========== Markdown 链接/图片标记 ==========
+  - name: Markdown Links
+    scope:
+      - "meta.link.inline.markdown"
+      - "meta.link.reference.markdown"
+      - "markup.underline.link.markdown"
+    settings:
+      foreground: "${highlight}"
+      fontStyle: "underline"

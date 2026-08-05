@@ -1,13 +1,20 @@
-[![Version](https://img.shields.io/github/package-json/v/yuelinghuashu/moongate-theme)]()
-[![Marketplace](https://img.shields.io/badge/vscode-marketplace-brightgreen)]()
+# 🌙 Moongate Theme
+
+> From blog to editor, let your code rest in moonlight
+
+<p align="center">
+  <img src="https://img.shields.io/github/package-json/v/yuelinghuashu/moongate-theme" alt="Version">
+  <img src="https://img.shields.io/badge/vscode-marketplace-brightgreen" alt="Marketplace">
+  <img src="https://img.shields.io/badge/languages-15-brightgreen" alt="Languages">
+  <img src="https://img.shields.io/badge/WCAG-AA%20%26%20AAA-blue" alt="WCAG">
+  <img src="https://img.shields.io/badge/Dark%20%26%20Light-both-8A2BE2" alt="Dark & Light">
+  <img src="https://img.shields.io/badge/Semantic%20Highlighting-on-purple" alt="Semantic Highlighting">
+  <img src="https://img.shields.io/badge/tests-85%20passing-brightgreen" alt="Tests">
+</p>
 
 [🇨🇳 中文版](./README.md) | English
 
 ---
-
-# 🌙 Moongate Theme
-
-> From blog to editor, let your code rest in moonlight
 
 Moongate is a VS Code theme born from [moongate.top](https://moongate.top), bringing the same visual language into your code editor.
 
@@ -45,10 +52,12 @@ Moongate is a VS Code theme born from [moongate.top](https://moongate.top), brin
 | **UI Physical Depth**            | Elevation system – natural "paper stack" effect                 |
 | **Design System Unity**          | DTCG tokens – one color language across all products            |
 
-## ✨ v2.5.0 Highlights
+## ✨ v2.6.0 Highlights
 
-- **⚛️ React JSX/TSX rules added**: New `jsx.yaml` — custom components in moon yellow bold, React Hooks in purple italic, embedded expressions in glowing blue, visually symmetric with Vue rules
-- **🧩 Modern VS Code UI coverage**: 149 modern UI keys added — Sticky Scroll, AI Chat / Inline Chat, Command Center, Terminal Command Guide, Ghost Text / Unicode highlighting, Comments / Ports, and Symbol Icons — all referencing semantic variables
+- **🚀 3 new languages added**: Shell/Bash, Dockerfile, SQL — following the "base common rules + language-specific rules" architecture
+- **🎨 Comprehensive scope fixes**: 8 language files (JSX/TSX, Python, Rust, CSS, Go, Markdown, HTML) rewritten and verified against VS Code's built-in TextMate grammars — eliminating all non-effective scopes
+- **📦 Cross-platform token artifacts**: Auto-generated `_tokens.scss` (Sass) and `tokens.ts` (TypeScript) — fulfilling the "one-click multi-platform export" promise
+- **🔍 New `verify-scopes.js` tool**: Auto-checks language configs against VS Code's built-in grammars to prevent scope regressions
 
 [📜 View full changelog](./CHANGELOG_EN.md)
 
@@ -57,6 +66,53 @@ Moongate is a VS Code theme born from [moongate.top](https://moongate.top), brin
 Moongate is built on the DTCG design token standard, providing complete color, layout, typography, breakpoint, and z-index tokens.
 👉 [View full documentation](./docs/DESIGN_SYSTEM.md)
 👉 [Read the Moongate Visual Contract (monitor calibration guide)](./extras/VISUAL_CONTRACT_EN.md)
+👉 [SCSS tokens for Sass projects](./themes/_tokens.scss)
+👉 [TypeScript tokens for front-end projects](./themes/tokens.ts)
+
+## 🏗️ Engineering Build
+
+Moongate is not hand-written JSON — it's an industrial-grade build pipeline driven by **DTCG tokens + YAML semantic layers**:
+
+```
+┌─────────────────────────────────────────────────────┐
+│                  Source Files (src/)                 │
+│  primitives/colors.yaml   Semantics (dark/light)     │
+│  workbench.yaml   languages/*.yaml   semantic.yaml    │
+└─────────────────────────┬───────────────────────────┘
+                          ▼
+┌─────────────────────────────────────────────────────┐
+│              scripts/build.js Automation             │
+│  ✔ Token resolution + variable substitution          │
+│  ✔ Token merging (deduplicates identical rules)      │
+│  ✔ WCAG contrast validation (built-in QA)            │
+│  ✔ Structural integrity checks                       │
+└─────────────────────────┬───────────────────────────┘
+                          ▼
+┌─────────────────────────────────────────────────────┐
+│              Generated Artifacts (themes/)           │
+│  JSON themes (dark/light)  CSS vars  SCSS  TS tokens │
+│  Design system docs (DESIGN_SYSTEM.md)               │
+└─────────────────────────────────────────────────────┘
+```
+
+### Quality Assurance
+
+| Tool | Purpose |
+|------|---------|
+| `node scripts/build.js` | One-command build of all artifacts |
+| `node scripts/verify-scopes.js` | Auto-verifies language scopes against VS Code's built-in grammars |
+| `pnpm test` | 85 automated tests (tokens/generators/validators/scopes) |
+
+### Local Development
+
+```bash
+pnpm install
+pnpm run build      # Build all theme artifacts
+pnpm test           # Run all automated tests
+pnpm run dev        # Watch source files and rebuild automatically
+```
+
+> 🌙 **Why not hand-write JSON?** Because a hand-written theme can only change color values — it can't evolve its *visual system*. With a token-driven theme, changing one semantic variable (e.g., `primary`) propagates across the entire theme, never drifting out of sync.
 
 ## ⚙️ Recommended Setup
 
@@ -72,7 +128,9 @@ After installing Moongate, semantic highlighting is **automatically enabled** �
 
 ### Better Comments
 
-Merge `extras/better-comments.json` into `better-comments.tags` in your VS Code settings.
+After installing Moongate, special comments in the Better Comments extension (TODO, FIXME, NOTE, HACK, BUG, XXX) **automatically use Moongate's official colors** — zero configuration required.
+
+> 💡 A standalone preset file `extras/better-comments.json` is auto-generated by the build script (`pnpm run gen:better-comments`) for users who want the colors without installing the theme itself.
 
 ## ☕ Support This Theme
 

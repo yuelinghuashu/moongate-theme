@@ -1,0 +1,55 @@
+# Dockerfile 特定规则
+# 只保留 base.yaml 未覆盖的 Dockerfile 独有规则
+# scope 来源：VS Code 内置 docker.tmLanguage.json（已验证）
+tokenColors:
+  # ========== 注释 ==========
+  - name: Dockerfile - Comments
+    scope:
+      - "comment.line.number-sign.dockerfile"
+      - "punctuation.definition.comment.dockerfile"
+    settings:
+      fontStyle: "italic"
+      foreground: "${comment}"
+
+  # ========== 主指令（FROM / AS） ==========
+  # docker.tmLanguage: ^\s*\b(?i:(FROM))\b.*?\b(?i:(AS))\b → keyword.other.special-method.dockerfile
+  - name: Dockerfile - FROM / AS
+    scope:
+      - "keyword.other.special-method.dockerfile"
+    settings:
+      foreground: "${primary}"
+      fontStyle: "bold"
+
+  # ========== 控制指令（ADD/ARG/CMD/COPY/ENTRYPOINT/ENV/EXPOSE 等全部） ==========
+  # docker.tmLanguage: ^\s*(?i:(ONBUILD)\s+)?(?i:(ADD|ARG|CMD|COPY|ENTRYPOINT|ENV|EXPOSE|...))
+  # → keyword.control.dockerfile
+  - name: Dockerfile - Instructions
+    scope:
+      - "keyword.control.dockerfile"
+    settings:
+      foreground: "${cyan}"
+      fontStyle: "bold"
+
+  # ========== CMD / ENTRYPOINT 的 JSON 数组操作符 ==========
+  # docker.tmLanguage: ^\s*(?i:(CMD|ENTRYPOINT))\s → keyword.operator.dockerfile
+  - name: Dockerfile - Operators
+    scope:
+      - "keyword.operator.dockerfile"
+    settings:
+      foreground: "${operator}"
+
+  # ========== 字符串（含 JSON 数组形式） ==========
+  - name: Dockerfile - Strings
+    scope:
+      - "string.quoted.double.dockerfile"
+      - "string.quoted.single.dockerfile"
+    settings:
+      foreground: "${success}"
+
+  # ========== 转义字符 ==========
+  - name: Dockerfile - Escape Characters
+    scope:
+      - "constant.character.escaped.dockerfile"
+    settings:
+      foreground: "${highlight}"
+      fontStyle: "bold"

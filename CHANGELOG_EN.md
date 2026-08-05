@@ -2,7 +2,51 @@
 
 [🇨🇳 中文版](./CHANGELOG.md) | English
 
-## [2.5.0] - 2026-08-05
+## [2.6.0] - 2026-08-05
+
+### 🚀 3 New Languages Added
+
+- **Shell/Bash** (`shell.yaml`): Control keywords, built-in commands, command calls, variable assignment, positional/special variables, command substitution (`$(...)` / backticks), here-doc / here-string, arrays & associative arrays, arithmetic, `case` / `while` / `select` / `trap`, and more.
+- **Dockerfile** (`dockerfile.yaml`): `FROM`/`AS` instructions, control instructions (`COPY`/`ADD`/`ARG`/`CMD`/`ENTRYPOINT`/`ENV`/`EXPOSE` etc.), JSON array syntax, escape characters, comments & TODO markers.
+- **SQL** (`sql.yaml`): DML / DDL keywords, aggregation functions, operators, storage modifiers, numbers, text variables, strings & comments.
+
+### 🎨 Comprehensive Scope Fixes (8 Language Files)
+
+- **New `verify-scopes.js` tool**: Automatically parses VS Code built-in TextMate grammars and cross-checks every scope in language configs — eliminating "rules don't match" issues.
+- **JSX/TSX**: Fixed the critical `.js.jsx` suffix for `.jsx` files (e.g., `support.class.component.js.jsx`) vs `*.tsx` suffix; fixed React Hooks / Fragment / entity character scopes.
+- **Python**: Fixed `meta.decorator.python` → `meta.function.decorator.python`; added `self`/`cls` special variables, f-string & format placeholder rules.
+- **Rust**: Fixed 21 non-existent scopes (lifetime → `entity.name.type.lifetime.rust`, `support.macro.rust` → `entity.name.function.macro.rust`, `support.self.rust` → `variable.language.self.rust`, etc.); added struct/enum/trait declarations, primitive types, Option/Result rules.
+- **CSS**: Fixed `source.css variable` → `variable.css`, `meta.function.css variable` → `meta.function.variable.css`; added class/ID selectors, color values, numbers, built-in functions (calc/url/gradient) rules.
+- **Go**: Completely rewritten — removed 20 non-existent scopes (`entity.name.package.go`, `storage.type.pointer.go`, `constant.language.nil.go`, etc.), replaced with verified `keyword.struct.go` / `keyword.interface.go` / `entity.name.type.*` / `variable.parameter.go`.
+- **Markdown**: Fixed heading scopes (`heading.1.markdown`–`heading.6.markdown`), fenced code blocks (`markup.fenced_code.block.markdown`), language identifiers (`fenced_code.block.language.markdown`); added quote/strikethrough/link rules.
+- **HTML**: Fixed doctype (`meta.tag.metadata.doctype.html`), removed non-existent scopes, added tag punctuation & inline tag rules.
+
+### 📦 Cross-Platform Token Artifacts
+
+- **New `_tokens.scss`**: Sass color Maps (`$ui-colors-dark` / `$ui-colors-light`), spacing Map, dark-mode convenience variables.
+- **New `tokens.ts`**: Typed TypeScript exports (`MoongateTokens` interface + `tokens` object).
+- Both generated automatically by `build.js`, synced with `moongate-colors.css` / `DESIGN_SYSTEM.md`.
+
+### 🛠️ Build Script Engineering Improvements
+
+- **Fixed architecture detection**: `replaceVariables` now correctly passes `primitiveKeys`, re-enabling the architecture-pollution warning for direct primitive references in semantic layers.
+- **Removed code duplication**: `generate-better-comments.js` now reuses `resolveTokens` from `scripts/lib/tokens.js`, unifying circular-reference detection logic.
+- **Refactored `build.js`**: Split the 196-line `main()` into 10 single-responsibility functions (file loading, rule scanning, theme building, validation, etc.) for easier testing and maintenance.
+- **Unified error handling**: Validation now throws errors (new `ThemeValidationError` class) instead of calling `process.exit` directly, making library functions reusable in non-CLI contexts.
+- **Token merge stability**: `mergeTokenColors` now sorts settings keys, preventing duplicate rules from key-order differences (e.g., `{foreground, fontStyle}` vs `{fontStyle, foreground}`).
+- **Extracted duplicate color detection**: `detectDuplicateColors` is now a standalone reusable, testable utility.
+
+### 🧪 Significantly Better Test Coverage
+
+- **Tests increased from 54 → 72**: Added generators (CSS/design system docs/SCSS/TS tokens) and Better Comments generator tests.
+- **New `test/helpers.js`**: Shared utilities for capturing console output and asserting error behavior, eliminating monkey-patch redundancy in tests.
+- **Better Comments works out of the box**: The theme includes 6 special-comment scope rules from `src/special/better-comments.yaml` (TODO, FIXME, NOTE, HACK, BUG, XXX) — Better Comments automatically uses Moongate's official colors after installation, zero configuration required. The standalone `extras/better-comments.json` preset is auto-generated via `pnpm run gen:better-comments` for users who want the colors without installing the theme; new tests verify a 1:1 match with dark semantics.
+- **Utility boundary coverage**: `normalizeHex` invalid-format errors, `detectDuplicateColors` duplicate/clean scenarios, etc.
+
+---
+
+<details>
+<summary>⚛️ v2.5.0 - 2026-08-05 · React JSX/TSX & 149 Modern UI Keys</summary>
 
 ### ⚛️ React JSX/TSX Rules Added
 
@@ -19,7 +63,7 @@
 - **Fixed jarring default fallback colors**: Previously these areas fell back to VS Code defaults (e.g., default blue) under Moongate; they now blend seamlessly with the moon-shadow-gray foundation.
 - **engines upgraded**: Minimum VS Code version raised from `^1.109.0` to `^1.130.0` to ensure new keys (Chat/Copilot, Sticky Scroll variants, etc.) work properly.
 
----
+</details>
 
 <details>
 <summary>🧹 v2.4.0 - 2026-07-04 · Language Refinement, Rust & TS Consistency</summary>

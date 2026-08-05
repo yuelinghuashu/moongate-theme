@@ -4,7 +4,9 @@ import {
   detectUnusedPrimitives,
   validateThemeStructure,
   checkContrast,
+  ThemeValidationError,
 } from "../scripts/lib/validators.js"
+import { captureConsole, assertThrows, assertNoThrow } from "./helpers.js"
 
 // ==================== detectUnusedPrimitives 测试 ====================
 test("detectUnusedPrimitives: 检测出未使用的原始值", () => {
@@ -41,29 +43,25 @@ test("validateThemeStructure: 合法主题通过", () => {
     tokenColors: [{ scope: ["comment"], settings: { foreground: "#aabbcc" } }],
     semanticTokenColors: { function: "#87cefa" },
   }
-  // 不应抛出或调用 process.exit
-  validateThemeStructure(theme, "test-theme.json")
+  // 不应抛出错误
+  assertNoThrow(() => {
+    captureConsole(() => validateThemeStructure(theme, "test-theme.json"))
+  })
 })
 
-test("validateThemeStructure: 缺失顶层 key 触发 process.exit", () => {
+test("validateThemeStructure: 缺失顶层 key 抛出 ThemeValidationError", () => {
   const theme = {
     name: "Test",
     type: "dark",
   }
-  const originalExit = process.exit
-  let exitCalled = false
-  process.exit = () => {
-    exitCalled = true
-  }
-  try {
-    validateThemeStructure(theme, "invalid-theme.json")
-  } finally {
-    process.exit = originalExit
-  }
-  assert.equal(exitCalled, true)
+  const err = assertThrows(
+    () => captureConsole(() => validateThemeStructure(theme, "invalid-theme.json")),
+    /结构验证失败/,
+  )
+  assert.ok(err instanceof ThemeValidationError)
 })
 
-test("validateThemeStructure: 非法颜色格式触发 process.exit", () => {
+test("validateThemeStructure: 非法颜色格式抛出 ThemeValidationError", () => {
   const theme = {
     name: "Test",
     type: "dark",
@@ -71,20 +69,14 @@ test("validateThemeStructure: 非法颜色格式触发 process.exit", () => {
     tokenColors: [],
     semanticTokenColors: {},
   }
-  const originalExit = process.exit
-  let exitCalled = false
-  process.exit = () => {
-    exitCalled = true
-  }
-  try {
-    validateThemeStructure(theme, "invalid-color.json")
-  } finally {
-    process.exit = originalExit
-  }
-  assert.equal(exitCalled, true)
+  const err = assertThrows(
+    () => captureConsole(() => validateThemeStructure(theme, "invalid-color.json")),
+    /不是合法颜色/,
+  )
+  assert.ok(err instanceof ThemeValidationError)
 })
 
-test("validateThemeStructure: 未解析变量引用触发 process.exit", () => {
+test("validateThemeStructure: 未解析变量引用抛出 ThemeValidationError", () => {
   const theme = {
     name: "Test",
     type: "dark",
@@ -92,41 +84,32 @@ test("validateThemeStructure: 未解析变量引用触发 process.exit", () => {
     tokenColors: [],
     semanticTokenColors: {},
   }
-  const originalExit = process.exit
-  let exitCalled = false
-  process.exit = () => {
-    exitCalled = true
-  }
-  try {
-    validateThemeStructure(theme, "unresolved-var.json")
-  } finally {
-    process.exit = originalExit
-  }
-  assert.equal(exitCalled, true)
+  const err = assertThrows(
+    () => captureConsole(() => validateThemeStructure(theme, "unresolved-var.json")),
+    /未解析的变量引用/,
+  )
+  assert.ok(err instanceof ThemeValidationError)
 })
 
 // ==================== checkContrast 测试 ====================
 test("checkContrast: 高对比度通过", () => {
   // #ffffff vs #000000 = 21:1
-  checkContrast("#ffffff", "#000000", "text", "test")
+  assertNoThrow(() => {
+    captureConsole(() => checkContrast("#ffffff", "#000000", "text", "test"))
+  })
 })
 
-test("checkContrast: 对比度不足触发 process.exit", () => {
+test("checkContrast: 对比度不足抛出错误", () => {
   // #f1f5f9 vs #ffffff ≈ 1.05:1
-  const originalExit = process.exit
-  let exitCalled = false
-  process.exit = () => {
-    exitCalled = true
-  }
-  try {
-    checkContrast("#f1f5f9", "#ffffff", "text", "test")
-  } finally {
-    process.exit = originalExit
-  }
-  assert.equal(exitCalled, true)
+  assertThrows(
+    () => captureConsole(() => checkContrast("#f1f5f9", "#ffffff", "text", "test")),
+    /对比度不足/,
+  )
 })
 
 test("checkContrast: textMuted 使用宽松阈值 3.0", () => {
   // #94a3b8 vs #0f172a ≈ 5.16:1，应通过
-  checkContrast("#94a3b8", "#0f172a", "textMuted", "test")
+  assertNoThrow(() => {
+    captureConsole(() => checkContrast("#94a3b8", "#0f172a", "textMuted", "test"))
+  })
 })

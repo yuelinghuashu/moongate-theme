@@ -9,14 +9,32 @@ export function mergeTokenColors(tokenColors) {
 
   const merged = new Map()
 
+  const stableKey = (obj) => {
+    // 递归生成稳定 key：按键名排序，避免相同 settings 因键序不同被当作不同规则
+    if (obj && typeof obj === "object" && !Array.isArray(obj)) {
+      return JSON.stringify(
+        Object.keys(obj)
+          .sort()
+          .reduce((acc, k) => {
+            acc[k] = stableKey(obj[k])
+            return acc
+          }, {}),
+      )
+    }
+    if (Array.isArray(obj)) {
+      return JSON.stringify(obj.map((item) => stableKey(item)))
+    }
+    return JSON.stringify(obj)
+  }
+
   for (const item of tokenColors) {
     // 跳过没有 settings 或 scope 的项
     if (!item.settings || !item.scope) {
       continue
     }
 
-    // 生成 settings 的稳定键
-    const settingsKey = JSON.stringify(item.settings)
+    // 生成 settings 的稳定键（键排序，避免 {foreground,fontStyle} 与 {fontStyle,foreground} 被视为不同）
+    const settingsKey = stableKey(item.settings)
 
     if (!merged.has(settingsKey)) {
       merged.set(settingsKey, {

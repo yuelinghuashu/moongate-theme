@@ -1,0 +1,115 @@
+# Shell / Bash 特定规则
+# 只保留 base.yaml 未覆盖的 Shell 独有规则
+# scope 来源：VS Code 内置 shell-unix-bash.tmLanguage.json（已验证）
+tokenColors:
+  # ========== 注释 ==========
+  - name: Shell - Comments
+    scope:
+      - "comment.line.number-sign.shell"
+      - "punctuation.definition.comment.shell"
+    settings:
+      fontStyle: "italic"
+      foreground: "${comment}"
+
+  # ========== 控制关键字（case / in / esac 等） ==========
+  # shell 语法中 keyword.control.$0.shell 动态匹配关键字
+  # 使用通配符覆盖所有控制关键字（if/for/while/case/function 等）
+  - name: Shell - Control Keywords
+    scope:
+      - "keyword.control.shell"
+      - "keyword.control.*.shell"
+    settings:
+      foreground: "${primary}"
+      fontStyle: "bold"
+
+  # ========== 内建命令（cd/echo/export 等） ==========
+  # shell 语法中 command_name_range 将 `cd`、`echo` 等内置命令标记为 support.function.builtin.shell
+  - name: Shell - Built-in Commands
+    scope:
+      - "support.function.builtin.shell"
+      - "support.function.builtin.*.shell"
+    settings:
+      foreground: "${function}"
+
+  # ========== 命令调用 ==========
+  # shell 语法中 entity.name.function.call.shell entity.name.command.shell
+  # 标记用户自定义命令/可执行程序名
+  - name: Shell - Command Calls
+    scope:
+      - "entity.name.function.call.shell entity.name.command.shell"
+    settings:
+      foreground: "${function}"
+
+  # ========== 命令语句（元作用域，用于分层） ==========
+  # meta.statement.command.shell 是命令的元容器，不直接着色
+  # 但可以用于给特定命令加字体样式
+
+  # ========== 变量赋值 ==========
+  # shell 语法中 variable.other.assignment.shell 标记赋值变量（如 FOO=bar 中的 FOO）
+  - name: Shell - Variable Assignment
+    scope:
+      - "variable.other.assignment.shell"
+    settings:
+      foreground: "${variable}"
+
+  # ========== 位置参数 / 特殊变量（$1/$2/$@ 等） ==========
+  # shell 语法中 variable.language.special.*.shell 标记 $0/$1/$@ 等
+  # variable.language.$0.shell 是动态 scope（布尔值如 true/false）
+  - name: Shell - Special Variables
+    scope:
+      - "variable.language.shell"
+      - "variable.language.*.shell"
+    settings:
+      foreground: "${warning}"
+      fontStyle: "bold"
+
+  # ========== 命令替换 / 子 shell / 算术 ==========
+  # shell 语法中 meta.arithmetic.shell / string.interpolated.*
+  - name: Shell - Arithmetic / Substitution
+    scope:
+      - "meta.arithmetic.shell"
+      - "string.interpolated.shell"
+    settings:
+      foreground: "${highlight}"
+
+  # ========== 操作符 / 赋值运算符 ==========
+  # shell 语法中 keyword.operator.assignment.shell
+  - name: Shell - Operators
+    scope:
+      - "keyword.operator.assignment.shell"
+      - "keyword.operator.assignment.compound.shell"
+    settings:
+      foreground: "${operator}"
+
+  # ========== 字符串（双引号 / 单引号） ==========
+  # base.yaml 的 string 规则已覆盖，这里补充 Shell 特有 scope
+  - name: Shell - Strings
+    scope:
+      - "string.quoted.double.shell"
+      - "string.quoted.single.shell"
+    settings:
+      foreground: "${success}"
+
+  # ========== 数字 ==========
+  - name: Shell - Numbers
+    scope:
+      - "constant.numeric.shell"
+    settings:
+      foreground: "${warning}"
+
+  # ========== 转义字符 ==========
+  - name: Shell - Escape Characters
+    scope:
+      - "constant.character.escape.shell"
+    settings:
+      foreground: "${highlight}"
+      fontStyle: "bold"
+
+  # ========== 语句终止符（分号 / && / || / 后台 &） ==========
+  # shell 语法中 punctuation.terminator.*.shell / punctuation.separator.*.shell
+  - name: Shell - Statement Terminators
+    scope:
+      - "punctuation.terminator.statement.*.shell"
+      - "punctuation.separator.statement.*.shell"
+    settings:
+      foreground: "${operator}"

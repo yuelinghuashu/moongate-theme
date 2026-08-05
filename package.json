@@ -5,7 +5,7 @@
   "description": "Where Moon Meets Code",
   "publisher": "yuelinghuashu",
   "icon": "images/icon.png",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "engines": {
     "vscode": "^1.130.0"
   },
@@ -78,6 +78,7 @@
   "scripts": {
     "build": "node scripts/build.js",
     "test": "node --test \"test/*.test.js\"",
+    "test:scopes": "node scripts/verify-scopes.js",
     "gen:better-comments": "node scripts/generate-better-comments.js",
     "watch": "nodemon --watch src -e yaml --exec \"pnpm run build\"",
     "dev": "pnpm run watch",

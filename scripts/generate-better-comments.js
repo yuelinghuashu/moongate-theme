@@ -11,6 +11,7 @@ import fs from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 import yaml from "js-yaml"
+import { resolveTokens } from "./lib/tokens.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT_DIR = path.resolve(__dirname, "..")
@@ -29,41 +30,6 @@ const TAG_MAP = [
   { tag: "BUG", semanticKey: "error", bold: true, underline: true },
   { tag: "XXX", semanticKey: "warning", bold: true },
 ]
-
-/**
- * 递归解析令牌引用 {token-name}
- */
-function resolveTokens(obj, tokenMap, depth = 0) {
-  const MAX_DEPTH = 20
-  if (depth > MAX_DEPTH) {
-    throw new Error(`令牌循环引用检测: ${JSON.stringify(obj)}`)
-  }
-
-  if (typeof obj === "string") {
-    const resolveOne = (str) => {
-      return str.replace(/\{([a-zA-Z0-9_-]+)\}/g, (match, key) => {
-        const value = tokenMap[key]
-        if (value === undefined) {
-          console.warn(`⚠️ 令牌 "${key}" 未定义，保留原样`)
-          return match
-        }
-        return resolveOne(value)
-      })
-    }
-    return resolveOne(obj)
-  }
-  if (Array.isArray(obj)) {
-    return obj.map((item) => resolveTokens(item, tokenMap, depth + 1))
-  }
-  if (obj && typeof obj === "object") {
-    const result = {}
-    for (const [k, v] of Object.entries(obj)) {
-      result[k] = resolveTokens(v, tokenMap, depth + 1)
-    }
-    return result
-  }
-  return obj
-}
 
 /**
  * 从语义层解析指定语义变量的最终色值

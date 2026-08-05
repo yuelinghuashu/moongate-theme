@@ -1,11 +1,11 @@
 # Python 特定规则
 # 只保留 base.yaml 未覆盖的 Python 独有规则
+# scope 来源：VS Code 内置 MagicPython.tmLanguage.json（已验证）
 tokenColors:
   # ========== 函数定义（覆盖 base，加粗） ==========
   - name: Python - Function Definition
     scope:
       - "entity.name.function.python"
-      - "meta.function.python entity.name.function"
     settings:
       foreground: "${function}"
       fontStyle: "bold"
@@ -15,19 +15,40 @@ tokenColors:
     scope:
       - "meta.function-call.python"
       - "meta.function-call.generic.python"
-      - "support.function.python"
       - "support.function.builtin.python"
     settings:
       foreground: "${function}"
 
   # ========== Python 独有 ==========
   - name: Python Decorators
-    scope: ["entity.name.function.decorator.python", "meta.decorator.python"]
+    scope:
+      - "entity.name.function.decorator.python"
+      - "meta.function.decorator.python"
+      - "punctuation.definition.decorator.python"
     settings:
       foreground: "${purple}"
       fontStyle: "italic"
 
-  - name: Python Dictionary Keys
-    scope: ["meta.mapping.key.python", "string.unquoted.key.python"]
+  # ========== self / cls 特殊变量 ==========
+  - name: Python - Self / Cls
+    scope:
+      - "variable.language.special.self.python"
+      - "variable.language.special.cls.python"
     settings:
-      foreground: "${variableDim}"
+      foreground: "${primary}"
+      fontStyle: "italic"
+
+  # ========== 字符串插值（f-string） ==========
+  # base.yaml 的 string 规则已覆盖，这里补充 f-string 特有 scope
+  - name: Python - String Interpolation
+    scope:
+      - "string.interpolated.python"
+    settings:
+      foreground: "${success}"
+
+  # ========== 格式化占位符 ==========
+  - name: Python - Format Placeholders
+    scope:
+      - "constant.character.format.placeholder.other.python"
+    settings:
+      foreground: "${highlight}"

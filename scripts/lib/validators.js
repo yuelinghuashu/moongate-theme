@@ -1,6 +1,17 @@
 import wcag from "wcag-contrast"
 
 /**
+ * 主题结构验证失败时抛出错误（由调用方决定如何处理）
+ */
+export class ThemeValidationError extends Error {
+  constructor(message, outputFile) {
+    super(outputFile ? `${message} (${outputFile})` : message)
+    this.name = "ThemeValidationError"
+    this.outputFile = outputFile
+  }
+}
+
+/**
  * 检测未使用的原始令牌（未被任何语义层引用的 primitives）
  */
 export function detectUnusedPrimitives(primitives, semanticsList) {
@@ -87,9 +98,8 @@ export function validateThemeStructure(theme, outputFile) {
   }
 
   if (errors.length > 0) {
-    console.error(`\n❌ 结构验证失败 (${outputFile}):`)
-    errors.forEach((err) => console.error(`   ❌ ${err}`))
-    process.exit(1)
+    const message = `❌ 结构验证失败:\n${errors.map((err) => `   ❌ ${err}`).join("\n")}`
+    throw new ThemeValidationError(message, outputFile)
   }
   console.log(`   ✅ 结构验证通过: ${outputFile}`)
 }
@@ -116,11 +126,10 @@ export function checkContrast(color1, color2, role, themeType) {
       )
       console.warn(`   建议保持 ≥3.0:1，当前满足最低要求。`)
     } else {
-      console.error(
-        `❌ 对比度不足: ${themeType} · ${role} (${color1}) vs 背景 (${color2}) = ${ratio.toFixed(2)}:1`,
+      throw new Error(
+        `❌ 对比度不足: ${themeType} · ${role} (${color1}) vs 背景 (${color2}) = ${ratio.toFixed(2)}:1\n` +
+        `   WCAG 要求 ≥${minRatio}:1，当前值低于标准`,
       )
-      console.error(`   WCAG 要求 ≥${minRatio}:1，当前值低于标准`)
-      process.exit(1)
     }
   } else {
     console.log(`✅ ${themeType} · ${role}: ${ratio.toFixed(2)}:1`)

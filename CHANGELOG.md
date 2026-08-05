@@ -2,7 +2,51 @@
 
 [🇬🇧 English](./CHANGELOG_EN.md) | 中文
 
-## [2.5.0] - 2026-08-05
+## [2.6.0] - 2026-08-05
+
+### 🚀 新增 3 种语言支持
+
+- **Shell/Bash**（`shell.yaml`）：控制关键字、内建命令、命令调用、变量赋值、位置参数与特殊变量、命令替换（`$(...)` / 反引号）、here-doc / here-string、数组与关联数组、数值运算、`case` / `while` / `select` / `trap` 等。
+- **Dockerfile**（`dockerfile.yaml`）：`FROM`/`AS` 指令、全部控制指令（`COPY`/`ADD`/`ARG`/`CMD`/`ENTRYPOINT`/`ENV`/`EXPOSE` 等）、JSON 数组语法、转义字符、注释与 TODO 标记。
+- **SQL**（`sql.yaml`）：DML / DDL 关键字、聚合函数、操作符、存储修饰符、数字、文本变量、字符串与注释。
+
+### 🎨 语言 scope 全面修复（8 个语言文件）
+
+- **新增 `verify-scopes.js` 验证工具**：自动解析 VS Code 内置 TextMate 语法，比对语言配置中的每个 scope，杜绝"规则写了对不上"的问题。
+- **JSX/TSX**：修正 `.jsx` 实际使用 `.js.jsx` 后缀（如 `support.class.component.js.jsx`）、`.tsx` 使用 `*.tsx` 后缀的关键问题；修复 React Hooks / Fragment / 实体字符 scope。
+- **Python**：修正 `meta.decorator.python` → `meta.function.decorator.python`，补充 `self`/`cls` 特殊变量、f-string 与格式化占位符规则。
+- **Rust**：修正 21 处不存在的 scope（lifetime → `entity.name.type.lifetime.rust`、`support.macro.rust` → `entity.name.function.macro.rust`、`support.self.rust` → `variable.language.self.rust` 等），补充 struct/enum/trait 类型声明、基础类型与 Option/Result 规则。
+- **CSS**：修正 `source.css variable` → `variable.css`、`meta.function.css variable` → `meta.function.variable.css`，补充类/ID 选择器、颜色值、数字、内置函数（calc/url/gradient）规则。
+- **Go**：全面重写，移除 20 个不存在的 scope（`entity.name.package.go`、`storage.type.pointer.go`、`constant.language.nil.go` 等），改用验证过的 `keyword.struct.go` / `keyword.interface.go` / `entity.name.type.*` / `variable.parameter.go` 等。
+- **Markdown**：修正标题 scope（`heading.1.markdown` ~ `heading.6.markdown`）、围栏代码块（`markup.fenced_code.block.markdown`）、语言标识（`fenced_code.block.language.markdown`），新增引用/删除线/链接规则。
+- **HTML**：修正 doctype（`meta.tag.metadata.doctype.html`）、移除不存在的 scope，新增标签标点、内联标签规则。
+
+### 📦 跨平台令牌产物
+
+- **新增 `_tokens.scss`**：Sass 颜色 Maps（`$ui-colors-dark` / `$ui-colors-light`）、间距 Map、深色便捷变量。
+- **新增 `tokens.ts`**：TypeScript 类型化导出（`MoongateTokens` 接口 + `tokens` 对象）。
+- 两套产物均由 `build.js` 自动生成，与 `moongate-colors.css` / `DESIGN_SYSTEM.md` 同步输出。
+
+### 🛠️ 构建脚本工程化优化
+
+- **修复架构检测失效**：`replaceVariables` 现在正确传递 `primitiveKeys`，「语义层直接引用原始值」的架构污染警告重新生效。
+- **消除代码重复**：`generate-better-comments.js` 复用 `scripts/lib/tokens.js` 的 `resolveTokens`，移除冗余实现，统一循环引用检测逻辑。
+- **拆分 `build.js` 主流程**：196 行的 `main()` 拆分为 10 个单一职责函数（文件加载、规则扫描、主题构建、验证等），便于测试与维护。
+- **错误处理统一**：构建验证从 `process.exit` 改为抛错（新增 `ThemeValidationError`），由主流程统一捕获处理，库函数可在非 CLI 场景复用。
+- **token 合并稳定性**：`mergeTokenColors` 对 settings 键排序，避免相同规则因键序不同（如 `{foreground, fontStyle}` vs `{fontStyle, foreground}`）被重复合并。
+- **重复色值检测提取**：`detectDuplicateColors` 从构建脚本内联逻辑提取为独立工具函数，可复用可测试。
+
+### 🧪 测试覆盖大幅提升
+
+- **测试总数 54 → 72**：新增 generators（CSS/设计系统文档/SCSS/TS 令牌）、Better Comments 生成器测试。
+- **新增 `test/helpers.js`**：统一捕获 console 输出、断言抛错行为的测试辅助函数，消除测试中的 monkey-patch 冗余。
+- **Better Comments 开箱即用**：主题内置 `src/special/better-comments.yaml` 的 6 个特殊注释 scope 规则（TODO、FIXME、NOTE、HACK、BUG、XXX），安装 Moongate 后 Better Comments 插件自动使用官方配色，零配置；`extras/better-comments.json` 独立预设由构建脚本自动生成（`pnpm run gen:better-comments`），供不安装主题的用户单独参考，并新增测试验证其与深色语义层一一对应。
+- **工具函数边界补充**：`normalizeHex` 非法格式抛错、`detectDuplicateColors` 重复/无重复场景等。
+
+---
+
+<details>
+<summary>⚛️ v2.5.0 - 2026-08-05 · React JSX/TSX 与 149 个现代 UI 适配</summary>
 
 ### ⚛️ 新增 React JSX/TSX 专属规则
 
@@ -20,7 +64,7 @@
 - **engines 升级**：最低 VS Code 版本要求从 `^1.109.0` 提升至 `^1.130.0`，确保 Chat/Copilot、Sticky Scroll 变体等新 key 正常工作。
 - **engines upgraded**: Minimum VS Code version raised from `^1.109.0` to `^1.130.0` to ensure new keys (Chat/Copilot, Sticky Scroll variants, etc.) work properly.
 
----
+</details>
 
 <details>
 <summary>🧹 v2.4.0 - 2026-07-04 · 语言精简、Rust 与 TS 一致性</summary>

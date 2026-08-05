@@ -1,126 +1,152 @@
 # Go 语言特定规则
 # 只保留 base.yaml 未覆盖的 Go 独有规则
+# scope 来源：VS Code 内置 go.tmLanguage.json（完整验证）
 tokenColors:
-  # ========== 包与导入 ==========
-  - name: Go - Package Name
-    scope: ["entity.name.package.go"]
-    settings:
-      foreground: "${variableDim}"
-
-  - name: Go - Import Paths
+  # ========== 包名与导入 ==========
+  - name: Go - Package and Import
     scope:
-      - "string.quoted.double.go meta.import.go"
-      - "string.quoted.double.go meta.import.path.go"
-    settings:
-      foreground: "${success}"
-
-  # ========== Go 独有类型系统 ==========
-  - name: Go - Interfaces
-    scope:
-      - "support.interface.go"
-      - "entity.name.type.interface.go"
+      - "keyword.package.go"
+      - "keyword.control.import.go"
+      - "entity.name.import.go"
     settings:
       foreground: "${primary}"
       fontStyle: "bold"
 
-  - name: Go - Type Aliases
-    scope: ["entity.name.type.alias.go"]
-    settings:
-      foreground: "${cyan}"
-
-  - name: Go - Pointer Types
-    scope: ["storage.type.pointer.go"]
-    settings:
-      foreground: "${cyan}"
-      fontStyle: "underline"
-
-  - name: Go - Map Types
-    scope: ["storage.type.map.go"]
-    settings:
-      foreground: "${cyan}"
-
-  - name: Go - Slice/Array Types
+  # ========== 声明关键字 ==========
+  - name: Go - Declarations
     scope:
-      - "storage.type.slice.go"
-      - "storage.type.array.go"
+      - "keyword.function.go"
+      - "keyword.var.go"
+      - "keyword.const.go"
+      - "keyword.struct.go"
+      - "keyword.interface.go"
+      - "keyword.map.go"
+      - "keyword.type.go"
+      - "keyword.channel.go"
+    settings:
+      foreground: "${primary}"
+      fontStyle: "bold"
+
+  # ========== 类型 ==========
+  - name: Go - Types
+    scope:
+      - "entity.name.type.go"
+      - "entity.name.type.package.go"
+      - "storage.type.boolean.go"
+      - "storage.type.byte.go"
+      - "storage.type.error.go"
+      - "storage.type.numeric.go"
+      - "storage.type.rune.go"
+      - "storage.type.string.go"
+      - "storage.type.uintptr.go"
     settings:
       foreground: "${cyan}"
 
-  # ========== Go 独有函数规则 ==========
-  # 函数定义加粗（覆盖 base 的 entity.name.function）
+  # ========== 特殊类型（any/comparable） ==========
+  - name: Go - Special Types
+    scope:
+      - "entity.name.type.any.go"
+      - "entity.name.type.comparable.go"
+    settings:
+      foreground: "${primary}"
+      fontStyle: "bold"
+
+  # ========== 函数定义（加粗） ==========
   - name: Go - Function Definition
     scope:
       - "entity.name.function.go"
-      - "meta.function.go entity.name.function"
-      - "meta.function.literal.go entity.name.function.go"
     settings:
       foreground: "${function}"
       fontStyle: "bold"
 
-  # Go 函数调用不加粗（覆盖 base 的 meta.function-call）
-  - name: Go - Function Calls
+  # ========== 内置函数调用（len/cap/append 等） ==========
+  - name: Go - Built-in Function Calls
     scope:
       - "entity.name.function.support.go"
       - "entity.name.function.support.builtin.go"
     settings:
       foreground: "${function}"
 
-  # ========== Go 独有变量/常量 ==========
-  - name: Go - Method Receiver
-    scope: ["variable.parameter.receiver.go"]
-    settings:
-      foreground: "${variableDim}"
-      fontStyle: "italic"
-
-  - name: Go - Struct Fields
+  # ========== 变量 ==========
+  - name: Go - Variables
     scope:
-      - "variable.other.property.go"
-      - "meta.struct.field.go"
+      - "variable.other.go"
+      - "variable.other.assignment.go"
     settings:
-      foreground: "${textMuted}"
+      foreground: "${variable}"
 
-  - name: Go - Package Variables
-    scope: ["variable.other.global.go"]
-    settings:
-      foreground: "${text}"
-      fontStyle: "bold"
-
-  - name: Go - Error Variables
-    scope: ["variable.other.err.go"]
-    settings:
-      foreground: "${error}"
-      fontStyle: "italic"
-
-  - name: Go - Blank Identifier
-    scope: ["constant.other.blank.go"]
-    settings:
-      foreground: "${textMuted}"
-      fontStyle: "italic"
-
-  - name: Go - Nil
-    scope: ["constant.language.nil.go"]
+  # ========== 常量 ==========
+  - name: Go - Constants
+    scope:
+      - "variable.other.constant.go"
+      - "constant.language.boolean.go"
+      - "constant.language.iota.go"
+      - "constant.language.null.go"
     settings:
       foreground: "${warning}"
       fontStyle: "bold"
 
-  - name: Go - Runes
-    scope: ["string.quoted.rune.go"]
+  # ========== 结构体字段 ==========
+  - name: Go - Struct Fields
+    scope:
+      - "variable.other.property.go"
     settings:
-      foreground: "${success}"
+      foreground: "${textMuted}"
 
+  # ========== 标签 ==========
   - name: Go - Labels
-    scope: ["entity.name.label.go"]
+    scope:
+      - "variable.other.label.go"
     settings:
       foreground: "${error}"
 
-  - name: Go - Channel Operations
-    scope: ["keyword.operator.channel.go"]
+  # ========== 参数 ==========
+  - name: Go - Parameters
+    scope:
+      - "variable.parameter.go"
     settings:
-      foreground: "${cyan}"
+      foreground: "${variableDim}"
+      fontStyle: "italic"
 
+  # ========== 字符串 ==========
+  - name: Go - Strings
+    scope:
+      - "string.quoted.double.go"
+      - "string.quoted.raw.go"
+      - "string.quoted.rune.go"
+    settings:
+      foreground: "${success}"
+
+  # ========== 格式化占位符（fmt.Printf 的 %d/%s） ==========
   - name: Go - Format Specifiers
     scope:
       - "constant.other.placeholder.go"
-      - "punctuation.definition.placeholder.go"
     settings:
       foreground: "${highlight}"
+
+  # ========== 数字 ==========
+  - name: Go - Numbers
+    scope:
+      - "constant.numeric.binary.go"
+      - "constant.numeric.decimal.go"
+      - "constant.numeric.hexadecimal.go"
+      - "constant.numeric.octal.go"
+    settings:
+      foreground: "${warning}"
+
+  # ========== 通道操作 ==========
+  - name: Go - Channel Operations
+    scope:
+      - "keyword.operator.channel.go"
+      - "keyword.channel.go"
+    settings:
+      foreground: "${cyan}"
+
+  # ========== 注释 ==========
+  - name: Go - Comments
+    scope:
+      - "comment.line.double-slash.go"
+      - "comment.block.go"
+    settings:
+      fontStyle: "italic"
+      foreground: "${comment}"

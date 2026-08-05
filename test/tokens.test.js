@@ -6,6 +6,7 @@ import {
   replaceVariables,
   detectPrimitiveReference,
 } from "../scripts/lib/tokens.js"
+import { captureConsole } from "./helpers.js"
 
 // ==================== resolveTokens 测试 ====================
 test("resolveTokens: 解析简单引用", () => {
@@ -31,8 +32,11 @@ test("resolveTokens: 保留字符串中的多个引用", () => {
 })
 
 test("resolveTokens: 未定义令牌保留原样（仅警告）", () => {
-  const result = resolveTokens("{undefined-token}", { defined: "#fff" })
-  assert.equal(result, "{undefined-token}")
+  const { stderr } = captureConsole(() => {
+    const result = resolveTokens("{undefined-token}", { defined: "#fff" })
+    assert.equal(result, "{undefined-token}")
+  })
+  assert.ok(stderr.some((line) => line.includes("未定义")))
 })
 
 test("resolveTokens: 数组递归解析", () => {
@@ -99,30 +103,15 @@ test("replaceVariables: 已含透明度变量忽略后缀并警告", () => {
 
 // ==================== detectPrimitiveReference 测试 ====================
 test("detectPrimitiveReference: 检测直接引用原始值", () => {
-  const warnings = []
-  const originalWarn = console.warn
-  console.warn = (msg) => warnings.push(msg)
-
-  try {
+  const { stderr } = captureConsole(() => {
     detectPrimitiveReference("{blue-500}", "test-context", ["blue-500"])
-  } finally {
-    console.warn = originalWarn
-  }
-
-  assert.equal(warnings.length, 1)
-  assert.match(warnings[0], /直接引用了原始值 "blue-500"/)
+  })
+  assert.ok(stderr.some((line) => line.includes('直接引用了原始值 "blue-500"')))
 })
 
 test("detectPrimitiveReference: ${var} 形式不触发检测", () => {
-  const warnings = []
-  const originalWarn = console.warn
-  console.warn = (msg) => warnings.push(msg)
-
-  try {
+  const { stderr } = captureConsole(() => {
     detectPrimitiveReference("${primary}", "test-context", ["primary"])
-  } finally {
-    console.warn = originalWarn
-  }
-
-  assert.equal(warnings.length, 0)
+  })
+  assert.equal(stderr.length, 0)
 })

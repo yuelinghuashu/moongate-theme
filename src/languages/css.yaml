@@ -1,22 +1,32 @@
 # CSS / SCSS 特定规则
 # 只保留 base.yaml 未覆盖的 CSS 独有规则
+# scope 来源：VS Code 内置 css.tmLanguage.json（已验证）
 tokenColors:
+  # ========== CSS 属性名 ==========
   - name: CSS Properties
-    scope: ["support.type.property-name.css", "meta.property-name.css"]
-    settings:
-      foreground: "${highlight}"
-
-  - name: CSS Variable Definitions
     scope:
-      ["meta.property-list.css variable", "source.css variable", "variable.css"]
+      - "support.type.property-name.css"
+      - "meta.property-name.css"
     settings:
       foreground: "${highlight}"
 
-  - name: CSS Variable Usage
-    scope: ["meta.function.css variable", "support.constant.property-value.css"]
+  # ========== CSS 变量（var(--x) 使用/定义） ==========
+  # 实际 scope：variable.css（CSS 变量） / meta.function.variable.css（var() 函数）
+  - name: CSS Variables
+    scope:
+      - "variable.css"
+      - "meta.function.variable.css"
     settings:
       foreground: "${highlight}"
 
+  # ========== CSS 属性值常量 ==========
+  - name: CSS Property Values
+    scope:
+      - "support.constant.property-value.css"
+    settings:
+      foreground: "${text}"
+
+  # ========== CSS 伪类/伪元素 ==========
   - name: CSS Pseudo
     scope:
       - "entity.other.attribute-name.pseudo-class.css"
@@ -24,3 +34,37 @@ tokenColors:
     settings:
       foreground: "${highlight}"
       fontStyle: "italic"
+
+  # ========== CSS 选择器（类/ID/属性选择器） ==========
+  - name: CSS Selectors
+    scope:
+      - "entity.other.attribute-name.class.css"
+      - "entity.other.attribute-name.id.css"
+      - "entity.other.attribute-name.css"
+    settings:
+      foreground: "${primary}"
+
+  # ========== CSS 颜色值 ==========
+  - name: CSS Color Values
+    scope:
+      - "constant.other.color.rgb-value.hex.css"
+    settings:
+      foreground: "${warning}"
+
+  # ========== CSS 数字 ==========
+  - name: CSS Numbers
+    scope:
+      - "constant.numeric.css"
+    settings:
+      foreground: "${warning}"
+
+  # ========== CSS 内置函数（calc/url/gradient 等） ==========
+  - name: CSS Functions
+    scope:
+      - "support.function.calc.css"
+      - "support.function.url.css"
+      - "support.function.gradient.css"
+      - "support.function.transform.css"
+      - "support.function.misc.css"
+    settings:
+      foreground: "${function}"

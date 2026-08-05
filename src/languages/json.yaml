@@ -1,16 +1,24 @@
 # JSON 特定规则
+# scope 来源：VS Code 内置 JSON.tmLanguage.json（已验证）
 tokenColors:
+  # JSON 键的 scope：string.json support.type.property-name.json
+  # 第一层级的键名
   - name: JSON Key - Level 0
-    scope: ["source.json meta.structure.dictionary.json support.type.property-name.json"]
+    scope:
+      - "string.json support.type.property-name.json"
     settings:
       foreground: "${primary}"
 
+  # 嵌套第二层级的键名
   - name: JSON Key - Level 1
-    scope: ["source.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"]
+    scope:
+      - "meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"
     settings:
       foreground: "${cyan}"
 
+  # 嵌套第三层级的键名
   - name: JSON Key - Level 2
-    scope: ["source.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"]
+    scope:
+      - "meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"
     settings:
       foreground: "${purple}"

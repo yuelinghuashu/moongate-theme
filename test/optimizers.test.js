@@ -80,6 +80,25 @@ test("mergeTokenColors: 按 scope 数量降序排序", () => {
   assert.equal(result[1].scope.length, 1)
 })
 
+test("mergeTokenColors: settings 键顺序不同也视为相同规则", () => {
+  const input = [
+    {
+      name: "Rule 1",
+      scope: ["comment"],
+      settings: { foreground: "#aabbcc", fontStyle: "italic" },
+    },
+    {
+      name: "Rule 2",
+      scope: ["string"],
+      settings: { fontStyle: "italic", foreground: "#aabbcc" },
+    },
+  ]
+  const result = mergeTokenColors(input)
+  assert.equal(result.length, 1)
+  assert.deepEqual(result[0].scope.sort(), ["comment", "string"])
+  assert.deepEqual(result[0].settings, { foreground: "#aabbcc", fontStyle: "italic" })
+})
+
 // ==================== optimizeSemanticTokenColors 测试 ====================
 test("optimizeSemanticTokenColors: 删除与父级相同的冗余 foreground", () => {
   const input = {

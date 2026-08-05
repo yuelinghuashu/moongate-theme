@@ -44,14 +44,35 @@ export function normalizeHex(color, tokenName) {
   }
 
   if (!/^[0-9a-fA-F]{6}$|^[0-9a-fA-F]{8}$/.test(hex)) {
-    console.error(
-      `❌ 致命错误: 令牌 "${tokenName}" 的色值 "${color}" 不符合工业规范。`,
+    throw new Error(
+      `❌ 致命错误: 令牌 "${tokenName}" 的色值 "${color}" 不符合工业规范。\n` +
+      `   要求: 6 位 (#RRGGBB) 或 8 位 (#RRGGBBAA) 十六进制`,
     )
-    console.error(`   要求: 6 位 (#RRGGBB) 或 8 位 (#RRGGBBAA) 十六进制`)
-    process.exit(1)
   }
 
   return `#${hex.toLowerCase()}`
+}
+
+/**
+ * 检测重复色值
+ * @param {Record<string, string>} primitives 原始色值映射
+ * @returns {Array<{ value: string, keys: string[] }>} 重复的色值列表
+ */
+export function detectDuplicateColors(primitives) {
+  const valueToKeys = {}
+  for (const [key, val] of Object.entries(primitives)) {
+    if (!valueToKeys[val]) valueToKeys[val] = []
+    valueToKeys[val].push(key)
+  }
+
+  const duplicates = []
+  for (const [val, keys] of Object.entries(valueToKeys)) {
+    if (keys.length > 1) {
+      console.warn(`⚠️ 检测到重复色值: ${val} → ${keys.join(", ")}`)
+      duplicates.push({ value: val, keys })
+    }
+  }
+  return duplicates
 }
 
 /** 从 package.json 读取主题名称信息 */
