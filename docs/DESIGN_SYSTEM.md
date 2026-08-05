@@ -80,15 +80,15 @@
 | `--moongate-gray-700` | `#2d3748` | ![](https://placehold.co/20x20/2d3748/2d3748?text=+) |
 | `--moongate-gray-600` | `#475569` | ![](https://placehold.co/20x20/475569/475569?text=+) |
 | `--moongate-gray-550` | `#7a8c9e` | ![](https://placehold.co/20x20/7a8c9e/7a8c9e?text=+) |
-| `--moongate-gray-500` | `#94a3b8` | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+) |
 | `--moongate-gray-525` | `#a5b4cb` | ![](https://placehold.co/20x20/a5b4cb/a5b4cb?text=+) |
+| `--moongate-gray-500` | `#64748b` | ![](https://placehold.co/20x20/64748b/64748b?text=+) |
 | `--moongate-gray-400` | `#94a3b8` | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+) |
 | `--moongate-gray-300` | `#cbd5e1` | ![](https://placehold.co/20x20/cbd5e1/cbd5e1?text=+) |
 | `--moongate-gray-200` | `#e2e8f0` | ![](https://placehold.co/20x20/e2e8f0/e2e8f0?text=+) |
 | `--moongate-gray-100` | `#f1f5f9` | ![](https://placehold.co/20x20/f1f5f9/f1f5f9?text=+) |
 | `--moongate-gray-50` | `#f9fafb` | ![](https://placehold.co/20x20/f9fafb/f9fafb?text=+) |
 
-### Special 色系
+### 纯色
 
 | 令牌 | 色值 | 预览 |
 |------|------|------|
@@ -155,7 +155,7 @@
 | `ansiMagenta` | `#7e22ce` | ![](https://placehold.co/20x20/7e22ce/7e22ce?text=+) | - |
 | `ansiCyan` | `#0e7490` | ![](https://placehold.co/20x20/0e7490/0e7490?text=+) | - |
 | `ansiWhite` | `#e2e8f0` | ![](https://placehold.co/20x20/e2e8f0/e2e8f0?text=+) | - |
-| `ansiBrightBlack` | `#94a3b8` | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+) | - |
+| `ansiBrightBlack` | `#64748b` | ![](https://placehold.co/20x20/64748b/64748b?text=+) | - |
 | `ansiBrightRed` | `#f87171` | ![](https://placehold.co/20x20/f87171/f87171?text=+) | - |
 | `ansiBrightGreen` | `#34d399` | ![](https://placehold.co/20x20/34d399/34d399?text=+) | - |
 | `ansiBrightYellow` | `#fbbf24` | ![](https://placehold.co/20x20/fbbf24/fbbf24?text=+) | - |
@@ -168,12 +168,12 @@
 | `bracket3` | `#b45309` | ![](https://placehold.co/20x20/b45309/b45309?text=+) | - |
 | `bracket4` | `#7e22ce` | ![](https://placehold.co/20x20/7e22ce/7e22ce?text=+) | - |
 | `bracket5` | `#0e7490` | ![](https://placehold.co/20x20/0e7490/0e7490?text=+) | - |
-| `bracket6` | `#94a3b8` | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+) | - |
+| `bracket6` | `#64748b` | ![](https://placehold.co/20x20/64748b/64748b?text=+) | - |
 | `scrollbar` | `#0284c7` | ![](https://placehold.co/20x20/0284c7/0284c7?text=+) | - |
 | `gitAdded` | `#059669` | ![](https://placehold.co/20x20/059669/059669?text=+) | - |
 | `gitModified` | `#b45309` | ![](https://placehold.co/20x20/b45309/b45309?text=+) | - |
 | `gitDeleted` | `#b91c1c` | ![](https://placehold.co/20x20/b91c1c/b91c1c?text=+) | - |
-| `gitUntracked` | `#94a3b8` | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+) | - |
+| `gitUntracked` | `#64748b` | ![](https://placehold.co/20x20/64748b/64748b?text=+) | - |
 | `gitIgnored` | `#94a3b8` | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+) | - |
 | `debugStart` | `#059669` | ![](https://placehold.co/20x20/059669/059669?text=+) | - |
 | `debugPause` | `#b45309` | ![](https://placehold.co/20x20/b45309/b45309?text=+) | - |
@@ -195,7 +195,7 @@
 | `comment` | `#a5b4cb` | ![](https://placehold.co/20x20/a5b4cb/a5b4cb?text=+) | 8.49:1 |
 | `variable` | `#e2e8f0` | ![](https://placehold.co/20x20/e2e8f0/e2e8f0?text=+) | - |
 | `variableDim` | `#cbd5e1` | ![](https://placehold.co/20x20/cbd5e1/cbd5e1?text=+) | - |
-| `textMuted` | `#94a3b8` | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+) | 6.96:1 |
+| `textMuted` | `#7a8c9e` | ![](https://placehold.co/20x20/7a8c9e/7a8c9e?text=+) | 5.16:1 |
 | `punctuation` | `#94a3b8` | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+) | - |
 | `bg` | `#0f172a` | ![](https://placehold.co/20x20/0f172a/0f172a?text=+) | - |
 | `bgElevated` | `#131c31` | ![](https://placehold.co/20x20/131c31/131c31?text=+) | - |

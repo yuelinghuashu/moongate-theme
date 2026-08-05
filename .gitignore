@@ -1,5 +1,15 @@
+# 依赖
 node_modules
+
+# 构建产物
 *.vsix
+
+# 环境变量
 .env
-pnpm-lock.yaml
-moongate-theme*.vsix
+
+# 测试覆盖率
+coverage/
+
+# 操作系统
+.DS_Store
+Thumbs.db

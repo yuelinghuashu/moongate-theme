@@ -99,9 +99,6 @@ variable.modification:
   foreground: "${variableDim}"
   fontStyle: "underline"
 
-# 内置库符号
-"*.defaultLibrary": {}
-
 # 类型构造器修饰符（需要语言服务器支持）
 variable.array: "${variableDim}"
 variable.pointer:

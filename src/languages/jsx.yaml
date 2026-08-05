@@ -1,0 +1,59 @@
+# React JSX / TSX 特定规则
+# 注意：VS Code 的 TS/JS 语法中 .jsx 与 .tsx 共享相同的 *.jsx scope 后缀，
+# 因此一个文件即可同时覆盖 JSX 与 TSX。
+# 只保留 base.yaml 未覆盖的 React 独有规则。
+
+tokenColors:
+  # ========== JSX 自定义组件（大写开头）==========
+  # 与原生 HTML 标签（base.yaml 中为错误红）区分，使用月光黄，呼应 CHANGELOG 1.2.0 设计决策
+  - name: JSX - Custom Components
+    scope:
+      - "support.class.component.jsx"
+      - "support.class.component.tsx"
+      - "meta.tag.jsx entity.name.tag.jsx"
+    settings:
+      foreground: "${warning}"
+      fontStyle: "bold"
+
+  # ========== JSX Attributes / Props ==========
+  # 与 base.yaml 的 Attributes（主蓝）保持视觉一致
+  - name: JSX - Attributes / Props
+    scope:
+      - "entity.other.attribute-name.jsx"
+      - "entity.other.attribute-name.tsx"
+    settings:
+      foreground: "${primary}"
+
+  # ========== JSX 内嵌表达式 ==========
+  # 与 Vue 插值规则（发光蓝）保持对称
+  - name: JSX - Embedded Expressions
+    scope:
+      - "constant.character.entity.jsx"
+      - "punctuation.section.embedded.jsx"
+      - "meta.embedded.expression.jsx"
+      - "meta.embedded.expression.tsx"
+    settings:
+      foreground: "${highlight}"
+
+  # ========== React Hooks ==========
+  # useState、useEffect 等 Hooks 使用紫色斜体，语义化「React 特有 API」
+  - name: React - Hooks
+    scope:
+      - "support.function.hook.jsx"
+      - "support.function.hook.tsx"
+      - "meta.function-call.jsx support.function"
+      - "meta.function-call.tsx support.function"
+    settings:
+      foreground: "${purple}"
+      fontStyle: "italic"
+
+  # ========== JSX Fragment ==========
+  # <> 空标签使用发光蓝，弱化结构性符号的视觉权重
+  - name: JSX - Fragment
+    scope:
+      - "entity.name.tag.fragment.jsx"
+      - "entity.name.tag.fragment.tsx"
+      - "punctuation.definition.tag.fragment.jsx"
+      - "punctuation.definition.tag.fragment.tsx"
+    settings:
+      foreground: "${highlight}"

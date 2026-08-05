@@ -1,2 +1,11 @@
 # Set default behavior to automatically normalize line endings.
 * text=auto
+
+# 二进制文件（禁止行尾转换）
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.vsix binary

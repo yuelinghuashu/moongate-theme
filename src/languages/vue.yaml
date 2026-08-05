@@ -12,7 +12,7 @@ tokenColors:
       fontStyle: "bold"
 
   - name: Vue Interpolation
-    scope: ["expression.embbeded.vue", "punctuation.definition.expression.vue"]
+    scope: ["expression.embedded.vue", "punctuation.definition.expression.vue"]
     settings:
       foreground: "${highlight}"
 

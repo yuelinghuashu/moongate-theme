@@ -1,19 +1,15 @@
-[![Version](https://img.shields.io/badge/version-2.4.0-blue)]()
+[![Version](https://img.shields.io/github/package-json/v/yuelinghuashu/moongate-theme)]()
 [![Marketplace](https://img.shields.io/badge/vscode-marketplace-brightgreen)]()
 
-[中文](#chinese) | [English](#english)
+中文 | [🇬🇧 English](./README_EN.md)
 
 ---
-
-## <span id="chinese">中文</span>
 
 # 🌙 Moongate Theme
 
 > 从博客到编辑器，让代码栖息在月光里
 
 Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而来的 VS Code 主题，将博客的视觉语言带到代码编辑器中。
-
-**v2.4.0 代码精简与语言扩展**：语言配置全面精简，新增 Rust 语言支持，TypeScript 内置对象视觉一致，构建脚本自动合并 token 规则，JSON 体积减小 16%。
 
 ## 📸 预览
 
@@ -49,12 +45,10 @@ Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而
 | **UI 物理深度**       | 海拔系统：不同 UI 区域分配明度阶梯，实现"纸张层叠"     |
 | **设计系统统一**      | DTCG 令牌自动生成 CSS 变量，一套颜色贯穿所有产品       |
 
-## ✨ v2.4.0 亮点
+## ✨ v2.5.0 亮点
 
-- **🧹 语言配置全面精简**：各语言文件移除与 `base.yaml` 重复的通用规则，Rust 精简 63%、Python 精简 56%、CSS 精简 50%，维护成本大幅降低
-- **🦀 新增 Rust 语言支持**：新增 `rust.yaml` 专属配置，覆盖泛型参数、生命周期、属性、宏等 Rust 特有语法元素，函数定义与调用统一加粗
-- **🎯 TypeScript 内置对象一致**：修复 `JSON` 意外加粗问题，所有内置对象（`console`、`Math`、`JSON`）视觉风格统一
-- **📦 构建脚本优化**：自动合并相同颜色的 token 规则，`tokenColors` 从 89 条精简至 34 条（减少 62%），JSON 体积减小 16%
+- **⚛️ React JSX/TSX 专属规则**：新增 `jsx.yaml`——自定义组件使用月光黄加粗，React Hooks 紫色斜体，内嵌表达式发光蓝，与 Vue 规则视觉对称
+- **🧩 现代 VS Code UI 适配**：补全 Sticky Scroll、AI Chat / Inline Chat、Command Center、Terminal Command Guide、Ghost Text / Unicode 高亮、Comments / Ports、Symbol Icons 等 149 个现代 UI key，全部遵循语义层引用
 
 [📜 查看完整更新日志](./CHANGELOG.md)
 
@@ -62,6 +56,7 @@ Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而
 
 Moongate 基于 DTCG 设计令牌标准构建，提供完整的颜色、布局、排版、断点、z-index 令牌。  
 👉 [查看完整设计系统文档](./docs/DESIGN_SYSTEM.md)  
+👉 [阅读《Moongate 视觉契约》（显示器校准指南）](./extras/VISUAL_CONTRACT.md)  
 👉 [使用颜色令牌驱动博客或 UI 组件库](./themes/moongate-colors.css)  
 👉 [使用布局令牌（间距、排版、断点等）](./themes/moongate-layout.css)
 
@@ -101,101 +96,3 @@ Moongate 基于 DTCG 设计令牌标准构建，提供完整的颜色、布局�
 ---
 
 [⬆ 返回顶部](#)
-
----
-
-## <span id="english">English</span>
-
-# 🌙 Moongate Theme
-
-> From blog to editor, let your code rest in moonlight
-
-Moongate is a VS Code theme born from [moongate.top](https://moongate.top), bringing the same visual language into your code editor.
-
-**v2.4.0 Code Refinement & Language Expansion**: Language configs deduplicated, Rust language support added, TypeScript built-in objects consistent, build script auto-merges token rules, JSON size reduced by 16%.
-
-## 📸 Preview
-
-| Language   | Dark                                     | Light                                      |
-| ---------- | ---------------------------------------- | ------------------------------------------ |
-| JavaScript | ![JS Dark](./images/javascript-dark.png) | ![JS Light](./images/javascript-light.png) |
-| Python     | ![Python Dark](./images/python-dark.png) | ![Python Light](./images/python-light.png) |
-| Go         | ![Go Dark](./images/go-dark.png)         | ![Go Light](./images/go-light.png)         |
-| Vue        | ![Vue Dark](./images/vue-dark.png)       | ![Vue Light](./images/vue-light.png)       |
-
-## ✨ Design Philosophy
-
-- **Soft as moonlight**: Easy on the eyes
-- **Clear boundaries**: Distinct visual hierarchy
-- **Day & night**: Thoughtfully balanced dark/light themes
-- **Physical elevation**: Sidebars lift, popups float, editor recedes
-- **Engineering calibration**: All colors pass WCAG contrast validation
-
-## 🎨 Color System
-
-- **Primary**: Cool lunar blue (dark `#3b82f6` / light `#0284c7`)
-- **Background**: Night sky `#0f172a` / moon white `#f9fafb`
-- **Elevation**: Four lightness steps (`surfaceGround` → `surfaceRaised` → `surfaceFloating` → `surfaceTooltip`)
-- **Design tokens**: DTCG‑based, auto‑generates CSS variables for cross‑platform reuse
-
-## 🧠 Core Optimizations
-
-| Optimization                     | How Moongate Fixes It                                           |
-| -------------------------------- | --------------------------------------------------------------- |
-| **Day‑Night Consistency**        | Same hue, different lightness – seamless switching              |
-| **Function Def/Call Separation** | Definitions bold, calls not – unified across Go, Python, JS, TS |
-| **JSON Nesting Depth**           | Blue → Cyan → Purple gradient – levels at a glance              |
-| **UI Physical Depth**            | Elevation system – natural "paper stack" effect                 |
-| **Design System Unity**          | DTCG tokens – one color language across all products            |
-
-## ✨ v2.4.0 Highlights
-
-- **🧹 Language configs deduplicated**: Removed rules duplicating `base.yaml` across all language files — Rust down 63%, Python 56%, CSS 50%, significantly reducing maintenance overhead
-- **🦀 Rust language support added**: New `rust.yaml` configuration covering generic parameters, lifetimes, attributes, macros, and more — function definitions and calls unified as bold
-- **🎯 TypeScript built‑in objects consistent**: Fixed unexpected `JSON` bolding — all built‑ins (`console`, `Math`, `JSON`) now share a consistent visual style
-- **📦 Build script optimized**: Auto‑merges token rules with identical colors — `tokenColors` reduced from 89 to 34 rules (62% decrease), JSON size reduced by 16%
-
-[📜 View full changelog](./CHANGELOG.md)
-
-## 📐 Design System
-
-Moongate is built on the DTCG design token standard, providing complete color, layout, typography, breakpoint, and z-index tokens.
-👉 [View full documentation](./docs/DESIGN_SYSTEM.md)
-
-## ⚙️ Recommended Setup
-
-### Semantic Highlighting
-
-After installing Moongate, semantic highlighting is **automatically enabled** – no manual setup required. If you encounter issues, verify:
-
-```json
-{
-  "editor.semanticHighlighting.enabled": true
-}
-```
-
-### Better Comments
-
-Merge `extras/better-comments.json` into `better-comments.tags` in your VS Code settings.
-
-## ☕ Support This Theme
-
-If Moongate Theme makes your coding time more enjoyable, consider buying me a coffee — it motivates me to keep refining the color palette, supporting more languages, and maintaining the theme long-term.
-
-<details>
-<summary>👈 Click to reveal sponsorship options</summary>
-
-<img src="./assets/ali-pay.jpg" width="200" height="280" alt="Alipay QR Code" />
-<img src="./assets/wechat-pay.jpg" width="200" height="280" alt="WeChat QR Code" />
-
-> Sponsorship funds will go toward theme maintenance, new language support, and color optimization. Thank you for your kindness ❤️
-
-</details>
-
----
-
-[⬆ Back to top](#)
-
-探索不息，编码不止 | Explore endlessly, code without ceasing
-
-© 2026 MOONGATE

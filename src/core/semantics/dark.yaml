@@ -16,7 +16,7 @@ operator: "{gray-600}"
 comment: "{gray-525}" # 使用专用注释色
 variable: "{gray-200}"
 variableDim: "{gray-300}"
-textMuted: "{gray-400}"
+textMuted: "{gray-550}" # 注释文字专用（弱化文本，比 punctuation 更低调）
 punctuation: "{gray-400}"
 
 # 背景层级

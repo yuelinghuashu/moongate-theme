@@ -50,7 +50,7 @@
   --ui-ansi-magenta: #7e22ce;
   --ui-ansi-cyan: #0e7490;
   --ui-ansi-white: #e2e8f0;
-  --ui-ansi-bright-black: #94a3b8;
+  --ui-ansi-bright-black: #64748b;
   --ui-ansi-bright-red: #f87171;
   --ui-ansi-bright-green: #34d399;
   --ui-ansi-bright-yellow: #fbbf24;
@@ -63,12 +63,12 @@
   --ui-bracket3: #b45309;
   --ui-bracket4: #7e22ce;
   --ui-bracket5: #0e7490;
-  --ui-bracket6: #94a3b8;
+  --ui-bracket6: #64748b;
   --ui-scrollbar: #0284c7;
   --ui-git-added: #059669;
   --ui-git-modified: #b45309;
   --ui-git-deleted: #b91c1c;
-  --ui-git-untracked: #94a3b8;
+  --ui-git-untracked: #64748b;
   --ui-git-ignored: #94a3b8;
   --ui-debug-start: #059669;
   --ui-debug-pause: #b45309;
@@ -89,7 +89,7 @@
   --ui-comment: #a5b4cb;
   --ui-variable: #e2e8f0;
   --ui-variable-dim: #cbd5e1;
-  --ui-text-muted: #94a3b8;
+  --ui-text-muted: #7a8c9e;
   --ui-punctuation: #94a3b8;
   --ui-bg: #0f172a;
   --ui-bg-elevated: #131c31;

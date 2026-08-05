@@ -1,12 +1,13 @@
 {
   "name": "moongate-theme",
   "displayName": "Moongate Theme",
+  "type": "module",
   "description": "Where Moon Meets Code",
   "publisher": "yuelinghuashu",
   "icon": "images/icon.png",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "engines": {
-    "vscode": "^1.109.0"
+    "vscode": "^1.130.0"
   },
   "categories": [
     "Themes"
@@ -76,11 +77,16 @@
   ],
   "scripts": {
     "build": "node scripts/build.js",
+    "test": "node --test \"test/*.test.js\"",
+    "gen:better-comments": "node scripts/generate-better-comments.js",
     "watch": "nodemon --watch src -e yaml --exec \"pnpm run build\"",
     "dev": "pnpm run watch",
-    "prepublishOnly": "pnpm run build"
+    "package": "pnpm run build && pnpm run gen:better-comments && vsce package",
+    "publish": "pnpm run build && pnpm run gen:better-comments && vsce publish",
+    "prepublishOnly": "pnpm run build && pnpm run gen:better-comments"
   },
   "devDependencies": {
+    "@vscode/vsce": "^3.2.1",
     "js-yaml": "^4.1.1",
     "nodemon": "^3.1.14",
     "wcag-contrast": "^3.0.0"
