@@ -99,11 +99,11 @@ Moongate 不是手写 JSON，而是由 **DTCG 令牌 + YAML 语义层** 驱动�
 
 ### 质量保障
 
-| 工具 | 作用 |
-|------|------|
-| `node scripts/build.js` | 一键构建全部产物 |
-| `node scripts/verify-scopes.js` | 自动比对语言 scope 与 VS Code 内置语法 |
-| `pnpm test` | 85 个自动化测试（令牌/生成器/验证器/scope） |
+| 工具                            | 作用                                        |
+| ------------------------------- | ------------------------------------------- |
+| `node scripts/build.js`         | 一键构建全部产物                            |
+| `node scripts/verify-scopes.js` | 自动比对语言 scope 与 VS Code 内置语法      |
+| `pnpm test`                     | 85 个自动化测试（令牌/生成器/验证器/scope） |
 
 ### 本地开发
 
@@ -131,8 +131,6 @@ pnpm run dev        # 监听源文件变化自动重新构建
 ### Better Comments
 
 安装 Moongate 后，Better Comments 插件的特殊注释（TODO、FIXME、NOTE、HACK、BUG、XXX）**自动使用 Moongate 官方配色**，无需任何手动配置。
-
-> 💡 独立配色预设文件 `extras/better-comments.json` 由构建脚本自动生成（`pnpm run gen:better-comments`），供不安装主题、单独使用配色预设的用户参考。
 
 ## ☕ 支持这个主题
 

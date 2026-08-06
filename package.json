@@ -79,12 +79,11 @@
     "build": "node scripts/build.js",
     "test": "node --test \"test/*.test.js\"",
     "test:scopes": "node scripts/verify-scopes.js",
-    "gen:better-comments": "node scripts/generate-better-comments.js",
     "watch": "nodemon --watch src -e yaml --exec \"pnpm run build\"",
     "dev": "pnpm run watch",
-    "package": "pnpm run build && pnpm run gen:better-comments && vsce package",
-    "publish": "pnpm run build && pnpm run gen:better-comments && vsce publish",
-    "prepublishOnly": "pnpm run build && pnpm run gen:better-comments"
+    "package": "pnpm run build && vsce package",
+    "publish": "pnpm run build && vsce publish",
+    "prepublishOnly": "pnpm run build"
   },
   "devDependencies": {
     "@vscode/vsce": "^3.2.1",
