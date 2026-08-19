@@ -1,0 +1,149 @@
+# C/C++ 特定规则
+# 只保留 base.yaml 未覆盖的 C/C++ 独有规则
+# scope 来源：VS Code 内置 cpp.tmLanguage.json + c.tmLanguage.json（已验证）
+tokenColors:
+  # ========== 预处理指令 ==========
+  - name: C/C++ - Preprocessor Directives
+    scope:
+      - "entity.name.function.preprocessor.c"
+      - "entity.name.function.preprocessor.cpp"
+    settings:
+      foreground: "${primary}"
+      fontStyle: "bold"
+
+  # ========== 预处理宏名 ==========
+  - name: C/C++ - Preprocessor Macro Names
+    scope:
+      - "entity.name.other.preprocessor.macro.include.cpp"
+      - "entity.name.other.preprocessor.macro.predefined.$1.c"
+      - "entity.name.other.preprocessor.macro.predefined.$1.cpp"
+    settings:
+      foreground: "${purple}"
+
+  # ========== 指针与引用操作符 ==========
+  - name: C/C++ - Pointer & Reference Operators
+    scope:
+      - "entity.name.operator.type.pointer.cpp"
+      - "entity.name.operator.type.reference.cpp"
+      - "storage.modifier.pointer.cpp"
+      - "storage.modifier.reference.cpp"
+    settings:
+      foreground: "${cyan}"
+
+  # ========== 模板类型 ==========
+  - name: C/C++ - Template Types
+    scope:
+      - "entity.name.type.template.cpp"
+    settings:
+      foreground: "${cyan}"
+
+  # ========== 类/结构体/枚举声明 ==========
+  # 对齐语义层：class.declaration 加粗，struct 不加粗
+  - name: C/C++ - Class & Enum Declarations
+    scope:
+      - "entity.name.type.class.cpp"
+      - "entity.name.type.enum.cpp"
+    settings:
+      foreground: "${warning}"
+      fontStyle: "bold"
+
+  - name: C/C++ - Struct Declarations
+    scope:
+      - "entity.name.type.struct.cpp"
+    settings:
+      foreground: "${warning}"
+
+  # ========== 函数定义（加粗，与 Go/Python/Rust 一致） ==========
+  - name: C/C++ - Function Definition
+    scope:
+      - "entity.name.function.definition.cpp"
+    settings:
+      foreground: "${function}"
+      fontStyle: "bold"
+
+  # ========== 构造函数（加粗） ==========
+  - name: C/C++ - Constructor
+    scope:
+      - "entity.name.function.constructor.cpp"
+      - "entity.name.function.definition.special.constructor.cpp"
+    settings:
+      foreground: "${function}"
+      fontStyle: "bold"
+
+  # ========== 析构函数（斜体） ==========
+  - name: C/C++ - Destructor
+    scope:
+      - "entity.name.function.definition.special.member.destructor.cpp"
+    settings:
+      foreground: "${function}"
+      fontStyle: "italic"
+
+  # ========== namespace（对齐语义层 namespace: textMuted） ==========
+  - name: C/C++ - Namespace
+    scope:
+      - "entity.name.namespace.cpp"
+    settings:
+      foreground: "${textMuted}"
+
+  # ========== this 指针 ==========
+  - name: C/C++ - This Pointer
+    scope:
+      - "variable.language.this.cpp"
+    settings:
+      foreground: "${primary}"
+      fontStyle: "bold"
+
+  # ========== 作用域解析 :: ==========
+  - name: C/C++ - Scope Resolution
+    scope:
+      - "entity.name.scope-resolution.function.definition.cpp"
+      - "entity.name.scope-resolution.function.call.cpp"
+      - "entity.name.scope-resolution.type.cpp"
+      - "entity.name.scope-resolution.template.call.cpp"
+      - "entity.name.scope-resolution.template.definition.cpp"
+    settings:
+      foreground: "${operator}"
+
+  # ========== const 修饰 ==========
+  - name: C/C++ - Const Modifier
+    scope:
+      - "storage.modifier.const.cpp"
+    settings:
+      foreground: "${primary}"
+
+  # ========== lambda 捕获列表 ==========
+  - name: C/C++ - Lambda Capture
+    scope:
+      - "storage.modifier.lambda.$0.cpp"
+    settings:
+      foreground: "${cyan}"
+
+  # ========== 格式化占位符（printf %d/%s） ==========
+  - name: C/C++ - Format Specifiers
+    scope:
+      - "constant.other.placeholder.c"
+      - "constant.other.placeholder"
+    settings:
+      foreground: "${highlight}"
+
+  # ========== 转义字符 ==========
+  - name: C/C++ - Escape Characters
+    scope:
+      - "constant.character.escape.c"
+      - "constant.character.escape.cpp"
+      - "constant.character.escape.line-continuation.c"
+      - "constant.character.escape.line-continuation.cpp"
+    settings:
+      foreground: "${highlight}"
+
+  # ========== 数字字面量 ==========
+  - name: C/C++ - Numbers
+    scope:
+      - "constant.numeric.binary.c"
+      - "constant.numeric.binary.cpp"
+      - "constant.numeric.hexadecimal.c"
+      - "constant.numeric.hexadecimal.cpp"
+      - "constant.numeric.octal.c"
+      - "constant.numeric.octal.cpp"
+    settings:
+      foreground: "${warning}"

@@ -24,7 +24,7 @@ $ui-colors-dark: (
   cyan: #22d3ee;
   purple: #c084fc;
   function: #87cefa;
-  operator: #475569;
+  operator: #7c8ea3;
   comment: #a5b4cb;
   variable: #e2e8f0;
   variable-dim: #cbd5e1;
@@ -88,8 +88,8 @@ $ui-colors-dark: (
 
 // 浅色模式颜色
 $ui-colors-light: (
-  primary: #0284c7;
-  success: #059669;
+  primary: #1e40af;
+  success: #047857;
   warning: #b45309;
   error: #b91c1c;
   highlight: #0369a1;
@@ -101,7 +101,7 @@ $ui-colors-light: (
   variable: #0f172a;
   variable-dim: #475569;
   text-muted: #475569;
-  punctuation: #94a3b8;
+  punctuation: #64748b;
   bg: #f9fafb;
   bg-elevated: #ffffff;
   bg-muted: #f1f5f9;
@@ -167,7 +167,7 @@ $ui-highlight: #7dd3fc;
 $ui-cyan: #22d3ee;
 $ui-purple: #c084fc;
 $ui-function: #87cefa;
-$ui-operator: #475569;
+$ui-operator: #7c8ea3;
 $ui-comment: #a5b4cb;
 $ui-variable: #e2e8f0;
 $ui-variable-dim: #cbd5e1;

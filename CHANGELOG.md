@@ -2,7 +2,34 @@
 
 [🇬🇧 English](./CHANGELOG_EN.md) | 中文
 
-## [2.6.0] - 2026-08-05
+## [2.7.0] - 2026-08-19
+
+### 🚀 新增 3 种语言支持
+
+- **C/C++**（`cpp.yaml`）：预处理指令（`#include`/`#define`）、指针与引用操作符、模板类型、类/结构体/枚举声明、构造函数/析构函数、namespace、`this` 指针、作用域解析 `::`、`const` 修饰、lambda 捕获、格式化占位符、转义字符。37 个 scope 全部通过 VS Code 内置语法验证。
+- **Java**（`java.yaml`）：注解 `@Override` 等、泛型 `<T>`、类/枚举/record 声明、`this` 关键字、包名与导入、基本类型、继承/实现/密封修饰、Javadoc 注释、转义字符。23 个 scope 全部验证通过。
+- **C#**（`csharp.yaml`）：特性 `[Serializable]`、泛型、类/结构体/枚举/记录/委托声明、`this` 关键字、命名空间、预处理指令、LINQ 查询关键字、委托/事件、字符串插值、discard 变量。45 个 scope 全部验证通过。
+
+### 🎨 WCAG 对比度全面修复
+
+- **语义层 4 个角色不达标已修复**：浅色 `punctuation`（2.45:1 → 4.55:1）、`primary`（3.92:1 → 8.35:1）、`success`（3.61:1 → 5.25:1），深色 `operator`（2.36:1 → 5.32:1）。新增 `blue-950`、`green-800`、`gray-450` 原始色值。
+- **tokenColors 层全面审计**：逐一检查 24 种语法高亮颜色在编辑器背景上的对比度，修复 HTML Doctype 使用 `${border}` 导致的几乎不可见问题（深色 1.49:1 → 5.16:1，浅色 1.42:1 → 7.25:1），改用 `${textMuted}`。
+- **构建时 WCAG 校验扩展**：`checkContrast` 从 3 个角色扩展至 13 个（覆盖所有前景色角色 vs 背景），确保新增对比度问题不会回归。
+
+### 🐛 构建脚本修复
+
+- **修复 `replaceVariables` 递归丢失 `primitiveKeys`**：嵌套结构中的架构污染检测现在所有层级正确生效。
+- **消除 `buildSingleTheme` 重复文件读取**：预加载的语义数据直接传入构建函数，布局令牌仅加载一次供 CSS/SCSS 生成复用。
+
+### 🛠️ 代码质量优化
+
+- 合并 `normalizeHex` 重复分支、移除 `resolveTokens` 冗余深度检查、`getThemeInfo` 复用 `ROOT_DIR`。
+- `scopeMatches` 通配符正则新增缓存，减少重复编译。
+
+---
+
+<details>
+<summary>## [2.6.0] - 2026-08-05</summary>
 
 ### 🚀 新增 3 种语言支持
 
@@ -43,6 +70,8 @@
 - **Better Comments 开箱即用**：主题内置 `src/special/better-comments.yaml` 的 6 个特殊注释 scope 规则（TODO、FIXME、NOTE、HACK、BUG、XXX），安装 Moongate 后 Better Comments 插件自动使用官方配色，零配置；`extras/better-comments.json` 独立预设由构建脚本自动生成（`pnpm run gen:better-comments`），供不安装主题的用户单独参考，并新增测试验证其与深色语义层一一对应。
 - **工具函数边界补充**：`normalizeHex` 非法格式抛错、`detectDuplicateColors` 重复/无重复场景等。
 
+</details>
+
 ---
 
 <details>
@@ -65,6 +94,8 @@
 - **engines upgraded**: Minimum VS Code version raised from `^1.109.0` to `^1.130.0` to ensure new keys (Chat/Copilot, Sticky Scroll variants, etc.) work properly.
 
 </details>
+
+---
 
 <details>
 <summary>🧹 v2.4.0 - 2026-07-04 · 语言精简、Rust 与 TS 一致性</summary>
@@ -99,6 +130,8 @@
 
 </details>
 
+---
+
 <details>
 <summary>🧩 v2.3.0 - 2026-06-24 · Go 深度适配与 Python 修复</summary>
 
@@ -125,6 +158,8 @@
 - **商店页展示优化**：新增 `galleryBanner` 和 `badges` 配置，插件在 VS Code 扩展市场中展示更专业。
 
 </details>
+
+---
 
 <details>
 <summary>🎨 v2.2.0 - 2026-03-27 · DTCG 令牌与海拔系统</summary>
@@ -155,6 +190,8 @@
 
 </details>
 
+---
+
 <details>
 <summary>✨ v2.1.0 - 2026-03-14 · 海拔系统</summary>
 
@@ -166,6 +203,8 @@
 - **全 UI 适配**：对侧边栏、活动栏、状态栏、输入框、下拉菜单、通知中心、快速输入等 20+ 个区域进行了海拔映射，视觉层次全面提升。
 
 </details>
+
+---
 
 <details>
 <summary>🌗 v2.0.0 - 2026-03-11 · 昼夜双子发布</summary>
@@ -206,6 +245,8 @@
 - **P1-P5 工程协议**：引入问题复杂度分级体系，将博客文章按难度标记为 P1~P5，未来将逐步应用于文档体系。
 
 </details>
+
+---
 
 <details>
 <summary>📜 v1.x - 历史版本</summary>

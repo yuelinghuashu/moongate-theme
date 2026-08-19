@@ -2,8 +2,8 @@
 # 基于“越高越亮”原则，侧边栏纯白，编辑器微冷白
 
 # 月语义主色
-primary: "{blue-700}"
-success: "{green-600}"
+primary: "{blue-950}" # 深蓝，确保浅色背景上 WCAG AA ≥4.5:1
+success: "{green-800}" # 深绿，确保浅色背景上 WCAG AA ≥4.5:1
 warning: "{yellow-700}"
 error: "{red-700}"
 highlight: "{blue-800}"
@@ -17,7 +17,7 @@ comment: "{gray-600}"
 variable: "{gray-900}"
 variableDim: "{gray-600}"
 textMuted: "{gray-600}"
-punctuation: "{gray-400}"
+punctuation: "{gray-500}" # 深灰，确保浅色背景上 WCAG AA ≥4.5:1
 
 # 背景层级（冰月白质感）
 bg: "{gray-50}"

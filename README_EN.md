@@ -5,11 +5,11 @@
 <p align="center">
   <img src="https://img.shields.io/github/package-json/v/yuelinghuashu/moongate-theme" alt="Version">
   <img src="https://img.shields.io/badge/vscode-marketplace-brightgreen" alt="Marketplace">
-  <img src="https://img.shields.io/badge/languages-15-brightgreen" alt="Languages">
+  <img src="https://img.shields.io/badge/languages-18-brightgreen" alt="Languages">
   <img src="https://img.shields.io/badge/WCAG-AA%20%26%20AAA-blue" alt="WCAG">
   <img src="https://img.shields.io/badge/Dark%20%26%20Light-both-8A2BE2" alt="Dark & Light">
   <img src="https://img.shields.io/badge/Semantic%20Highlighting-on-purple" alt="Semantic Highlighting">
-  <img src="https://img.shields.io/badge/tests-85%20passing-brightgreen" alt="Tests">
+  <img src="https://img.shields.io/badge/tests-83%20passing-brightgreen" alt="Tests">
 </p>
 
 [🇨🇳 中文版](./README.md) | English
@@ -37,7 +37,7 @@ Moongate is a VS Code theme born from [moongate.top](https://moongate.top), brin
 
 ## 🎨 Color System
 
-- **Primary**: Cool lunar blue (dark `#3b82f6` / light `#0284c7`)
+- **Primary**: Cool lunar blue (dark `#3b82f6` / light `#1e40af`)
 - **Background**: Night sky `#0f172a` / moon white `#f9fafb`
 - **Elevation**: Four lightness steps (`surfaceGround` → `surfaceRaised` → `surfaceFloating` → `surfaceTooltip`)
 - **Design tokens**: DTCG‑based, auto‑generates CSS variables for cross‑platform reuse
@@ -47,17 +47,16 @@ Moongate is a VS Code theme born from [moongate.top](https://moongate.top), brin
 | Optimization                     | How Moongate Fixes It                                           |
 | -------------------------------- | --------------------------------------------------------------- |
 | **Day‑Night Consistency**        | Same hue, different lightness – seamless switching              |
-| **Function Def/Call Separation** | Definitions bold, calls not – unified across Go, Python, JS, TS |
+| **Function Def/Call Separation** | Definitions bold, calls not – unified across C/C++, Go, Java, C#, Python, Rust, JS, TS |
 | **JSON Nesting Depth**           | Blue → Cyan → Purple gradient – levels at a glance              |
 | **UI Physical Depth**            | Elevation system – natural "paper stack" effect                 |
 | **Design System Unity**          | DTCG tokens – one color language across all products            |
 
-## ✨ v2.6.0 Highlights
+## ✨ v2.7.0 Highlights
 
-- **🚀 3 new languages added**: Shell/Bash, Dockerfile, SQL — following the "base common rules + language-specific rules" architecture
-- **🎨 Comprehensive scope fixes**: 8 language files (JSX/TSX, Python, Rust, CSS, Go, Markdown, HTML) rewritten and verified against VS Code's built-in TextMate grammars — eliminating all non-effective scopes
-- **📦 Cross-platform token artifacts**: Auto-generated `_tokens.scss` (Sass) and `tokens.ts` (TypeScript) — fulfilling the "one-click multi-platform export" promise
-- **🔍 New `verify-scopes.js` tool**: Auto-checks language configs against VS Code's built-in grammars to prevent scope regressions
+- **🚀 3 new languages: C/C++, Java, C#** — preprocessor directives, pointers/templates, annotations/generics, LINQ, attributes and more; 316 scopes verified against VS Code's built-in grammars
+- **🎨 Full WCAG contrast audit** — 4 semantic roles + HTML Doctype fixed below standard; build now auto-checks 13 foreground roles to prevent regressions
+- **🔧 Semantic highlighting consistency** — TextMate layer aligned with semantic layer (function definitions bold, macro/namespace/interface colors unified) for identical visuals with or without a language server
 
 [📜 View full changelog](./CHANGELOG_EN.md)
 
@@ -73,7 +72,7 @@ Moongate is built on the DTCG design token standard, providing complete color, l
 
 Moongate is not hand-written JSON — it's an industrial-grade build pipeline driven by **DTCG tokens + YAML semantic layers**:
 
-```
+```text
 ┌─────────────────────────────────────────────────────┐
 │                  Source Files (src/)                 │
 │  primitives/colors.yaml   Semantics (dark/light)     │
@@ -101,7 +100,7 @@ Moongate is not hand-written JSON — it's an industrial-grade build pipeline dr
 | ------------------------------- | ----------------------------------------------------------------- |
 | `node scripts/build.js`         | One-command build of all artifacts                                |
 | `node scripts/verify-scopes.js` | Auto-verifies language scopes against VS Code's built-in grammars |
-| `pnpm test`                     | 85 automated tests (tokens/generators/validators/scopes)          |
+| `pnpm test`                     | 83 automated tests (tokens/generators/validators/scopes)          |
 
 ### Local Development
 

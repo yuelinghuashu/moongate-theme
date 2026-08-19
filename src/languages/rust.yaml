@@ -39,14 +39,14 @@ tokenColors:
       foreground: "${cyan}"
       fontStyle: "italic"
 
-  # ========== Rust - 宏 ==========
+  # ========== Rust - 宏（对齐语义层 macro: purple） ==========
   - name: Rust - Macros
     scope:
       - "entity.name.function.macro.rust"
       - "entity.name.function.macro.rules.rust"
       - "meta.macro.rust"
     settings:
-      foreground: "${function}"
+      foreground: "${purple}"
 
   # ========== Rust - 属性 ==========
   - name: Rust - Attributes

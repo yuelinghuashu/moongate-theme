@@ -24,6 +24,7 @@
 | `--moongate-blue-700` | `#0284c7` | ![](https://placehold.co/20x20/0284c7/0284c7?text=+) |
 | `--moongate-blue-800` | `#0369a1` | ![](https://placehold.co/20x20/0369a1/0369a1?text=+) |
 | `--moongate-blue-900` | `#1e3a8a` | ![](https://placehold.co/20x20/1e3a8a/1e3a8a?text=+) |
+| `--moongate-blue-950` | `#1e40af` | ![](https://placehold.co/20x20/1e40af/1e40af?text=+) |
 | `--moongate-blue-glow` | `#7dd3fc` | ![](https://placehold.co/20x20/7dd3fc/7dd3fc?text=+) |
 | `--moongate-blue-glow-dark` | `#87cefa` | ![](https://placehold.co/20x20/87cefa/87cefa?text=+) |
 
@@ -34,6 +35,7 @@
 | `--moongate-green-400` | `#34d399` | ![](https://placehold.co/20x20/34d399/34d399?text=+) |
 | `--moongate-green-600` | `#059669` | ![](https://placehold.co/20x20/059669/059669?text=+) |
 | `--moongate-green-700` | `#10b981` | ![](https://placehold.co/20x20/10b981/10b981?text=+) |
+| `--moongate-green-800` | `#047857` | ![](https://placehold.co/20x20/047857/047857?text=+) |
 
 ### Yellow 色系
 
@@ -82,6 +84,7 @@
 | `--moongate-gray-550` | `#7a8c9e` | ![](https://placehold.co/20x20/7a8c9e/7a8c9e?text=+) |
 | `--moongate-gray-525` | `#a5b4cb` | ![](https://placehold.co/20x20/a5b4cb/a5b4cb?text=+) |
 | `--moongate-gray-500` | `#64748b` | ![](https://placehold.co/20x20/64748b/64748b?text=+) |
+| `--moongate-gray-450` | `#7c8ea3` | ![](https://placehold.co/20x20/7c8ea3/7c8ea3?text=+) |
 | `--moongate-gray-400` | `#94a3b8` | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+) |
 | `--moongate-gray-300` | `#cbd5e1` | ![](https://placehold.co/20x20/cbd5e1/cbd5e1?text=+) |
 | `--moongate-gray-200` | `#e2e8f0` | ![](https://placehold.co/20x20/e2e8f0/e2e8f0?text=+) |
@@ -110,8 +113,8 @@
 
 | 语义变量 | 色值 | 预览 | WCAG 对比度（vs `bg`） |
 |----------|------|------|------------------------|
-| `primary` | `#0284c7` | ![](https://placehold.co/20x20/0284c7/0284c7?text=+) | 3.92:1 |
-| `success` | `#059669` | ![](https://placehold.co/20x20/059669/059669?text=+) | 3.61:1 |
+| `primary` | `#1e40af` | ![](https://placehold.co/20x20/1e40af/1e40af?text=+) | 8.35:1 |
+| `success` | `#047857` | ![](https://placehold.co/20x20/047857/047857?text=+) | 5.25:1 |
 | `warning` | `#b45309` | ![](https://placehold.co/20x20/b45309/b45309?text=+) | 4.81:1 |
 | `error` | `#b91c1c` | ![](https://placehold.co/20x20/b91c1c/b91c1c?text=+) | 6.19:1 |
 | `highlight` | `#0369a1` | ![](https://placehold.co/20x20/0369a1/0369a1?text=+) | - |
@@ -123,7 +126,7 @@
 | `variable` | `#0f172a` | ![](https://placehold.co/20x20/0f172a/0f172a?text=+) | - |
 | `variableDim` | `#475569` | ![](https://placehold.co/20x20/475569/475569?text=+) | - |
 | `textMuted` | `#475569` | ![](https://placehold.co/20x20/475569/475569?text=+) | 7.25:1 |
-| `punctuation` | `#94a3b8` | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+) | - |
+| `punctuation` | `#64748b` | ![](https://placehold.co/20x20/64748b/64748b?text=+) | - |
 | `bg` | `#f9fafb` | ![](https://placehold.co/20x20/f9fafb/f9fafb?text=+) | - |
 | `bgElevated` | `#ffffff` | ![](https://placehold.co/20x20/ffffff/ffffff?text=+) | - |
 | `bgMuted` | `#f1f5f9` | ![](https://placehold.co/20x20/f1f5f9/f1f5f9?text=+) | - |
@@ -191,7 +194,7 @@
 | `cyan` | `#22d3ee` | ![](https://placehold.co/20x20/22d3ee/22d3ee?text=+) | - |
 | `purple` | `#c084fc` | ![](https://placehold.co/20x20/c084fc/c084fc?text=+) | - |
 | `function` | `#87cefa` | ![](https://placehold.co/20x20/87cefa/87cefa?text=+) | - |
-| `operator` | `#475569` | ![](https://placehold.co/20x20/475569/475569?text=+) | - |
+| `operator` | `#7c8ea3` | ![](https://placehold.co/20x20/7c8ea3/7c8ea3?text=+) | - |
 | `comment` | `#a5b4cb` | ![](https://placehold.co/20x20/a5b4cb/a5b4cb?text=+) | 8.49:1 |
 | `variable` | `#e2e8f0` | ![](https://placehold.co/20x20/e2e8f0/e2e8f0?text=+) | - |
 | `variableDim` | `#cbd5e1` | ![](https://placehold.co/20x20/cbd5e1/cbd5e1?text=+) | - |

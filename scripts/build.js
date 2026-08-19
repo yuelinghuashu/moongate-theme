@@ -33,7 +33,7 @@ function loadPrimitives() {
   return primitives
 }
 
-/** 加载布局令牌并生成 CSS */
+/** 加载布局令牌并生成 CSS，返回令牌数据供后续使用 */
 function loadLayoutTokens() {
   console.log("  加载布局令牌...")
   const layoutTokens = safeLoadYaml(PATHS.layout, "layout.yaml")
@@ -41,6 +41,7 @@ function loadLayoutTokens() {
     throw new Error("❌ layout.yaml 加载失败，构建终止")
   }
   generateLayoutCss(layoutTokens)
+  return layoutTokens
 }
 
 /** 加载公共规则（workbench + semantic） */
@@ -85,7 +86,7 @@ function loadTokenColors() {
   return [...langRules, ...specialRules]
 }
 
-/** 加载语义文件并检测未使用原始值 */
+/** 加载语义文件并检测未使用原始值，返回文件名列表和预加载的语义数据 */
 function loadSemanticFiles(primitives) {
   console.log("\n🎨 扫描语义文件...")
   const semanticFiles = fs
@@ -96,23 +97,28 @@ function loadSemanticFiles(primitives) {
   }
 
   const allSemantics = []
+  const semanticsByName = {}
   for (const file of semanticFiles) {
     const semantics = safeLoadYaml(path.join(PATHS.semanticsDir, file), `语义层 ${file}`)
-    if (semantics) allSemantics.push(semantics)
+    if (semantics) {
+      allSemantics.push(semantics)
+      semanticsByName[file] = semantics
+    }
   }
   detectUnusedPrimitives(primitives, allSemantics)
 
-  return semanticFiles
+  return { semanticFiles, semanticsByName }
 }
 
 // ==================== 主题构建 ====================
 
 /**
  * 构建单个主题并写入文件
- * @returns {Promise<void>} 无返回值（副作用：写文件、验证）
+ * @returns {object|null} normalized 语义色值映射（副作用：写文件、验证）
  */
 function buildSingleTheme({
   semanticFile,
+  semantics,
   primitives,
   workbenchRaw,
   semanticRaw,
@@ -124,8 +130,6 @@ function buildSingleTheme({
   const themeType = path.basename(semanticFile, ".yaml")
   const outputFile = path.join(PATHS.outputDir, `${baseName}-${themeType}.json`)
 
-  const semanticsPath = path.join(PATHS.semanticsDir, semanticFile)
-  const semantics = safeLoadYaml(semanticsPath, `语义层 ${semanticFile}`)
   if (!semantics) {
     console.error(`   ❌ 跳过 ${semanticFile}`)
     return null
@@ -168,15 +172,16 @@ function buildSingleTheme({
   // 结构验证
   validateThemeStructure(theme, outputFile)
 
-  // 对比度验证
-  if (normalized.bg && normalized.text) {
-    checkContrast(normalized.text, normalized.bg, "text", themeType)
-  }
-  if (normalized.bg && normalized.textDim) {
-    checkContrast(normalized.textDim, normalized.bg, "textDim", themeType)
-  }
-  if (normalized.bg && normalized.textMuted) {
-    checkContrast(normalized.textMuted, normalized.bg, "textMuted", themeType)
+  // 对比度验证（覆盖所有前景色角色 vs 背景）
+  const contrastRoles = [
+    "text", "textDim", "textMuted", "comment",
+    "primary", "success", "warning", "error",
+    "function", "variable", "variableDim", "punctuation", "operator",
+  ]
+  for (const role of contrastRoles) {
+    if (normalized.bg && normalized[role]) {
+      checkContrast(normalized[role], normalized.bg, role, themeType)
+    }
   }
 
   return normalized
@@ -195,8 +200,8 @@ function main() {
     const primitiveKeys = Object.keys(primitives)
     detectDuplicateColors(primitives)
 
-    // 3. 生成布局 CSS
-    loadLayoutTokens()
+    // 3. 生成布局 CSS，返回令牌数据供 SCSS 生成复用
+    const layoutTokens = loadLayoutTokens()
 
     // 4. 加载公共规则（workbench + semantic）
     const { workbenchRaw, semanticRaw } = loadCommonRules()
@@ -205,7 +210,7 @@ function main() {
     const tokenColorsRaw = loadTokenColors()
 
     // 6. 扫描语义文件并检测未使用原始值
-    const semanticFiles = loadSemanticFiles(primitives)
+    const { semanticFiles, semanticsByName: preloadedSemantics } = loadSemanticFiles(primitives)
 
     // 7. 构建每个主题
     const themeInfo = getThemeInfo()
@@ -216,6 +221,7 @@ function main() {
     for (const semanticFile of semanticFiles) {
       const normalized = buildSingleTheme({
         semanticFile,
+        semantics: preloadedSemantics[semanticFile],
         primitives,
         workbenchRaw,
         semanticRaw,
@@ -234,7 +240,7 @@ function main() {
     const darkSemantics = semanticsByName.dark
     if (lightSemantics && darkSemantics) {
       generateColorCss(lightSemantics, darkSemantics)
-      generateScssTokens(lightSemantics, darkSemantics)
+      generateScssTokens(lightSemantics, darkSemantics, layoutTokens)
       generateTsTokens(lightSemantics, darkSemantics)
       generateDesignSystemDoc(primitives, lightSemantics, darkSemantics)
     }

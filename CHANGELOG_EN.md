@@ -2,7 +2,34 @@
 
 [🇨🇳 中文版](./CHANGELOG.md) | English
 
-## [2.6.0] - 2026-08-05
+## [2.7.0] - 2026-08-19
+
+### 🚀 3 New Languages Added
+
+- **C/C++** (`cpp.yaml`): Preprocessor directives (`#include`/`#define`), pointer & reference operators, template types, class/struct/enum declarations, constructor/destructor, namespace, `this` pointer, scope resolution `::`, `const` modifier, lambda captures, format specifiers, escape characters. 37 scopes all verified against VS Code built-in grammars.
+- **Java** (`java.yaml`): Annotations (`@Override` etc.), generics `<T>`, class/enum/record declarations, `this` keyword, packages & imports, primitive types, inheritance/sealed modifiers, Javadoc comments, escape characters. 23 scopes all verified.
+- **C#** (`csharp.yaml`): Attributes (`[Serializable]`), generics, class/struct/enum/record/delegate declarations, `this` keyword, namespaces, preprocessor directives, LINQ query keywords, delegates/events, string interpolation, discard variables. 45 scopes all verified.
+
+### 🎨 WCAG Contrast Full Audit & Fixes
+
+- **4 semantic roles below standard now fixed** — Light: `punctuation` (2.45:1 → 4.55:1), `primary` (3.92:1 → 8.35:1), `success` (3.61:1 → 5.25:1); Dark: `operator` (2.36:1 → 5.32:1). Added `blue-950`, `green-800`, `gray-450` primitives.
+- **tokenColors layer fully audited** — All 24 syntax highlighting colors checked against editor background. Fixed HTML Doctype using `${border}` (nearly invisible: dark 1.49:1 → 5.16:1, light 1.42:1 → 7.25:1), switched to `${textMuted}`.
+- **Build-time WCAG validation expanded**: `checkContrast` now covers 13 foreground roles (up from 3), preventing contrast regressions.
+
+### 🐛 Build Script Fixes
+
+- **Fixed `replaceVariables` losing `primitiveKeys` in recursion**: Architecture-pollution detection now works correctly at all nesting levels.
+- **Eliminated redundant file reads in build pipeline**: Pre-loaded semantics passed directly to `buildSingleTheme`; layout tokens loaded once for CSS/SCSS generation.
+
+### 🛠️ Code Quality
+
+- Merged duplicate `normalizeHex` branches, removed redundant depth check in `resolveTokens`, `getThemeInfo` reuses `ROOT_DIR`.
+- `scopeMatches` wildcard regex caching added to reduce redundant compilation.
+
+---
+
+<details>
+<summary>## [2.6.0] - 2026-08-05</summary>
 
 ### 🚀 3 New Languages Added
 
@@ -43,6 +70,8 @@
 - **Better Comments works out of the box**: The theme includes 6 special-comment scope rules from `src/special/better-comments.yaml` (TODO, FIXME, NOTE, HACK, BUG, XXX) — Better Comments automatically uses Moongate's official colors after installation, zero configuration required. The standalone `extras/better-comments.json` preset is auto-generated via `pnpm run gen:better-comments` for users who want the colors without installing the theme; new tests verify a 1:1 match with dark semantics.
 - **Utility boundary coverage**: `normalizeHex` invalid-format errors, `detectDuplicateColors` duplicate/clean scenarios, etc.
 
+</details>
+
 ---
 
 <details>
@@ -64,6 +93,8 @@
 - **engines upgraded**: Minimum VS Code version raised from `^1.109.0` to `^1.130.0` to ensure new keys (Chat/Copilot, Sticky Scroll variants, etc.) work properly.
 
 </details>
+
+---
 
 <details>
 <summary>🧹 v2.4.0 - 2026-07-04 · Language Refinement, Rust & TS Consistency</summary>
@@ -98,6 +129,8 @@
 
 </details>
 
+---
+
 <details>
 <summary>🧩 v2.3.0 - 2026-06-24 · Go Deep Dive & Python Fix</summary>
 
@@ -124,6 +157,8 @@
 - **Marketplace presentation polish**: Added `galleryBanner` and `badges` configuration for a more professional appearance in the VS Code extension marketplace.
 
 </details>
+
+---
 
 <details>
 <summary>🎨 v2.2.0 - 2026-03-27 · DTCG Tokens & Elevation System</summary>
@@ -154,6 +189,8 @@
 
 </details>
 
+---
+
 <details>
 <summary>✨ v2.1.0 - 2026-03-14 · Elevation System</summary>
 
@@ -165,6 +202,8 @@
 - **Full UI coverage**: Mapped elevations to 20+ areas including the sidebar, activity bar, status bar, input fields, dropdowns, notifications, and quick pick – elevating the entire visual hierarchy.
 
 </details>
+
+---
 
 <details>
 <summary>🌗 v2.0.0 - 2026-03-11 · The Gemini Release</summary>
@@ -205,6 +244,8 @@
 - **P1–P5 Engineering Protocol**: A problem‑complexity grading system has been introduced, marking blog posts by difficulty (P1–P5), to be gradually integrated into the documentation ecosystem.
 
 </details>
+
+---
 
 <details>
 <summary>📜 v1.x - Historical Versions</summary>

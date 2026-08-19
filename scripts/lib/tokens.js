@@ -5,9 +5,6 @@ import { normalizeHex } from "./utils.js"
  */
 export function resolveTokens(obj, tokenMap, depth = 0, path = []) {
   const MAX_DEPTH = 20
-  if (depth > MAX_DEPTH) {
-    throw new Error(`[ENGINEERING_FATAL] 令牌循环引用检测: ${path.join(" → ")}`)
-  }
 
   if (typeof obj === "string") {
     const resolveOne = (str, currentDepth, currentPath) => {
@@ -120,12 +117,12 @@ export function replaceVariables(obj, colors, context = "", primitiveKeys = []) 
     )
   }
   if (Array.isArray(obj)) {
-    return obj.map((item) => replaceVariables(item, colors, context))
+    return obj.map((item) => replaceVariables(item, colors, context, primitiveKeys))
   }
   if (obj && typeof obj === "object") {
     const result = {}
     for (const [k, v] of Object.entries(obj)) {
-      result[k] = replaceVariables(v, colors, context)
+      result[k] = replaceVariables(v, colors, context, primitiveKeys)
     }
     return result
   }

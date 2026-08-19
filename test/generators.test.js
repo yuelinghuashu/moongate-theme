@@ -117,8 +117,9 @@ test("generateLayoutCss: 保留多字体名称的内部引号", () => {
 test("generateScssTokens: 生成 SCSS 变量与 Maps", () => {
   const lightColors = { bg: "#f9fafb", text: "#0f172a" }
   const darkColors = { bg: "#0f172a", text: "#e2e8f0" }
+  const layoutTokens = { spacing: { xs: "4px", md: "12px" } }
 
-  captureConsole(() => generateScssTokens(lightColors, darkColors))
+  captureConsole(() => generateScssTokens(lightColors, darkColors, layoutTokens))
 
   const scssEntry = writes.find((w) => w.filePath.includes("_tokens.scss"))
   assert.ok(scssEntry, "应调用 writeFileSync 写 SCSS 文件")
@@ -137,6 +138,8 @@ test("generateScssTokens: 生成 SCSS 变量与 Maps", () => {
   assert.match(content, /\$ui-text: #e2e8f0;/)
   // 验证间距
   assert.match(content, /\$ui-spacing: \(/)
+  assert.match(content, /xs: "4px";/)
+  assert.match(content, /md: "12px";/)
 })
 
 // ==================== generateTsTokens 测试 ====================

@@ -8,7 +8,7 @@ tokenColors:
     scope:
       - "meta.tag.metadata.doctype.html"
     settings:
-      foreground: "${border}"
+      foreground: "${textMuted}"
 
   # ========== HTML Attribute Value ==========
   - name: HTML Attribute Value

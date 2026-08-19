@@ -259,7 +259,7 @@
     "symbolIcon.nullForeground": "#7a8c9e",
     "symbolIcon.numberForeground": "#fbbf24",
     "symbolIcon.objectForeground": "#fbbf24",
-    "symbolIcon.operatorForeground": "#475569",
+    "symbolIcon.operatorForeground": "#7c8ea3",
     "symbolIcon.packageForeground": "#fbbf24",
     "symbolIcon.propertyForeground": "#cbd5e1",
     "symbolIcon.referenceForeground": "#94a3b8",
@@ -354,11 +354,110 @@
   "tokenColors": [
     {
       "scope": [
+        "entity.name.operator.type.pointer.cpp",
+        "entity.name.operator.type.reference.cpp",
+        "entity.name.type.go",
+        "entity.name.type.numeric.rust",
+        "entity.name.type.package.go",
+        "entity.name.type.primitive.rust",
+        "entity.name.type.template.cpp",
+        "entity.name.type.type-parameter.cs",
+        "keyword.channel.go",
+        "keyword.operator.channel.go",
+        "keyword.operator.expression.query.by.cs",
+        "keyword.operator.expression.query.equals.cs",
+        "keyword.operator.expression.query.from.cs",
+        "keyword.operator.expression.query.group.cs",
+        "keyword.operator.expression.query.in.cs",
+        "keyword.operator.expression.query.into.cs",
+        "keyword.operator.expression.query.join.cs",
+        "keyword.operator.expression.query.let.cs",
+        "keyword.operator.expression.query.on.cs",
+        "keyword.operator.expression.query.orderby.cs",
+        "keyword.operator.expression.query.select.cs",
+        "keyword.operator.expression.query.where.cs",
+        "meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json",
+        "punctuation.definition.typeparameters.begin.cs",
+        "punctuation.definition.typeparameters.end.cs",
+        "storage.modifier.lambda.$0.cpp",
+        "storage.modifier.pointer.cpp",
+        "storage.modifier.reference.cpp",
+        "storage.type.boolean.go",
+        "storage.type.byte.go",
+        "storage.type.delegate.cs",
+        "storage.type.error.go",
+        "storage.type.event.cs",
+        "storage.type.generic.java",
+        "storage.type.generic.wildcard.java",
+        "storage.type.local.java",
+        "storage.type.numeric.go",
+        "storage.type.object.array.java",
+        "storage.type.operator.cs",
+        "storage.type.primitive.array.java",
+        "storage.type.primitive.java",
+        "storage.type.rune.go",
+        "storage.type.string.go",
+        "storage.type.uintptr.go",
+        "string.regexp"
+      ],
+      "settings": {
+        "foreground": "#22d3ee"
+      },
+      "name": "Regular Expressions - 青色点缀"
+    },
+    {
+      "scope": [
+        "comment.block.documentation entity.name.type",
+        "comment.block.documentation storage.type",
+        "constant.character.entity.js.jsx",
+        "constant.character.entity.tsx",
+        "constant.character.escape.c",
+        "constant.character.escape.cpp",
+        "constant.character.escape.cs",
+        "constant.character.escape.java",
+        "constant.character.escape.line-continuation.c",
+        "constant.character.escape.line-continuation.cpp",
+        "constant.character.format.placeholder.other.python",
+        "constant.other.placeholder",
+        "constant.other.placeholder.c",
+        "constant.other.placeholder.go",
+        "expression.embedded.vue",
+        "meta.arithmetic.shell",
+        "meta.embedded",
+        "meta.function-call entity.name.function",
+        "meta.function-call.vue",
+        "meta.function.variable.css",
+        "meta.method-call entity.name.function",
+        "meta.property-name.css",
+        "punctuation.definition.entity.js.jsx",
+        "punctuation.definition.entity.tsx",
+        "punctuation.definition.expression.vue",
+        "punctuation.definition.interpolation.begin.cs",
+        "punctuation.definition.interpolation.end.cs",
+        "source.js.embedded",
+        "string.interpolated.shell",
+        "string.other.link.description.markdown",
+        "string.other.link.title.markdown",
+        "string.template meta.template.expression",
+        "support.function.vue",
+        "support.type.property-name.css",
+        "variable.css"
+      ],
+      "settings": {
+        "foreground": "#7dd3fc"
+      },
+      "name": "String Interpolation - 发光蓝"
+    },
+    {
+      "scope": [
         "comment.block.documentation keyword.other.documentation",
+        "entity.name.function.preprocessor.c",
+        "entity.name.function.preprocessor.cpp",
         "entity.name.import.go",
         "entity.name.type.any.go",
         "entity.name.type.comparable.go",
         "entity.name.type.instance.jsdoc",
+        "entity.name.type.interface.cs",
         "entity.name.type.option.rust",
         "entity.name.type.result.rust",
         "keyword",
@@ -381,7 +480,10 @@
         "storage.type",
         "storage.type.class.jsdoc",
         "variable.language.self.rust",
-        "variable.language.super.rust"
+        "variable.language.super.rust",
+        "variable.language.this.cpp",
+        "variable.language.this.cs",
+        "variable.language.this.java"
       ],
       "settings": {
         "foreground": "#3b82f6",
@@ -391,39 +493,50 @@
     },
     {
       "scope": [
-        "comment.block.documentation entity.name.type",
-        "comment.block.documentation storage.type",
-        "constant.character.entity.js.jsx",
-        "constant.character.entity.tsx",
-        "constant.character.format.placeholder.other.python",
-        "constant.other.placeholder.go",
-        "expression.embedded.vue",
-        "meta.arithmetic.shell",
-        "meta.embedded",
-        "meta.function-call entity.name.function",
-        "meta.function-call.vue",
-        "meta.function.variable.css",
-        "meta.method-call entity.name.function",
-        "meta.property-name.css",
-        "punctuation.definition.entity.js.jsx",
-        "punctuation.definition.entity.tsx",
-        "punctuation.definition.expression.vue",
-        "source.js.embedded",
-        "string.interpolated.shell",
-        "string.other.link.description.markdown",
-        "string.other.link.title.markdown",
-        "string.template meta.template.expression",
-        "support.function.vue",
-        "support.type.property-name.css",
-        "variable.css"
+        "entity.other.attribute-name",
+        "entity.other.attribute-name.class.css",
+        "entity.other.attribute-name.css",
+        "entity.other.attribute-name.id.css",
+        "entity.other.attribute-name.js.jsx",
+        "entity.other.attribute-name.tsx",
+        "keyword.other.LUW.sql",
+        "keyword.other.alias.sql",
+        "keyword.other.authorization.sql",
+        "keyword.other.data-integrity.sql",
+        "keyword.other.import.java",
+        "keyword.other.object-comments.sql",
+        "keyword.other.order.sql",
+        "keyword.other.package.java",
+        "keyword.other.sql",
+        "keyword.preprocessor.define.cs",
+        "keyword.preprocessor.elif.cs",
+        "keyword.preprocessor.else.cs",
+        "keyword.preprocessor.endif.cs",
+        "keyword.preprocessor.endregion.cs",
+        "keyword.preprocessor.error.cs",
+        "keyword.preprocessor.if.cs",
+        "keyword.preprocessor.pragma.cs",
+        "keyword.preprocessor.region.cs",
+        "keyword.preprocessor.warning.cs",
+        "storage.modifier.const.cpp",
+        "storage.modifier.extends.java",
+        "storage.modifier.implements.java",
+        "storage.modifier.permits.java",
+        "string.json support.type.property-name.json",
+        "text.html.vue entity.other.attribute-name"
       ],
       "settings": {
-        "foreground": "#7dd3fc"
+        "foreground": "#3b82f6"
       },
-      "name": "String Interpolation - 发光蓝"
+      "name": "Attributes - 主蓝"
     },
     {
       "scope": [
+        "entity.name.scope-resolution.function.call.cpp",
+        "entity.name.scope-resolution.function.definition.cpp",
+        "entity.name.scope-resolution.template.call.cpp",
+        "entity.name.scope-resolution.template.definition.cpp",
+        "entity.name.scope-resolution.type.cpp",
         "keyword.operator",
         "keyword.operator.assignment.compound.shell",
         "keyword.operator.assignment.shell",
@@ -437,6 +550,7 @@
         "meta.tag.object.start.html",
         "punctuation",
         "punctuation.accessor",
+        "punctuation.definition.markdown",
         "punctuation.definition.tag.begin.html",
         "punctuation.definition.tag.begin.js.jsx",
         "punctuation.definition.tag.begin.tsx",
@@ -450,22 +564,91 @@
         "punctuation.terminator.statement.*.shell"
       ],
       "settings": {
-        "foreground": "#475569"
+        "foreground": "#7c8ea3"
       },
       "name": "Operator - 视觉退后"
     },
     {
       "scope": [
+        "constant.language",
+        "constant.numeric",
+        "constant.numeric.binary.c",
+        "constant.numeric.binary.cpp",
+        "constant.numeric.binary.cs",
+        "constant.numeric.binary.go",
+        "constant.numeric.binary.java",
+        "constant.numeric.css",
+        "constant.numeric.decimal.go",
+        "constant.numeric.hex.cs",
+        "constant.numeric.hex.java",
+        "constant.numeric.hexadecimal.c",
+        "constant.numeric.hexadecimal.cpp",
+        "constant.numeric.hexadecimal.go",
+        "constant.numeric.octal.c",
+        "constant.numeric.octal.cpp",
+        "constant.numeric.octal.go",
+        "constant.numeric.octal.java",
+        "constant.numeric.other.exponent.cs",
+        "constant.numeric.shell",
+        "constant.numeric.sql",
+        "constant.other.color.rgb-value.hex.css",
+        "entity.name.type",
+        "entity.name.type.struct.cpp",
+        "markup.changed",
+        "support.class",
+        "support.constant",
+        "support.type"
+      ],
+      "settings": {
+        "foreground": "#fbbf24"
+      },
+      "name": "Number, Constant - 月光黄"
+    },
+    {
+      "scope": [
+        "comment.block.todo",
+        "comment.line.todo",
+        "comment.todo",
+        "comment.xxx",
+        "constant.language.boolean.go",
+        "constant.language.iota.go",
+        "constant.language.null.go",
+        "constant.other.caps.rust",
+        "entity.name.type.class.cpp",
+        "entity.name.type.class.cs",
+        "entity.name.type.class.java",
+        "entity.name.type.declaration.rust",
+        "entity.name.type.delegate.cs",
+        "entity.name.type.enum.cpp",
+        "entity.name.type.enum.cs",
+        "entity.name.type.enum.java",
+        "entity.name.type.enum.rust",
+        "entity.name.type.record.java",
+        "entity.name.type.struct.cs",
+        "entity.name.type.struct.rust",
+        "entity.name.type.trait.rust",
+        "storage.type.record.cs",
+        "support.class.component.js.jsx",
+        "support.class.component.tsx",
+        "variable.language.*.shell",
+        "variable.language.shell",
+        "variable.other.constant.go"
+      ],
+      "settings": {
+        "foreground": "#fbbf24",
+        "fontStyle": "bold"
+      },
+      "name": "TODO Highlight"
+    },
+    {
+      "scope": [
         "entity.name.function",
         "entity.name.function.call.shell entity.name.command.shell",
-        "entity.name.function.macro.rules.rust",
-        "entity.name.function.macro.rust",
         "entity.name.function.support.builtin.go",
         "entity.name.function.support.go",
         "meta.function-call",
         "meta.function-call.generic.python",
         "meta.function-call.python",
-        "meta.macro.rust",
         "support.function",
         "support.function.builtin.*.shell",
         "support.function.builtin.python",
@@ -509,103 +692,33 @@
     },
     {
       "scope": [
-        "entity.other.attribute-name",
-        "entity.other.attribute-name.class.css",
-        "entity.other.attribute-name.css",
-        "entity.other.attribute-name.id.css",
-        "entity.other.attribute-name.js.jsx",
-        "entity.other.attribute-name.tsx",
-        "keyword.other.LUW.sql",
-        "keyword.other.alias.sql",
-        "keyword.other.authorization.sql",
-        "keyword.other.data-integrity.sql",
-        "keyword.other.object-comments.sql",
-        "keyword.other.order.sql",
-        "keyword.other.sql",
+        "entity.name.function.decorator.python",
+        "entity.other.attribute-name.cs",
+        "entity.other.attribute-name.localname.cs",
+        "entity.other.attribute-name.namespace.cs",
+        "fenced_code.block.language",
+        "fenced_code.block.language.markdown",
+        "meta.attribute.rust",
+        "meta.attribute.rust entity.name.type",
+        "meta.function-call.js support.function",
+        "meta.function-call.js.jsx support.function",
+        "meta.function-call.tsx support.function",
+        "meta.function.decorator.python",
+        "punctuation.definition.annotation.java",
+        "punctuation.definition.decorator.python",
+        "storage.type.annotation.java",
+        "support.function.vue.lifecycle"
+      ],
+      "settings": {
+        "foreground": "#c084fc",
+        "fontStyle": "italic"
+      },
+      "name": "C# - Attributes"
+    },
+    {
+      "scope": [
         "markup.fenced_code.block.markdown",
         "markup.raw.block.markdown",
-        "string.json support.type.property-name.json",
-        "text.html.vue entity.other.attribute-name"
-      ],
-      "settings": {
-        "foreground": "#3b82f6"
-      },
-      "name": "Attributes - 主蓝"
-    },
-    {
-      "scope": [
-        "comment.block.todo",
-        "comment.line.todo",
-        "comment.todo",
-        "comment.xxx",
-        "constant.language.boolean.go",
-        "constant.language.iota.go",
-        "constant.language.null.go",
-        "constant.other.caps.rust",
-        "entity.name.type.declaration.rust",
-        "entity.name.type.enum.rust",
-        "entity.name.type.struct.rust",
-        "entity.name.type.trait.rust",
-        "support.class.component.js.jsx",
-        "support.class.component.tsx",
-        "variable.language.*.shell",
-        "variable.language.shell",
-        "variable.other.constant.go"
-      ],
-      "settings": {
-        "foreground": "#fbbf24",
-        "fontStyle": "bold"
-      },
-      "name": "TODO Highlight"
-    },
-    {
-      "scope": [
-        "constant.language",
-        "constant.numeric",
-        "constant.numeric.binary.go",
-        "constant.numeric.css",
-        "constant.numeric.decimal.go",
-        "constant.numeric.hexadecimal.go",
-        "constant.numeric.octal.go",
-        "constant.numeric.shell",
-        "constant.numeric.sql",
-        "constant.other.color.rgb-value.hex.css",
-        "entity.name.type",
-        "markup.changed",
-        "support.class",
-        "support.constant",
-        "support.type"
-      ],
-      "settings": {
-        "foreground": "#fbbf24"
-      },
-      "name": "Number, Constant - 月光黄"
-    },
-    {
-      "scope": [
-        "entity.name.type.go",
-        "entity.name.type.numeric.rust",
-        "entity.name.type.package.go",
-        "entity.name.type.primitive.rust",
-        "keyword.channel.go",
-        "keyword.operator.channel.go",
-        "meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json",
-        "storage.type.boolean.go",
-        "storage.type.byte.go",
-        "storage.type.error.go",
-        "storage.type.numeric.go",
-        "storage.type.rune.go",
-        "storage.type.string.go",
-        "storage.type.uintptr.go",
-        "string.regexp"
-      ],
-      "settings": {
-        "foreground": "#22d3ee"
-      },
-      "name": "Regular Expressions - 青色点缀"
-    },
-    {
-      "scope": [
         "support.constant.property-value.css",
         "variable.other.assignment.go",
         "variable.other.assignment.shell",
@@ -624,6 +737,28 @@
         "foreground": "#e2e8f0"
       },
       "name": "Variables - 局部变量 (退后)"
+    },
+    {
+      "scope": [
+        "comment",
+        "comment.block.go",
+        "comment.block.javadoc.java",
+        "comment.block.sql",
+        "comment.line.double-dash.sql",
+        "comment.line.double-slash.go",
+        "comment.line.number-sign.dockerfile",
+        "comment.line.number-sign.shell",
+        "keyword.other.documentation.javadoc.java",
+        "punctuation.definition.comment",
+        "punctuation.definition.comment.dockerfile",
+        "punctuation.definition.comment.shell",
+        "punctuation.definition.comment.sql"
+      ],
+      "settings": {
+        "fontStyle": "italic",
+        "foreground": "#a5b4cb"
+      },
+      "name": "Comment"
     },
     {
       "scope": [
@@ -648,46 +783,6 @@
     },
     {
       "scope": [
-        "comment",
-        "comment.block.go",
-        "comment.block.sql",
-        "comment.line.double-dash.sql",
-        "comment.line.double-slash.go",
-        "comment.line.number-sign.dockerfile",
-        "comment.line.number-sign.shell",
-        "punctuation.definition.comment",
-        "punctuation.definition.comment.dockerfile",
-        "punctuation.definition.comment.shell",
-        "punctuation.definition.comment.sql"
-      ],
-      "settings": {
-        "fontStyle": "italic",
-        "foreground": "#a5b4cb"
-      },
-      "name": "Comment"
-    },
-    {
-      "scope": [
-        "entity.name.function.decorator.python",
-        "fenced_code.block.language",
-        "fenced_code.block.language.markdown",
-        "meta.attribute.rust",
-        "meta.attribute.rust entity.name.type",
-        "meta.function-call.js support.function",
-        "meta.function-call.js.jsx support.function",
-        "meta.function-call.tsx support.function",
-        "meta.function.decorator.python",
-        "punctuation.definition.decorator.python",
-        "support.function.vue.lifecycle"
-      ],
-      "settings": {
-        "foreground": "#c084fc",
-        "fontStyle": "italic"
-      },
-      "name": "React - Hooks"
-    },
-    {
-      "scope": [
         "entity.name.tag",
         "entity.name.tag.js.jsx",
         "entity.name.tag.tsx",
@@ -703,6 +798,41 @@
         "foreground": "#f87171"
       },
       "name": "Tag - 错误红"
+    },
+    {
+      "scope": [
+        "entity.name.namespace.cpp",
+        "entity.name.type.namespace.cs",
+        "meta.method-call meta.method-call meta.method-call entity.name.function",
+        "meta.object.key meta.object.key",
+        "meta.object.key.nested",
+        "meta.tag.metadata.doctype.html",
+        "variable.other.member",
+        "variable.other.property",
+        "variable.other.property.go"
+      ],
+      "settings": {
+        "foreground": "#7a8c9e"
+      },
+      "name": "Variables - 成员属性"
+    },
+    {
+      "scope": [
+        "entity.name.function.constructor.cpp",
+        "entity.name.function.cs",
+        "entity.name.function.definition.cpp",
+        "entity.name.function.definition.special.constructor.cpp",
+        "entity.name.function.go",
+        "entity.name.function.java",
+        "entity.name.function.python",
+        "entity.name.function.rust",
+        "meta.function.definition.rust entity.name.function"
+      ],
+      "settings": {
+        "foreground": "#87cefa",
+        "fontStyle": "bold"
+      },
+      "name": "C/C++ - Function Definition"
     },
     {
       "scope": [
@@ -723,6 +853,21 @@
     },
     {
       "scope": [
+        "entity.name.function.macro.rules.rust",
+        "entity.name.function.macro.rust",
+        "entity.name.other.preprocessor.macro.include.cpp",
+        "entity.name.other.preprocessor.macro.predefined.$1.c",
+        "entity.name.other.preprocessor.macro.predefined.$1.cpp",
+        "meta.macro.rust",
+        "meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"
+      ],
+      "settings": {
+        "foreground": "#c084fc"
+      },
+      "name": "C/C++ - Preprocessor Macro Names"
+    },
+    {
+      "scope": [
         "heading.1.markdown",
         "heading.2.markdown",
         "heading.3.markdown",
@@ -739,20 +884,6 @@
     },
     {
       "scope": [
-        "meta.method-call meta.method-call meta.method-call entity.name.function",
-        "meta.object.key meta.object.key",
-        "meta.object.key.nested",
-        "variable.other.member",
-        "variable.other.property",
-        "variable.other.property.go"
-      ],
-      "settings": {
-        "foreground": "#7a8c9e"
-      },
-      "name": "Variables - 成员属性"
-    },
-    {
-      "scope": [
         "markup.italic.markdown",
         "variable.other.parameter",
         "variable.parameter",
@@ -763,19 +894,6 @@
         "foreground": "#cbd5e1"
       },
       "name": "Variables - 参数 (斜体退后)"
-    },
-    {
-      "scope": [
-        "entity.name.function.go",
-        "entity.name.function.python",
-        "entity.name.function.rust",
-        "meta.function.definition.rust entity.name.function"
-      ],
-      "settings": {
-        "foreground": "#87cefa",
-        "fontStyle": "bold"
-      },
-      "name": "Go - Function Definition"
     },
     {
       "scope": [
@@ -881,6 +999,26 @@
     },
     {
       "scope": [
+        "entity.name.function.definition.special.member.destructor.cpp"
+      ],
+      "settings": {
+        "foreground": "#87cefa",
+        "fontStyle": "italic"
+      },
+      "name": "C/C++ - Destructor"
+    },
+    {
+      "scope": [
+        "variable.language.discard.cs"
+      ],
+      "settings": {
+        "foreground": "#7c8ea3",
+        "fontStyle": "italic"
+      },
+      "name": "C# - Discard"
+    },
+    {
+      "scope": [
         "keyword.control.dockerfile"
       ],
       "settings": {
@@ -888,24 +1026,6 @@
         "fontStyle": "bold"
       },
       "name": "Dockerfile - Instructions"
-    },
-    {
-      "scope": [
-        "meta.tag.metadata.doctype.html"
-      ],
-      "settings": {
-        "foreground": "#2d3748"
-      },
-      "name": "HTML Doctype"
-    },
-    {
-      "scope": [
-        "meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json meta.structure.dictionary.value.json meta.structure.dictionary.json support.type.property-name.json"
-      ],
-      "settings": {
-        "foreground": "#c084fc"
-      },
-      "name": "JSON Key - Level 2"
     },
     {
       "scope": [
@@ -961,6 +1081,7 @@
     "struct": "#fbbf24",
     "interface": "#3b82f6",
     "type": "#3b82f6",
+    "type.builtin": "#22d3ee",
     "typeParameter": "#22d3ee",
     "namespace": "#7a8c9e",
     "annotation": "#c084fc",

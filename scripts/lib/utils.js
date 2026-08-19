@@ -1,7 +1,7 @@
 import fs from "node:fs"
 import path from "node:path"
-import { fileURLToPath } from "node:url"
 import yaml from "js-yaml"
+import { ROOT_DIR } from "./config.js"
 
 /** 确保文件存在，不存在则抛出错误 */
 export function ensureFileExists(filePath, description) {
@@ -31,12 +31,7 @@ export function normalizeHex(color, tokenName) {
 
   let hex = color.replace("#", "")
 
-  if (hex.length === 3) {
-    hex = hex
-      .split("")
-      .map((c) => c + c)
-      .join("")
-  } else if (hex.length === 4) {
+  if (hex.length === 3 || hex.length === 4) {
     hex = hex
       .split("")
       .map((c) => c + c)
@@ -77,8 +72,7 @@ export function detectDuplicateColors(primitives) {
 
 /** 从 package.json 读取主题名称信息 */
 export function getThemeInfo() {
-  const __dirname = path.dirname(fileURLToPath(import.meta.url))
-  const pkgPath = path.resolve(__dirname, "..", "..", "package.json")
+  const pkgPath = path.join(ROOT_DIR, "package.json")
   if (!fs.existsSync(pkgPath)) {
     return { name: "your-theme", displayName: "Your Theme" }
   }

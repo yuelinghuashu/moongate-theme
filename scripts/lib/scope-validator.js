@@ -98,6 +98,12 @@ export function buildDefaultSyntaxMap(vscodeExt = VSCODE_EXT) {
       path.join(vscodeExt, "docker/syntaxes/docker.tmLanguage.json"),
     ],
     "sql.yaml": [path.join(vscodeExt, "sql/syntaxes/sql.tmLanguage.json")],
+    "cpp.yaml": [
+      path.join(vscodeExt, "cpp/syntaxes/cpp.tmLanguage.json"),
+      path.join(vscodeExt, "cpp/syntaxes/c.tmLanguage.json"),
+    ],
+    "java.yaml": [path.join(vscodeExt, "java/syntaxes/java.tmLanguage.json")],
+    "csharp.yaml": [path.join(vscodeExt, "csharp/syntaxes/csharp.tmLanguage.json")],
   }
 }
 
@@ -130,6 +136,9 @@ export function loadConfigScopes(filePath) {
   return scopes
 }
 
+/** 通配符正则缓存，避免重复编译 */
+const wildcardRegexCache = new Map()
+
 /** 检查单个 scope 是否匹配语法文件（支持前缀/通配符/组合匹配） */
 export function scopeMatches(checkScope, allSyntaxScopes) {
   // 已知合理例外直接通过（必须在组合拆分之前，否则组合 scope 会被拆散后无法匹配白名单）
@@ -143,9 +152,13 @@ export function scopeMatches(checkScope, allSyntaxScopes) {
 
   // 通配符（* 匹配任意部分）
   if (checkScope.includes("*")) {
-    const regex = new RegExp(
-      "^" + checkScope.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^ ]*") + "($|\\.)",
-    )
+    let regex = wildcardRegexCache.get(checkScope)
+    if (!regex) {
+      regex = new RegExp(
+        "^" + checkScope.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^ ]*") + "($|\\.)",
+      )
+      wildcardRegexCache.set(checkScope, regex)
+    }
     for (const s of allSyntaxScopes) {
       if (regex.test(s)) return true
     }

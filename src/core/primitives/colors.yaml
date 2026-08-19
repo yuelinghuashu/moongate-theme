@@ -8,6 +8,7 @@ blue-600: "#2563eb" # 深色按钮悬停
 blue-700: "#0284c7" # 浅色主蓝
 blue-800: "#0369a1" # 浅色高亮/函数
 blue-900: "#1e3a8a" # 深色选中背景
+blue-950: "#1e40af" # 浅色主蓝（高对比度，WCAG AA ≥4.5:1）
 
 # 发光蓝（特殊）
 blue-glow: "#7dd3fc" # 深色高亮
@@ -17,6 +18,7 @@ blue-glow-dark: "#87cefa" # 深色函数
 green-400: "#34d399" # 深色成功
 green-600: "#059669" # 浅色成功
 green-700: "#10b981" # 浅色亮绿（ansiBrightGreen）
+green-800: "#047857" # 浅色成功（高对比度，WCAG AA ≥4.5:1）
 
 # ==================== 黄色系 ====================
 yellow-400: "#fbbf24" # 深色警告
@@ -51,6 +53,7 @@ gray-600: "#475569" # 深色操作符/降权变量
 gray-550: "#7a8c9e" # 注释文字专用（textMuted）
 gray-525: "#a5b4cb" # 深色模式注释（comment，比 gray-500 稍亮）
 gray-500: "#64748b" # 浅色模式 ansiBrightBlack/bracket6/gitUntracked
+gray-450: "#7c8ea3" # 深色操作符（gray-500 与 gray-400 之间，WCAG AA ≥4.5:1）
 gray-400: "#94a3b8" # 深色标点/非活跃/textMuted
 gray-300: "#cbd5e1" # 深色降权变量/浅色边框
 gray-200: "#e2e8f0" # 深色正文/浅色选中背景

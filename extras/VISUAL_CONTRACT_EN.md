@@ -6,23 +6,23 @@
 
 ## ——Let Day and Night Moonlight Both Render Faithfully on Your Screen
 
-Moongate 2.0 introduces a complete **dual‑theme system** for the first time: dark “Night Sky” and light “Dawn”. They share the same semantic color mapping, but have undergone **gravity compensation** for different ambient lighting—the dark mode focuses on preserving shadow details, while the light mode optimizes readability and comfort in bright environments.
+Moongate 2.0 introduces a complete **dual‑theme system** for the first time: dark "Night Sky" and light "Dawn". They share the same semantic color mapping, but have undergone **gravity compensation** for different ambient lighting—the dark mode focuses on preserving shadow details, while the light mode optimizes readability and comfort in bright environments.
 
 Yet, no matter how precisely a theme is designed, the final result still depends on whether your monitor **faithfully reproduces these designs**. Incorrect hardware settings can turn the deep night sky into dull grey plastic, or make the gentle dawn glare harsh.
 
-This guide is not a dogma; it is a **visual contract**. By aligning our physical parameters together, we can let Moongate’s moonlight truly shine on your screen.
+This guide is not a dogma; it is a **visual contract**. By aligning our physical parameters together, we can let Moongate's moonlight truly shine on your screen.
 
 ---
 
 ## ⚙️ I. Core Calibration: Precise Moonlight, Day or Night
 
-Before you begin, please **reset your monitor to factory defaults** and turn off all “dynamic contrast”, “vivid mode”, “game mode”, and similar gimmicks. This is the prerequisite for calibration.
+Before you begin, please **reset your monitor to factory defaults** and turn off all "dynamic contrast", "vivid mode", "game mode", and similar gimmicks. This is the prerequisite for calibration.
 
 | Step                     | Action                                                                                                                                                                                                           | Goal                                                                                                 |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | **1. Set Gamma**         | Choose `Gamma 2.2` (Windows/macOS standard)                                                                                                                                                                      | Ensure smooth grayscale transitions, mid‑tones are neither too dark nor too bright                   |
 | **2. Adjust Brightness** | **Dark mode**: make the 2% gray patch just visible; **Light mode**: use the white saturation test to make the brightest gray patches (e.g., 250–255) distinguishable, with the brightest patch (255) not glaring | Dark: preserve shadow details; Light: prevent blown‑out highlights, ensure clear highlight gradation |
-| **3. Adjust Contrast**   | Keep the 100% white patch clear but not glaring                                                                                                                                                                  | Prevent clipped highlights and avoid “ghosting” on character edges                                   |
+| **3. Adjust Contrast**   | Keep the 100% white patch clear but not glaring                                                                                                                                                                  | Prevent clipped highlights and avoid "ghosting" on character edges                                   |
 | **4. Color Temperature** | Recommend `6500K` or `Warm` mode                                                                                                                                                                                 | Neutralize blue light, soften vision – especially at night                                           |
 
 > **💡 Tip**:
@@ -32,7 +32,7 @@ Before you begin, please **reset your monitor to factory defaults** and turn off
 
 ---
 
-## 🛡️ II. “Deadly Traps” for Specific Monitors (Universal for Both Modes)
+## 🛡️ II. "Deadly Traps" for Specific Monitors (Universal for Both Modes)
 
 Different panels have vastly different physical characteristics. Here are pitfalls to avoid with common high‑end monitors, regardless of whether you use dark or light mode.
 
@@ -42,21 +42,42 @@ Different panels have vastly different physical characteristics. Here are pitfal
 **Cause**: Forcibly brightening or crushing shadows destroys contrast hierarchy.  
 **Solution**: In the monitor OSD, set **Black Stabilizer to 50** (the standard value) or turn off shadow control.
 
-### 🎨 Trap 2: Color Mode / Saturation
+### 🎨 Trap 2: Color Gamut & Color Mode (Most Critical)
 
-**Symptom**: Colors deviate from design – cool tones shift warm, or bright colors become glaring.  
-**Cause**: Enabling “vivid mode”, “wide gamut mode”, or setting saturation too high.  
-**Solution**: Prefer **sRGB mode**; if unavailable, choose **“User Defined” and set saturation to 50**.
+**Symptom**: Colors appear oversaturated — greens become harsher, reds shift toward orange, cool tones turn warm, and overall colors deviate from the design intent.  
+**Cause**: The monitor is operating in a wide‑gamut mode (DCI‑P3 / Adobe RGB), but **all Moongate colors are designed for the sRGB color space**. A wide‑gamut monitor maps sRGB values into a larger color space, stretching the saturation of every color. For example, the design value `#34d399` (green‑400) will render as a more vivid green on a P3 display, deviating from the intended appearance.  
+**Solution**:
+
+1. **Best**: Select **sRGB mode** in your monitor's OSD (most reliable).
+2. **Alternative**: If no sRGB mode is available, force sRGB at the OS level — disable HDR on Windows; macOS typically handles this automatically via ColorSync.
+3. **Fallback**: Choose "User Defined" and set saturation to 50.
+
+> **Why is sRGB so important?** Moongate's WCAG contrast validation is calculated using the sRGB linearization formula. In sRGB mode, contrast ratios are accurate. In wide‑gamut mode, the actual rendered RGB values deviate from the specified values, and the foundation of contrast calculation no longer holds. Choosing sRGB is not "sacrificing color" — it is **ensuring that the colors you see are the colors the designer intended**.
 
 ### 🔪 Trap 3: Sharpness
 
-**Symptom**: Character edges show “ghosting” or “halos”, especially in light mode where dark text may appear fuzzy.  
+**Symptom**: Character edges show "ghosting" or "halos", especially in light mode where dark text may appear fuzzy.  
 **Cause**: Excessive sharpness causing overshoot.  
 **Solution**: Lower **Sharpness to 50‑60** to restore natural edges.
 
 ---
 
-## 📊 III. Moongate Brightness Calibration Method (Mode‑Specific)
+## 🖥️ III. Panel Technology & Color Accuracy
+
+Different panel technologies have vastly different color reproduction capabilities. Here is a reference for common panel types:
+
+| Panel Type | Color Accuracy (Delta E) | Color Gamut                   | Dark Performance           | Impact on Moongate                                                             |
+| ---------- | ------------------------ | ----------------------------- | -------------------------- | ------------------------------------------------------------------------------ |
+| **IPS**    | Medium–High (1–3)        | Usually sRGB, some wide‑gamut | Medium, blacks appear grey | Dark mode background may lack depth                                            |
+| **VA**     | Medium (2–4)             | Usually sRGB                  | Excellent, deep blacks     | Best dark mode layering                                                        |
+| **TN**     | Low (4–8)                | sRGB only                     | Poor, shadow details lost  | Light mode acceptable; dark mode shadows may crush                             |
+| **OLED**   | High (1–2)               | Wide‑gamut (P3)               | Perfect pure black         | **Must switch to sRGB mode** — colors will be severely oversaturated otherwise |
+
+> **About Delta E**: Delta E measures color accuracy — lower is better. Delta E < 2 is professional grade (imperceptible to the human eye), 2–4 is good, and > 5 means visible color deviation. If your monitor has a factory Delta E > 5, Moongate's colors may significantly deviate from the design intent on your screen — in that case, calibrating the monitor or choosing a more accurate display is the fundamental solution.
+
+---
+
+## 📊 IV. Moongate Brightness Calibration Method (Mode‑Specific)
 
 You need a professional online test tool. Recommended sites:
 
@@ -67,7 +88,7 @@ You need a professional online test tool. Recommended sites:
 
 1. Open the [Black level test page](http://www.lagom.nl/lcd-test/black.php) in a **completely dark room**.
 2. Let your eyes adapt for 2‑3 minutes.
-3. Adjust the monitor’s brightness until the **2% gray patch** (the second patch) is just barely visible – it should be very faint, but definitely present.
+3. Adjust the monitor's brightness until the **2% gray patch** (the second patch) is just barely visible – it should be very faint, but definitely present.
 4. If the 1% patch is completely invisible, that is normal due to the physical limits of the panel (especially IPS). **Use the 2% patch as your target.**
 
 ### Light Mode Calibration (Daytime Environment)
@@ -79,7 +100,7 @@ You need a professional online test tool. Recommended sites:
 
 ---
 
-## 🌗 IV. Ambient Brightness Recommendations (Mode‑Specific Reference)
+## 🌗 V. Ambient Brightness Recommendations (Mode‑Specific Reference)
 
 The ranges below are based on typical monitors. **Always calibrate using the visibility of test patches**; do not rigidly follow these percentages.
 
@@ -107,19 +128,19 @@ The ranges below are based on typical monitors. **Always calibrate using the vis
 
 ---
 
-## 🤝 V. Our Visual Contract (v2.0 Day‑Night Manifesto)
+## 🤝 VI. Our Visual Contract (v2.0 Day‑Night Manifesto)
 
-Moongate’s design philosophy has never changed: **To keep auxiliary information at the threshold of “perceptible but not eye‑catching” on your retina, and to let the core logic emerge naturally through a stepped brightness hierarchy.**  
+Moongate's design philosophy has never changed: **To keep auxiliary information at the threshold of "perceptible but not eye‑catching" on your retina, and to let the core logic emerge naturally through a stepped brightness hierarchy.**  
 v2.0 goes further: **No matter how the ambient light shifts, through two precisely compensated themes – dark and light – we pledge to deliver consistent clarity and comfort.**
 
 If you have followed the calibration above and still find some elements too bright or too dark, you are welcome to share your calibration experience. Your feedback will help us continuously improve Moongate and deliver a more precise moonlight and dawn on more screens.
 
-However, if your monitor has “dynamic contrast”, “vivid mode”, “Black Stabilizer > 50”, or similar gimmicks enabled, please try turning them off first. **Moongate’s day and night moonlight both need a clean mirror to reflect accurately.**
+However, if your monitor has "dynamic contrast", "vivid mode", "Black Stabilizer > 50", or similar gimmicks enabled, please try turning them off first. **Moongate's day and night moonlight both need a clean mirror to reflect accurately.**
 
 ---
 
 ## 📌 Appendix: A Note on Hardware Limits
 
-If, after calibration, the 2% gray patch remains invisible in dark mode, or the 250–255 bright patches are still difficult to distinguish in light mode – this is often your monitor’s physical limit. In such cases, prioritize your eye comfort. Moongate’s core design will still provide an excellent coding experience; the end of calibration is not theoretical perfection, but the discovery of the balance point that is most comfortable for your eyes.
+If, after calibration, the 2% gray patch remains invisible in dark mode, or the 250–255 bright patches are still difficult to distinguish in light mode – this is often your monitor's physical limit. In such cases, prioritize your eye comfort. Moongate's core design will still provide an excellent coding experience; the end of calibration is not theoretical perfection, but the discovery of the balance point that is most comfortable for your eyes.
 
 [⬆ Back to top](#)

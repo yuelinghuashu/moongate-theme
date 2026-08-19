@@ -5,8 +5,8 @@
 /* 浅色模式 */
 :root,
 .light {
-  --ui-primary: #0284c7;
-  --ui-success: #059669;
+  --ui-primary: #1e40af;
+  --ui-success: #047857;
   --ui-warning: #b45309;
   --ui-error: #b91c1c;
   --ui-highlight: #0369a1;
@@ -18,7 +18,7 @@
   --ui-variable: #0f172a;
   --ui-variable-dim: #475569;
   --ui-text-muted: #475569;
-  --ui-punctuation: #94a3b8;
+  --ui-punctuation: #64748b;
   --ui-bg: #f9fafb;
   --ui-bg-elevated: #ffffff;
   --ui-bg-muted: #f1f5f9;
@@ -85,7 +85,7 @@
   --ui-cyan: #22d3ee;
   --ui-purple: #c084fc;
   --ui-function: #87cefa;
-  --ui-operator: #475569;
+  --ui-operator: #7c8ea3;
   --ui-comment: #a5b4cb;
   --ui-variable: #e2e8f0;
   --ui-variable-dim: #cbd5e1;

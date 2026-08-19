@@ -1,6 +1,5 @@
 import fs from "node:fs"
 import path from "node:path"
-import yaml from "js-yaml"
 import wcag from "wcag-contrast"
 import { PATHS } from "./config.js"
 
@@ -216,21 +215,13 @@ function toCssKey(key) {
 /**
  * 生成 SCSS 令牌文件（Sass 变量 + Maps）
  */
-export function generateScssTokens(lightColors, darkColors) {
+export function generateScssTokens(lightColors, darkColors, layoutTokens = {}) {
   let scss = `// ===== Moongate SCSS 令牌 - 自动生成 =====\n`
   scss += `// 来源: VS Code 主题构建脚本\n`
   scss += `// 请勿手动修改，修改请编辑 primitives/ 和 semantics/ 目录\n\n`
 
-  // 布局令牌（间距）——从 layout.yaml 读取
-  let layoutSpacing = {}
-  try {
-    if (fs.existsSync(PATHS.layout)) {
-      const layoutTokens = yaml.load(fs.readFileSync(PATHS.layout, "utf8"))
-      layoutSpacing = layoutTokens?.spacing || {}
-    }
-  } catch {
-    // 布局令牌加载失败时静默降级（仅跳过 spacing map 生成）
-  }
+  // 布局令牌（间距）——优先使用传入的 layoutTokens
+  const layoutSpacing = layoutTokens?.spacing || {}
 
   scss += `// 布局令牌\n`
   scss += `$ui-spacing: (\n`

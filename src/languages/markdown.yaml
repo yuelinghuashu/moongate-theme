@@ -60,12 +60,21 @@ tokenColors:
 
   # ========== Markdown 代码块 ==========
   # markdown.tmLanguage: markup.raw.block.markdown / markup.fenced_code.block.markdown
+  # 代码块内容使用正文色，避免整个代码块被染成主蓝
   - name: Markdown Raw Block
     scope:
       - "markup.raw.block.markdown"
       - "markup.fenced_code.block.markdown"
     settings:
-      foreground: "${primary}"
+      foreground: "${text}"
+
+  # ========== Markdown 围栏符号 ==========
+  # 保留代码块边界可辨识（``` 标记）
+  - name: Markdown Fence Punctuation
+    scope:
+      - "punctuation.definition.markdown"
+    settings:
+      foreground: "${operator}"
 
   # ========== Markdown 代码块语言标识 ==========
   # markdown.tmLanguage: fenced_code.block.language.markdown

@@ -5,11 +5,11 @@
 <p align="center">
   <img src="https://img.shields.io/github/package-json/v/yuelinghuashu/moongate-theme" alt="Version">
   <img src="https://img.shields.io/badge/vscode-marketplace-brightgreen" alt="Marketplace">
-  <img src="https://img.shields.io/badge/languages-15-brightgreen" alt="Languages">
+  <img src="https://img.shields.io/badge/languages-18-brightgreen" alt="Languages">
   <img src="https://img.shields.io/badge/WCAG-AA%20%26%20AAA-blue" alt="WCAG">
   <img src="https://img.shields.io/badge/Dark%20%26%20Light-both-8A2BE2" alt="Dark & Light">
   <img src="https://img.shields.io/badge/Semantic%20Highlighting-on-purple" alt="Semantic Highlighting">
-  <img src="https://img.shields.io/badge/tests-85%20passing-brightgreen" alt="Tests">
+  <img src="https://img.shields.io/badge/tests-83%20passing-brightgreen" alt="Tests">
 </p>
 
 中文 | [🇬🇧 English](./README_EN.md)
@@ -37,27 +37,26 @@ Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而
 
 ## 🎨 配色系统
 
-- **主色**：冷调月蓝（深色 `#3b82f6` / 浅色 `#0284c7`）
+- **主色**：冷调月蓝（深色 `#3b82f6` / 浅色 `#1e40af`）
 - **背景**：深空 `#0f172a` / 冷月白 `#f9fafb`
 - **海拔层级**：四层明度阶梯（`surfaceGround` → `surfaceRaised` → `surfaceFloating` → `surfaceTooltip`）
 - **设计令牌**：基于 DTCG 标准，自动生成 CSS 变量供跨平台复用
 
 ## 🧠 核心优化
 
-| 优化项                | Moongate 的解法                                        |
-| --------------------- | ------------------------------------------------------ |
-| **昼夜语义一致性**    | 同一色系不同明度，视觉重量对等，切换无感               |
-| **函数定义/调用分离** | 定义加粗，调用不加粗，全语言统一（Go、Python、JS、TS） |
-| **JSON 嵌套层级**     | 蓝 → 青 → 紫 阶梯，层次一目了然                        |
-| **UI 物理深度**       | 海拔系统：不同 UI 区域分配明度阶梯，实现"纸张层叠"     |
-| **设计系统统一**      | DTCG 令牌自动生成 CSS 变量，一套颜色贯穿所有产品       |
+| 优化项                | Moongate 的解法                                                               |
+| --------------------- | ----------------------------------------------------------------------------- |
+| **昼夜语义一致性**    | 同一色系不同明度，视觉重量对等，切换无感                                      |
+| **函数定义/调用分离** | 定义加粗，调用不加粗，全语言统一（C/C++、Go、Java、C#、Python、Rust、JS、TS） |
+| **JSON 嵌套层级**     | 蓝 → 青 → 紫 阶梯，层次一目了然                                               |
+| **UI 物理深度**       | 海拔系统：不同 UI 区域分配明度阶梯，实现"纸张层叠"                            |
+| **设计系统统一**      | DTCG 令牌自动生成 CSS 变量，一套颜色贯穿所有产品                              |
 
-## ✨ v2.6.0 亮点
+## ✨ v2.7.0 亮点
 
-- **🚀 新增 3 种语言支持**：Shell/Bash、Dockerfile、SQL——统一遵循"base 通用规则 + 语言独有规则"架构
-- **🎨 语言 scope 全面修复**：JSX/TSX、Python、Rust、CSS、Go、Markdown、HTML 共 8 个文件重写，逐一对照 VS Code 内置 TextMate 语法验证，消除所有不生效的 scope
-- **📦 跨平台令牌产物**：自动生成 `_tokens.scss`（Sass）和 `tokens.ts`（TypeScript），兑现"一键导出多平台"承诺
-- **🔍 新增 `verify-scopes.js`**：自动比对语言配置与 VS Code 内置语法，防止 scope 错误回归
+- **🚀 新增 C/C++、Java、C# 三种语言**：预处理指令、指针/模板、注解/泛型、LINQ、特性等专属规则，316 个 scope 逐一对照 VS Code 内置语法验证
+- **🎨 WCAG 对比度全面审计**：语义层 4 个角色 + HTML Doctype 不达标已修复，构建时自动校验 13 个前景色角色，杜绝回归
+- **🔧 语义高亮一致性**：TextMate 层与语义层对齐（函数定义加粗、宏/namespace/接口配色统一），语言服务器开启前后视觉一致
 
 [📜 查看完整更新日志](./CHANGELOG.md)
 
@@ -75,7 +74,7 @@ Moongate 基于 DTCG 设计令牌标准构建，提供完整的颜色、布局�
 
 Moongate 不是手写 JSON，而是由 **DTCG 令牌 + YAML 语义层** 驱动的工业级构建流程：
 
-```
+```text
 ┌─────────────────────────────────────────────────────┐
 │                     源文件（src/）                   │
 │  primitives/colors.yaml   语义层（dark/light）       │
@@ -103,7 +102,7 @@ Moongate 不是手写 JSON，而是由 **DTCG 令牌 + YAML 语义层** 驱动�
 | ------------------------------- | ------------------------------------------- |
 | `node scripts/build.js`         | 一键构建全部产物                            |
 | `node scripts/verify-scopes.js` | 自动比对语言 scope 与 VS Code 内置语法      |
-| `pnpm test`                     | 85 个自动化测试（令牌/生成器/验证器/scope） |
+| `pnpm test`                     | 83 个自动化测试（令牌/生成器/验证器/scope） |
 
 ### 本地开发
 

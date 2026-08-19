@@ -1,0 +1,98 @@
+# Java 特定规则
+# 只保留 base.yaml 未覆盖的 Java 独有规则
+# scope 来源：VS Code 内置 java.tmLanguage.json（已验证）
+tokenColors:
+  # ========== 注解 @Override 等 ==========
+  - name: Java - Annotations
+    scope:
+      - "storage.type.annotation.java"
+      - "punctuation.definition.annotation.java"
+    settings:
+      foreground: "${purple}"
+      fontStyle: "italic"
+
+  # ========== 泛型 <T> ==========
+  - name: Java - Generics
+    scope:
+      - "storage.type.generic.java"
+      - "storage.type.generic.wildcard.java"
+    settings:
+      foreground: "${cyan}"
+
+  # ========== 类/枚举/record 声明（加粗） ==========
+  - name: Java - Type Declarations
+    scope:
+      - "entity.name.type.class.java"
+      - "entity.name.type.enum.java"
+      - "entity.name.type.record.java"
+    settings:
+      foreground: "${warning}"
+      fontStyle: "bold"
+
+  # ========== 函数定义（加粗，与 Go/Python/Rust 一致） ==========
+  - name: Java - Function Definition
+    scope:
+      - "entity.name.function.java"
+    settings:
+      foreground: "${function}"
+      fontStyle: "bold"
+
+  # ========== this 关键字 ==========
+  - name: Java - This
+    scope:
+      - "variable.language.this.java"
+    settings:
+      foreground: "${primary}"
+      fontStyle: "bold"
+
+  # ========== 包名与导入 ==========
+  - name: Java - Package & Import
+    scope:
+      - "keyword.other.package.java"
+      - "keyword.other.import.java"
+    settings:
+      foreground: "${primary}"
+
+  # ========== 基本类型 ==========
+  - name: Java - Primitive Types
+    scope:
+      - "storage.type.primitive.java"
+      - "storage.type.primitive.array.java"
+      - "storage.type.local.java"
+      - "storage.type.object.array.java"
+    settings:
+      foreground: "${cyan}"
+
+  # ========== 继承/实现/密封修饰 ==========
+  - name: Java - Inheritance Modifiers
+    scope:
+      - "storage.modifier.extends.java"
+      - "storage.modifier.implements.java"
+      - "storage.modifier.permits.java"
+    settings:
+      foreground: "${primary}"
+
+  # ========== Javadoc 注释 ==========
+  - name: Java - Javadoc
+    scope:
+      - "comment.block.javadoc.java"
+      - "keyword.other.documentation.javadoc.java"
+    settings:
+      foreground: "${comment}"
+      fontStyle: "italic"
+
+  # ========== 转义字符 ==========
+  - name: Java - Escape Characters
+    scope:
+      - "constant.character.escape.java"
+    settings:
+      foreground: "${highlight}"
+
+  # ========== 数字字面量 ==========
+  - name: Java - Numbers
+    scope:
+      - "constant.numeric.binary.java"
+      - "constant.numeric.hex.java"
+      - "constant.numeric.octal.java"
+    settings:
+      foreground: "${warning}"
