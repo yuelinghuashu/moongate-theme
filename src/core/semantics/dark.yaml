@@ -13,10 +13,10 @@ purple: "{purple-400}"
 # 功能色（语法）
 function: "{blue-glow-dark}"
 operator: "{gray-450}" # 深色操作符，确保深色背景上 WCAG AA ≥4.5:1
-comment: "{gray-525}" # 使用专用注释色
+comment: "{gray-350}" # 使用专用注释色（比 punctuation 亮、比 textDim 暗）
 variable: "{gray-200}"
 variableDim: "{gray-300}"
-textMuted: "{gray-550}" # 注释文字专用（弱化文本，比 punctuation 更低调）
+textMuted: "{gray-450}" # 弱化文本（与 operator 同档，≥4.5:1；property/namespace 等代码角色也消费此档，保持可读）
 punctuation: "{gray-400}"
 
 # 背景层级
@@ -39,6 +39,11 @@ borderFloating: "{blue-500}40"
 text: "{gray-200}"
 textDim: "{gray-300}"
 textInactive: "{gray-400}"
+selectionForeground: "{white}" # 选中行前景（实底选中背景上的高亮文本）
+
+# 叠加层遮罩（Modal/Drawer 等）
+overlayScrim: "{black}b3" # 70% 纯黑遮罩
+codeDim: "{black}22" # 无用代码压暗（unnecessary code，原直写字面值转正）
 
 # 边框
 border: "{gray-700}"
@@ -46,6 +51,7 @@ borderHover: "{blue-500}"
 borderDim: "{gray-600}"
 
 # 交互控件
+primarySolid: "{blue-600}" # 实底强调背景（其上的白/浅色小字 ≥4.5:1：按钮/菜单/徽章/输入激活）
 buttonHoverBg: "{blue-600}"
 white: "{white}"
 

@@ -2,6 +2,31 @@
 
 [🇨🇳 中文版](./CHANGELOG.md) | English
 
+## [2.7.1] - 2026-09-06
+
+### 🎨 Semantic Text Hierarchy Refactor (Light)
+
+- **Normalized gray ramp**: re-ordered into a strictly monotonic 15-step scale (`gray-525 → gray-350`, `gray-550 → gray-450`, new `gray-550 #55647c`) — step numbers now always track brightness; removed 8 dead primitives (`blue-900/green-700/yellow-500/red-500` etc.) and fixed stale comments; builds are warning-free.
+- **Light role de-collapse**: the previous collapse where `comment/textMuted/textDim/variableDim/operator` all equaled `#475569` is fixed — `comment` → `#55647c` (5.7:1), `operator` & `punctuation` share `#64748b`, `textMuted` → `#64748b` (4.55:1, keeps property/namespace code roles readable), `textInactive` → `#7a8c9e` (2.45:1 → 3.31:1, now compliant).
+- **Readable light terminal ANSI**: `ansiWhite`/`ansiBrightWhite` moved from near-white to ink grays (≥4.5:1); all bright variants now use readable lighter variants (≥3:1); black-family contrast exemption documented.
+- Dark syntax & text colors are effectively unchanged (operator shifts < ΔE1); deeper interactive solid backgrounds are covered in the next bullet.
+- **Dark interactive contrast fix**: new semantic roles `primarySolid` (dark `#2563eb` / light `#1e40af`) and `selectionForeground` (dark white / light ink); small-white-text solid backgrounds (buttons/menus/badges/input options/activity bar badge/extensions) and list/suggest/tab selection foregrounds now use them — dark white-on-solid 3.68:1 → 5.17:1, selection foreground 4.19:1 → 5.17:1; light unchanged.
+
+### 🛠️ Engineering Checks
+
+- **Cross-rule scope conflict detection** in `verify-scopes.js` (same scope with different settings → error); fixed `keyword.channel.go` living in two Go rules; validator now matches scope atoms inside combined grammar names (fixes the CSS `support.type.property-name.css` false positive).
+- **Layer-reference enforcement**: direct primitive refs in component/rule layers, `${var}` or non-primitive refs inside the semantic layer → build fails with guidance.
+- **No raw hex in consumer layers**: leftover `editorUnnecessaryCode.opacity: #00000022` moved to semantic role `codeDim` (`{black}22`); literal hex colors in consumer layers now fail the build.
+- **Extended WCAG matrix**: `textInactive` ≥3:1, full ANSI terminal check (white ≥4.5:1), dark/light semantic key parity, and a **UI interactive pair matrix** (white-on-solid & selection-foreground-on-selected-bg ≥4.5:1, alpha-composited); generated CSS variable names stay stable (this release only adds the `primarySolid` / `selectionForeground` / `codeDim` roles).
+- Single `toCssKey` in generators; new `docs/TOKEN_CONVENTIONS.md` (naming, alias registry, exemptions).
+
+### 🤝 Ecosystem Sync
+
+- Regenerated `themes/*` and synced `moongate-vue`: `src/styles/tokens/colors.css` updated, component fallbacks (`--ui-text-inactive`) aligned, `design-tokens.md` table refreshed; `check-tokens.ts` and full build pass, `dist/style.css` rebuilt.
+- Wording unified: README/badges now say "DTCG-inspired" instead of "DTCG standard" (custom YAML token pipeline, not full DTCG `$type/$value`).
+
+---
+
 ## [2.7.0] - 2026-08-19
 
 ### 🚀 3 New Languages Added

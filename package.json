@@ -5,7 +5,7 @@
   "description": "Where Moon Meets Code — a low-glare dark & light theme, WCAG-verified",
   "publisher": "yuelinghuashu",
   "icon": "images/icon.png",
-  "version": "2.7.0",
+  "version": "2.7.1",
   "engines": {
     "vscode": "^1.130.0"
   },
@@ -26,9 +26,9 @@
       "description": "Go language fully supported"
     },
     {
-      "url": "https://img.shields.io/badge/DTCG-Industrial%20Grade-blue",
+      "url": "https://img.shields.io/badge/Design%20Tokens-DTCG%20inspired-blue",
       "href": "https://github.com/yuelinghuashu/moongate-theme/blob/main/docs/DESIGN_SYSTEM.md",
-      "description": "DTCG design token standard with WCAG validation"
+      "description": "DTCG-inspired design tokens with WCAG validation"
     }
   ],
   "contributes": {

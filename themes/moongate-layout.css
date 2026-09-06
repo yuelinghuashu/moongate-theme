@@ -27,6 +27,11 @@
   --ui-typography-size-code: 13px;
   --ui-typography-size-body: 15px;
   --ui-typography-size-lg: 18px;
+  --ui-typography-size-xl: 24px;
+  --ui-typography-size-title: 20px;
+  --ui-typography-size-display: 40px;
+  --ui-typography-size-display-lg: 48px;
+  --ui-typography-size-display-xl: 60px;
   --ui-typography-size-small: 12px;
   --ui-typography-line-height: 1.6;
   --ui-typography-line-height-code: 1.45;

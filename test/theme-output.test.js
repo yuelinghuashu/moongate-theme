@@ -4,6 +4,8 @@ import { execFileSync } from "node:child_process"
 import fs from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
+import { safeLoadYaml } from "../scripts/lib/utils.js"
+import { detectUnusedPrimitives, assertSemanticKeyParity } from "../scripts/lib/validators.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT_DIR = path.resolve(__dirname, "..")
@@ -141,4 +143,23 @@ test("tokenColors 合并后无重复 scope 组合", () => {
     assert.ok(!seen.has(key), `重复的 scope 组合: ${key}`)
     seen.add(key)
   }
+})
+
+// ==================== 真实源数据卫生检查 ====================
+test("真实语义层: 无未使用的原始令牌", () => {
+  const primitives = safeLoadYaml(path.join(ROOT_DIR, "src/core/primitives/colors.yaml"))
+  const semantics = ["dark", "light"].map((m) =>
+    safeLoadYaml(path.join(ROOT_DIR, `src/core/semantics/${m}.yaml`)),
+  )
+  const unused = detectUnusedPrimitives(primitives, semantics)
+  assert.equal(unused.length, 0, `存在未使用原始令牌: ${unused.map((u) => u.key).join(", ")}`)
+})
+
+test("真实语义层: dark/light 键位一致", () => {
+  const dark = safeLoadYaml(path.join(ROOT_DIR, "src/core/semantics/dark.yaml"))
+  const light = safeLoadYaml(path.join(ROOT_DIR, "src/core/semantics/light.yaml"))
+  const onlyDark = Object.keys(dark).filter((k) => !(k in light))
+  const onlyLight = Object.keys(light).filter((k) => !(k in dark))
+  assert.deepEqual(onlyDark, [], `仅 dark 含角色: ${onlyDark.join(", ")}`)
+  assert.deepEqual(onlyLight, [], `仅 light 含角色: ${onlyLight.join(", ")}`)
 })

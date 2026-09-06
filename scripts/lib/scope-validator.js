@@ -136,8 +136,114 @@ export function loadConfigScopes(filePath) {
   return scopes
 }
 
+/**
+ * 加载规则明细（含 settings），供跨规则冲突检测使用
+ * @returns {Array<{file:string, scope:string, name:string, settings:object}>}
+ */
+export function loadScopeRules(filePath) {
+  const data = yaml.load(fs.readFileSync(filePath, "utf8"))
+  const rules = []
+  if (!data?.tokenColors) return rules
+  for (const rule of data.tokenColors) {
+    if (!rule.scope || !rule.settings) continue
+    const list = Array.isArray(rule.scope) ? rule.scope : [rule.scope]
+    for (const s of list) {
+      rules.push({ file: filePath, scope: s, name: rule.name || "", settings: rule.settings })
+    }
+  }
+  return rules
+}
+
+/** settings 的稳定签名（键排序），用于判断两条规则样式是否冲突 */
+function settingsSignature(settings) {
+  return JSON.stringify(
+    Object.keys(settings)
+      .sort()
+      .reduce((acc, k) => { acc[k] = settings[k]; return acc }, {}),
+  )
+}
+
+/**
+ * 跨规则 scope 冲突检测
+ *
+ * 同一 scope 字符串出现在 ≥2 条规则、且 settings（颜色/字体）不一致时视为冲突：
+ * 最终生效样式取决于规则合并后的排序，存在歧义。相同 settings 的重复是安全的
+ * （构建时会被 mergeTokenColors 合并成一条）。
+ *
+ * @param {object} options
+ * @param {string} [options.langDir]     语言规则目录
+ * @param {string} [options.specialDir]  特殊规则目录
+ * @returns {{ total:number, conflicts:Array<{scope:string, occurrences:Array<{file, name, settings}>}> }}
+ */
+export function findScopeConflicts({
+  langDir = path.join(ROOT_DIR, "src", "languages"),
+  specialDir = path.join(ROOT_DIR, "src", "special"),
+} = {}) {
+  const byScope = new Map()
+  const collectDir = (dir) => {
+    if (!fs.existsSync(dir)) return
+    for (const file of fs.readdirSync(dir).filter((f) => f.endsWith(".yaml")).sort()) {
+      for (const rule of loadScopeRules(path.join(dir, file))) {
+        if (!byScope.has(rule.scope)) byScope.set(rule.scope, [])
+        byScope.get(rule.scope).push(rule)
+      }
+    }
+  }
+  collectDir(langDir)
+  collectDir(specialDir)
+
+  const conflicts = []
+  for (const [scope, rules] of byScope) {
+    const signatures = new Set(rules.map((r) => settingsSignature(r.settings)))
+    if (rules.length > 1 && signatures.size > 1) {
+      conflicts.push({
+        scope,
+        occurrences: rules.map((r) => ({
+          file: r.file,
+          name: r.name,
+          settings: r.settings,
+        })),
+      })
+    }
+  }
+
+  return { total: conflicts.length, conflicts }
+}
+
+/** 格式化冲突检测结果 */
+export function formatScopeConflicts(result) {
+  let out = ""
+  if (result.conflicts.length === 0) {
+    out += "✅ 无跨规则 scope 冲突\n"
+    return out
+  }
+  out += `❌ 发现 ${result.total} 个跨规则 scope 冲突（同一 scope 对应不同 settings）:\n`
+  for (const { scope, occurrences } of result.conflicts) {
+    out += `   ⚠️ "${scope}"\n`
+    for (const o of occurrences) {
+      out += `       ${o.file} · ${o.name || "(未命名)"} · ${JSON.stringify(o.settings)}\n`
+    }
+  }
+  return out
+}
+
+
 /** 通配符正则缓存，避免重复编译 */
 const wildcardRegexCache = new Map()
+
+/** 语法 scope 集合 → 原子集合缓存（组合名 "A B" 拆成 A、B 两个原子） */
+const atomCache = new WeakMap()
+function getAtoms(scopeSet) {
+  let atoms = atomCache.get(scopeSet)
+  if (!atoms) {
+    atoms = new Set()
+    for (const s of scopeSet) {
+      for (const atom of s.split(/\s+/)) atoms.add(atom)
+    }
+    atomCache.set(scopeSet, atoms)
+  }
+  return atoms
+}
 
 /** 检查单个 scope 是否匹配语法文件（支持前缀/通配符/组合匹配） */
 export function scopeMatches(checkScope, allSyntaxScopes) {
@@ -149,6 +255,10 @@ export function scopeMatches(checkScope, allSyntaxScopes) {
   if (parts.length > 1) {
     return parts.every((p) => scopeMatches(p, allSyntaxScopes))
   }
+
+  // 语法文件中的组合名（如 "meta.property-name.css support.type.property-name.css"）
+  // 会为每个原子生成独立 scope 栈元素；单段配置 scope 也要对原子集合匹配
+  const atoms = getAtoms(allSyntaxScopes)
 
   // 通配符（* 匹配任意部分）
   if (checkScope.includes("*")) {
@@ -162,6 +272,9 @@ export function scopeMatches(checkScope, allSyntaxScopes) {
     for (const s of allSyntaxScopes) {
       if (regex.test(s)) return true
     }
+    for (const a of atoms) {
+      if (regex.test(a)) return true
+    }
     return false
   }
 
@@ -173,6 +286,12 @@ export function scopeMatches(checkScope, allSyntaxScopes) {
     if (checkScope.startsWith(s + ".")) return true
     // 组合 scope 中作为首段存在（"string.interpolated.python string.quoted.python"）
     if (s.startsWith(checkScope + " ")) return true
+  }
+  // 原子级匹配（覆盖语法名以组合串形式书写的场景）
+  for (const a of atoms) {
+    if (a === checkScope) return true
+    if (a.startsWith(checkScope + ".")) return true
+    if (checkScope.startsWith(a + ".")) return true
   }
   return false
 }

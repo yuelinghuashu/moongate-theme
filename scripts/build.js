@@ -2,8 +2,8 @@ import fs from "node:fs"
 import path from "node:path"
 import { PATHS } from "./lib/config.js"
 import { ensureFileExists, safeLoadYaml, normalizeHex, detectDuplicateColors, getThemeInfo } from "./lib/utils.js"
-import { resolveTokens, normalizeColors, replaceVariables } from "./lib/tokens.js"
-import { detectUnusedPrimitives, validateThemeStructure, checkContrast } from "./lib/validators.js"
+import { resolveTokens, normalizeColors, replaceVariables, assertNoDirectPrimitiveRefs, assertSemanticReferencesPrimitivesOnly, assertNoRawHexColors } from "./lib/tokens.js"
+import { detectUnusedPrimitives, validateThemeStructure, checkContrast, checkAnsiContrast, assertSemanticKeyParity, checkUIPairs } from "./lib/validators.js"
 import { mergeTokenColors, optimizeSemanticTokenColors } from "./lib/optimizers.js"
 import { generateColorCss, generateLayoutCss, generateDesignSystemDoc, generateScssTokens, generateTsTokens } from "./lib/generators.js"
 
@@ -135,6 +135,17 @@ function buildSingleTheme({
     return null
   }
 
+  // 架构分层强校验：语义层只引用原始值；组件/规则层禁止直接引用原始值
+  assertSemanticReferencesPrimitivesOnly(semantics, primitiveKeys)
+  assertNoDirectPrimitiveRefs(workbenchRaw, "workbench", primitiveKeys)
+  assertNoDirectPrimitiveRefs(semanticRaw, "semantic", primitiveKeys)
+  assertNoDirectPrimitiveRefs(tokenColorsRaw, "tokenColors", primitiveKeys)
+
+  // 分层硬化：消费者层禁止直写裸 hex 色值
+  assertNoRawHexColors(workbenchRaw, "workbench")
+  assertNoRawHexColors(semanticRaw, "semantic")
+  assertNoRawHexColors(tokenColorsRaw, "tokenColors")
+
   const resolved = resolveTokens(semantics, primitives)
   const normalized = normalizeColors(resolved, `semantics.${semanticFile}`)
 
@@ -174,7 +185,7 @@ function buildSingleTheme({
 
   // 对比度验证（覆盖所有前景色角色 vs 背景）
   const contrastRoles = [
-    "text", "textDim", "textMuted", "comment",
+    "text", "textDim", "textInactive", "textMuted", "comment",
     "primary", "success", "warning", "error",
     "function", "variable", "variableDim", "punctuation", "operator",
   ]
@@ -183,6 +194,12 @@ function buildSingleTheme({
       checkContrast(normalized[role], normalized.bg, role, themeType)
     }
   }
+
+  // ANSI 终端色对比度验证（黑族豁免）
+  checkAnsiContrast(normalized, themeType)
+
+  // UI 交互前景/背景配对对比度（按钮/菜单/徽章/选中行等）
+  checkUIPairs(normalized, themeType)
 
   return normalized
 }
@@ -235,10 +252,11 @@ function main() {
       }
     }
 
-    // 8. 生成 CSS 变量、跨平台令牌和设计系统文档
+    // 8. 语义层键位一致性 + 生成 CSS 变量、跨平台令牌和设计系统文档
     const lightSemantics = semanticsByName.light
     const darkSemantics = semanticsByName.dark
     if (lightSemantics && darkSemantics) {
+      assertSemanticKeyParity(darkSemantics, lightSemantics)
       generateColorCss(lightSemantics, darkSemantics)
       generateScssTokens(lightSemantics, darkSemantics, layoutTokens)
       generateTsTokens(lightSemantics, darkSemantics)

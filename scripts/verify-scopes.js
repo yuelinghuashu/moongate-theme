@@ -10,14 +10,20 @@
  *
  * 有 scope 错误时退出码为 1（供 CI 中断）。
  */
-import { verifyAllScopes, formatVerificationResult } from "./lib/scope-validator.js"
+import { verifyAllScopes, formatVerificationResult, findScopeConflicts, formatScopeConflicts } from "./lib/scope-validator.js"
 
 const result = verifyAllScopes({ verbose: true })
+const conflictResult = findScopeConflicts()
 
 console.log("🔍 验证语言配置中的 scope...\n")
 process.stdout.write(formatVerificationResult(result))
 
-if (!result.isValid) {
-  console.error(`\n❌ 发现 ${result.totalIssues} 个 scope 不匹配，验证失败！`)
+console.log("\n🔎 检查跨规则 scope 冲突...\n")
+process.stdout.write(formatScopeConflicts(conflictResult))
+
+if (!result.isValid || conflictResult.total > 0) {
+  console.error(
+    `\n❌ 发现 ${result.totalIssues} 个 scope 不匹配、${conflictResult.total} 个跨规则冲突，验证失败！`,
+  )
   process.exit(1)
 }

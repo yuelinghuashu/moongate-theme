@@ -22,7 +22,6 @@ tokenColors:
       - "keyword.interface.go"
       - "keyword.map.go"
       - "keyword.type.go"
-      - "keyword.channel.go"
     settings:
       foreground: "${primary}"
       fontStyle: "bold"

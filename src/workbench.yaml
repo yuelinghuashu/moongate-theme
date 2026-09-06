@@ -16,7 +16,7 @@ titleBar.border: "${border}"
 # 菜单栏（菜单为浮层，使用 floating 层）
 menu.background: "${surfaceFloating}"
 menu.foreground: "${text}"
-menu.selectionBackground: "${primary}"
+menu.selectionBackground: "${primarySolid}"
 menu.selectionForeground: "${white}"
 menu.border: "${borderFloating}"
 
@@ -26,7 +26,7 @@ activityBar.foreground: "${text}"
 activityBar.inactiveForeground: "${textInactive}"
 activityBar.border: "${border}"
 activityBar.activeBorder: "${primary}"
-activityBarBadge.background: "${primary}"
+activityBarBadge.background: "${primarySolid}"
 activityBarBadge.foreground: "${white}"
 
 # 侧边栏（侧边栏为次级区域，使用 raised 层）
@@ -78,7 +78,7 @@ input.background: "${surfaceFloating}"
 input.foreground: "${text}"
 input.border: "${borderFloating}"
 input.placeholderForeground: "${textInactive}"
-inputOption.activeBackground: "${primary}"
+inputOption.activeBackground: "${primarySolid}"
 inputOption.activeForeground: "${white}"
 inputValidation.errorBackground: "${error}"
 inputValidation.errorBorder: "${error}"
@@ -93,14 +93,14 @@ dropdown.foreground: "${text}"
 dropdown.border: "${borderFloating}"
 
 # 按钮（按钮背景使用主色，前景白色）
-button.background: "${primary}"
+button.background: "${primarySolid}"
 button.foreground: "${white}"
 button.hoverBackground: "${buttonHoverBg}"
 button.secondaryBackground: "${surfaceRaised}"
 button.secondaryForeground: "${text}"
 
 # 徽章
-badge.background: "${primary}"
+badge.background: "${primarySolid}"
 badge.foreground: "${white}"
 
 # 滚动条
@@ -111,11 +111,11 @@ scrollbarSlider.activeBackground: "${scrollbar}"
 
 # 列表/树（列表项悬停/选中保持原有交互色，背景使用 raised 层）
 list.activeSelectionBackground: "${selectedBg}"
-list.activeSelectionForeground: "${text}"
+list.activeSelectionForeground: "${selectionForeground}"
 list.hoverBackground: "${hoverBg}"
 list.hoverForeground: "${text}"
 list.focusBackground: "${selectedBg}"
-list.focusForeground: "${text}"
+list.focusForeground: "${selectionForeground}"
 list.inactiveSelectionBackground: "${surfaceRaised}"
 list.inactiveSelectionForeground: "${textInactive}"
 list.highlightForeground: "${primary}"
@@ -185,6 +185,7 @@ editorSuggestWidget.border: "${borderFloating}"
 editorSuggestWidget.foreground: "${text}"
 editorSuggestWidget.highlightForeground: "${primary}"
 editorSuggestWidget.selectedBackground: "${selectedBg}"
+editorSuggestWidget.selectedForeground: "${selectionForeground}"
 editorHoverWidget.background: "${surfaceTooltip}" # 悬停提示用最高层
 editorHoverWidget.foreground: "${text}"
 editorHoverWidget.border: "${borderFloating}"
@@ -243,7 +244,7 @@ notifications.foreground: "${text}"
 notifications.border: "${borderFloating}"
 
 # 扩展
-extensionButton.prominentBackground: "${primary}"
+extensionButton.prominentBackground: "${primarySolid}"
 extensionButton.prominentForeground: "${white}"
 extensionButton.prominentHoverBackground: "${buttonHoverBg}"
 
@@ -365,7 +366,7 @@ editorMultiCursor.secondary.background: "${primary}10"
 editorMultiCursor.secondary.foreground: "${primary}"
 editorPlaceholder.foreground: "${textInactive}"
 editorUnnecessaryCode.border: "${textMuted}80"
-editorUnnecessaryCode.opacity: "#00000022"
+editorUnnecessaryCode.opacity: "${codeDim}"
 
 # ========== A 级：Sticky Scroll 新变体（VS Code 1.120+）==========
 editorStickyScrollGutter.background: "${surfaceRaised}"
@@ -396,7 +397,7 @@ statusBarItem.offlineForeground: "${surfaceGround}"
 # ========== A 级：选项卡选中态（VS Code 1.126+）==========
 tab.selectedBackground: "${selectedBg}"
 tab.selectedBorderTop: "${primary}"
-tab.selectedForeground: "${text}"
+tab.selectedForeground: "${selectionForeground}"
 
 # ========== B 级：常见 UI 组件 ==========
 banner.background: "${primary}20"

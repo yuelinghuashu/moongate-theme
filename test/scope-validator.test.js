@@ -9,6 +9,8 @@ import {
   scopeMatches,
   verifyAllScopes,
   formatVerificationResult,
+  findScopeConflicts,
+  formatScopeConflicts,
 } from "../scripts/lib/scope-validator.js"
 
 // ==================== collectAllNames 测试 ====================
@@ -154,4 +156,100 @@ test("formatVerificationResult: 格式化输出含统计", () => {
   assert.match(out, /bad\.scope/)
   assert.match(out, /c\.yaml: ⚠️ 未找到内置语法文件/)
   assert.match(out, /📊 统计: 检查 3 个 scope，发现 1 个不匹配/)
+})
+
+// ==================== 原子级匹配（组合名语法 scope） ====================
+test("scopeMatches: 语法组合名中的原子可被单段 scope 匹配", () => {
+  const scopes = new Set([
+    "meta.property-name.css support.type.property-name.css",
+    "meta.property-name.css",
+  ])
+  assert.equal(scopeMatches("support.type.property-name.css", scopes), true)
+})
+
+// ==================== findScopeConflicts 测试 ====================
+test("findScopeConflicts: 同 scope 不同 settings 报冲突", () => {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "moongate-conflict-"))
+  fs.writeFileSync(
+    path.join(tmpDir, "a.yaml"),
+    `tokenColors:
+  - name: Red
+    scope: ["keyword.x"]
+    settings: { foreground: "#ff0000" }
+`,
+  )
+  fs.writeFileSync(
+    path.join(tmpDir, "b.yaml"),
+    `tokenColors:
+  - name: Blue
+    scope: ["keyword.x"]
+    settings: { foreground: "#0000ff" }
+`,
+  )
+  const result = findScopeConflicts({ langDir: tmpDir, specialDir: path.join(tmpDir, "empty") })
+  assert.equal(result.conflicts.length, 1)
+  assert.equal(result.conflicts[0].scope, "keyword.x")
+  assert.equal(result.conflicts[0].occurrences.length, 2)
+  fs.rmSync(tmpDir, { recursive: true, force: true })
+})
+
+test("findScopeConflicts: 同 scope 同 settings 不报冲突（合并安全）", () => {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "moongate-conflict-"))
+  fs.writeFileSync(
+    path.join(tmpDir, "a.yaml"),
+    `tokenColors:
+  - name: Same
+    scope: ["keyword.y"]
+    settings: { foreground: "#112233" }
+`,
+  )
+  fs.writeFileSync(
+    path.join(tmpDir, "b.yaml"),
+    `tokenColors:
+  - name: Same Again
+    scope: ["keyword.y"]
+    settings: { foreground: "#112233" }
+`,
+  )
+  const result = findScopeConflicts({ langDir: tmpDir, specialDir: path.join(tmpDir, "empty") })
+  assert.equal(result.conflicts.length, 0)
+  fs.rmSync(tmpDir, { recursive: true, force: true })
+})
+
+test("findScopeConflicts: 无重复 scope 返回空", () => {
+  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "moongate-conflict-"))
+  fs.writeFileSync(
+    path.join(tmpDir, "a.yaml"),
+    `tokenColors:
+  - name: A
+    scope: ["keyword.a"]
+    settings: { foreground: "#111111" }
+  - name: B
+    scope: ["keyword.b"]
+    settings: { foreground: "#222222" }
+`,
+  )
+  const result = findScopeConflicts({ langDir: tmpDir, specialDir: path.join(tmpDir, "empty") })
+  assert.equal(result.total, 0)
+  assert.deepEqual(result.conflicts, [])
+  fs.rmSync(tmpDir, { recursive: true, force: true })
+})
+
+test("formatScopeConflicts: 空结果与有结果两种输出", () => {
+  assert.match(formatScopeConflicts({ total: 0, conflicts: [] }), /无跨规则 scope 冲突/)
+  const out = formatScopeConflicts({
+    total: 1,
+    conflicts: [
+      {
+        scope: "keyword.dup",
+        occurrences: [
+          { file: "a.yaml", name: "A", settings: { foreground: "#111111" } },
+          { file: "b.yaml", name: "B", settings: { foreground: "#222222" } },
+        ],
+      },
+    ],
+  })
+  assert.match(out, /1 个跨规则 scope 冲突/)
+  assert.match(out, /keyword\.dup/)
+  assert.match(out, /a\.yaml/)
 })

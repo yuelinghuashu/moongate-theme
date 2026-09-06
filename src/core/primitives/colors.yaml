@@ -1,64 +1,63 @@
 # ==================== 原始色值 ====================
-# 从 colors-dark.yaml 和 colors-light.yaml 提取
-# 按色相-明度命名，作为所有主题的基础构建块
+# 命名约定（DTCG 风格，非完整 DTCG 规范）：
+#   - 色相-明度命名：{hue}-{step}，step 数字越大越暗（灰阶单调递增变暗）
+#   - 灰阶扩展档位：350 / 450 / 550 为中间档，保证深/浅两模式角色层级有足够档位
+#   - 发光系（blue-glow / blue-glow-dark）为特殊用途，不参与阶数体系
+# 所有角色只能经 src/core/semantics/*.yaml 引用本文件，禁止组件层直接引用。
 
 # ==================== 蓝色系 ====================
-blue-500: "#3b82f6" # 深色主蓝
-blue-600: "#2563eb" # 深色按钮悬停
-blue-700: "#0284c7" # 浅色主蓝
-blue-800: "#0369a1" # 浅色高亮/函数
-blue-900: "#1e3a8a" # 深色选中背景
-blue-950: "#1e40af" # 浅色主蓝（高对比度，WCAG AA ≥4.5:1）
+blue-500: "#3b82f6" # 深色主蓝（primary/链接/滚动条/activeBorder）
+blue-600: "#2563eb" # 深色悬停/选中背景（buttonHoverBg/selectedBg）
+blue-700: "#0284c7" # 浅色主蓝（borderHover/scrollbar/bracket1）
+blue-800: "#0369a1" # 浅色高亮/函数（highlight/function）
+blue-950: "#1e40af" # 浅色 primary（高对比度，WCAG AA ≥4.5:1）
 
 # 发光蓝（特殊）
 blue-glow: "#7dd3fc" # 深色高亮
 blue-glow-dark: "#87cefa" # 深色函数
 
 # ==================== 绿色系 ====================
-green-400: "#34d399" # 深色成功
-green-600: "#059669" # 浅色成功
-green-700: "#10b981" # 浅色亮绿（ansiBrightGreen）
+green-400: "#34d399" # 深色成功/亮绿
+green-600: "#059669" # 浅色 ansiBrightGreen（亮绿，≥3:1）
 green-800: "#047857" # 浅色成功（高对比度，WCAG AA ≥4.5:1）
 
 # ==================== 黄色系 ====================
-yellow-400: "#fbbf24" # 深色警告
-yellow-500: "#f59e0b" # 浅色警告（未使用）
-yellow-600: "#d97706" # 浅色亮黄（ansiBrightYellow）
+yellow-400: "#fbbf24" # 深色警告/亮黄
+yellow-600: "#d97706" # 浅色 ansiBrightYellow（亮黄，≥3:1）
 yellow-700: "#b45309" # 浅色警告/琥珀
 
 # ==================== 红色系 ====================
-red-400: "#f87171" # 深色错误
-red-500: "#ef4444" # 浅色错误（未使用）
-red-600: "#dc2626" # 浅色亮红（ansiBrightRed）
+red-400: "#f87171" # 深色错误/亮红
+red-600: "#dc2626" # 浅色 ansiBrightRed（亮红，≥3:1）
 red-700: "#b91c1c" # 浅色错误
 
 # ==================== 青色系 ====================
-cyan-400: "#22d3ee" # 深色青色
-cyan-500: "#0891b2" # 浅色亮青（ansiBrightCyan）
+cyan-400: "#22d3ee" # 深色青色/亮青
+cyan-500: "#0891b2" # 浅色 ansiBrightCyan（亮青，≥3:1）
 cyan-700: "#0e7490" # 浅色青色
 
 # ==================== 紫色系 ====================
-purple-400: "#c084fc" # 深色紫色
-purple-500: "#9333ea" # 浅色亮紫（ansiBrightMagenta）
+purple-400: "#c084fc" # 深色紫色/亮紫
+purple-500: "#9333ea" # 浅色 ansiBrightMagenta（亮紫，≥3:1）
 purple-700: "#7e22ce" # 浅色紫色
 
-# ==================== 灰阶（冷调基底）====================
-# 深色模式灰阶
-gray-900: "#0f172a" # 深色编辑器背景
-gray-850: "#131c31" # 深色卡片/浮层
-gray-800: "#1e293b" # 深色侧边栏/代码块
-gray-750: "#252e40" # 深色悬停背景
-gray-700: "#2d3748" # 深色边框
-gray-600: "#475569" # 深色操作符/降权变量
-gray-550: "#7a8c9e" # 注释文字专用（textMuted）
-gray-525: "#a5b4cb" # 深色模式注释（comment，比 gray-500 稍亮）
-gray-500: "#64748b" # 浅色模式 ansiBrightBlack/bracket6/gitUntracked
-gray-450: "#7c8ea3" # 深色操作符（gray-500 与 gray-400 之间，WCAG AA ≥4.5:1）
-gray-400: "#94a3b8" # 深色标点/非活跃/textMuted
-gray-300: "#cbd5e1" # 深色降权变量/浅色边框
-gray-200: "#e2e8f0" # 深色正文/浅色选中背景
-gray-100: "#f1f5f9" # 浅色次级背景
-gray-50: "#f9fafb" # 浅色编辑器背景
+# ==================== 灰阶（冷调基底，亮度严格单调）====================
+# 编号越大越暗；50 → 900 依次变暗，350/450/550 为中间档
+gray-900: "#0f172a" # 最暗：深色编辑器背景 / 浅色正文
+gray-850: "#131c31" # 深色隆起层表面（bgElevated/surfaceRaised）
+gray-800: "#1e293b" # 深色次级表面/代码块（bgMuted/surfaceFloating/fillSubtle/ansiBlack）
+gray-750: "#252e40" # 深色悬停/浮层表面（hoverBg/surfaceTooltip/fillMedium）
+gray-700: "#2d3748" # 深色边框/被忽略（border/ansiBrightBlack/gitIgnored）
+gray-600: "#475569" # 深色 borderDim；浅色降权文本（textDim/variableDim/ansiWhite）
+gray-550: "#55647c" # 浅色注释（comment，弱于 textDim、强于 punctuation）
+gray-500: "#64748b" # 浅色标点/操作符/弱化文本（punctuation/operator/textMuted/bracket6/gitUntracked/ansiBrightBlack）
+gray-450: "#7a8c9e" # 深色操作符/弱化文本（operator/textMuted，≥4.5:1）；浅色非活跃文本（textInactive，≥3:1）
+gray-400: "#94a3b8" # 深色标点/非活跃（punctuation/textInactive/bracket6/gitUntracked）；浅色弱边框（borderDim/gitIgnored）
+gray-350: "#a5b4cb" # 深色注释（comment，专用注释色）
+gray-300: "#cbd5e1" # 深色降权变量（variableDim/textDim）；浅色边框/选中（border/borderSubtle/selectedBg）
+gray-200: "#e2e8f0" # 深色正文（text/variable）；浅色浮层表面（surfaceTooltip/fillMedium）
+gray-100: "#f1f5f9" # 浅色次级背景（bgMuted/hoverBg/surfaceFloating/fillSubtle）
+gray-50: "#f9fafb" # 浅色编辑器背景（bg/surfaceGround）
 
 # ==================== 纯色 ====================
 white: "#ffffff" # 纯白

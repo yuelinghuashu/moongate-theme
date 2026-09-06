@@ -77,6 +77,78 @@ export function detectPrimitiveReference(value, context, primitiveKeys) {
 }
 
 /**
+ * 分层引用强校验（架构污染 → 构建失败）
+ *
+ * 组件/语义规则层（workbench / semantic / tokenColors）只允许引用语义层变量
+ * （${semantic-role}），禁止直接引用原始值（{primitive}）。语义层文件内部
+ * 才允许用 {primitive}。
+ *
+ * @param {object|array} obj 待扫描的对象
+ * @param {string} context 描述性上下文（用于报错信息）
+ * @param {string[]} primitiveKeys 原始值键集合
+ * @returns {void} 发现直接原始值引用时抛错
+ */
+export function assertNoDirectPrimitiveRefs(obj, context, primitiveKeys) {
+  const visit = (value, path) => {
+    if (typeof value === "string") {
+      const refs = value.match(/(?<!\$)\{([a-zA-Z0-9_-]+)\}/g) || []
+      for (const ref of refs) {
+        const name = ref.slice(1, -1)
+        if (primitiveKeys.includes(name)) {
+          throw new Error(
+            `[架构违规] ${context}${path ? ` (${path})` : ""} 直接引用了原始值 "{${name}}"。\n` +
+            `   颜色必须经过 "原始值 → 语义层 → 组件层" 链条；请改为引用语义层变量（\${role}）。`,
+          )
+        }
+      }
+    } else if (Array.isArray(value)) {
+      value.forEach((v, i) => visit(v, `${path}[${i}]`))
+    } else if (value && typeof value === "object") {
+      for (const [k, v] of Object.entries(value)) {
+        visit(v, path ? `${path}.${k}` : k)
+      }
+    }
+  }
+  visit(obj, "")
+}
+
+/**
+ * 语义层文件只允许引用原始值（{primitive}），禁止 ${var} 与引用非 primitive 键
+ * @param {object} semantics 语义层原始对象
+ * @param {string[]} primitiveKeys 原始值键集合
+ */
+export function assertSemanticReferencesPrimitivesOnly(semantics, primitiveKeys) {
+  const visit = (value, path) => {
+    if (typeof value === "string") {
+      const varRefs = value.match(/\$\{([a-zA-Z0-9_-]+)\}/g) || []
+      if (varRefs.length) {
+        throw new Error(
+          `[架构违规] 语义层 (${path || "?"}) 使用了 \${...} 引用 ${varRefs.join(", ")}。\n` +
+          `   语义层只能引用原始值 {primitive}，组件层才能引用 \${semantic-role}。`,
+        )
+      }
+      const tokenRefs = value.match(/(?<!\$)\{([a-zA-Z0-9_-]+)\}/g) || []
+      for (const ref of tokenRefs) {
+        const name = ref.slice(1, -1)
+        if (!primitiveKeys.includes(name)) {
+          throw new Error(
+            `[架构违规] 语义层 (${path || "?"}) 引用了非原始值 "{${name}}"。\n` +
+            `   语义层只能引用原始值；跨语义角色引用请先在 primitives 中定义。`,
+          )
+        }
+      }
+    } else if (Array.isArray(value)) {
+      value.forEach((v, i) => visit(v, `${path}[${i}]`))
+    } else if (value && typeof value === "object") {
+      for (const [k, v] of Object.entries(value)) {
+        visit(v, path ? `${path}.${k}` : k)
+      }
+    }
+  }
+  visit(semantics, "")
+}
+
+/**
  * 替换变量 ${var} 为最终色值
  */
 export function replaceVariables(obj, colors, context = "", primitiveKeys = []) {
@@ -127,4 +199,29 @@ export function replaceVariables(obj, colors, context = "", primitiveKeys = []) 
     return result
   }
   return obj
+}
+/**
+ * 消费者/规则层禁止直写裸 hex 色值（#RRGGBB / #RRGGBBAA 等）
+ *
+ * 所有颜色必须走 "原始值 → 语义层 → 组件层" 链条；组件层只能引用
+ * ${semantic-role}。需要透明度时在语义层用 "{primitive}AA" 后缀表达。
+ */
+export function assertNoRawHexColors(obj, context) {
+  const visit = (value, path) => {
+    if (typeof value === "string") {
+      if (/^#([0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(value)) {
+        throw new Error(
+          `[架构违规] ${context}${path ? ` (${path})` : ""} 直写了裸色值 "${value}"。\n` +
+            `   请改走 "原始值 → 语义层 → 组件层" 链条（需要透明度用语义层 {primitive}AA 后缀）。`,
+        )
+      }
+    } else if (Array.isArray(value)) {
+      value.forEach((v, i) => visit(v, `${path}[${i}]`))
+    } else if (value && typeof value === "object") {
+      for (const [k, v] of Object.entries(value)) {
+        visit(v, path ? `${path}.${k}` : k)
+      }
+    }
+  }
+  visit(obj, "")
 }

@@ -4,12 +4,12 @@
 
 为了确保设计系统的长期可维护性和语义一致性，请遵循以下决策路径：
 
-| 场景 | 查找位置 | 禁止行为 |
-|------|----------|----------|
-| **我需要定义新的基础色值**（如 `blue-600`） | `primitives/colors.yaml` | ❌ 不要在语义层或组件层直接写色值 |
-| **我需要给某个语义角色赋值**（如 `primary` 应该是什么颜色） | `semantics/*.yaml`（引用原始值） | ❌ 不要在组件层直接引用原始值 |
-| **我要为 UI 组件设置样式**（如 `sideBar.background`） | 引用语义层变量（如 `${surfaceRaised}`） | ❌ 不要直接使用 `${blue-500}` 或硬编码色值 |
-| **语义层缺少我需要的角色** | 在语义层新增一个逻辑角色（如 `actionHover`），再在组件中引用它 | ❌ 禁止在组件层发明新变量 |
+| 场景                                                        | 查找位置                                                       | 禁止行为                                   |
+| ----------------------------------------------------------- | -------------------------------------------------------------- | ------------------------------------------ |
+| **我需要定义新的基础色值**（如 `blue-600`）                 | `primitives/colors.yaml`                                       | ❌ 不要在语义层或组件层直接写色值          |
+| **我需要给某个语义角色赋值**（如 `primary` 应该是什么颜色） | `semantics/*.yaml`（引用原始值）                               | ❌ 不要在组件层直接引用原始值              |
+| **我要为 UI 组件设置样式**（如 `sideBar.background`）       | 引用语义层变量（如 `${surfaceRaised}`）                        | ❌ 不要直接使用 `${blue-500}` 或硬编码色值 |
+| **语义层缺少我需要的角色**                                  | 在语义层新增一个逻辑角色（如 `actionHover`），再在组件中引用它 | ❌ 禁止在组件层发明新变量                  |
 
 > **核心原则**：所有颜色必须经过"原始值 → 语义层 → 组件层"的传递链条，任何跨层直接引用都是**架构污染**。
 
@@ -17,84 +17,80 @@
 
 ### Blue 色系
 
-| 令牌 | 色值 | 预览 |
-|------|------|------|
-| `--moongate-blue-500` | `#3b82f6` | ![](https://placehold.co/20x20/3b82f6/3b82f6?text=+) |
-| `--moongate-blue-600` | `#2563eb` | ![](https://placehold.co/20x20/2563eb/2563eb?text=+) |
-| `--moongate-blue-700` | `#0284c7` | ![](https://placehold.co/20x20/0284c7/0284c7?text=+) |
-| `--moongate-blue-800` | `#0369a1` | ![](https://placehold.co/20x20/0369a1/0369a1?text=+) |
-| `--moongate-blue-900` | `#1e3a8a` | ![](https://placehold.co/20x20/1e3a8a/1e3a8a?text=+) |
-| `--moongate-blue-950` | `#1e40af` | ![](https://placehold.co/20x20/1e40af/1e40af?text=+) |
-| `--moongate-blue-glow` | `#7dd3fc` | ![](https://placehold.co/20x20/7dd3fc/7dd3fc?text=+) |
+| 令牌                        | 色值      | 预览                                                 |
+| --------------------------- | --------- | ---------------------------------------------------- |
+| `--moongate-blue-500`       | `#3b82f6` | ![](https://placehold.co/20x20/3b82f6/3b82f6?text=+) |
+| `--moongate-blue-600`       | `#2563eb` | ![](https://placehold.co/20x20/2563eb/2563eb?text=+) |
+| `--moongate-blue-700`       | `#0284c7` | ![](https://placehold.co/20x20/0284c7/0284c7?text=+) |
+| `--moongate-blue-800`       | `#0369a1` | ![](https://placehold.co/20x20/0369a1/0369a1?text=+) |
+| `--moongate-blue-950`       | `#1e40af` | ![](https://placehold.co/20x20/1e40af/1e40af?text=+) |
+| `--moongate-blue-glow`      | `#7dd3fc` | ![](https://placehold.co/20x20/7dd3fc/7dd3fc?text=+) |
 | `--moongate-blue-glow-dark` | `#87cefa` | ![](https://placehold.co/20x20/87cefa/87cefa?text=+) |
 
 ### Green 色系
 
-| 令牌 | 色值 | 预览 |
-|------|------|------|
+| 令牌                   | 色值      | 预览                                                 |
+| ---------------------- | --------- | ---------------------------------------------------- |
 | `--moongate-green-400` | `#34d399` | ![](https://placehold.co/20x20/34d399/34d399?text=+) |
 | `--moongate-green-600` | `#059669` | ![](https://placehold.co/20x20/059669/059669?text=+) |
-| `--moongate-green-700` | `#10b981` | ![](https://placehold.co/20x20/10b981/10b981?text=+) |
 | `--moongate-green-800` | `#047857` | ![](https://placehold.co/20x20/047857/047857?text=+) |
 
 ### Yellow 色系
 
-| 令牌 | 色值 | 预览 |
-|------|------|------|
+| 令牌                    | 色值      | 预览                                                 |
+| ----------------------- | --------- | ---------------------------------------------------- |
 | `--moongate-yellow-400` | `#fbbf24` | ![](https://placehold.co/20x20/fbbf24/fbbf24?text=+) |
-| `--moongate-yellow-500` | `#f59e0b` | ![](https://placehold.co/20x20/f59e0b/f59e0b?text=+) |
 | `--moongate-yellow-600` | `#d97706` | ![](https://placehold.co/20x20/d97706/d97706?text=+) |
 | `--moongate-yellow-700` | `#b45309` | ![](https://placehold.co/20x20/b45309/b45309?text=+) |
 
 ### Red 色系
 
-| 令牌 | 色值 | 预览 |
-|------|------|------|
+| 令牌                 | 色值      | 预览                                                 |
+| -------------------- | --------- | ---------------------------------------------------- |
 | `--moongate-red-400` | `#f87171` | ![](https://placehold.co/20x20/f87171/f87171?text=+) |
-| `--moongate-red-500` | `#ef4444` | ![](https://placehold.co/20x20/ef4444/ef4444?text=+) |
 | `--moongate-red-600` | `#dc2626` | ![](https://placehold.co/20x20/dc2626/dc2626?text=+) |
 | `--moongate-red-700` | `#b91c1c` | ![](https://placehold.co/20x20/b91c1c/b91c1c?text=+) |
 
 ### Cyan 色系
 
-| 令牌 | 色值 | 预览 |
-|------|------|------|
+| 令牌                  | 色值      | 预览                                                 |
+| --------------------- | --------- | ---------------------------------------------------- |
 | `--moongate-cyan-400` | `#22d3ee` | ![](https://placehold.co/20x20/22d3ee/22d3ee?text=+) |
 | `--moongate-cyan-500` | `#0891b2` | ![](https://placehold.co/20x20/0891b2/0891b2?text=+) |
 | `--moongate-cyan-700` | `#0e7490` | ![](https://placehold.co/20x20/0e7490/0e7490?text=+) |
 
 ### Purple 色系
 
-| 令牌 | 色值 | 预览 |
-|------|------|------|
+| 令牌                    | 色值      | 预览                                                 |
+| ----------------------- | --------- | ---------------------------------------------------- |
 | `--moongate-purple-400` | `#c084fc` | ![](https://placehold.co/20x20/c084fc/c084fc?text=+) |
 | `--moongate-purple-500` | `#9333ea` | ![](https://placehold.co/20x20/9333ea/9333ea?text=+) |
 | `--moongate-purple-700` | `#7e22ce` | ![](https://placehold.co/20x20/7e22ce/7e22ce?text=+) |
 
 ### Gray 色系
 
-| 令牌 | 色值 | 预览 |
-|------|------|------|
+| 令牌                  | 色值      | 预览                                                 |
+| --------------------- | --------- | ---------------------------------------------------- |
 | `--moongate-gray-900` | `#0f172a` | ![](https://placehold.co/20x20/0f172a/0f172a?text=+) |
 | `--moongate-gray-850` | `#131c31` | ![](https://placehold.co/20x20/131c31/131c31?text=+) |
 | `--moongate-gray-800` | `#1e293b` | ![](https://placehold.co/20x20/1e293b/1e293b?text=+) |
 | `--moongate-gray-750` | `#252e40` | ![](https://placehold.co/20x20/252e40/252e40?text=+) |
 | `--moongate-gray-700` | `#2d3748` | ![](https://placehold.co/20x20/2d3748/2d3748?text=+) |
 | `--moongate-gray-600` | `#475569` | ![](https://placehold.co/20x20/475569/475569?text=+) |
-| `--moongate-gray-550` | `#7a8c9e` | ![](https://placehold.co/20x20/7a8c9e/7a8c9e?text=+) |
-| `--moongate-gray-525` | `#a5b4cb` | ![](https://placehold.co/20x20/a5b4cb/a5b4cb?text=+) |
+| `--moongate-gray-550` | `#55647c` | ![](https://placehold.co/20x20/55647c/55647c?text=+) |
 | `--moongate-gray-500` | `#64748b` | ![](https://placehold.co/20x20/64748b/64748b?text=+) |
-| `--moongate-gray-450` | `#7c8ea3` | ![](https://placehold.co/20x20/7c8ea3/7c8ea3?text=+) |
+| `--moongate-gray-450` | `#7a8c9e` | ![](https://placehold.co/20x20/7a8c9e/7a8c9e?text=+) |
 | `--moongate-gray-400` | `#94a3b8` | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+) |
+| `--moongate-gray-350` | `#a5b4cb` | ![](https://placehold.co/20x20/a5b4cb/a5b4cb?text=+) |
 | `--moongate-gray-300` | `#cbd5e1` | ![](https://placehold.co/20x20/cbd5e1/cbd5e1?text=+) |
 | `--moongate-gray-200` | `#e2e8f0` | ![](https://placehold.co/20x20/e2e8f0/e2e8f0?text=+) |
 | `--moongate-gray-100` | `#f1f5f9` | ![](https://placehold.co/20x20/f1f5f9/f1f5f9?text=+) |
-| `--moongate-gray-50` | `#f9fafb` | ![](https://placehold.co/20x20/f9fafb/f9fafb?text=+) |
+| `--moongate-gray-50`  | `#f9fafb` | ![](https://placehold.co/20x20/f9fafb/f9fafb?text=+) |
 
 ### 纯色
 
-| 令牌 | 色值 | 预览 |
-|------|------|------|
+| 令牌               | 色值      | 预览                                                 |
+| ------------------ | --------- | ---------------------------------------------------- |
 | `--moongate-white` | `#ffffff` | ![](https://placehold.co/20x20/ffffff/ffffff?text=+) |
 | `--moongate-black` | `#000000` | ![](https://placehold.co/20x20/000000/000000?text=+) |
 
@@ -111,146 +107,154 @@
 
 ## 🌙 浅色模式语义层
 
-| 语义变量 | 色值 | 预览 | WCAG 对比度（vs `bg`） |
-|----------|------|------|------------------------|
-| `primary` | `#1e40af` | ![](https://placehold.co/20x20/1e40af/1e40af?text=+) | 8.35:1 |
-| `success` | `#047857` | ![](https://placehold.co/20x20/047857/047857?text=+) | 5.25:1 |
-| `warning` | `#b45309` | ![](https://placehold.co/20x20/b45309/b45309?text=+) | 4.81:1 |
-| `error` | `#b91c1c` | ![](https://placehold.co/20x20/b91c1c/b91c1c?text=+) | 6.19:1 |
-| `highlight` | `#0369a1` | ![](https://placehold.co/20x20/0369a1/0369a1?text=+) | - |
-| `cyan` | `#0e7490` | ![](https://placehold.co/20x20/0e7490/0e7490?text=+) | - |
-| `purple` | `#7e22ce` | ![](https://placehold.co/20x20/7e22ce/7e22ce?text=+) | - |
-| `function` | `#0369a1` | ![](https://placehold.co/20x20/0369a1/0369a1?text=+) | - |
-| `operator` | `#475569` | ![](https://placehold.co/20x20/475569/475569?text=+) | - |
-| `comment` | `#475569` | ![](https://placehold.co/20x20/475569/475569?text=+) | 7.25:1 |
-| `variable` | `#0f172a` | ![](https://placehold.co/20x20/0f172a/0f172a?text=+) | - |
-| `variableDim` | `#475569` | ![](https://placehold.co/20x20/475569/475569?text=+) | - |
-| `textMuted` | `#475569` | ![](https://placehold.co/20x20/475569/475569?text=+) | 7.25:1 |
-| `punctuation` | `#64748b` | ![](https://placehold.co/20x20/64748b/64748b?text=+) | - |
-| `bg` | `#f9fafb` | ![](https://placehold.co/20x20/f9fafb/f9fafb?text=+) | - |
-| `bgElevated` | `#ffffff` | ![](https://placehold.co/20x20/ffffff/ffffff?text=+) | - |
-| `bgMuted` | `#f1f5f9` | ![](https://placehold.co/20x20/f1f5f9/f1f5f9?text=+) | - |
-| `bgHover` | `#0284c715` | ![](https://placehold.co/20x20/0284c715/0284c715?text=+) | - |
-| `bgActive` | `#0284c725` | ![](https://placehold.co/20x20/0284c725/0284c725?text=+) | - |
-| `hoverBg` | `#f1f5f9` | ![](https://placehold.co/20x20/f1f5f9/f1f5f9?text=+) | - |
-| `selectedBg` | `#cbd5e1` | ![](https://placehold.co/20x20/cbd5e1/cbd5e1?text=+) | - |
-| `surfaceGround` | `#f9fafb` | ![](https://placehold.co/20x20/f9fafb/f9fafb?text=+) | - |
-| `surfaceRaised` | `#ffffff` | ![](https://placehold.co/20x20/ffffff/ffffff?text=+) | - |
-| `surfaceFloating` | `#f1f5f9` | ![](https://placehold.co/20x20/f1f5f9/f1f5f9?text=+) | - |
-| `surfaceTooltip` | `#e2e8f0` | ![](https://placehold.co/20x20/e2e8f0/e2e8f0?text=+) | - |
-| `borderFloating` | `#0284c780` | ![](https://placehold.co/20x20/0284c780/0284c780?text=+) | - |
-| `text` | `#0f172a` | ![](https://placehold.co/20x20/0f172a/0f172a?text=+) | 17.08:1 |
-| `textDim` | `#475569` | ![](https://placehold.co/20x20/475569/475569?text=+) | 7.25:1 |
-| `textInactive` | `#94a3b8` | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+) | - |
-| `border` | `#cbd5e1` | ![](https://placehold.co/20x20/cbd5e1/cbd5e1?text=+) | - |
-| `borderHover` | `#0284c7` | ![](https://placehold.co/20x20/0284c7/0284c7?text=+) | - |
-| `borderDim` | `#94a3b8` | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+) | - |
-| `buttonHoverBg` | `#0284c7` | ![](https://placehold.co/20x20/0284c7/0284c7?text=+) | - |
-| `white` | `#ffffff` | ![](https://placehold.co/20x20/ffffff/ffffff?text=+) | - |
-| `fillSubtle` | `#f1f5f9` | ![](https://placehold.co/20x20/f1f5f9/f1f5f9?text=+) | - |
-| `fillMedium` | `#e2e8f0` | ![](https://placehold.co/20x20/e2e8f0/e2e8f0?text=+) | - |
-| `borderSubtle` | `#cbd5e1` | ![](https://placehold.co/20x20/cbd5e1/cbd5e1?text=+) | - |
-| `ansiBlack` | `#0f172a` | ![](https://placehold.co/20x20/0f172a/0f172a?text=+) | - |
-| `ansiRed` | `#b91c1c` | ![](https://placehold.co/20x20/b91c1c/b91c1c?text=+) | - |
-| `ansiGreen` | `#059669` | ![](https://placehold.co/20x20/059669/059669?text=+) | - |
-| `ansiYellow` | `#b45309` | ![](https://placehold.co/20x20/b45309/b45309?text=+) | - |
-| `ansiBlue` | `#0284c7` | ![](https://placehold.co/20x20/0284c7/0284c7?text=+) | - |
-| `ansiMagenta` | `#7e22ce` | ![](https://placehold.co/20x20/7e22ce/7e22ce?text=+) | - |
-| `ansiCyan` | `#0e7490` | ![](https://placehold.co/20x20/0e7490/0e7490?text=+) | - |
-| `ansiWhite` | `#e2e8f0` | ![](https://placehold.co/20x20/e2e8f0/e2e8f0?text=+) | - |
-| `ansiBrightBlack` | `#64748b` | ![](https://placehold.co/20x20/64748b/64748b?text=+) | - |
-| `ansiBrightRed` | `#f87171` | ![](https://placehold.co/20x20/f87171/f87171?text=+) | - |
-| `ansiBrightGreen` | `#34d399` | ![](https://placehold.co/20x20/34d399/34d399?text=+) | - |
-| `ansiBrightYellow` | `#fbbf24` | ![](https://placehold.co/20x20/fbbf24/fbbf24?text=+) | - |
-| `ansiBrightBlue` | `#2563eb` | ![](https://placehold.co/20x20/2563eb/2563eb?text=+) | - |
-| `ansiBrightMagenta` | `#c084fc` | ![](https://placehold.co/20x20/c084fc/c084fc?text=+) | - |
-| `ansiBrightCyan` | `#22d3ee` | ![](https://placehold.co/20x20/22d3ee/22d3ee?text=+) | - |
-| `ansiBrightWhite` | `#ffffff` | ![](https://placehold.co/20x20/ffffff/ffffff?text=+) | - |
-| `bracket1` | `#0284c7` | ![](https://placehold.co/20x20/0284c7/0284c7?text=+) | - |
-| `bracket2` | `#059669` | ![](https://placehold.co/20x20/059669/059669?text=+) | - |
-| `bracket3` | `#b45309` | ![](https://placehold.co/20x20/b45309/b45309?text=+) | - |
-| `bracket4` | `#7e22ce` | ![](https://placehold.co/20x20/7e22ce/7e22ce?text=+) | - |
-| `bracket5` | `#0e7490` | ![](https://placehold.co/20x20/0e7490/0e7490?text=+) | - |
-| `bracket6` | `#64748b` | ![](https://placehold.co/20x20/64748b/64748b?text=+) | - |
-| `scrollbar` | `#0284c7` | ![](https://placehold.co/20x20/0284c7/0284c7?text=+) | - |
-| `gitAdded` | `#059669` | ![](https://placehold.co/20x20/059669/059669?text=+) | - |
-| `gitModified` | `#b45309` | ![](https://placehold.co/20x20/b45309/b45309?text=+) | - |
-| `gitDeleted` | `#b91c1c` | ![](https://placehold.co/20x20/b91c1c/b91c1c?text=+) | - |
-| `gitUntracked` | `#64748b` | ![](https://placehold.co/20x20/64748b/64748b?text=+) | - |
-| `gitIgnored` | `#94a3b8` | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+) | - |
-| `debugStart` | `#059669` | ![](https://placehold.co/20x20/059669/059669?text=+) | - |
-| `debugPause` | `#b45309` | ![](https://placehold.co/20x20/b45309/b45309?text=+) | - |
-| `debugStop` | `#b91c1c` | ![](https://placehold.co/20x20/b91c1c/b91c1c?text=+) | - |
+| 语义变量              | 色值        | 预览                                                     | WCAG 对比度（vs `bg`） |
+| --------------------- | ----------- | -------------------------------------------------------- | ---------------------- |
+| `primary`             | `#1e40af`   | ![](https://placehold.co/20x20/1e40af/1e40af?text=+)     | 8.35:1                 |
+| `success`             | `#047857`   | ![](https://placehold.co/20x20/047857/047857?text=+)     | 5.25:1                 |
+| `warning`             | `#b45309`   | ![](https://placehold.co/20x20/b45309/b45309?text=+)     | 4.81:1                 |
+| `error`               | `#b91c1c`   | ![](https://placehold.co/20x20/b91c1c/b91c1c?text=+)     | 6.19:1                 |
+| `highlight`           | `#0369a1`   | ![](https://placehold.co/20x20/0369a1/0369a1?text=+)     | -                      |
+| `cyan`                | `#0e7490`   | ![](https://placehold.co/20x20/0e7490/0e7490?text=+)     | -                      |
+| `purple`              | `#7e22ce`   | ![](https://placehold.co/20x20/7e22ce/7e22ce?text=+)     | -                      |
+| `function`            | `#0369a1`   | ![](https://placehold.co/20x20/0369a1/0369a1?text=+)     | -                      |
+| `operator`            | `#64748b`   | ![](https://placehold.co/20x20/64748b/64748b?text=+)     | -                      |
+| `comment`             | `#55647c`   | ![](https://placehold.co/20x20/55647c/55647c?text=+)     | 5.74:1                 |
+| `variable`            | `#0f172a`   | ![](https://placehold.co/20x20/0f172a/0f172a?text=+)     | -                      |
+| `variableDim`         | `#475569`   | ![](https://placehold.co/20x20/475569/475569?text=+)     | -                      |
+| `textMuted`           | `#64748b`   | ![](https://placehold.co/20x20/64748b/64748b?text=+)     | 4.55:1                 |
+| `punctuation`         | `#64748b`   | ![](https://placehold.co/20x20/64748b/64748b?text=+)     | -                      |
+| `bg`                  | `#f9fafb`   | ![](https://placehold.co/20x20/f9fafb/f9fafb?text=+)     | -                      |
+| `bgElevated`          | `#ffffff`   | ![](https://placehold.co/20x20/ffffff/ffffff?text=+)     | -                      |
+| `bgMuted`             | `#f1f5f9`   | ![](https://placehold.co/20x20/f1f5f9/f1f5f9?text=+)     | -                      |
+| `bgHover`             | `#0284c715` | ![](https://placehold.co/20x20/0284c715/0284c715?text=+) | -                      |
+| `bgActive`            | `#0284c725` | ![](https://placehold.co/20x20/0284c725/0284c725?text=+) | -                      |
+| `hoverBg`             | `#f1f5f9`   | ![](https://placehold.co/20x20/f1f5f9/f1f5f9?text=+)     | -                      |
+| `selectedBg`          | `#cbd5e1`   | ![](https://placehold.co/20x20/cbd5e1/cbd5e1?text=+)     | -                      |
+| `surfaceGround`       | `#f9fafb`   | ![](https://placehold.co/20x20/f9fafb/f9fafb?text=+)     | -                      |
+| `surfaceRaised`       | `#ffffff`   | ![](https://placehold.co/20x20/ffffff/ffffff?text=+)     | -                      |
+| `surfaceFloating`     | `#f1f5f9`   | ![](https://placehold.co/20x20/f1f5f9/f1f5f9?text=+)     | -                      |
+| `surfaceTooltip`      | `#e2e8f0`   | ![](https://placehold.co/20x20/e2e8f0/e2e8f0?text=+)     | -                      |
+| `borderFloating`      | `#0284c780` | ![](https://placehold.co/20x20/0284c780/0284c780?text=+) | -                      |
+| `text`                | `#0f172a`   | ![](https://placehold.co/20x20/0f172a/0f172a?text=+)     | 17.08:1                |
+| `textDim`             | `#475569`   | ![](https://placehold.co/20x20/475569/475569?text=+)     | 7.25:1                 |
+| `textInactive`        | `#7a8c9e`   | ![](https://placehold.co/20x20/7a8c9e/7a8c9e?text=+)     | -                      |
+| `selectionForeground` | `#0f172a`   | ![](https://placehold.co/20x20/0f172a/0f172a?text=+)     | -                      |
+| `overlayScrim`        | `#00000080` | ![](https://placehold.co/20x20/00000080/00000080?text=+) | -                      |
+| `codeDim`             | `#00000022` | ![](https://placehold.co/20x20/00000022/00000022?text=+) | -                      |
+| `border`              | `#cbd5e1`   | ![](https://placehold.co/20x20/cbd5e1/cbd5e1?text=+)     | -                      |
+| `borderHover`         | `#0284c7`   | ![](https://placehold.co/20x20/0284c7/0284c7?text=+)     | -                      |
+| `borderDim`           | `#94a3b8`   | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+)     | -                      |
+| `primarySolid`        | `#1e40af`   | ![](https://placehold.co/20x20/1e40af/1e40af?text=+)     | -                      |
+| `buttonHoverBg`       | `#0284c7`   | ![](https://placehold.co/20x20/0284c7/0284c7?text=+)     | -                      |
+| `white`               | `#ffffff`   | ![](https://placehold.co/20x20/ffffff/ffffff?text=+)     | -                      |
+| `fillSubtle`          | `#f1f5f9`   | ![](https://placehold.co/20x20/f1f5f9/f1f5f9?text=+)     | -                      |
+| `fillMedium`          | `#e2e8f0`   | ![](https://placehold.co/20x20/e2e8f0/e2e8f0?text=+)     | -                      |
+| `borderSubtle`        | `#cbd5e1`   | ![](https://placehold.co/20x20/cbd5e1/cbd5e1?text=+)     | -                      |
+| `ansiBlack`           | `#0f172a`   | ![](https://placehold.co/20x20/0f172a/0f172a?text=+)     | -                      |
+| `ansiRed`             | `#b91c1c`   | ![](https://placehold.co/20x20/b91c1c/b91c1c?text=+)     | -                      |
+| `ansiGreen`           | `#047857`   | ![](https://placehold.co/20x20/047857/047857?text=+)     | -                      |
+| `ansiYellow`          | `#b45309`   | ![](https://placehold.co/20x20/b45309/b45309?text=+)     | -                      |
+| `ansiBlue`            | `#0284c7`   | ![](https://placehold.co/20x20/0284c7/0284c7?text=+)     | -                      |
+| `ansiMagenta`         | `#7e22ce`   | ![](https://placehold.co/20x20/7e22ce/7e22ce?text=+)     | -                      |
+| `ansiCyan`            | `#0e7490`   | ![](https://placehold.co/20x20/0e7490/0e7490?text=+)     | -                      |
+| `ansiWhite`           | `#475569`   | ![](https://placehold.co/20x20/475569/475569?text=+)     | -                      |
+| `ansiBrightBlack`     | `#64748b`   | ![](https://placehold.co/20x20/64748b/64748b?text=+)     | -                      |
+| `ansiBrightRed`       | `#dc2626`   | ![](https://placehold.co/20x20/dc2626/dc2626?text=+)     | -                      |
+| `ansiBrightGreen`     | `#059669`   | ![](https://placehold.co/20x20/059669/059669?text=+)     | -                      |
+| `ansiBrightYellow`    | `#d97706`   | ![](https://placehold.co/20x20/d97706/d97706?text=+)     | -                      |
+| `ansiBrightBlue`      | `#2563eb`   | ![](https://placehold.co/20x20/2563eb/2563eb?text=+)     | -                      |
+| `ansiBrightMagenta`   | `#9333ea`   | ![](https://placehold.co/20x20/9333ea/9333ea?text=+)     | -                      |
+| `ansiBrightCyan`      | `#0891b2`   | ![](https://placehold.co/20x20/0891b2/0891b2?text=+)     | -                      |
+| `ansiBrightWhite`     | `#64748b`   | ![](https://placehold.co/20x20/64748b/64748b?text=+)     | -                      |
+| `bracket1`            | `#0284c7`   | ![](https://placehold.co/20x20/0284c7/0284c7?text=+)     | -                      |
+| `bracket2`            | `#059669`   | ![](https://placehold.co/20x20/059669/059669?text=+)     | -                      |
+| `bracket3`            | `#b45309`   | ![](https://placehold.co/20x20/b45309/b45309?text=+)     | -                      |
+| `bracket4`            | `#7e22ce`   | ![](https://placehold.co/20x20/7e22ce/7e22ce?text=+)     | -                      |
+| `bracket5`            | `#0e7490`   | ![](https://placehold.co/20x20/0e7490/0e7490?text=+)     | -                      |
+| `bracket6`            | `#64748b`   | ![](https://placehold.co/20x20/64748b/64748b?text=+)     | -                      |
+| `scrollbar`           | `#0284c7`   | ![](https://placehold.co/20x20/0284c7/0284c7?text=+)     | -                      |
+| `gitAdded`            | `#059669`   | ![](https://placehold.co/20x20/059669/059669?text=+)     | -                      |
+| `gitModified`         | `#b45309`   | ![](https://placehold.co/20x20/b45309/b45309?text=+)     | -                      |
+| `gitDeleted`          | `#b91c1c`   | ![](https://placehold.co/20x20/b91c1c/b91c1c?text=+)     | -                      |
+| `gitUntracked`        | `#64748b`   | ![](https://placehold.co/20x20/64748b/64748b?text=+)     | -                      |
+| `gitIgnored`          | `#94a3b8`   | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+)     | -                      |
+| `debugStart`          | `#059669`   | ![](https://placehold.co/20x20/059669/059669?text=+)     | -                      |
+| `debugPause`          | `#b45309`   | ![](https://placehold.co/20x20/b45309/b45309?text=+)     | -                      |
+| `debugStop`           | `#b91c1c`   | ![](https://placehold.co/20x20/b91c1c/b91c1c?text=+)     | -                      |
 
 ## 🌑 深色模式语义层
 
-| 语义变量 | 色值 | 预览 | WCAG 对比度（vs `bg`） |
-|----------|------|------|------------------------|
-| `primary` | `#3b82f6` | ![](https://placehold.co/20x20/3b82f6/3b82f6?text=+) | 4.85:1 |
-| `success` | `#34d399` | ![](https://placehold.co/20x20/34d399/34d399?text=+) | 9.29:1 |
-| `warning` | `#fbbf24` | ![](https://placehold.co/20x20/fbbf24/fbbf24?text=+) | 10.69:1 |
-| `error` | `#f87171` | ![](https://placehold.co/20x20/f87171/f87171?text=+) | 6.45:1 |
-| `highlight` | `#7dd3fc` | ![](https://placehold.co/20x20/7dd3fc/7dd3fc?text=+) | - |
-| `cyan` | `#22d3ee` | ![](https://placehold.co/20x20/22d3ee/22d3ee?text=+) | - |
-| `purple` | `#c084fc` | ![](https://placehold.co/20x20/c084fc/c084fc?text=+) | - |
-| `function` | `#87cefa` | ![](https://placehold.co/20x20/87cefa/87cefa?text=+) | - |
-| `operator` | `#7c8ea3` | ![](https://placehold.co/20x20/7c8ea3/7c8ea3?text=+) | - |
-| `comment` | `#a5b4cb` | ![](https://placehold.co/20x20/a5b4cb/a5b4cb?text=+) | 8.49:1 |
-| `variable` | `#e2e8f0` | ![](https://placehold.co/20x20/e2e8f0/e2e8f0?text=+) | - |
-| `variableDim` | `#cbd5e1` | ![](https://placehold.co/20x20/cbd5e1/cbd5e1?text=+) | - |
-| `textMuted` | `#7a8c9e` | ![](https://placehold.co/20x20/7a8c9e/7a8c9e?text=+) | 5.16:1 |
-| `punctuation` | `#94a3b8` | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+) | - |
-| `bg` | `#0f172a` | ![](https://placehold.co/20x20/0f172a/0f172a?text=+) | - |
-| `bgElevated` | `#131c31` | ![](https://placehold.co/20x20/131c31/131c31?text=+) | - |
-| `bgMuted` | `#1e293b` | ![](https://placehold.co/20x20/1e293b/1e293b?text=+) | - |
-| `bgHover` | `#3b82f620` | ![](https://placehold.co/20x20/3b82f620/3b82f620?text=+) | - |
-| `bgActive` | `#3b82f640` | ![](https://placehold.co/20x20/3b82f640/3b82f640?text=+) | - |
-| `hoverBg` | `#252e40` | ![](https://placehold.co/20x20/252e40/252e40?text=+) | - |
-| `selectedBg` | `#2563eb` | ![](https://placehold.co/20x20/2563eb/2563eb?text=+) | - |
-| `surfaceGround` | `#0f172a` | ![](https://placehold.co/20x20/0f172a/0f172a?text=+) | - |
-| `surfaceRaised` | `#131c31` | ![](https://placehold.co/20x20/131c31/131c31?text=+) | - |
-| `surfaceFloating` | `#1e293b` | ![](https://placehold.co/20x20/1e293b/1e293b?text=+) | - |
-| `surfaceTooltip` | `#252e40` | ![](https://placehold.co/20x20/252e40/252e40?text=+) | - |
-| `borderFloating` | `#3b82f640` | ![](https://placehold.co/20x20/3b82f640/3b82f640?text=+) | - |
-| `text` | `#e2e8f0` | ![](https://placehold.co/20x20/e2e8f0/e2e8f0?text=+) | 14.48:1 |
-| `textDim` | `#cbd5e1` | ![](https://placehold.co/20x20/cbd5e1/cbd5e1?text=+) | 12.02:1 |
-| `textInactive` | `#94a3b8` | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+) | - |
-| `border` | `#2d3748` | ![](https://placehold.co/20x20/2d3748/2d3748?text=+) | - |
-| `borderHover` | `#3b82f6` | ![](https://placehold.co/20x20/3b82f6/3b82f6?text=+) | - |
-| `borderDim` | `#475569` | ![](https://placehold.co/20x20/475569/475569?text=+) | - |
-| `buttonHoverBg` | `#2563eb` | ![](https://placehold.co/20x20/2563eb/2563eb?text=+) | - |
-| `white` | `#ffffff` | ![](https://placehold.co/20x20/ffffff/ffffff?text=+) | - |
-| `fillSubtle` | `#1e293b` | ![](https://placehold.co/20x20/1e293b/1e293b?text=+) | - |
-| `fillMedium` | `#252e40` | ![](https://placehold.co/20x20/252e40/252e40?text=+) | - |
-| `borderSubtle` | `#2d3748` | ![](https://placehold.co/20x20/2d3748/2d3748?text=+) | - |
-| `ansiBlack` | `#1e293b` | ![](https://placehold.co/20x20/1e293b/1e293b?text=+) | - |
-| `ansiRed` | `#f87171` | ![](https://placehold.co/20x20/f87171/f87171?text=+) | - |
-| `ansiGreen` | `#34d399` | ![](https://placehold.co/20x20/34d399/34d399?text=+) | - |
-| `ansiYellow` | `#fbbf24` | ![](https://placehold.co/20x20/fbbf24/fbbf24?text=+) | - |
-| `ansiBlue` | `#3b82f6` | ![](https://placehold.co/20x20/3b82f6/3b82f6?text=+) | - |
-| `ansiMagenta` | `#c084fc` | ![](https://placehold.co/20x20/c084fc/c084fc?text=+) | - |
-| `ansiCyan` | `#22d3ee` | ![](https://placehold.co/20x20/22d3ee/22d3ee?text=+) | - |
-| `ansiWhite` | `#e2e8f0` | ![](https://placehold.co/20x20/e2e8f0/e2e8f0?text=+) | - |
-| `ansiBrightBlack` | `#2d3748` | ![](https://placehold.co/20x20/2d3748/2d3748?text=+) | - |
-| `ansiBrightRed` | `#f87171` | ![](https://placehold.co/20x20/f87171/f87171?text=+) | - |
-| `ansiBrightGreen` | `#34d399` | ![](https://placehold.co/20x20/34d399/34d399?text=+) | - |
-| `ansiBrightYellow` | `#fbbf24` | ![](https://placehold.co/20x20/fbbf24/fbbf24?text=+) | - |
-| `ansiBrightBlue` | `#3b82f6` | ![](https://placehold.co/20x20/3b82f6/3b82f6?text=+) | - |
-| `ansiBrightMagenta` | `#c084fc` | ![](https://placehold.co/20x20/c084fc/c084fc?text=+) | - |
-| `ansiBrightCyan` | `#22d3ee` | ![](https://placehold.co/20x20/22d3ee/22d3ee?text=+) | - |
-| `ansiBrightWhite` | `#ffffff` | ![](https://placehold.co/20x20/ffffff/ffffff?text=+) | - |
-| `bracket1` | `#7dd3fc` | ![](https://placehold.co/20x20/7dd3fc/7dd3fc?text=+) | - |
-| `bracket2` | `#34d399` | ![](https://placehold.co/20x20/34d399/34d399?text=+) | - |
-| `bracket3` | `#fbbf24` | ![](https://placehold.co/20x20/fbbf24/fbbf24?text=+) | - |
-| `bracket4` | `#c084fc` | ![](https://placehold.co/20x20/c084fc/c084fc?text=+) | - |
-| `bracket5` | `#3b82f6` | ![](https://placehold.co/20x20/3b82f6/3b82f6?text=+) | - |
-| `bracket6` | `#94a3b8` | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+) | - |
-| `scrollbar` | `#3b82f6` | ![](https://placehold.co/20x20/3b82f6/3b82f6?text=+) | - |
-| `gitAdded` | `#34d399` | ![](https://placehold.co/20x20/34d399/34d399?text=+) | - |
-| `gitModified` | `#fbbf24` | ![](https://placehold.co/20x20/fbbf24/fbbf24?text=+) | - |
-| `gitDeleted` | `#f87171` | ![](https://placehold.co/20x20/f87171/f87171?text=+) | - |
-| `gitUntracked` | `#94a3b8` | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+) | - |
-| `gitIgnored` | `#2d3748` | ![](https://placehold.co/20x20/2d3748/2d3748?text=+) | - |
-| `debugStart` | `#34d399` | ![](https://placehold.co/20x20/34d399/34d399?text=+) | - |
-| `debugPause` | `#fbbf24` | ![](https://placehold.co/20x20/fbbf24/fbbf24?text=+) | - |
-| `debugStop` | `#f87171` | ![](https://placehold.co/20x20/f87171/f87171?text=+) | - |
+| 语义变量              | 色值        | 预览                                                     | WCAG 对比度（vs `bg`） |
+| --------------------- | ----------- | -------------------------------------------------------- | ---------------------- |
+| `primary`             | `#3b82f6`   | ![](https://placehold.co/20x20/3b82f6/3b82f6?text=+)     | 4.85:1                 |
+| `success`             | `#34d399`   | ![](https://placehold.co/20x20/34d399/34d399?text=+)     | 9.29:1                 |
+| `warning`             | `#fbbf24`   | ![](https://placehold.co/20x20/fbbf24/fbbf24?text=+)     | 10.69:1                |
+| `error`               | `#f87171`   | ![](https://placehold.co/20x20/f87171/f87171?text=+)     | 6.45:1                 |
+| `highlight`           | `#7dd3fc`   | ![](https://placehold.co/20x20/7dd3fc/7dd3fc?text=+)     | -                      |
+| `cyan`                | `#22d3ee`   | ![](https://placehold.co/20x20/22d3ee/22d3ee?text=+)     | -                      |
+| `purple`              | `#c084fc`   | ![](https://placehold.co/20x20/c084fc/c084fc?text=+)     | -                      |
+| `function`            | `#87cefa`   | ![](https://placehold.co/20x20/87cefa/87cefa?text=+)     | -                      |
+| `operator`            | `#7a8c9e`   | ![](https://placehold.co/20x20/7a8c9e/7a8c9e?text=+)     | -                      |
+| `comment`             | `#a5b4cb`   | ![](https://placehold.co/20x20/a5b4cb/a5b4cb?text=+)     | 8.49:1                 |
+| `variable`            | `#e2e8f0`   | ![](https://placehold.co/20x20/e2e8f0/e2e8f0?text=+)     | -                      |
+| `variableDim`         | `#cbd5e1`   | ![](https://placehold.co/20x20/cbd5e1/cbd5e1?text=+)     | -                      |
+| `textMuted`           | `#7a8c9e`   | ![](https://placehold.co/20x20/7a8c9e/7a8c9e?text=+)     | 5.16:1                 |
+| `punctuation`         | `#94a3b8`   | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+)     | -                      |
+| `bg`                  | `#0f172a`   | ![](https://placehold.co/20x20/0f172a/0f172a?text=+)     | -                      |
+| `bgElevated`          | `#131c31`   | ![](https://placehold.co/20x20/131c31/131c31?text=+)     | -                      |
+| `bgMuted`             | `#1e293b`   | ![](https://placehold.co/20x20/1e293b/1e293b?text=+)     | -                      |
+| `bgHover`             | `#3b82f620` | ![](https://placehold.co/20x20/3b82f620/3b82f620?text=+) | -                      |
+| `bgActive`            | `#3b82f640` | ![](https://placehold.co/20x20/3b82f640/3b82f640?text=+) | -                      |
+| `hoverBg`             | `#252e40`   | ![](https://placehold.co/20x20/252e40/252e40?text=+)     | -                      |
+| `selectedBg`          | `#2563eb`   | ![](https://placehold.co/20x20/2563eb/2563eb?text=+)     | -                      |
+| `surfaceGround`       | `#0f172a`   | ![](https://placehold.co/20x20/0f172a/0f172a?text=+)     | -                      |
+| `surfaceRaised`       | `#131c31`   | ![](https://placehold.co/20x20/131c31/131c31?text=+)     | -                      |
+| `surfaceFloating`     | `#1e293b`   | ![](https://placehold.co/20x20/1e293b/1e293b?text=+)     | -                      |
+| `surfaceTooltip`      | `#252e40`   | ![](https://placehold.co/20x20/252e40/252e40?text=+)     | -                      |
+| `borderFloating`      | `#3b82f640` | ![](https://placehold.co/20x20/3b82f640/3b82f640?text=+) | -                      |
+| `text`                | `#e2e8f0`   | ![](https://placehold.co/20x20/e2e8f0/e2e8f0?text=+)     | 14.48:1                |
+| `textDim`             | `#cbd5e1`   | ![](https://placehold.co/20x20/cbd5e1/cbd5e1?text=+)     | 12.02:1                |
+| `textInactive`        | `#94a3b8`   | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+)     | -                      |
+| `selectionForeground` | `#ffffff`   | ![](https://placehold.co/20x20/ffffff/ffffff?text=+)     | -                      |
+| `overlayScrim`        | `#000000b3` | ![](https://placehold.co/20x20/000000b3/000000b3?text=+) | -                      |
+| `codeDim`             | `#00000022` | ![](https://placehold.co/20x20/00000022/00000022?text=+) | -                      |
+| `border`              | `#2d3748`   | ![](https://placehold.co/20x20/2d3748/2d3748?text=+)     | -                      |
+| `borderHover`         | `#3b82f6`   | ![](https://placehold.co/20x20/3b82f6/3b82f6?text=+)     | -                      |
+| `borderDim`           | `#475569`   | ![](https://placehold.co/20x20/475569/475569?text=+)     | -                      |
+| `primarySolid`        | `#2563eb`   | ![](https://placehold.co/20x20/2563eb/2563eb?text=+)     | -                      |
+| `buttonHoverBg`       | `#2563eb`   | ![](https://placehold.co/20x20/2563eb/2563eb?text=+)     | -                      |
+| `white`               | `#ffffff`   | ![](https://placehold.co/20x20/ffffff/ffffff?text=+)     | -                      |
+| `fillSubtle`          | `#1e293b`   | ![](https://placehold.co/20x20/1e293b/1e293b?text=+)     | -                      |
+| `fillMedium`          | `#252e40`   | ![](https://placehold.co/20x20/252e40/252e40?text=+)     | -                      |
+| `borderSubtle`        | `#2d3748`   | ![](https://placehold.co/20x20/2d3748/2d3748?text=+)     | -                      |
+| `ansiBlack`           | `#1e293b`   | ![](https://placehold.co/20x20/1e293b/1e293b?text=+)     | -                      |
+| `ansiRed`             | `#f87171`   | ![](https://placehold.co/20x20/f87171/f87171?text=+)     | -                      |
+| `ansiGreen`           | `#34d399`   | ![](https://placehold.co/20x20/34d399/34d399?text=+)     | -                      |
+| `ansiYellow`          | `#fbbf24`   | ![](https://placehold.co/20x20/fbbf24/fbbf24?text=+)     | -                      |
+| `ansiBlue`            | `#3b82f6`   | ![](https://placehold.co/20x20/3b82f6/3b82f6?text=+)     | -                      |
+| `ansiMagenta`         | `#c084fc`   | ![](https://placehold.co/20x20/c084fc/c084fc?text=+)     | -                      |
+| `ansiCyan`            | `#22d3ee`   | ![](https://placehold.co/20x20/22d3ee/22d3ee?text=+)     | -                      |
+| `ansiWhite`           | `#e2e8f0`   | ![](https://placehold.co/20x20/e2e8f0/e2e8f0?text=+)     | -                      |
+| `ansiBrightBlack`     | `#2d3748`   | ![](https://placehold.co/20x20/2d3748/2d3748?text=+)     | -                      |
+| `ansiBrightRed`       | `#f87171`   | ![](https://placehold.co/20x20/f87171/f87171?text=+)     | -                      |
+| `ansiBrightGreen`     | `#34d399`   | ![](https://placehold.co/20x20/34d399/34d399?text=+)     | -                      |
+| `ansiBrightYellow`    | `#fbbf24`   | ![](https://placehold.co/20x20/fbbf24/fbbf24?text=+)     | -                      |
+| `ansiBrightBlue`      | `#3b82f6`   | ![](https://placehold.co/20x20/3b82f6/3b82f6?text=+)     | -                      |
+| `ansiBrightMagenta`   | `#c084fc`   | ![](https://placehold.co/20x20/c084fc/c084fc?text=+)     | -                      |
+| `ansiBrightCyan`      | `#22d3ee`   | ![](https://placehold.co/20x20/22d3ee/22d3ee?text=+)     | -                      |
+| `ansiBrightWhite`     | `#ffffff`   | ![](https://placehold.co/20x20/ffffff/ffffff?text=+)     | -                      |
+| `bracket1`            | `#7dd3fc`   | ![](https://placehold.co/20x20/7dd3fc/7dd3fc?text=+)     | -                      |
+| `bracket2`            | `#34d399`   | ![](https://placehold.co/20x20/34d399/34d399?text=+)     | -                      |
+| `bracket3`            | `#fbbf24`   | ![](https://placehold.co/20x20/fbbf24/fbbf24?text=+)     | -                      |
+| `bracket4`            | `#c084fc`   | ![](https://placehold.co/20x20/c084fc/c084fc?text=+)     | -                      |
+| `bracket5`            | `#3b82f6`   | ![](https://placehold.co/20x20/3b82f6/3b82f6?text=+)     | -                      |
+| `bracket6`            | `#94a3b8`   | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+)     | -                      |
+| `scrollbar`           | `#3b82f6`   | ![](https://placehold.co/20x20/3b82f6/3b82f6?text=+)     | -                      |
+| `gitAdded`            | `#34d399`   | ![](https://placehold.co/20x20/34d399/34d399?text=+)     | -                      |
+| `gitModified`         | `#fbbf24`   | ![](https://placehold.co/20x20/fbbf24/fbbf24?text=+)     | -                      |
+| `gitDeleted`          | `#f87171`   | ![](https://placehold.co/20x20/f87171/f87171?text=+)     | -                      |
+| `gitUntracked`        | `#94a3b8`   | ![](https://placehold.co/20x20/94a3b8/94a3b8?text=+)     | -                      |
+| `gitIgnored`          | `#2d3748`   | ![](https://placehold.co/20x20/2d3748/2d3748?text=+)     | -                      |
+| `debugStart`          | `#34d399`   | ![](https://placehold.co/20x20/34d399/34d399?text=+)     | -                      |
+| `debugPause`          | `#fbbf24`   | ![](https://placehold.co/20x20/fbbf24/fbbf24?text=+)     | -                      |
+| `debugStop`           | `#f87171`   | ![](https://placehold.co/20x20/f87171/f87171?text=+)     | -                      |

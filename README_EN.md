@@ -40,29 +40,30 @@ Moongate is a VS Code theme born from [moongate.top](https://moongate.top), brin
 - **Primary**: Cool lunar blue (dark `#3b82f6` / light `#1e40af`)
 - **Background**: Night sky `#0f172a` / moon white `#f9fafb`
 - **Elevation**: Four lightness steps (`surfaceGround` → `surfaceRaised` → `surfaceFloating` → `surfaceTooltip`)
-- **Design tokens**: DTCG‑based, auto‑generates CSS variables for cross‑platform reuse
+- **Design tokens**: DTCG-inspired three-layer tokens (primitives → semantics → components), auto‑generates CSS variables for cross‑platform reuse
 
 ## 🧠 Core Optimizations
 
-| Optimization                     | How Moongate Fixes It                                           |
-| -------------------------------- | --------------------------------------------------------------- |
-| **Day‑Night Consistency**        | Same hue, different lightness – seamless switching              |
+| Optimization                     | How Moongate Fixes It                                                                  |
+| -------------------------------- | -------------------------------------------------------------------------------------- |
+| **Day‑Night Consistency**        | Same hue, different lightness – seamless switching                                     |
 | **Function Def/Call Separation** | Definitions bold, calls not – unified across C/C++, Go, Java, C#, Python, Rust, JS, TS |
-| **JSON Nesting Depth**           | Blue → Cyan → Purple gradient – levels at a glance              |
-| **UI Physical Depth**            | Elevation system – natural "paper stack" effect                 |
-| **Design System Unity**          | DTCG tokens – one color language across all products            |
+| **JSON Nesting Depth**           | Blue → Cyan → Purple gradient – levels at a glance                                     |
+| **UI Physical Depth**            | Elevation system – natural "paper stack" effect                                        |
+| **Design System Unity**          | DTCG-inspired tokens – one color language across all products                          |
 
-## ✨ v2.7.0 Highlights
+## ✨ v2.7.1 Highlights
 
-- **🚀 3 new languages: C/C++, Java, C#** — preprocessor directives, pointers/templates, annotations/generics, LINQ, attributes and more; 316 scopes verified against VS Code's built-in grammars
-- **🎨 Full WCAG contrast audit** — 4 semantic roles + HTML Doctype fixed below standard; build now auto-checks 13 foreground roles to prevent regressions
-- **🔧 Semantic highlighting consistency** — TextMate layer aligned with semantic layer (function definitions bold, macro/namespace/interface colors unified) for identical visuals with or without a language server
+- **🎨 Light text hierarchy de-collapsed** — monotonic 15-step gray ramp; `comment/textDim/textMuted/variableDim/operator` no longer share one color; `textInactive` now ≥3:1; all 16 light-terminal ANSI colors readable (whites ≥4.5:1)
+- **🔧 Dark interactive contrast** — new `primarySolid`/`selectionForeground` roles lift white-on-solid and selection text from 3.68:1 / 4.19:1 to 5.17:1
+- **🛠️ Engineering checks** — cross-rule scope conflict detection, layer-reference & no-raw-hex enforcement, dark/light key parity, ANSI + UI-pair contrast matrix, all enforced at build time
+- **🤝 Ecosystem sync** — CSS/SCSS/TS tokens synced to moongate-vue and rebuilt (cross-repo `check-tokens` green)
 
 [📜 View full changelog](./CHANGELOG_EN.md)
 
 ## 📐 Design System
 
-Moongate is built on the DTCG design token standard, providing complete color, layout, typography, breakpoint, and z-index tokens.
+Moongate is built on DTCG-inspired design tokens, providing complete color, layout, typography, breakpoint, and z-index tokens.
 👉 [View full documentation](./docs/DESIGN_SYSTEM.md)
 👉 [Read the Moongate Visual Contract (monitor calibration guide)](./extras/VISUAL_CONTRACT_EN.md)
 👉 [SCSS tokens for Sass projects](./themes/_tokens.scss)
@@ -70,7 +71,7 @@ Moongate is built on the DTCG design token standard, providing complete color, l
 
 ## 🏗️ Engineering Build
 
-Moongate is not hand-written JSON — it's an industrial-grade build pipeline driven by **DTCG tokens + YAML semantic layers**:
+Moongate is not hand-written JSON — it's an industrial-grade build pipeline driven by **DTCG-inspired tokens + YAML semantic layers**:
 
 ```text
 ┌─────────────────────────────────────────────────────┐

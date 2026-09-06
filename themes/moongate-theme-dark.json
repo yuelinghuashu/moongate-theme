@@ -11,7 +11,7 @@
     "titleBar.border": "#2d3748",
     "menu.background": "#1e293b",
     "menu.foreground": "#e2e8f0",
-    "menu.selectionBackground": "#3b82f6",
+    "menu.selectionBackground": "#2563eb",
     "menu.selectionForeground": "#ffffff",
     "menu.border": "#3b82f640",
     "activityBar.background": "#131c31",
@@ -19,7 +19,7 @@
     "activityBar.inactiveForeground": "#94a3b8",
     "activityBar.border": "#2d3748",
     "activityBar.activeBorder": "#3b82f6",
-    "activityBarBadge.background": "#3b82f6",
+    "activityBarBadge.background": "#2563eb",
     "activityBarBadge.foreground": "#ffffff",
     "sideBar.background": "#131c31",
     "sideBar.foreground": "#e2e8f0",
@@ -59,7 +59,7 @@
     "input.foreground": "#e2e8f0",
     "input.border": "#3b82f640",
     "input.placeholderForeground": "#94a3b8",
-    "inputOption.activeBackground": "#3b82f6",
+    "inputOption.activeBackground": "#2563eb",
     "inputOption.activeForeground": "#ffffff",
     "inputValidation.errorBackground": "#f87171",
     "inputValidation.errorBorder": "#f87171",
@@ -70,23 +70,23 @@
     "dropdown.background": "#1e293b",
     "dropdown.foreground": "#e2e8f0",
     "dropdown.border": "#3b82f640",
-    "button.background": "#3b82f6",
+    "button.background": "#2563eb",
     "button.foreground": "#ffffff",
     "button.hoverBackground": "#2563eb",
     "button.secondaryBackground": "#131c31",
     "button.secondaryForeground": "#e2e8f0",
-    "badge.background": "#3b82f6",
+    "badge.background": "#2563eb",
     "badge.foreground": "#ffffff",
     "scrollbar.shadow": "#0f172a",
     "scrollbarSlider.background": "#3b82f660",
     "scrollbarSlider.hoverBackground": "#3b82f680",
     "scrollbarSlider.activeBackground": "#3b82f6",
     "list.activeSelectionBackground": "#2563eb",
-    "list.activeSelectionForeground": "#e2e8f0",
+    "list.activeSelectionForeground": "#ffffff",
     "list.hoverBackground": "#252e40",
     "list.hoverForeground": "#e2e8f0",
     "list.focusBackground": "#2563eb",
-    "list.focusForeground": "#e2e8f0",
+    "list.focusForeground": "#ffffff",
     "list.inactiveSelectionBackground": "#131c31",
     "list.inactiveSelectionForeground": "#94a3b8",
     "list.highlightForeground": "#3b82f6",
@@ -144,6 +144,7 @@
     "editorSuggestWidget.foreground": "#e2e8f0",
     "editorSuggestWidget.highlightForeground": "#3b82f6",
     "editorSuggestWidget.selectedBackground": "#2563eb",
+    "editorSuggestWidget.selectedForeground": "#ffffff",
     "editorHoverWidget.background": "#252e40",
     "editorHoverWidget.foreground": "#e2e8f0",
     "editorHoverWidget.border": "#3b82f640",
@@ -190,7 +191,7 @@
     "notifications.background": "#1e293b",
     "notifications.foreground": "#e2e8f0",
     "notifications.border": "#3b82f640",
-    "extensionButton.prominentBackground": "#3b82f6",
+    "extensionButton.prominentBackground": "#2563eb",
     "extensionButton.prominentForeground": "#ffffff",
     "extensionButton.prominentHoverBackground": "#2563eb",
     "progressBar.background": "#3b82f6",
@@ -259,7 +260,7 @@
     "symbolIcon.nullForeground": "#7a8c9e",
     "symbolIcon.numberForeground": "#fbbf24",
     "symbolIcon.objectForeground": "#fbbf24",
-    "symbolIcon.operatorForeground": "#7c8ea3",
+    "symbolIcon.operatorForeground": "#7a8c9e",
     "symbolIcon.packageForeground": "#fbbf24",
     "symbolIcon.propertyForeground": "#cbd5e1",
     "symbolIcon.referenceForeground": "#94a3b8",
@@ -315,7 +316,7 @@
     "statusBarItem.offlineForeground": "#0f172a",
     "tab.selectedBackground": "#2563eb",
     "tab.selectedBorderTop": "#3b82f6",
-    "tab.selectedForeground": "#e2e8f0",
+    "tab.selectedForeground": "#ffffff",
     "banner.background": "#3b82f620",
     "banner.foreground": "#e2e8f0",
     "banner.iconForeground": "#3b82f6",
@@ -407,6 +408,53 @@
     },
     {
       "scope": [
+        "entity.name.namespace.cpp",
+        "entity.name.scope-resolution.function.call.cpp",
+        "entity.name.scope-resolution.function.definition.cpp",
+        "entity.name.scope-resolution.template.call.cpp",
+        "entity.name.scope-resolution.template.definition.cpp",
+        "entity.name.scope-resolution.type.cpp",
+        "entity.name.type.namespace.cs",
+        "keyword.operator",
+        "keyword.operator.assignment.compound.shell",
+        "keyword.operator.assignment.shell",
+        "keyword.operator.comparison.sql",
+        "keyword.operator.concatenator.sql",
+        "keyword.operator.dockerfile",
+        "keyword.operator.math.sql",
+        "keyword.operator.star.sql",
+        "meta.brace",
+        "meta.method-call meta.method-call meta.method-call entity.name.function",
+        "meta.object.key meta.object.key",
+        "meta.object.key.nested",
+        "meta.tag.inline.start.html",
+        "meta.tag.metadata.doctype.html",
+        "meta.tag.object.start.html",
+        "punctuation",
+        "punctuation.accessor",
+        "punctuation.definition.markdown",
+        "punctuation.definition.tag.begin.html",
+        "punctuation.definition.tag.begin.js.jsx",
+        "punctuation.definition.tag.begin.tsx",
+        "punctuation.definition.tag.end.html",
+        "punctuation.definition.tag.end.js.jsx",
+        "punctuation.definition.tag.end.tsx",
+        "punctuation.separator.dot",
+        "punctuation.separator.key-value",
+        "punctuation.separator.mapping.key-value",
+        "punctuation.separator.statement.*.shell",
+        "punctuation.terminator.statement.*.shell",
+        "variable.other.member",
+        "variable.other.property",
+        "variable.other.property.go"
+      ],
+      "settings": {
+        "foreground": "#7a8c9e"
+      },
+      "name": "Operator - 视觉退后"
+    },
+    {
+      "scope": [
         "comment.block.documentation entity.name.type",
         "comment.block.documentation storage.type",
         "constant.character.entity.js.jsx",
@@ -461,7 +509,6 @@
         "entity.name.type.option.rust",
         "entity.name.type.result.rust",
         "keyword",
-        "keyword.channel.go",
         "keyword.const.go",
         "keyword.control.*.shell",
         "keyword.control.import.go",
@@ -529,44 +576,6 @@
         "foreground": "#3b82f6"
       },
       "name": "Attributes - 主蓝"
-    },
-    {
-      "scope": [
-        "entity.name.scope-resolution.function.call.cpp",
-        "entity.name.scope-resolution.function.definition.cpp",
-        "entity.name.scope-resolution.template.call.cpp",
-        "entity.name.scope-resolution.template.definition.cpp",
-        "entity.name.scope-resolution.type.cpp",
-        "keyword.operator",
-        "keyword.operator.assignment.compound.shell",
-        "keyword.operator.assignment.shell",
-        "keyword.operator.comparison.sql",
-        "keyword.operator.concatenator.sql",
-        "keyword.operator.dockerfile",
-        "keyword.operator.math.sql",
-        "keyword.operator.star.sql",
-        "meta.brace",
-        "meta.tag.inline.start.html",
-        "meta.tag.object.start.html",
-        "punctuation",
-        "punctuation.accessor",
-        "punctuation.definition.markdown",
-        "punctuation.definition.tag.begin.html",
-        "punctuation.definition.tag.begin.js.jsx",
-        "punctuation.definition.tag.begin.tsx",
-        "punctuation.definition.tag.end.html",
-        "punctuation.definition.tag.end.js.jsx",
-        "punctuation.definition.tag.end.tsx",
-        "punctuation.separator.dot",
-        "punctuation.separator.key-value",
-        "punctuation.separator.mapping.key-value",
-        "punctuation.separator.statement.*.shell",
-        "punctuation.terminator.statement.*.shell"
-      ],
-      "settings": {
-        "foreground": "#7c8ea3"
-      },
-      "name": "Operator - 视觉退后"
     },
     {
       "scope": [
@@ -801,23 +810,6 @@
     },
     {
       "scope": [
-        "entity.name.namespace.cpp",
-        "entity.name.type.namespace.cs",
-        "meta.method-call meta.method-call meta.method-call entity.name.function",
-        "meta.object.key meta.object.key",
-        "meta.object.key.nested",
-        "meta.tag.metadata.doctype.html",
-        "variable.other.member",
-        "variable.other.property",
-        "variable.other.property.go"
-      ],
-      "settings": {
-        "foreground": "#7a8c9e"
-      },
-      "name": "Variables - 成员属性"
-    },
-    {
-      "scope": [
         "entity.name.function.constructor.cpp",
         "entity.name.function.cs",
         "entity.name.function.definition.cpp",
@@ -956,6 +948,17 @@
     },
     {
       "scope": [
+        "markup.quote.markdown",
+        "variable.language.discard.cs"
+      ],
+      "settings": {
+        "foreground": "#7a8c9e",
+        "fontStyle": "italic"
+      },
+      "name": "C# - Discard"
+    },
+    {
+      "scope": [
         "constant.character.escape.shell",
         "constant.character.escaped.dockerfile"
       ],
@@ -1009,16 +1012,6 @@
     },
     {
       "scope": [
-        "variable.language.discard.cs"
-      ],
-      "settings": {
-        "foreground": "#7c8ea3",
-        "fontStyle": "italic"
-      },
-      "name": "C# - Discard"
-    },
-    {
-      "scope": [
         "keyword.control.dockerfile"
       ],
       "settings": {
@@ -1036,16 +1029,6 @@
         "fontStyle": "strikethrough"
       },
       "name": "Markdown Strikethrough"
-    },
-    {
-      "scope": [
-        "markup.quote.markdown"
-      ],
-      "settings": {
-        "foreground": "#7a8c9e",
-        "fontStyle": "italic"
-      },
-      "name": "Markdown Quote"
     },
     {
       "scope": [

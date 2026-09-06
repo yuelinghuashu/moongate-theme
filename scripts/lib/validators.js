@@ -118,6 +118,10 @@ export function checkContrast(color1, color2, role, themeType) {
   if (role === "textMuted") {
     minRatio = 3.0
   }
+  if (role === "textInactive") {
+    // 非活跃 UI 文本（最弱档文本角色）允许 ≥3:1（大号/图形文本 AA）
+    minRatio = 3.0
+  }
 
   if (ratio < minRatio) {
     if (role === "textMuted") {
@@ -133,5 +137,107 @@ export function checkContrast(color1, color2, role, themeType) {
     }
   } else {
     console.log(`✅ ${themeType} · ${role}: ${ratio.toFixed(2)}:1`)
+  }
+}
+
+/** ANSI 黑族豁免：黑/亮黑为终端底色族，天然低对比，不参与阈值 */
+const ANSI_BLACK_EXEMPT = new Set(["ansiBlack", "ansiBrightBlack"])
+
+/**
+ * 终端 ANSI 对比度校验（对 terminal.background）
+ * - 黑族豁免
+ * - white / brightWhite ≥ 4.5:1（正文级）
+ * - 其余 ≥ 3:1
+ */
+export function checkAnsiContrast(normalized, themeType) {
+  const bg = normalized.bg // terminal.background === surfaceGround === bg
+  if (!bg) return
+  const ansiKeys = [
+    "ansiRed", "ansiGreen", "ansiYellow", "ansiBlue", "ansiMagenta", "ansiCyan", "ansiWhite",
+    "ansiBrightRed", "ansiBrightGreen", "ansiBrightYellow", "ansiBrightBlue", "ansiBrightMagenta", "ansiBrightCyan", "ansiBrightWhite",
+  ]
+  for (const key of ansiKeys) {
+    if (!normalized[key]) continue
+    const minRatio = key === "ansiWhite" || key === "ansiBrightWhite" ? 4.5 : 3.0
+    const ratio = wcag.hex(normalized[key], bg)
+    if (ratio < minRatio) {
+      throw new Error(
+        `❌ ANSI 对比度不足: ${themeType} · ${key} (${normalized[key]}) vs 终端背景 (${bg}) = ${ratio.toFixed(2)}:1\n` +
+        `   WCAG 要求 ≥${minRatio}:1（黑族 ${[...ANSI_BLACK_EXEMPT].join("/")} 豁免）`,
+      )
+    }
+    console.log(`✅ ${themeType} · ${key}: ${ratio.toFixed(2)}:1`)
+  }
+}
+
+/**
+ * 语义层键位一致性（dark/light 键集合必须相同）
+ */
+export function assertSemanticKeyParity(darkMap, lightMap, darkFile = "dark", lightFile = "light") {
+  const darkKeys = Object.keys(darkMap).sort()
+  const lightKeys = Object.keys(lightMap).sort()
+  const onlyDark = darkKeys.filter((k) => !lightKeys.includes(k))
+  const onlyLight = lightKeys.filter((k) => !darkKeys.includes(k))
+  if (onlyDark.length || onlyLight.length) {
+    throw new Error(
+      `❌ 语义层键位不一致（${darkFile}/${lightFile}）:\n` +
+      (onlyDark.length ? `   仅 ${darkFile} 有: ${onlyDark.join(", ")}\n` : "") +
+      (onlyLight.length ? `   仅 ${lightFile} 有: ${onlyLight.join(", ")}` : ""),
+    )
+  }
+  console.log(`✅ 语义层键位一致: ${darkKeys.length} 个角色（${darkFile}/${lightFile}）`)
+}
+
+// ==================== 交互前景/背景配对对比度 ====================
+
+/** 将 #RRGGBB[AA] 合成到背景上（前景可带 alpha） */
+function compositeColor(fg, bg) {
+  fg = fg.replace("#", "")
+  if (fg.length === 6) return "#" + fg
+  const a = parseInt(fg.slice(6, 8), 16) / 255
+  const mix = (i) =>
+    Math.round(parseInt(fg.slice(i, i + 2), 16) * a + parseInt(bg.slice(1 + i, 3 + i), 16) * (1 - a))
+      .toString(16)
+      .padStart(2, "0")
+  return `#${mix(0)}${mix(2)}${mix(4)}`
+}
+
+/**
+ * UI 交互配对表（每对给出语义角色与阈值）
+ *
+ * 背景/前景取自语义层 resolved 值；alpha 前景先合成到背景再算对比度。
+ * 说明：
+ * - 正文级白/浅字 on 实底强调（按钮/菜单/徽章/输入激活/选中行）要求 ≥4.5:1
+ * - 装饰性白字（头像/标记类，非正文）登记为 ≥3:1 例外
+ */
+export const UI_CONTRAST_PAIRS = {
+  dark: [
+    { fg: "white", bg: "primarySolid", min: 4.5, label: "按钮/菜单/徽章/输入激活：白字 on 实底强调" },
+    { fg: "selectionForeground", bg: "selectedBg", min: 4.5, label: "列表/建议/标签 选中行前景" },
+    { fg: "white", bg: "primary", min: 3.0, label: "装饰白字（头像/标记，非正文）" },
+  ],
+  light: [
+    { fg: "white", bg: "primary", min: 4.5, label: "实底白字 on primary（浅色主蓝）" },
+    { fg: "white", bg: "primarySolid", min: 4.5, label: "实底白字 on primarySolid（与 primary 别名）" },
+    { fg: "selectionForeground", bg: "selectedBg", min: 4.5, label: "列表选中行（墨字 on 浅灰选中背景）" },
+  ],
+}
+
+/** 交互配对对比度校验：低于阈值抛错（防 UI 选中/按钮文本不可读回归） */
+export function checkUIPairs(normalized, themeType) {
+  const pairs = UI_CONTRAST_PAIRS[themeType] || []
+  for (const { fg, bg, min, label } of pairs) {
+    const fgColor = normalized[fg]
+    const bgColor = normalized[bg]
+    if (!fgColor || !bgColor) continue
+    const effective = compositeColor(fgColor, bgColor)
+    const ratio = wcag.hex(effective, bgColor)
+    if (ratio < min) {
+      throw new Error(
+        `❌ UI 配对对比度不足: ${themeType} · ${label}\n` +
+        `   ${fg}=${fgColor} on ${bg}=${bgColor} (合成 ${effective}) = ${ratio.toFixed(2)}:1，要求 ≥${min}:1`,
+      )
+    }
+    console.log(`✅ ${themeType} · ${label}: ${ratio.toFixed(2)}:1`)
   }
 }

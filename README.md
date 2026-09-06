@@ -40,7 +40,7 @@ Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而
 - **主色**：冷调月蓝（深色 `#3b82f6` / 浅色 `#1e40af`）
 - **背景**：深空 `#0f172a` / 冷月白 `#f9fafb`
 - **海拔层级**：四层明度阶梯（`surfaceGround` → `surfaceRaised` → `surfaceFloating` → `surfaceTooltip`）
-- **设计令牌**：基于 DTCG 标准，自动生成 CSS 变量供跨平台复用
+- **设计令牌**：DTCG 风格（DTCG-inspired）三层令牌（原始值 → 语义层 → 组件层），自动生成 CSS 变量供跨平台复用
 
 ## 🧠 核心优化
 
@@ -50,19 +50,20 @@ Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而
 | **函数定义/调用分离** | 定义加粗，调用不加粗，全语言统一（C/C++、Go、Java、C#、Python、Rust、JS、TS） |
 | **JSON 嵌套层级**     | 蓝 → 青 → 紫 阶梯，层次一目了然                                               |
 | **UI 物理深度**       | 海拔系统：不同 UI 区域分配明度阶梯，实现"纸张层叠"                            |
-| **设计系统统一**      | DTCG 令牌自动生成 CSS 变量，一套颜色贯穿所有产品                              |
+| **设计系统统一**      | DTCG 风格令牌自动生成 CSS 变量，一套颜色贯穿所有产品                          |
 
-## ✨ v2.7.0 亮点
+## ✨ v2.7.1 亮点
 
-- **🚀 新增 C/C++、Java、C# 三种语言**：预处理指令、指针/模板、注解/泛型、LINQ、特性等专属规则，316 个 scope 逐一对照 VS Code 内置语法验证
-- **🎨 WCAG 对比度全面审计**：语义层 4 个角色 + HTML Doctype 不达标已修复，构建时自动校验 13 个前景色角色，杜绝回归
-- **🔧 语义高亮一致性**：TextMate 层与语义层对齐（函数定义加粗、宏/namespace/接口配色统一），语言服务器开启前后视觉一致
+- **🎨 文本层级分级（浅色）**：灰阶单调规范化（15 档），`comment/textDim/textMuted/variableDim/operator` 不再共用一色；`textInactive` 达标 ≥3:1；浅色终端 ANSI 16 色全部可读（白族 ≥4.5:1）
+- **🔧 深色交互对比度**：新增 `primarySolid`/`selectionForeground` 语义角色，按钮/菜单/徽章/选中行白字由 3.68:1 提到 5.17:1
+- **🛠️ 工程化校验**：跨规则 scope 冲突检测、分层引用强制化（禁止直接引用原始值/裸 hex）、dark-light 键位 parity、ANSI + UI 配对对比度矩阵，构建期全部自动拦截
+- **🤝 生态同步**：CSS/SCSS/TS 令牌与 moongate-vue 组件库同步并重建产物（跨库 `check-tokens` 通过）
 
 [📜 查看完整更新日志](./CHANGELOG.md)
 
 ## 📐 设计系统
 
-Moongate 基于 DTCG 设计令牌标准构建，提供完整的颜色、布局、排版、断点、z-index 令牌。  
+Moongate 基于 DTCG 风格（DTCG-inspired）设计令牌构建，提供完整的颜色、布局、排版、断点、z-index 令牌。  
 👉 [查看完整设计系统文档](./docs/DESIGN_SYSTEM.md)  
 👉 [阅读《Moongate 视觉契约》（显示器校准指南）](./extras/VISUAL_CONTRACT.md)  
 👉 [使用颜色令牌驱动博客或 UI 组件库](./themes/moongate-colors.css)  
@@ -72,7 +73,7 @@ Moongate 基于 DTCG 设计令牌标准构建，提供完整的颜色、布局�
 
 ## 🏗️ 工程化构建
 
-Moongate 不是手写 JSON，而是由 **DTCG 令牌 + YAML 语义层** 驱动的工业级构建流程：
+Moongate 不是手写 JSON，而是由 **DTCG 风格令牌 + YAML 语义层** 驱动的工业级构建流程：
 
 ```text
 ┌─────────────────────────────────────────────────────┐

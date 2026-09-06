@@ -11,34 +11,40 @@ cyan: "{cyan-700}"
 purple: "{purple-700}"
 
 # 功能色（墨迹感语法）
+# 文本层级（由亮到弱）：text > textDim > comment > punctuation/operator > textMuted/textInactive
 function: "{blue-800}"
-operator: "{gray-600}"
-comment: "{gray-600}"
+operator: "{gray-500}" # 与 punctuation 同级（文档化别名，≥4.5:1）
+comment: "{gray-550}" # 专用注释色（弱于 textDim、强于 punctuation）
 variable: "{gray-900}"
-variableDim: "{gray-600}"
-textMuted: "{gray-600}"
+variableDim: "{gray-600}" # 与 textDim 同级（参数/解构等降权变量）
+textMuted: "{gray-500}" # 弱化文本（≥4.5:1；property/namespace 等代码角色也消费此档，须保持可读）
 punctuation: "{gray-500}" # 深灰，确保浅色背景上 WCAG AA ≥4.5:1
 
 # 背景层级（冰月白质感）
 bg: "{gray-50}"
 bgElevated: "{white}"
 bgMuted: "{gray-100}"
-bgHover: "{blue-700}15"
-bgActive: "{blue-700}25"
-hoverBg: "{gray-100}"
-selectedBg: "{gray-300}"
+bgHover: "{blue-700}15" # 组件库：交互行/表格行悬停半透明背景
+bgActive: "{blue-700}25" # 组件库：激活/选中态半透明背景（Switch/Table/Select）
+hoverBg: "{gray-100}" # workbench：容器 hover 实底（menu/list/tab hover）
+selectedBg: "{gray-300}" # workbench：列表选中态（workbench 消费；组件库预留）
 
 # 海拔系统（重力补偿）
-surfaceGround: "{gray-50}"
-surfaceRaised: "{white}"
-surfaceFloating: "{gray-100}"
-surfaceTooltip: "{gray-200}"
-borderFloating: "{blue-700}80"
+surfaceGround: "{gray-50}" # workbench 地面层
+surfaceRaised: "{white}" # workbench 隆起层（组件库 bg-elevated 对应）
+surfaceFloating: "{gray-100}" # workbench + 组件浮层：menu/dropdown/editorWidget 背景
+surfaceTooltip: "{gray-200}" # 组件库 Tooltip 表面（tooltip.css 使用）
+borderFloating: "{blue-700}80" # workbench 浮层边框 + 组件浮层边框预留
 
 # 文本层级
 text: "{gray-900}"
 textDim: "{gray-600}"
-textInactive: "{gray-400}"
+textInactive: "{gray-450}" # 非活跃 UI 文本（最弱档，≥3:1）
+selectionForeground: "{gray-900}" # 选中行前景（浅色选中背景为浅灰，前景保持正文墨色）
+
+# 叠加层遮罩（Modal/Drawer 等）
+overlayScrim: "{black}80" # 50% 纯黑遮罩
+codeDim: "{black}22" # 无用代码压暗（unnecessary code，原直写字面值转正）
 
 # 边框（折痕感）
 border: "{gray-300}"
@@ -46,32 +52,33 @@ borderHover: "{blue-700}"
 borderDim: "{gray-400}"
 
 # 交互控件
+primarySolid: "{blue-950}" # 实底强调背景（与 primary 同值别名，白字 ≥4.5:1）
 buttonHoverBg: "{blue-700}"
 white: "{white}"
 
-# 中性色（用于组件库）
+# 中性色（组件库填充/边框：fill-medium 已用于 Skeleton 高光，其余为组件预留）
 fillSubtle: "{gray-100}"
 fillMedium: "{gray-200}"
 borderSubtle: "{gray-300}"
 
-# 终端 ANSI 色（修正版）
+# 终端 ANSI 色（浅色可读版：normal 用墨色变体，bright 用可读的亮变体，均 ≥3:1；白族 ≥4.5:1）
 ansiBlack: "{gray-900}"
 ansiRed: "{red-700}"
-ansiGreen: "{green-600}"
+ansiGreen: "{green-800}"
 ansiYellow: "{yellow-700}"
 ansiBlue: "{blue-700}"
 ansiMagenta: "{purple-700}"
 ansiCyan: "{cyan-700}"
-ansiWhite: "{gray-200}" # 修正：避免白色背景上消失
+ansiWhite: "{gray-600}" # 白族：用中灰代替近白，避免浅底上消失
 
 ansiBrightBlack: "{gray-500}"
-ansiBrightRed: "{red-400}"
-ansiBrightGreen: "{green-400}"
-ansiBrightYellow: "{yellow-400}"
+ansiBrightRed: "{red-600}"
+ansiBrightGreen: "{green-600}"
+ansiBrightYellow: "{yellow-600}"
 ansiBrightBlue: "{blue-600}"
-ansiBrightMagenta: "{purple-400}"
-ansiBrightCyan: "{cyan-400}"
-ansiBrightWhite: "{white}"
+ansiBrightMagenta: "{purple-500}"
+ansiBrightCyan: "{cyan-500}"
+ansiBrightWhite: "{gray-500}" # 亮白族：最浅档仍须 ≥4.5:1
 
 # 括号高亮
 bracket1: "{blue-700}"

@@ -48,6 +48,11 @@ typography:
   size-code: "13px" # 精密代码尺寸
   size-body: "15px" # 黄金阅读尺寸 (从 14px 提升，增加阅读舒适度)
   size-lg: "18px" # 大号文字：标题、大按钮、分页等强调场景
+  size-xl: "24px" # 浮层关闭按钮 / 更大强调
+  size-title: "20px" # 浮层标题（Modal/Drawer）
+  size-display: "40px" # 首屏大标题（Hero 基准）
+  size-display-lg: "48px" # 首屏大标题（桌面端增强）
+  size-display-xl: "60px" # 首屏大标题（宽屏增强）
   size-small: "12px" # 元数据/辅助信息
   line-height: "1.6" # 极简核心：呼吸感行高
   line-height-code: "1.45" # 代码块紧凑度

@@ -2,6 +2,31 @@
 
 [🇬🇧 English](./CHANGELOG_EN.md) | 中文
 
+## [2.7.1] - 2026-09-06
+
+### 🎨 语义层文本层级重构（浅色）
+
+- **灰阶体系规范化**：色板重排为严格单调的 15 档灰阶（`gray-525 → gray-350`、`gray-550 → gray-450`、新增 `gray-550 #55647c`），编号与亮度严格同向；删除与实引用不符的 8 个未使用原始色（`blue-900/green-700/yellow-500/red-500` 等），修正陈旧注释，构建不再告警。
+- **浅色角色去塌陷**：原 `comment/textMuted/textDim/variableDim/operator` 五个角色共用一个 `#475569` 的问题已修复——`comment` 独立为 `#55647c`（5.7:1）、`operator` 与 `punctuation` 同级 `#64748b`、`textMuted` 独立为 `#64748b`（4.55:1，兼顾 property/namespace 等代码角色）、`textInactive` 单独下沉 `#7a8c9e`（2.45:1 → 3.31:1，达标）。
+- **浅色终端 ANSI 16 色可读化**：`ansiWhite`/`ansiBrightWhite` 由近白/纯白改为墨色中灰（≥4.5:1），全部 bright 变体改用可读的亮变体（≥3:1）；黑族（Black/BrightBlack）对比度豁免并注释化。
+- 深色**语法与文本颜色**基本不变（`operator` 微调 ΔE<1）；UI 交互实底背景的加深见下条。
+- **深色交互对比度修复**：新增语义角色 `primarySolid`（dark=`#2563eb`/light=`#1e40af`）与 `selectionForeground`（dark=白/light=正文墨色）；按钮/菜单/徽章/输入激活/活动栏徽章/扩展按钮等承载小号白字的实底背景、列表/建议/标签选中行前景切到新角色——dark 白字对比度由 3.68:1 → 5.17:1，选中行前景 4.19:1 → 5.17:1；light 观感不变。
+
+### 🛠️ 工程化校验强化
+
+- **跨规则 scope 冲突检测**：`verify-scopes.js` 新增检测（同一 scope 对应不同 settings 即报错）；修复 `go.yaml` 中 `keyword.channel.go` 同时挂在两套规则的问题；scope 校验新增「组合名语法原子」匹配，修复 CSS `support.type.property-name.css` 误报。
+- **分层引用强制化**：组件/规则层直接引用原始值、语义层误用 `${var}` 或引用非原始值 → 构建失败并给出修复提示（原仅警告）。
+- **消费者层禁裸 hex**：workbench 遗留的 `editorUnnecessaryCode.opacity: #00000022` 转正为语义角色 `codeDim`（`{black}22`）；新增"消费者层直写裸色值即构建失败"校验。
+- **WCAG 阈值矩阵扩展**：新增 `textInactive` ≥3:1、终端 ANSI 全色校验（白族 ≥4.5:1）、dark/light 语义层键位一致性校验；**UI 交互配对矩阵**（白字 on 实底强调/选中行前景 on 选中背景 ≥4.5:1，含 alpha 合成）；CSS 变量名集保持稳定（本版仅新增 `primarySolid`/`selectionForeground`/`codeDim` 3 个角色）。
+- 生成器 `toCssKey` 收敛为单一实现；`docs/TOKEN_CONVENTIONS.md` 记录命名、别名登记与豁免清单。
+
+### 🤝 生态同步
+
+- 重新生成 `themes/*` 并同步 `moongate-vue`：`src/styles/tokens/colors.css` 覆盖更新、组件 fallback 字面量（`--ui-text-inactive`）同步、`design-tokens.md` 数值表更新；`moongate-vue` 的 `check-tokens.ts` 与完整构建通过，`dist/style.css` 已重建。
+- 宣传措辞统一：README / 徽章由「DTCG 标准」改为「DTCG-inspired / DTCG 风格」（自研 YAML 令牌体系，非完整 DTCG `$type/$value` 格式）。
+
+---
+
 ## [2.7.0] - 2026-08-19
 
 ### 🚀 新增 3 种语言支持

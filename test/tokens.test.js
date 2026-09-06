@@ -5,8 +5,11 @@ import {
   normalizeColors,
   replaceVariables,
   detectPrimitiveReference,
+  assertNoDirectPrimitiveRefs,
+  assertSemanticReferencesPrimitivesOnly,
+  assertNoRawHexColors,
 } from "../scripts/lib/tokens.js"
-import { captureConsole } from "./helpers.js"
+import { captureConsole, assertThrows, assertNoThrow } from "./helpers.js"
 
 // ==================== resolveTokens 测试 ====================
 test("resolveTokens: 解析简单引用", () => {
@@ -114,4 +117,69 @@ test("detectPrimitiveReference: ${var} 形式不触发检测", () => {
     detectPrimitiveReference("${primary}", "test-context", ["primary"])
   })
   assert.equal(stderr.length, 0)
+})
+
+// ==================== 分层引用强校验 ====================
+test("assertNoDirectPrimitiveRefs: 直接引用原始值抛错", () => {
+  assertThrows(
+    () => assertNoDirectPrimitiveRefs({ a: "${primary}", b: "{blue-500}" }, "workbench", ["blue-500"]),
+    /架构违规.*\{blue-500\}/s,
+  )
+})
+
+test("assertNoDirectPrimitiveRefs: 仅 ${var} 引用通过", () => {
+  assertNoThrow(() => {
+    assertNoDirectPrimitiveRefs(
+      [{ settings: { foreground: "${primary}", fontStyle: "bold" } }],
+      "tokenColors",
+      ["blue-500"],
+    )
+  })
+})
+
+test("assertSemanticReferencesPrimitivesOnly: 语义层 ${var} 抛错", () => {
+  assertThrows(
+    () => assertSemanticReferencesPrimitivesOnly({ text: "${primary}" }, ["blue-500"]),
+    /架构违规.*\$/s,
+  )
+})
+
+test("assertSemanticReferencesPrimitivesOnly: 引用非原始值键抛错", () => {
+  assertThrows(
+    () => assertSemanticReferencesPrimitivesOnly({ hover: "{primary}20" }, ["gray-900", "gray-700"]),
+    /非原始值/,
+  )
+  assertThrows(
+    () => assertSemanticReferencesPrimitivesOnly({ hover: "{not-a-token}" }, ["gray-700"]),
+    /非原始值/,
+  )
+})
+
+test("assertSemanticReferencesPrimitivesOnly: 仅引用原始值通过", () => {
+  assertNoThrow(() => {
+    assertSemanticReferencesPrimitivesOnly(
+      { bg: "{gray-900}", accent: "{blue-500}40", scrim: "{black}b3" },
+      ["gray-900", "blue-500", "black"],
+    )
+  })
+})
+
+// ==================== 裸 hex 色值拦截 ====================
+test("assertNoRawHexColors: 消费者层直写裸 hex 抛错", () => {
+  assertThrows(
+    () => assertNoRawHexColors({ editorUnnecessaryCode: { opacity: "#00000022" } }, "workbench"),
+    /架构违规.*#00000022/s,
+  )
+})
+
+test("assertNoRawHexColors: 引用与样式字段通过", () => {
+  assertNoThrow(() => {
+    assertNoRawHexColors(
+      [
+        { settings: { foreground: "${codeDim}", fontStyle: "italic" } },
+        { scope: "comment", settings: { fontStyle: "italic" } },
+      ],
+      "tokenColors",
+    )
+  })
 })

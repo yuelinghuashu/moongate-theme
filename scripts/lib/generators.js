@@ -13,14 +13,14 @@ export function generateColorCss(lightColors, darkColors) {
 
   css += `/* 浅色模式 */\n:root,\n.light {\n`
   Object.entries(lightColors).forEach(([key, val]) => {
-    const cssKey = key.replace(/([A-Z])/g, "-$1").toLowerCase()
+    const cssKey = toCssKey(key)
     css += `  --ui-${cssKey}: ${val};\n`
   })
   css += `}\n\n`
 
   css += `/* 深色模式 */\n.dark {\n`
   Object.entries(darkColors).forEach(([key, val]) => {
-    const cssKey = key.replace(/([A-Z])/g, "-$1").toLowerCase()
+    const cssKey = toCssKey(key)
     css += `  --ui-${cssKey}: ${val};\n`
   })
   css += `}\n`
