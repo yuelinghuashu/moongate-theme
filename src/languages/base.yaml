@@ -54,6 +54,11 @@ tokenColors:
     settings:
       foreground: "${highlight}"
 
+  - name: Escape Characters - 发光蓝
+    scope: ["constant.character.escape"]
+    settings:
+      foreground: "${highlight}"
+
   - name: Class, Type - 暖色点缀
     scope: ["entity.name.type", "support.type", "support.class"]
     settings:

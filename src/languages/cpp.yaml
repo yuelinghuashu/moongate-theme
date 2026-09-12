@@ -17,8 +17,19 @@ tokenColors:
       - "entity.name.other.preprocessor.macro.include.cpp"
       - "entity.name.other.preprocessor.macro.predefined.$1.c"
       - "entity.name.other.preprocessor.macro.predefined.$1.cpp"
+      - "entity.name.other.preprocessor.macro.predefined.DLLEXPORT.cpp"
+      - "entity.name.other.preprocessor.macro.predefined.probably.$0.cpp"
+      - "entity.name.other.preprocessor.macro.predefined.probably.$1.c"
+      - "entity.name.other.preprocessor.macro.predefined.probably.$1.cpp"
     settings:
       foreground: "${purple}"
+
+  # ========== 变参省略号（...） ==========
+  - name: C/C++ - Ellipsis
+    scope:
+      - "ellipses.c"
+    settings:
+      foreground: "${operator}"
 
   # ========== 指针与引用操作符 ==========
   - name: C/C++ - Pointer & Reference Operators
@@ -101,6 +112,11 @@ tokenColors:
       - "entity.name.scope-resolution.type.cpp"
       - "entity.name.scope-resolution.template.call.cpp"
       - "entity.name.scope-resolution.template.definition.cpp"
+      # 构造/析构/运算符重载等变体（COVERAGE.md 补齐）
+      - "entity.name.scope-resolution.constructor.cpp"
+      - "entity.name.scope-resolution.destructor.cpp"
+      - "entity.name.scope-resolution.operator.cpp"
+      - "entity.name.scope-resolution.operator-overload.cpp"
     settings:
       foreground: "${operator}"
 

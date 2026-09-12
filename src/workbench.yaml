@@ -47,8 +47,12 @@ statusBar.debuggingBackground: "${success}"
 statusBar.debuggingForeground: "${surfaceGround}"
 statusBarItem.activeBackground: "${bgHover}" # 保持原变量（半透明）
 statusBarItem.hoverBackground: "${primary}10" # 保持原变量
+statusBarItem.hoverForeground: "${text}"
 statusBarItem.prominentBackground: "${surfaceRaised}"
+# prominent 为隆起/白底实面：必须显式给前景（缺省会回退 VS Code 默认白字 → 浅色下白压白 1.00:1）
+statusBarItem.prominentForeground: "${text}"
 statusBarItem.prominentHoverBackground: "${hoverBg}"
+statusBarItem.prominentHoverForeground: "${text}"
 statusBarItem.remoteBackground: "${surfaceGround}"
 statusBarItem.remoteForeground: "${textInactive}"
 
@@ -82,10 +86,16 @@ inputOption.activeBackground: "${primarySolid}"
 inputOption.activeForeground: "${white}"
 inputValidation.errorBackground: "${error}"
 inputValidation.errorBorder: "${error}"
+# 彩色实底上的文字统一用 surfaceGround（与 statusBarItem.errorForeground 同一惯例）：
+# 深色 = 墨色 on 亮色族、浅色 = 近白 on 深色族，两模式均 ≥4.5:1。
+# 缺省会回退 VS Code 默认前景（深 1.10–2.00:1 / 浅 1.87–3.24:1，提示不可读）。
+inputValidation.errorForeground: "${surfaceGround}"
 inputValidation.infoBackground: "${primary}"
 inputValidation.infoBorder: "${primary}"
+inputValidation.infoForeground: "${surfaceGround}"
 inputValidation.warningBackground: "${warning}"
 inputValidation.warningBorder: "${warning}"
+inputValidation.warningForeground: "${surfaceGround}"
 
 # 下拉框（下拉框为浮层，使用 floating 层）
 dropdown.background: "${surfaceFloating}"
@@ -219,6 +229,8 @@ editorInlayHint.parameterForeground: "${punctuation}"
 terminal.background: "${surfaceGround}"
 terminal.foreground: "${text}"
 terminalCursor.foreground: "${primary}"
+# 光标块上的字符色（与光标块成对，须 ≥4.5:1；深 4.85:1 / 浅 8.35:1）
+terminalCursor.background: "${surfaceGround}"
 terminal.selectionBackground: "${primary}40"
 terminal.border: "${border}"
 terminal.ansiBlack: "${ansiBlack}"
@@ -263,7 +275,6 @@ editorBracketHighlight.unexpectedBracket.foreground: "${error}"
 # 滚动粘滞标题（Sticky Scroll）
 editorStickyScroll.background: "${surfaceRaised}"
 editorStickyScroll.border: "${border}"
-editorStickyScroll.foreground: "${textInactive}"
 editorStickyScrollHover.background: "${hoverBg}"
 
 # AI 聊天（Chat / Inline Chat）
@@ -271,14 +282,10 @@ chat.requestBackground: "${bgMuted}"
 chat.requestBorder: "${border}"
 chat.avatarBackground: "${primary}"
 chat.avatarForeground: "${white}"
-chat.editorBackground: "${surfaceGround}"
 chat.slashCommandBackground: "${primary}20"
 chat.slashCommandForeground: "${text}"
-chat.suggestedRequestBackground: "${primary}15"
-chat.suggestedRequestBorder: "${borderFloating}"
 inlineChat.background: "${surfaceFloating}"
 inlineChat.border: "${borderFloating}"
-inlineChat.regionHighlight: "${primary}15"
 inlineChatInput.background: "${surfaceRaised}"
 inlineChatInput.border: "${border}"
 inlineChatInput.placeholderForeground: "${textInactive}"
@@ -292,10 +299,7 @@ commandCenter.activeForeground: "${text}"
 commandCenter.inactiveForeground: "${textInactive}"
 
 # 终端命令指南（Terminal Command Guide）
-terminalCommandGuide.background: "${bgMuted}"
 terminalCommandGuide.foreground: "${text}"
-terminalCommandGuide.border: "${border}"
-terminalCommandGuide.activeForeground: "${primary}"
 
 # 编辑器 Ghost Text / Unicode 高亮
 editorGhostText.background: "${surfaceFloating}"
@@ -306,7 +310,6 @@ editorUnicodeHighlight.background: "${warning}20"
 # 注释线程（Comments）/ 端口（Ports）
 commentsView.resolvedIcon: "${success}"
 commentsView.unresolvedIcon: "${warning}"
-portsIconRunningForeground: "${success}"
 
 # 符号图标（Symbol Icons）
 symbolIcon.arrayForeground: "${warning}"
@@ -364,7 +367,6 @@ editorMultiCursor.primary.background: "${primary}20"
 editorMultiCursor.primary.foreground: "${primary}"
 editorMultiCursor.secondary.background: "${primary}10"
 editorMultiCursor.secondary.foreground: "${primary}"
-editorPlaceholder.foreground: "${textInactive}"
 editorUnnecessaryCode.border: "${textMuted}80"
 editorUnnecessaryCode.opacity: "${codeDim}"
 
@@ -442,3 +444,171 @@ terminal.tab.activeBorder: "${primary}"
 widget.border: "${borderFloating}"
 widget.shadow: "${surfaceGround}"
 selection.background: "${primary}40"
+
+# ==================== 覆盖补全 2026-09 ====================
+# 依据 docs/COVERAGE.md（对照 VS Code 默认主题键集）补齐高可见度键。
+# 未定义时会回退 VS Code 默认色：虽自洽，但与月庭色调不一致（且"只定义一半"的配对会不可读）。
+# 映射规则：能复用既有语义角色就复用，不新增角色。
+
+# ---- 编辑器高亮层（当前行 / 范围 / 悬停 / 非活跃选区）----
+editor.lineHighlightBackground: "${bgElevated}"
+editor.rangeHighlightBackground: "${primary}10"
+editor.hoverHighlightBackground: "${primary}10"
+editor.inactiveSelectionBackground: "${primary}20"
+
+# ---- 缩进参考线（现代键名；background1/activeBackground1 为已废弃别名，两者都保留）----
+editorIndentGuide.background: "${border}"
+editorIndentGuide.activeBackground: "${primary}"
+
+# ---- 概览标尺 ----
+editorOverviewRuler.errorForeground: "${error}"
+editorOverviewRuler.warningForeground: "${warning}"
+editorOverviewRuler.findMatchForeground: "${highlight}"
+
+# ---- Diff 行底色 ----
+diffEditor.insertedLineBackground: "${success}22"
+diffEditor.removedLineBackground: "${error}22"
+diffEditor.unchangedRegionBackground: "${bgMuted}"
+
+# ---- 选项卡未聚焦态 ----
+tab.unfocusedActiveBackground: "${surfaceGround}"
+tab.unfocusedActiveForeground: "${textInactive}"
+tab.unfocusedInactiveBackground: "${surfaceRaised}"
+tab.unfocusedInactiveForeground: "${textMuted}"
+tab.unfocusedHoverBackground: "${hoverBg}"
+tab.unfocusedActiveBorder: "${border}"
+tab.unfocusedActiveBorderTop: "${border}"
+tab.activeBorderTop: "${primary}"
+tab.lastPinnedBorder: "${border}"
+
+# ---- 列表（焦点描边 / 拖放 / 非法项 / 选中图标）----
+list.focusOutline: "${primary}"
+list.focusAndSelectionOutline: "${primary}"
+list.dropBackground: "${bgHover}"
+list.invalidItemForeground: "${error}"
+list.activeSelectionIconForeground: "${selectionForeground}"
+
+# ---- Markdown / hover 文档渲染面 ----
+textLink.foreground: "${primary}"
+textLink.activeForeground: "${highlight}"
+textPreformat.foreground: "${warning}"
+textPreformat.background: "${bgMuted}"
+textBlockQuote.background: "${bgMuted}"
+textBlockQuote.border: "${border}"
+
+# ---- 通用文本 ----
+descriptionForeground: "${textMuted}"
+disabledForeground: "${textInactive}"
+
+# ---- Git 暂存态 ----
+gitDecoration.stageModifiedResourceForeground: "${gitModified}"
+gitDecoration.stageDeletedResourceForeground: "${gitDeleted}"
+
+# ---- 小地图滑块 ----
+minimapSlider.background: "${scrollbar}60"
+minimapSlider.hoverBackground: "${scrollbar}80"
+minimapSlider.activeBackground: "${scrollbar}"
+
+# ---- 菜单 / 菜单栏 / 工具栏 / 分组头 ----
+menu.selectionBorder: "${borderFloating}"
+menu.separatorBackground: "${border}"
+menubar.selectionBackground: "${primarySolid}"
+menubar.selectionForeground: "${white}"
+toolbar.hoverBackground: "${hoverBg}"
+toolbar.activeBackground: "${bgActive}"
+editorGroupHeader.tabsBorder: "${border}"
+actionBar.toggledBackground: "${bgActive}"
+
+# ---- 面包屑 / 下拉 / 活动栏 / 建议控件 ----
+breadcrumb.activeSelectionForeground: "${text}"
+dropdown.listBackground: "${surfaceFloating}"
+activityBar.activeBackground: "${bgHover}"
+activityBar.activeFocusBorder: "${primary}"
+editorSuggestWidget.focusOutline: "${primary}"
+editorSuggestWidget.selectedIconForeground: "${selectionForeground}"
+
+# ---- 通知中心 / 欢迎页 / 评论控件 / 笔记本 / 复选框 / 按钮边框 ----
+notificationCenterHeader.background: "${surfaceGround}"
+notificationCenterHeader.foreground: "${text}"
+welcomePage.progress.foreground: "${primary}"
+welcomePage.tileBackground: "${surfaceRaised}"
+editorCommentsWidget.rangeBackground: "${primary}10"
+editorCommentsWidget.rangeActiveBackground: "${primary}20"
+notebook.cellBorderColor: "${border}"
+notebook.selectedCellBackground: "${bgMuted}"
+checkbox.background: "${surfaceFloating}"
+checkbox.border: "${borderFloating}"
+checkbox.foreground: "${text}"
+button.border: "${borderFloating}"
+button.secondaryBorder: "${border}"
+button.secondaryHoverBackground: "${hoverBg}"
+statusBarItem.focusBorder: "${primary}"
+statusBarItem.compactHoverBackground: "${primary}20"
+
+# ---- 现代活动栏 / 统一表面 / AI 面板（Agents）----
+surface.background: "${surfaceGround}"
+surface.foreground: "${text}"
+surface.border: "${border}"
+modernActivityBar.background: "${surfaceRaised}"
+modernActivityBar.activeBackground: "${bgHover}"
+modernActivityBar.activeForeground: "${text}"
+modernActivityBar.hoverBackground: "${hoverBg}"
+modernActivityBar.hoverForeground: "${text}"
+commandCenter.activeBorder: "${primary}"
+activityBarTop.activeBorder: "${primary}"
+agents.background: "${surfaceRaised}"
+agentsPanel.background: "${surfaceFloating}"
+agentsPanel.foreground: "${text}"
+agentsPanel.border: "${borderFloating}"
+agentsChatInput.background: "${surfaceFloating}"
+agentsChatInput.foreground: "${text}"
+agentsChatInput.border: "${borderFloating}"
+agentsChatInput.focusBorder: "${primary}"
+agentsChatInput.placeholderForeground: "${textInactive}"
+agentsNewSessionButton.background: "${primarySolid}"
+agentsNewSessionButton.foreground: "${white}"
+agentsNewSessionButton.border: "${borderFloating}"
+agentsNewSessionButton.hoverBackground: "${buttonHoverBg}"
+agentsBadge.background: "${primarySolid}"
+agentsBadge.foreground: "${white}"
+agentsUnreadBadge.background: "${primarySolid}"
+agentsUnreadBadge.foreground: "${white}"
+agentsCard.border: "${border}"
+agentsBottomPanel.border: "${border}"
+agentsGradient.tintColor: "${primary}20"
+chat.inputWorkingBorderColor1: "${primary}"
+chat.inputWorkingBorderColor2: "${cyan}"
+chat.inputWorkingBorderColor3: "${purple}"
+
+# ---- 活动栏问题徽章（与状态栏错误/警告项同一惯例：墨字 on 彩色实底）----
+activityErrorBadge.background: "${error}"
+activityErrorBadge.foreground: "${surfaceGround}"
+activityWarningBadge.background: "${warning}"
+activityWarningBadge.foreground: "${surfaceGround}"
+
+# ---- 核心单键补全（全局前景/焦点/图标/通知图标等高频回退点）----
+foreground: "${text}"
+errorForeground: "${error}"
+focusBorder: "${primary}"
+icon.foreground: "${textMuted}"
+inputOption.activeBorder: "${primary}"
+keybindingLabel.foreground: "${textMuted}"
+listFilterWidget.shadow: "${surfaceGround}"
+notificationCenter.border: "${border}"
+notificationToast.border: "${border}"
+notificationLink.foreground: "${primary}"
+notificationsErrorIcon.foreground: "${error}"
+notificationsWarningIcon.foreground: "${warning}"
+notificationsInfoIcon.foreground: "${primary}"
+problemsWarningIcon.foreground: "${warning}"
+panelInput.border: "${border}"
+editorLink.activeForeground: "${primary}"
+editorStickyScroll.shadow: "${surfaceGround}"
+ports.iconRunningProcessForeground: "${success}"
+
+# ---- 覆盖率测试补齐的核心单键（COVERAGE.md）----
+textCodeBlock.background: "${bgMuted}"
+textSeparator.foreground: "${border}"
+sideBarSectionHeader.border: "${border}"
+statusBar.focusBorder: "${primary}"
+terminal.inactiveSelectionBackground: "${primary}20"

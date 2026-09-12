@@ -3,23 +3,57 @@
 
 # 变量（局部变量、全局变量等）
 variable: "${variable}"
-variable.readonly:
-  foreground: "${variableDim}"
-  fontStyle: "italic"
+# 只读变量（TS const、Python Final/只读成员、math.pi 一类）
+# 与 TextMate 层「Variables - 常量/全局 (保持亮度)」（base.yaml 的 variable.other.constant → ${text}）对齐：
+# 语义层总是优于 TextMate 层，此处若压成 ${variableDim} 斜体，常量会比普通变量更暗，与本主题
+# “常量保持亮度”的分层相反，并让 variable.defaultLibrary.readonly 探针失效。
+variable.readonly: "${text}"
 variable.readwrite: "${variableDim}"
+
+# dunder 变量（Pylance/Python：__name__ / __file__ / __doc__ 等）
+# 实测（Inspect Editor Tokens and Scopes）：token 为 type=variable、modifiers=builtin。
+# 打分 = 100(精确类型 variable) + 100(builtin) + 10(语言) = 210，压过 variable(100)，
+# 因此能盖住语义层的变量本色；带 :python 后缀则只影响 Python（不波及其它语言的内置全局量）。
+# 颜色与 languages/python.yaml 的 support.variable.magic.python 规则保持一致（两层同色）。
+"variable.builtin:python":
+  foreground: "${purple}"
+  fontStyle: "italic"
 
 # 函数参数
 parameter:
   foreground: "${variableDim}"
   fontStyle: "italic"
 
+# self / cls（Pylance 语义类型 selfParameter / clsParameter，父类型 parameter）
+# 必须显式声明：否则会被 parameter 规则按父类型捕获成 ${variableDim} 斜体，
+# 使 languages/python.yaml 中 variable.language.special.*.python 的主蓝斜体声明失效。
+selfParameter:
+  foreground: "${primary}"
+  fontStyle: "italic"
+clsParameter:
+  foreground: "${primary}"
+  fontStyle: "italic"
+
 # 属性
 property: "${textMuted}"
+# 只读属性（TextMate 侧 variable.other.constant.property 由 variable.other.constant 命中 → ${text}）
+property.readonly: "${text}"
 
 # 常量
 constant: "${text}"
-constant.builtin: "${text}"
 enumMember: "${text}"
+# 内置常量（Pylance/Python：True / False / None / NotImplemented / Ellipsis / __debug__）
+#
+# ⚠️ VS Code 语义选择器打分 = (100 − 选择器类型在父类型层级中的下标) + 100 × 选择器修饰符个数，
+#    修饰符权重远大于层级惩罚，因此精确类型键会被「父类型 + 修饰符」键反超。Pylance 发出的
+#    token 是 builtinConstant（父类型 constant）+ 修饰符 readonly、builtin，故实际优先级为：
+#        constant.builtin (99 + 100) = 199  ← 胜出，必须是月光黄
+#        builtinConstant (100 + 0)   = 100  ← 仅作「无 builtin 修饰符」时兜底
+#        constant (99 + 0)           = 99   ← 同时命中，若上面两个键不成对同色即会变白
+#    两个键必须同色，否则 True/False/None 会落到 ${text}（白色），与 TextMate 层
+#    constant.language 的月光黄不一致。修改时请同步 test/helpers.test.js 的优先级镜像。
+constant.builtin: "${warning}"
+builtinConstant: "${warning}"
 
 # 函数调用（普通）
 function: "${function}"
@@ -41,9 +75,16 @@ class.declaration:
 struct: "${warning}"
 
 # 接口/类型别名
-interface: "${primary}"
-type: "${primary}"
-type.builtin: "${cyan}" # 基本类型（int/String/i32 等），与 TextMate 层保持一致
+# 与 TextMate 层「Class, Type - 暖色点缀」（base.yaml 的 entity.name.type / support.type）对齐：
+# 语义层总是优于 TextMate 层，此处若用 ${primary}，TS 的 type/interface、Java 接口等会与
+# 同语言的 class/struct 及无语言服务器的环境出现两种颜色。
+interface: "${warning}"
+type: "${warning}"
+# ⚠️ 刻意偏离 TextMate 层：基础/内置类型（Python int/str、Rust i32、Go int32…）统一走青色，
+#    与 C#/Java/Go 语法里的 storage.type.primitive.* / entity.name.type.* 青色一致，
+#    不复用 TextMate 的 entity.name.type 黄。打分 199（99 + builtin 修饰符）压过 type(99)。
+type.builtin: "${cyan}"
+# ⚠️ 刻意偏离 TextMate 层：类型参数（TS/Rust 泛型）用青色，与基础类型同族；TextMate 侧是黄。
 typeParameter: "${cyan}"
 
 # 命名空间/模块
@@ -56,6 +97,8 @@ namespace: "${textMuted}"
 annotation: "${purple}"
 
 # 宏
+# ⚠️ 刻意偏离 TextMate 层（预处理器宏在 base/cpp 里是主蓝加粗）：宏统一用紫；
+#    当前安装的服务器栈（Pylance / go / Volar）不发 macro token，仅 clangd 一类会命中。
 macro: "${purple}"
 
 # 标签
@@ -73,6 +116,19 @@ property.static:
 "*.deprecated":
   foreground: "${punctuation}"
   fontStyle: "strikethrough"
+
+# 非法/无法识别的构件（Pylance 的 invalid 修饰符；TextMate 层 invalid → ${error}）
+# ⚠️ 必须显式声明：类型键（如 variable）会先以 100 分填入 foreground，使 VS Code 内建的
+#    *.invalid 探针（→ invalid.illegal）失效，红色标记被静默吞掉。本键同为 100 分，
+#    靠"同分后出现者胜出"取胜，因此必须排在各类型键之后。
+"*.invalid":
+  foreground: "${error}"
+
+# 类型注释（Pylance 的 typeHintComment 修饰符，如 # type: int）
+# 同上：探针 → comment.typehint.type.notation.python，保持注释样式而非类型色。
+"*.typeHintComment":
+  foreground: "${comment}"
+  fontStyle: "italic"
 
 # 异步函数
 function.async:

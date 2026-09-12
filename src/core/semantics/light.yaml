@@ -6,7 +6,7 @@ primary: "{blue-950}" # 深蓝，确保浅色背景上 WCAG AA ≥4.5:1
 success: "{green-800}" # 深绿，确保浅色背景上 WCAG AA ≥4.5:1
 warning: "{yellow-700}"
 error: "{red-700}"
-highlight: "{blue-800}"
+highlight: "{blue-600}" # 与 function(blue-800) 拆开：二者在浅色下曾同为 #0369a1（区分度塌陷）
 cyan: "{cyan-700}"
 purple: "{purple-700}"
 
@@ -90,7 +90,7 @@ bracket6: "{gray-500}"
 
 # 其他
 scrollbar: "{blue-700}"
-gitAdded: "{green-600}"
+gitAdded: "{green-800}" # 与 success 同档（深色亦然）：原 green-600 在浅底上仅 3.61:1
 gitModified: "{yellow-700}"
 gitDeleted: "{red-700}"
 gitUntracked: "{gray-500}"

@@ -1,0 +1,377 @@
+{
+  "ansiBlack": {
+    "css": "--ui-ansi-black",
+    "scss": "$ui-ansi-black",
+    "ts": "ansiBlack"
+  },
+  "ansiBlue": {
+    "css": "--ui-ansi-blue",
+    "scss": "$ui-ansi-blue",
+    "ts": "ansiBlue"
+  },
+  "ansiBrightBlack": {
+    "css": "--ui-ansi-bright-black",
+    "scss": "$ui-ansi-bright-black",
+    "ts": "ansiBrightBlack"
+  },
+  "ansiBrightBlue": {
+    "css": "--ui-ansi-bright-blue",
+    "scss": "$ui-ansi-bright-blue",
+    "ts": "ansiBrightBlue"
+  },
+  "ansiBrightCyan": {
+    "css": "--ui-ansi-bright-cyan",
+    "scss": "$ui-ansi-bright-cyan",
+    "ts": "ansiBrightCyan"
+  },
+  "ansiBrightGreen": {
+    "css": "--ui-ansi-bright-green",
+    "scss": "$ui-ansi-bright-green",
+    "ts": "ansiBrightGreen"
+  },
+  "ansiBrightMagenta": {
+    "css": "--ui-ansi-bright-magenta",
+    "scss": "$ui-ansi-bright-magenta",
+    "ts": "ansiBrightMagenta"
+  },
+  "ansiBrightRed": {
+    "css": "--ui-ansi-bright-red",
+    "scss": "$ui-ansi-bright-red",
+    "ts": "ansiBrightRed"
+  },
+  "ansiBrightWhite": {
+    "css": "--ui-ansi-bright-white",
+    "scss": "$ui-ansi-bright-white",
+    "ts": "ansiBrightWhite"
+  },
+  "ansiBrightYellow": {
+    "css": "--ui-ansi-bright-yellow",
+    "scss": "$ui-ansi-bright-yellow",
+    "ts": "ansiBrightYellow"
+  },
+  "ansiCyan": {
+    "css": "--ui-ansi-cyan",
+    "scss": "$ui-ansi-cyan",
+    "ts": "ansiCyan"
+  },
+  "ansiGreen": {
+    "css": "--ui-ansi-green",
+    "scss": "$ui-ansi-green",
+    "ts": "ansiGreen"
+  },
+  "ansiMagenta": {
+    "css": "--ui-ansi-magenta",
+    "scss": "$ui-ansi-magenta",
+    "ts": "ansiMagenta"
+  },
+  "ansiRed": {
+    "css": "--ui-ansi-red",
+    "scss": "$ui-ansi-red",
+    "ts": "ansiRed"
+  },
+  "ansiWhite": {
+    "css": "--ui-ansi-white",
+    "scss": "$ui-ansi-white",
+    "ts": "ansiWhite"
+  },
+  "ansiYellow": {
+    "css": "--ui-ansi-yellow",
+    "scss": "$ui-ansi-yellow",
+    "ts": "ansiYellow"
+  },
+  "bg": {
+    "css": "--ui-bg",
+    "scss": "$ui-bg",
+    "ts": "bg"
+  },
+  "bgActive": {
+    "css": "--ui-bg-active",
+    "scss": "$ui-bg-active",
+    "ts": "bgActive"
+  },
+  "bgElevated": {
+    "css": "--ui-bg-elevated",
+    "scss": "$ui-bg-elevated",
+    "ts": "bgElevated"
+  },
+  "bgHover": {
+    "css": "--ui-bg-hover",
+    "scss": "$ui-bg-hover",
+    "ts": "bgHover"
+  },
+  "bgMuted": {
+    "css": "--ui-bg-muted",
+    "scss": "$ui-bg-muted",
+    "ts": "bgMuted"
+  },
+  "border": {
+    "css": "--ui-border",
+    "scss": "$ui-border",
+    "ts": "border"
+  },
+  "borderDim": {
+    "css": "--ui-border-dim",
+    "scss": "$ui-border-dim",
+    "ts": "borderDim"
+  },
+  "borderFloating": {
+    "css": "--ui-border-floating",
+    "scss": "$ui-border-floating",
+    "ts": "borderFloating"
+  },
+  "borderHover": {
+    "css": "--ui-border-hover",
+    "scss": "$ui-border-hover",
+    "ts": "borderHover"
+  },
+  "borderSubtle": {
+    "css": "--ui-border-subtle",
+    "scss": "$ui-border-subtle",
+    "ts": "borderSubtle"
+  },
+  "bracket1": {
+    "css": "--ui-bracket1",
+    "scss": "$ui-bracket1",
+    "ts": "bracket1"
+  },
+  "bracket2": {
+    "css": "--ui-bracket2",
+    "scss": "$ui-bracket2",
+    "ts": "bracket2"
+  },
+  "bracket3": {
+    "css": "--ui-bracket3",
+    "scss": "$ui-bracket3",
+    "ts": "bracket3"
+  },
+  "bracket4": {
+    "css": "--ui-bracket4",
+    "scss": "$ui-bracket4",
+    "ts": "bracket4"
+  },
+  "bracket5": {
+    "css": "--ui-bracket5",
+    "scss": "$ui-bracket5",
+    "ts": "bracket5"
+  },
+  "bracket6": {
+    "css": "--ui-bracket6",
+    "scss": "$ui-bracket6",
+    "ts": "bracket6"
+  },
+  "buttonHoverBg": {
+    "css": "--ui-button-hover-bg",
+    "scss": "$ui-button-hover-bg",
+    "ts": "buttonHoverBg"
+  },
+  "codeDim": {
+    "css": "--ui-code-dim",
+    "scss": "$ui-code-dim",
+    "ts": "codeDim"
+  },
+  "colorsDark": {
+    "css": "--ui-colors-dark",
+    "scss": "$ui-colors-dark",
+    "ts": "colorsDark"
+  },
+  "colorsLight": {
+    "css": "--ui-colors-light",
+    "scss": "$ui-colors-light",
+    "ts": "colorsLight"
+  },
+  "comment": {
+    "css": "--ui-comment",
+    "scss": "$ui-comment",
+    "ts": "comment"
+  },
+  "cyan": {
+    "css": "--ui-cyan",
+    "scss": "$ui-cyan",
+    "ts": "cyan"
+  },
+  "debugPause": {
+    "css": "--ui-debug-pause",
+    "scss": "$ui-debug-pause",
+    "ts": "debugPause"
+  },
+  "debugStart": {
+    "css": "--ui-debug-start",
+    "scss": "$ui-debug-start",
+    "ts": "debugStart"
+  },
+  "debugStop": {
+    "css": "--ui-debug-stop",
+    "scss": "$ui-debug-stop",
+    "ts": "debugStop"
+  },
+  "error": {
+    "css": "--ui-error",
+    "scss": "$ui-error",
+    "ts": "error"
+  },
+  "fillMedium": {
+    "css": "--ui-fill-medium",
+    "scss": "$ui-fill-medium",
+    "ts": "fillMedium"
+  },
+  "fillSubtle": {
+    "css": "--ui-fill-subtle",
+    "scss": "$ui-fill-subtle",
+    "ts": "fillSubtle"
+  },
+  "function": {
+    "css": "--ui-function",
+    "scss": "$ui-function",
+    "ts": "function"
+  },
+  "gitAdded": {
+    "css": "--ui-git-added",
+    "scss": "$ui-git-added",
+    "ts": "gitAdded"
+  },
+  "gitDeleted": {
+    "css": "--ui-git-deleted",
+    "scss": "$ui-git-deleted",
+    "ts": "gitDeleted"
+  },
+  "gitIgnored": {
+    "css": "--ui-git-ignored",
+    "scss": "$ui-git-ignored",
+    "ts": "gitIgnored"
+  },
+  "gitModified": {
+    "css": "--ui-git-modified",
+    "scss": "$ui-git-modified",
+    "ts": "gitModified"
+  },
+  "gitUntracked": {
+    "css": "--ui-git-untracked",
+    "scss": "$ui-git-untracked",
+    "ts": "gitUntracked"
+  },
+  "highlight": {
+    "css": "--ui-highlight",
+    "scss": "$ui-highlight",
+    "ts": "highlight"
+  },
+  "hoverBg": {
+    "css": "--ui-hover-bg",
+    "scss": "$ui-hover-bg",
+    "ts": "hoverBg"
+  },
+  "operator": {
+    "css": "--ui-operator",
+    "scss": "$ui-operator",
+    "ts": "operator"
+  },
+  "overlayScrim": {
+    "css": "--ui-overlay-scrim",
+    "scss": "$ui-overlay-scrim",
+    "ts": "overlayScrim"
+  },
+  "primary": {
+    "css": "--ui-primary",
+    "scss": "$ui-primary",
+    "ts": "primary"
+  },
+  "primarySolid": {
+    "css": "--ui-primary-solid",
+    "scss": "$ui-primary-solid",
+    "ts": "primarySolid"
+  },
+  "punctuation": {
+    "css": "--ui-punctuation",
+    "scss": "$ui-punctuation",
+    "ts": "punctuation"
+  },
+  "purple": {
+    "css": "--ui-purple",
+    "scss": "$ui-purple",
+    "ts": "purple"
+  },
+  "scrollbar": {
+    "css": "--ui-scrollbar",
+    "scss": "$ui-scrollbar",
+    "ts": "scrollbar"
+  },
+  "selectedBg": {
+    "css": "--ui-selected-bg",
+    "scss": "$ui-selected-bg",
+    "ts": "selectedBg"
+  },
+  "selectionForeground": {
+    "css": "--ui-selection-foreground",
+    "scss": "$ui-selection-foreground",
+    "ts": "selectionForeground"
+  },
+  "spacing": {
+    "css": "--ui-spacing",
+    "scss": "$ui-spacing",
+    "ts": "spacing"
+  },
+  "success": {
+    "css": "--ui-success",
+    "scss": "$ui-success",
+    "ts": "success"
+  },
+  "surfaceFloating": {
+    "css": "--ui-surface-floating",
+    "scss": "$ui-surface-floating",
+    "ts": "surfaceFloating"
+  },
+  "surfaceGround": {
+    "css": "--ui-surface-ground",
+    "scss": "$ui-surface-ground",
+    "ts": "surfaceGround"
+  },
+  "surfaceRaised": {
+    "css": "--ui-surface-raised",
+    "scss": "$ui-surface-raised",
+    "ts": "surfaceRaised"
+  },
+  "surfaceTooltip": {
+    "css": "--ui-surface-tooltip",
+    "scss": "$ui-surface-tooltip",
+    "ts": "surfaceTooltip"
+  },
+  "text": {
+    "css": "--ui-text",
+    "scss": "$ui-text",
+    "ts": "text"
+  },
+  "textDim": {
+    "css": "--ui-text-dim",
+    "scss": "$ui-text-dim",
+    "ts": "textDim"
+  },
+  "textInactive": {
+    "css": "--ui-text-inactive",
+    "scss": "$ui-text-inactive",
+    "ts": "textInactive"
+  },
+  "textMuted": {
+    "css": "--ui-text-muted",
+    "scss": "$ui-text-muted",
+    "ts": "textMuted"
+  },
+  "variable": {
+    "css": "--ui-variable",
+    "scss": "$ui-variable",
+    "ts": "variable"
+  },
+  "variableDim": {
+    "css": "--ui-variable-dim",
+    "scss": "$ui-variable-dim",
+    "ts": "variableDim"
+  },
+  "warning": {
+    "css": "--ui-warning",
+    "scss": "$ui-warning",
+    "ts": "warning"
+  },
+  "white": {
+    "css": "--ui-white",
+    "scss": "$ui-white",
+    "ts": "white"
+  }
+}

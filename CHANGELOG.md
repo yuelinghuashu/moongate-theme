@@ -2,6 +2,49 @@
 
 [🇬🇧 English](./CHANGELOG_EN.md) | 中文
 
+## [2.8.0] - 2026-09-12
+
+### 🩹 可见性故障修复（对比度实测）
+
+- **输入校验提示不可读**：`inputValidation.error/info/warningForeground` 三个前景键此前缺失，回退 VS Code 默认值后压在彩色提示底上仅 **1.10–2.00:1（深色）/ 1.87–3.24:1（浅色）**；现统一用 `${surfaceGround}`（与 `statusBarItem.errorForeground` 同一惯例）→ 深色 6.45 / 4.85 / 10.69:1，浅色 6.19 / 8.35 / 4.81:1。
+- **浅色状态栏 prominent 项白压白**：`statusBarItem.prominentForeground` / `prominentHoverForeground` 缺失导致 **1.00:1（完全不可见）**；现为 `${text}` → 深色 13.76 / 11.04:1，浅色 17.85 / 16.30:1。
+- 顺带显式定义 `statusBarItem.hoverForeground`、`terminalCursor.background`（消除非月庭回退）。
+
+### 🧭 界面键覆盖补全（对齐 VS Code 1.130 默认主题键集）
+
+- 新增 **111** 个界面键：编辑器当前行/范围/悬停/非活跃选区高亮、缩进参考线、概览标尺、Diff 行底色、未聚焦标签页（9）、列表焦点描边与拖放、Markdown/hover 文档面（链接/行内 code/引用块）、Git 暂存态、小地图滑块、菜单/菜单栏/工具栏、面包屑、通知中心、欢迎页、评论控件、笔记本、复选框、按钮边框、状态栏焦点环，以及**现代 AI 面板**（Agents 20 键、现代活动栏、`surface.*` 统一表面、chat 工作动效边框）。
+- 未覆盖键由 **173 → 37**（剩余为按计划延期的扩展视图批次：charts / gauge / peekView / settings / quickInputList），全部登记在 `docs/COVERAGE.md`。
+
+### 🔬 校验强化（防复发）
+
+- **回退可读性校验**：主题只定义"配对的一半"时，用 VS Code 默认主题的真实回退值算对比度，低于阈值**构建失败**——本轮两个可见性故障正是这样漏网的。
+- **深浅区分度一致性校验**：语法角色在深/浅两模式的"同色结构"必须一致，差异须登记豁免。
+- **对比度角色扩展**：新增 `highlight`/`cyan`/`purple`/`git*`/`bracket1-6`，`gitIgnored`/`codeDim` 登记豁免；UI 配对表由 6 条扩到 16 条。
+- 新增 **`docs/COVERAGE.md`**（构建自动生成：界面键覆盖 / 逐语言语法叶子 scope 覆盖 / 角色区分度）与 `test/theme-coverage.test.js` 常驻断言。
+
+### 🎨 深浅一致性调整
+
+- **浅色 `highlight` 与 `function` 拆色**：二者原同为 `#0369a1`，导致浅色下类型/转义/占位符/一层方法调用与函数名同色；`highlight` 改为 `{blue-600}`（`--ui-highlight: #2563eb`）。
+- **浅色 `gitAdded`**：`#059669`（3.61:1）→ `{green-800}` `#047857`（5.25:1，与 `success` 同档，深色亦然）；`--ui-git-added` 随之变化。
+
+### 🌐 语法覆盖补齐
+
+- **Markdown**：setext 风格标题（`===`/`---`）、行内 `` `code` ``；**Java**：继承基类；**C#**：变量声明族（字段/局部/参数/事件/预处理符号）与 goto 标签；**C/C++**：作用域解析的构造/析构/运算符重载变体、预定义宏全族、变参省略号 `...`。
+- 语法叶子 scope 未覆盖率 **26 → 0**（4 个 Python 正则内部 scope 与 3 个语法占位/兜底 scope 登记豁免并写明理由）。
+
+> 跨仓库同步：`--ui-highlight`、`--ui-git-added`（浅色）已变化，按 `docs/TOKEN_CONVENTIONS.md` §7 同步 moongate-vue 的 `src/styles/tokens/colors.css` 与数值表。
+
+### 🧪 自动化测试补齐（141 → 181 条）
+
+- **死键检查**：新增「VS Code 已知色键」数据表（安装包 + 官方文档，`pnpm run sync:color-ids` 刷新）与构建期核对 —— 上线即抓到并删除 **12 个死键**（`chat.editorBackground`、`chat.suggestedRequest*`、`editorPlaceholder.foreground`、`editorStickyScroll.foreground`、`inlineChat.regionHighlight`、`modernActivityBar.foreground`、`portsIconRunningForeground`、`terminalCommandGuide.{background,border,activeForeground}`、`textBlockQuote.foreground`）。
+- **跨仓库契约快照**：`docs/token-names.snapshot.json` + `pnpm run check:contract` —— 角色名"只增不删、不改名、CSS/SCSS/TS 三端一致"，防止无意改动弄坏 moongate-vue 的 `check-tokens.ts`。
+- **产出物一致性**：`pnpm run check:artifacts`（重建后 `git diff` 产物）；构建内置 prettier 格式化生成的 markdown，`docs/DESIGN_SYSTEM.md` 的格式漂移与内容陈旧（`highlight`/`gitAdded` 旧值）一并修正。
+- **构建失败路径与幂等性**：`scripts/lib/config.js` 支持 `MOONGATE_ROOT`，测试在临时副本里注入坏数据断言 7 条失败分支（架构违规/裸色值/未定义角色/半配对不可读/区分度不一致/键位不一致/对比度不足）＋ 连续两次构建字节一致。
+- **语义键可达性**：对照已装扩展声明的类型/修饰符（含 superType 层级）检查 `semantic.yaml`，4 个为其它服务器预留的键登记理由。
+- **样式字段合法性**：`fontStyle` 取值、`semanticTokenColors` 键模式与未知字段、`tokenColors` scope 名形状。
+- **发布元数据与打包**：`docs/COVERAGE.md` 内容与数字断言、`verify-scopes` CLI 退出码、版本号 ⟷ CHANGELOG 标题、`contributes.*` 文件存在性、`vsce ls` 打包清单（含语法文件、不含源码/依赖）。
+- **可移植性与健壮性**：docstring 语法测试按 `VSCODE_EXTENSIONS_DIR` / 平台路径解析，缺 VS Code 时 **skip 而非失败**；新增对抗性输入用例（未闭合 docstring、10 万字符长行、深嵌套类型、CRLF、引号转义），并借此**收紧注入语法**：纯 `*`/`` ` ``长串不再被误判为粗体/斜体/行内字面量。
+
 ## [2.7.1] - 2026-09-06
 
 ### 🎨 语义层文本层级重构（浅色）

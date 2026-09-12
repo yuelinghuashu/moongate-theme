@@ -30,13 +30,52 @@ tokenColors:
       fontStyle: "italic"
 
   # ========== self / cls 特殊变量 ==========
+  # MagicPython 对「参数位置的 self/cls」用另一条分支
+  # （variable.parameter.function.language.special.*.python），漏掉它会让 def m(self) 显示为
+  # 普通参数的灰斜体、而函数体内的 self.x 是主蓝斜体；该 scope 同时也是 Pylance 为
+  # selfParameter/clsParameter 注册的取色探针目标。
   - name: Python - Self / Cls
     scope:
       - "variable.language.special.self.python"
       - "variable.language.special.cls.python"
+      - "variable.parameter.function.language.special.self.python"
+      - "variable.parameter.function.language.special.cls.python"
     settings:
       foreground: "${primary}"
       fontStyle: "italic"
+
+  # ========== dunder 变量（__name__ / __file__ / __doc__ 等） ==========
+  # 与 decorator/注解同族的紫色斜体，区别于 self/cls 的主蓝。
+  # 注意：启用语义高亮时该处会被语义层的 variable 键覆盖（见 src/semantic.yaml 的说明）。
+  - name: Python - Magic Variables
+    scope:
+      - "support.variable.magic.python"
+    settings:
+      foreground: "${purple}"
+      fontStyle: "italic"
+
+  # ========== 文档字符串（docstring）正文 ==========
+  # MagicPython 只给整个 docstring 一个 scope，内部由本扩展的注入语法
+  # （syntaxes/python-docstring.injection.tmLanguage.json）补充 token，配色见 python-docstring.yaml。
+  # 这里把正文基调从「字符串绿」改为「注释灰斜体」，与 TS 的 JSDoc 观感对齐。
+  # 注意：转义字符（constant.character.escape.python）比正文 scope 更内层，仍保持高亮蓝。
+  - name: Python - Docstrings
+    scope:
+      - "string.quoted.docstring.multi.python"
+      - "string.quoted.docstring.raw.multi.python"
+      - "string.quoted.docstring.single.python"
+      - "string.quoted.docstring.raw.single.python"
+    settings:
+      foreground: "${comment}"
+      fontStyle: "italic"
+
+  # ========== 继承基类（class Foo(Bar) 的 Bar） ==========
+  # 与类/类型同色（base.yaml「Class, Type - 暖色点缀」），也与语义层 class 的黄色一致。
+  - name: Python - Inherited Class
+    scope:
+      - "entity.other.inherited-class.python"
+    settings:
+      foreground: "${warning}"
 
   # ========== 字符串插值（f-string） ==========
   # base.yaml 的 string 规则已覆盖，这里补充 f-string 特有 scope
@@ -50,5 +89,15 @@ tokenColors:
   - name: Python - Format Placeholders
     scope:
       - "constant.character.format.placeholder.other.python"
+    settings:
+      foreground: "${highlight}"
+
+  # ========== 转义字符 ==========
+  # MagicPython 对所有转义（\n / \x41 / \123 / \u1234 / \N{...} 及 f-string 的 {{ }}）
+  # 统一使用该 scope；base.yaml 的通用 constant.character.escape 已覆盖，
+  # 此处显式登记本语言已验证的 scope（与 C/C++、Java、C# 写法一致）。
+  - name: Python - Escape Characters
+    scope:
+      - "constant.character.escape.python"
     settings:
       foreground: "${highlight}"

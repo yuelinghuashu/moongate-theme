@@ -1,0 +1,165 @@
+{
+  "scopeName": "documentation.injection.python",
+  "injectionSelector": "L:string.quoted.docstring.multi.python, L:string.quoted.docstring.raw.multi.python, L:string.quoted.docstring.single.python, L:string.quoted.docstring.raw.single.python",
+  "comment": "Moongate Theme — Python docstring 注入语法。VS Code 的 MagicPython 与 Pylance 自带语法都只给整个 docstring 一个 scope，内部零 token，因此文档注释无法配色。本语法以 L:（低于宿主优先级）注入到 4 个 docstring scope，只补充内部 token，不覆盖宿主语法。支持 Sphinx field list、Google / NumPy 段落风格与内联 reST。",
+  "patterns": [
+    {
+      "include": "#sectionHeader"
+    },
+    {
+      "include": "#sectionUnderline"
+    },
+    {
+      "include": "#sphinxDirective"
+    },
+    {
+      "include": "#sphinxTypeField"
+    },
+    {
+      "include": "#sphinxRaisesField"
+    },
+    {
+      "include": "#sphinxField"
+    },
+    {
+      "include": "#parameterLine"
+    },
+    {
+      "include": "#inlineMarkup"
+    }
+  ],
+  "repository": {
+    "sectionHeader": {
+      "comment": "Google / NumPy 段落头：单独成行的 Args: / Returns: / Parameters …",
+      "match": "^\\s*(Args|Arguments|Parameters|Keyword Args|Other Parameters|Returns|Yields|Raises|Attributes|Note|Notes|Warning|Warns|Example|Examples|Todo|See Also|References)\\s*(:)?\\s*$",
+      "captures": {
+        "1": {
+          "name": "keyword.other.documentation.docstring.python"
+        },
+        "2": {
+          "name": "punctuation.separator.documentation.docstring.python"
+        }
+      }
+    },
+    "sectionUnderline": {
+      "comment": "NumPy 段落下划线：Parameters 下方的一行短横线",
+      "match": "^\\s*-{3,}\\s*$",
+      "name": "punctuation.definition.section.documentation.docstring.python"
+    },
+    "sphinxDirective": {
+      "comment": "Sphinx 指令：.. note:: / .. code-block:: 等",
+      "match": "^\\s*(\\.\\.)\\s+([a-z][\\w-]*)::",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.directive.documentation.docstring.python"
+        },
+        "2": {
+          "name": "keyword.other.directive.documentation.docstring.python"
+        }
+      }
+    },
+    "sphinxTypeField": {
+      "comment": ":type x: list[dict[str, int]] / :rtype: — 冒号后整段视为类型引用",
+      "match": "^\\s*(:)(type|vartype|rtype|ytype)\\b(\\s+(\\*{0,2}[A-Za-z_][\\w.]*))?(\\s*:)\\s*(\\S.*)$",
+      "captures": {
+        "1": {
+          "name": "punctuation.separator.documentation.docstring.python"
+        },
+        "2": {
+          "name": "keyword.other.documentation.docstring.python"
+        },
+        "4": {
+          "name": "variable.parameter.documentation.docstring.python"
+        },
+        "5": {
+          "name": "punctuation.separator.documentation.docstring.python"
+        },
+        "6": {
+          "name": "entity.name.type.documentation.docstring.python"
+        }
+      }
+    },
+    "sphinxRaisesField": {
+      "comment": ":raises ValueError: — 字段后第一个词视为异常类型",
+      "match": "^\\s*(:)(raises?|except)\\b(\\s+(\\*{0,2}[A-Za-z_][\\w.]*))?(\\s*:)",
+      "captures": {
+        "1": {
+          "name": "punctuation.separator.documentation.docstring.python"
+        },
+        "2": {
+          "name": "keyword.other.documentation.docstring.python"
+        },
+        "4": {
+          "name": "entity.name.type.documentation.docstring.python"
+        },
+        "5": {
+          "name": "punctuation.separator.documentation.docstring.python"
+        }
+      }
+    },
+    "sphinxField": {
+      "comment": "Sphinx field list 头：:param x: / :returns: 等（匹配止于字段冒号，冒号之后的正文仍可被其它规则命中）",
+      "match": "^\\s*(:)(param|parameter|arg|argument|key|keyword|var|ivar|cvar|meta|default|returns?|yields?)\\b(\\s+(\\*{0,2}[A-Za-z_][\\w.]*))?(\\s*:)",
+      "captures": {
+        "1": {
+          "name": "punctuation.separator.documentation.docstring.python"
+        },
+        "2": {
+          "name": "keyword.other.documentation.docstring.python"
+        },
+        "4": {
+          "name": "variable.parameter.documentation.docstring.python"
+        },
+        "5": {
+          "name": "punctuation.separator.documentation.docstring.python"
+        }
+      }
+    },
+    "parameterLine": {
+      "comment": "Google 参数行：name (type): description —— 要求带括号，避免把正文里的 “Word:” 误判成参数",
+      "match": "^\\s*(\\*{0,2}[A-Za-z_]\\w*)\\s*\\(([^)\\n]*)\\)\\s*(:)?",
+      "captures": {
+        "1": {
+          "name": "variable.parameter.documentation.docstring.python"
+        },
+        "2": {
+          "name": "entity.name.type.documentation.docstring.python"
+        },
+        "3": {
+          "name": "punctuation.separator.documentation.docstring.python"
+        }
+      }
+    },
+    "inlineMarkup": {
+      "patterns": [
+        {
+          "comment": "交叉引用角色：:class:`Foo`",
+          "match": "(:[a-z][\\w:+-]*:)(`[^`\\n]*`)",
+          "captures": {
+            "1": {
+              "name": "keyword.other.role.documentation.docstring.python"
+            },
+            "2": {
+              "name": "markup.inline.raw.docstring.python"
+            }
+          }
+        },
+        {
+          "comment": "reST 行内字面量：``code``（要求内容含非空白非反引号字符，避免长串反引号误判）",
+          "match": "``[^`\\s](?:[^`\\n]*[^`\\s])?``",
+          "name": "markup.inline.raw.docstring.python"
+        },
+        {
+          "comment": "粗体：**text**（要求内容含非星号非空白字符，避免 ***** 这类长串误判）",
+          "match": "\\*\\*[^*\\s](?:[^*\\n]*[^*\\s])?\\*\\*",
+          "name": "markup.bold.docstring.python"
+        },
+        {
+          "comment": "斜体：*text*（同上，且排除粗体）",
+          "match": "(?<!\\*)\\*[^*\\s](?:[^*\\n]*[^*\\s])?\\*(?!\\*)",
+          "name": "markup.italic.docstring.python"
+        }
+      ]
+    }
+  }
+}

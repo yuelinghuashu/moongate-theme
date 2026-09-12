@@ -38,7 +38,9 @@ export function detectUnusedPrimitives(primitives, semanticsList) {
   }
 
   if (unused.length > 0) {
-    console.warn("\n⚠️  以下原始令牌未被任何语义层引用（可考虑删除或补充语义引用）:")
+    console.warn(
+      "\n⚠️  以下原始令牌未被任何语义层引用（可考虑删除或补充语义引用）:",
+    )
     unused.forEach(({ key, val }) => {
       console.warn(`   ⚠️  ${key}: "${val}"`)
     })
@@ -54,7 +56,13 @@ export function detectUnusedPrimitives(primitives, semanticsList) {
  */
 export function validateThemeStructure(theme, outputFile) {
   const errors = []
-  const requiredKeys = ["name", "type", "colors", "tokenColors", "semanticTokenColors"]
+  const requiredKeys = [
+    "name",
+    "type",
+    "colors",
+    "tokenColors",
+    "semanticTokenColors",
+  ]
 
   // 1. 必须包含所有顶层 key
   for (const key of requiredKeys) {
@@ -70,7 +78,10 @@ export function validateThemeStructure(theme, outputFile) {
     }
     // 3. 所有 colors 值必须是合法颜色格式
     for (const [k, v] of Object.entries(theme.colors)) {
-      if (typeof v !== "string" || !/^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(v)) {
+      if (
+        typeof v !== "string" ||
+        !/^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(v)
+      ) {
         errors.push(`"colors.${k}" 不是合法颜色: "${v}"`)
       }
     }
@@ -82,7 +93,10 @@ export function validateThemeStructure(theme, outputFile) {
   }
 
   // 5. semanticTokenColors 必须是对象
-  if (theme.semanticTokenColors !== undefined && typeof theme.semanticTokenColors !== "object") {
+  if (
+    theme.semanticTokenColors !== undefined &&
+    typeof theme.semanticTokenColors !== "object"
+  ) {
     errors.push('"semanticTokenColors" 必须是对象')
   }
 
@@ -90,11 +104,15 @@ export function validateThemeStructure(theme, outputFile) {
   const jsonStr = JSON.stringify(theme)
   const unresolvedVars = jsonStr.match(/\$\{([a-zA-Z0-9_-]+)\}/g)
   if (unresolvedVars) {
-    errors.push(`存在未解析的变量引用: ${[...new Set(unresolvedVars)].join(", ")}`)
+    errors.push(
+      `存在未解析的变量引用: ${[...new Set(unresolvedVars)].join(", ")}`,
+    )
   }
   const unresolvedTokens = jsonStr.match(/(?<!\$)\{([a-zA-Z0-9_-]+)\}/g)
   if (unresolvedTokens) {
-    errors.push(`存在未解析的令牌引用: ${[...new Set(unresolvedTokens)].join(", ")}`)
+    errors.push(
+      `存在未解析的令牌引用: ${[...new Set(unresolvedTokens)].join(", ")}`,
+    )
   }
 
   if (errors.length > 0) {
@@ -105,10 +123,27 @@ export function validateThemeStructure(theme, outputFile) {
 }
 
 /**
+ * 对比度豁免登记表（角色 → 理由）
+ *
+ * 与 docs/TOKEN_CONVENTIONS.md §5 的"豁免清单"配套：只登记**有意**低于阈值、
+ * 且不承载正文可读性的角色。
+ */
+export const CONTRAST_EXEMPTIONS = {
+  gitIgnored: "被忽略文件刻意压暗（与 VS Code 默认一致），不承载正文",
+  codeDim: "无用代码压暗遮罩（8 位 alpha 叠加），非实体前景色",
+}
+
+/**
  * WCAG 对比度校验
  */
 export function checkContrast(color1, color2, role, themeType) {
   if (!color1 || !color2) return
+  if (CONTRAST_EXEMPTIONS[role]) {
+    console.log(
+      `➖ ${themeType} · ${role}: 已登记豁免（${CONTRAST_EXEMPTIONS[role]}）`,
+    )
+    return
+  }
   const ratio = wcag.hex(color1, color2)
 
   let minRatio = 4.5
@@ -122,6 +157,10 @@ export function checkContrast(color1, color2, role, themeType) {
     // 非活跃 UI 文本（最弱档文本角色）允许 ≥3:1（大号/图形文本 AA）
     minRatio = 3.0
   }
+  if (/^bracket[1-6]$/.test(role)) {
+    // 括号高亮为装饰性大字号/图形文本（与 VS Code 默认括号色同档）
+    minRatio = 3.0
+  }
 
   if (ratio < minRatio) {
     if (role === "textMuted") {
@@ -132,7 +171,7 @@ export function checkContrast(color1, color2, role, themeType) {
     } else {
       throw new Error(
         `❌ 对比度不足: ${themeType} · ${role} (${color1}) vs 背景 (${color2}) = ${ratio.toFixed(2)}:1\n` +
-        `   WCAG 要求 ≥${minRatio}:1，当前值低于标准`,
+          `   WCAG 要求 ≥${minRatio}:1，当前值低于标准`,
       )
     }
   } else {
@@ -153,17 +192,30 @@ export function checkAnsiContrast(normalized, themeType) {
   const bg = normalized.bg // terminal.background === surfaceGround === bg
   if (!bg) return
   const ansiKeys = [
-    "ansiRed", "ansiGreen", "ansiYellow", "ansiBlue", "ansiMagenta", "ansiCyan", "ansiWhite",
-    "ansiBrightRed", "ansiBrightGreen", "ansiBrightYellow", "ansiBrightBlue", "ansiBrightMagenta", "ansiBrightCyan", "ansiBrightWhite",
+    "ansiRed",
+    "ansiGreen",
+    "ansiYellow",
+    "ansiBlue",
+    "ansiMagenta",
+    "ansiCyan",
+    "ansiWhite",
+    "ansiBrightRed",
+    "ansiBrightGreen",
+    "ansiBrightYellow",
+    "ansiBrightBlue",
+    "ansiBrightMagenta",
+    "ansiBrightCyan",
+    "ansiBrightWhite",
   ]
   for (const key of ansiKeys) {
     if (!normalized[key]) continue
-    const minRatio = key === "ansiWhite" || key === "ansiBrightWhite" ? 4.5 : 3.0
+    const minRatio =
+      key === "ansiWhite" || key === "ansiBrightWhite" ? 4.5 : 3.0
     const ratio = wcag.hex(normalized[key], bg)
     if (ratio < minRatio) {
       throw new Error(
         `❌ ANSI 对比度不足: ${themeType} · ${key} (${normalized[key]}) vs 终端背景 (${bg}) = ${ratio.toFixed(2)}:1\n` +
-        `   WCAG 要求 ≥${minRatio}:1（黑族 ${[...ANSI_BLACK_EXEMPT].join("/")} 豁免）`,
+          `   WCAG 要求 ≥${minRatio}:1（黑族 ${[...ANSI_BLACK_EXEMPT].join("/")} 豁免）`,
       )
     }
     console.log(`✅ ${themeType} · ${key}: ${ratio.toFixed(2)}:1`)
@@ -173,7 +225,12 @@ export function checkAnsiContrast(normalized, themeType) {
 /**
  * 语义层键位一致性（dark/light 键集合必须相同）
  */
-export function assertSemanticKeyParity(darkMap, lightMap, darkFile = "dark", lightFile = "light") {
+export function assertSemanticKeyParity(
+  darkMap,
+  lightMap,
+  darkFile = "dark",
+  lightFile = "light",
+) {
   const darkKeys = Object.keys(darkMap).sort()
   const lightKeys = Object.keys(lightMap).sort()
   const onlyDark = darkKeys.filter((k) => !lightKeys.includes(k))
@@ -181,11 +238,17 @@ export function assertSemanticKeyParity(darkMap, lightMap, darkFile = "dark", li
   if (onlyDark.length || onlyLight.length) {
     throw new Error(
       `❌ 语义层键位不一致（${darkFile}/${lightFile}）:\n` +
-      (onlyDark.length ? `   仅 ${darkFile} 有: ${onlyDark.join(", ")}\n` : "") +
-      (onlyLight.length ? `   仅 ${lightFile} 有: ${onlyLight.join(", ")}` : ""),
+        (onlyDark.length
+          ? `   仅 ${darkFile} 有: ${onlyDark.join(", ")}\n`
+          : "") +
+        (onlyLight.length
+          ? `   仅 ${lightFile} 有: ${onlyLight.join(", ")}`
+          : ""),
     )
   }
-  console.log(`✅ 语义层键位一致: ${darkKeys.length} 个角色（${darkFile}/${lightFile}）`)
+  console.log(
+    `✅ 语义层键位一致: ${darkKeys.length} 个角色（${darkFile}/${lightFile}）`,
+  )
 }
 
 // ==================== 交互前景/背景配对对比度 ====================
@@ -196,7 +259,10 @@ function compositeColor(fg, bg) {
   if (fg.length === 6) return "#" + fg
   const a = parseInt(fg.slice(6, 8), 16) / 255
   const mix = (i) =>
-    Math.round(parseInt(fg.slice(i, i + 2), 16) * a + parseInt(bg.slice(1 + i, 3 + i), 16) * (1 - a))
+    Math.round(
+      parseInt(fg.slice(i, i + 2), 16) * a +
+        parseInt(bg.slice(1 + i, 3 + i), 16) * (1 - a),
+    )
       .toString(16)
       .padStart(2, "0")
   return `#${mix(0)}${mix(2)}${mix(4)}`
@@ -209,17 +275,91 @@ function compositeColor(fg, bg) {
  * 说明：
  * - 正文级白/浅字 on 实底强调（按钮/菜单/徽章/输入激活/选中行）要求 ≥4.5:1
  * - 装饰性白字（头像/标记类，非正文）登记为 ≥3:1 例外
+ *
+ * 2026-09 新增：**彩色实底上的文字**（surfaceGround on error/primary/warning）与
+ * **状态栏 prominent 项**（text on surfaceRaised/hoverBg）。这两组键此前只定义了背景，
+ * 前景回退 VS Code 默认值 → 深色 1.10–2.00:1、浅色白压白 1.00:1（真实不可读）。
  */
 export const UI_CONTRAST_PAIRS = {
   dark: [
-    { fg: "white", bg: "primarySolid", min: 4.5, label: "按钮/菜单/徽章/输入激活：白字 on 实底强调" },
-    { fg: "selectionForeground", bg: "selectedBg", min: 4.5, label: "列表/建议/标签 选中行前景" },
-    { fg: "white", bg: "primary", min: 3.0, label: "装饰白字（头像/标记，非正文）" },
+    {
+      fg: "white",
+      bg: "primarySolid",
+      min: 4.5,
+      label: "按钮/菜单/徽章/输入激活：白字 on 实底强调",
+    },
+    {
+      fg: "selectionForeground",
+      bg: "selectedBg",
+      min: 4.5,
+      label: "列表/建议/标签 选中行前景",
+    },
+    {
+      fg: "white",
+      bg: "primary",
+      min: 3.0,
+      label: "装饰白字（头像/标记，非正文）",
+    },
+    {
+      fg: "surfaceGround",
+      bg: "error",
+      min: 4.5,
+      label: "彩色实底墨字：输入校验/状态栏错误项",
+    },
+    {
+      fg: "surfaceGround",
+      bg: "primary",
+      min: 4.5,
+      label: "彩色实底墨字：输入校验 info / 终端光标字符",
+    },
+    {
+      fg: "surfaceGround",
+      bg: "warning",
+      min: 4.5,
+      label: "彩色实底墨字：输入校验 warning",
+    },
+    { fg: "text", bg: "surfaceRaised", min: 4.5, label: "状态栏 prominent 项" },
+    { fg: "text", bg: "hoverBg", min: 4.5, label: "状态栏 prominent hover 项" },
   ],
   light: [
-    { fg: "white", bg: "primary", min: 4.5, label: "实底白字 on primary（浅色主蓝）" },
-    { fg: "white", bg: "primarySolid", min: 4.5, label: "实底白字 on primarySolid（与 primary 别名）" },
-    { fg: "selectionForeground", bg: "selectedBg", min: 4.5, label: "列表选中行（墨字 on 浅灰选中背景）" },
+    {
+      fg: "white",
+      bg: "primary",
+      min: 4.5,
+      label: "实底白字 on primary（浅色主蓝）",
+    },
+    {
+      fg: "white",
+      bg: "primarySolid",
+      min: 4.5,
+      label: "实底白字 on primarySolid（与 primary 别名）",
+    },
+    {
+      fg: "selectionForeground",
+      bg: "selectedBg",
+      min: 4.5,
+      label: "列表选中行（墨字 on 浅灰选中背景）",
+    },
+    {
+      fg: "surfaceGround",
+      bg: "error",
+      min: 4.5,
+      label: "彩色实底文字：输入校验/状态栏错误项",
+    },
+    {
+      fg: "surfaceGround",
+      bg: "primary",
+      min: 4.5,
+      label: "彩色实底文字：输入校验 info / 终端光标字符",
+    },
+    {
+      fg: "surfaceGround",
+      bg: "warning",
+      min: 4.5,
+      label: "彩色实底文字：输入校验 warning",
+    },
+    { fg: "text", bg: "surfaceRaised", min: 4.5, label: "状态栏 prominent 项" },
+    { fg: "text", bg: "hoverBg", min: 4.5, label: "状态栏 prominent hover 项" },
   ],
 }
 
@@ -235,7 +375,7 @@ export function checkUIPairs(normalized, themeType) {
     if (ratio < min) {
       throw new Error(
         `❌ UI 配对对比度不足: ${themeType} · ${label}\n` +
-        `   ${fg}=${fgColor} on ${bg}=${bgColor} (合成 ${effective}) = ${ratio.toFixed(2)}:1，要求 ≥${min}:1`,
+          `   ${fg}=${fgColor} on ${bg}=${bgColor} (合成 ${effective}) = ${ratio.toFixed(2)}:1，要求 ≥${min}:1`,
       )
     }
     console.log(`✅ ${themeType} · ${label}: ${ratio.toFixed(2)}:1`)

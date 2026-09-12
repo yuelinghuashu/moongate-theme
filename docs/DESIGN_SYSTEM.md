@@ -97,13 +97,14 @@
 ## 🏔️ 海拔系统（Elevation System）
 
 海拔系统通过明度差异表达 UI 元素的物理深度，遵循 Material Design 海拔规范。
-| 变量 | 浅色模式 | 深色模式 | 说明 |
-|------|----------|----------|------|
-| `surfaceGround` | `#f9fafb` | `#0f172a` | 地面层（0dp）—— 编辑器背景 |
-| `surfaceRaised` | `#ffffff` | `#131c31` | 隆起层（2dp）—— 侧边栏、活动栏 |
-| `surfaceFloating` | `#f1f5f9` | `#1e293b` | 漂浮层（8dp）—— 弹窗、菜单 |
-| `surfaceTooltip` | `#e2e8f0` | `#252e40` | 提示层（12dp）—— 工具提示 |
-| `borderFloating` | `#0284c780` | `#3b82f640` | 浮层边框（半透明主色） |
+
+| 变量              | 浅色模式    | 深色模式    | 说明                           |
+| ----------------- | ----------- | ----------- | ------------------------------ |
+| `surfaceGround`   | `#f9fafb`   | `#0f172a`   | 地面层（0dp）—— 编辑器背景     |
+| `surfaceRaised`   | `#ffffff`   | `#131c31`   | 隆起层（2dp）—— 侧边栏、活动栏 |
+| `surfaceFloating` | `#f1f5f9`   | `#1e293b`   | 漂浮层（8dp）—— 弹窗、菜单     |
+| `surfaceTooltip`  | `#e2e8f0`   | `#252e40`   | 提示层（12dp）—— 工具提示      |
+| `borderFloating`  | `#0284c780` | `#3b82f640` | 浮层边框（半透明主色）         |
 
 ## 🌙 浅色模式语义层
 
@@ -113,7 +114,7 @@
 | `success`             | `#047857`   | ![](https://placehold.co/20x20/047857/047857?text=+)     | 5.25:1                 |
 | `warning`             | `#b45309`   | ![](https://placehold.co/20x20/b45309/b45309?text=+)     | 4.81:1                 |
 | `error`               | `#b91c1c`   | ![](https://placehold.co/20x20/b91c1c/b91c1c?text=+)     | 6.19:1                 |
-| `highlight`           | `#0369a1`   | ![](https://placehold.co/20x20/0369a1/0369a1?text=+)     | -                      |
+| `highlight`           | `#2563eb`   | ![](https://placehold.co/20x20/2563eb/2563eb?text=+)     | -                      |
 | `cyan`                | `#0e7490`   | ![](https://placehold.co/20x20/0e7490/0e7490?text=+)     | -                      |
 | `purple`              | `#7e22ce`   | ![](https://placehold.co/20x20/7e22ce/7e22ce?text=+)     | -                      |
 | `function`            | `#0369a1`   | ![](https://placehold.co/20x20/0369a1/0369a1?text=+)     | -                      |
@@ -173,7 +174,7 @@
 | `bracket5`            | `#0e7490`   | ![](https://placehold.co/20x20/0e7490/0e7490?text=+)     | -                      |
 | `bracket6`            | `#64748b`   | ![](https://placehold.co/20x20/64748b/64748b?text=+)     | -                      |
 | `scrollbar`           | `#0284c7`   | ![](https://placehold.co/20x20/0284c7/0284c7?text=+)     | -                      |
-| `gitAdded`            | `#059669`   | ![](https://placehold.co/20x20/059669/059669?text=+)     | -                      |
+| `gitAdded`            | `#047857`   | ![](https://placehold.co/20x20/047857/047857?text=+)     | -                      |
 | `gitModified`         | `#b45309`   | ![](https://placehold.co/20x20/b45309/b45309?text=+)     | -                      |
 | `gitDeleted`          | `#b91c1c`   | ![](https://placehold.co/20x20/b91c1c/b91c1c?text=+)     | -                      |
 | `gitUntracked`        | `#64748b`   | ![](https://placehold.co/20x20/64748b/64748b?text=+)     | -                      |

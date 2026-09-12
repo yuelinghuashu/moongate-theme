@@ -113,6 +113,24 @@ tokenColors:
     settings:
       foreground: "${cyan}"
 
+  # ========== 变量声明族（COVERAGE.md 补齐：字段/局部/参数/事件/预处理符号） ==========
+  - name: C# - Variable Declarations
+    scope:
+      - "entity.name.variable.local.cs"
+      - "entity.name.variable.field.cs"
+      - "entity.name.variable.parameter.cs"
+      - "entity.name.variable.event.cs"
+      - "entity.name.variable.preprocessor.symbol.cs"
+    settings:
+      foreground: "${variable}"
+
+  # ========== 标签（goto 标签） ==========
+  - name: C# - Labels
+    scope:
+      - "entity.name.label.cs"
+    settings:
+      foreground: "${error}"
+
   # ========== 转义字符 ==========
   - name: C# - Escape Characters
     scope:

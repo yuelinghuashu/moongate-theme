@@ -87,6 +87,10 @@ export function buildDefaultSyntaxMap(vscodeExt = VSCODE_EXT) {
     "python.yaml": [
       path.join(vscodeExt, "python/syntaxes/MagicPython.tmLanguage.json"),
     ],
+    // 本扩展自带的 docstring 注入语法（不在 VS Code 内置目录里，需用仓库路径校验）
+    "python-docstring.yaml": [
+      path.join(ROOT_DIR, "syntaxes", "python-docstring.injection.tmLanguage.json"),
+    ],
     "rust.yaml": [path.join(vscodeExt, "rust/syntaxes/rust.tmLanguage.json")],
     "vue.yaml": [
       // Vue 由 Volar 扩展提供，无法从内置目录验证

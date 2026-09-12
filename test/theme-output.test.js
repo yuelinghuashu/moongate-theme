@@ -6,6 +6,7 @@ import path from "node:path"
 import { fileURLToPath } from "node:url"
 import { safeLoadYaml } from "../scripts/lib/utils.js"
 import { detectUnusedPrimitives, assertSemanticKeyParity } from "../scripts/lib/validators.js"
+import { resolveSemanticStyle } from "./helpers.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT_DIR = path.resolve(__dirname, "..")
@@ -120,6 +121,115 @@ for (const [name, theme] of [
       } else if (value && typeof value === "object") {
         assert.ok(value.foreground === undefined || /^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(value.foreground), `semanticTokenColors.${key}.foreground 不是合法颜色: "${value.foreground}"`)
       }
+    }
+  })
+
+  // ==================== 样式字段合法性（VS Code schema） ====================
+  const FONT_STYLE_PATTERN = /^(\s*(italic|bold|underline|strikethrough))*\s*$/
+  const SEMANTIC_KEY_PATTERN = /^(\w+[-\w+]*|\*)(\.\w+[-\w+]*)*(:\w+[-\w+]*)?$/
+  const SEMANTIC_STYLE_KEYS = new Set([
+    "foreground", "background", "fontStyle", "bold", "italic", "underline", "strikethrough",
+  ])
+
+  test(`theme(${name}): tokenColors 的 fontStyle 均为 VS Code 允许的取值`, () => {
+    for (const rule of theme.tokenColors) {
+      const fontStyle = rule.settings?.fontStyle
+      if (fontStyle === undefined) continue
+      assert.match(
+        String(fontStyle),
+        FONT_STYLE_PATTERN,
+        `规则「${rule.name || rule.scope}」的 fontStyle="${fontStyle}" 不合法（会被 VS Code 静默忽略）`,
+      )
+    }
+  })
+
+  test(`theme(${name}): semanticTokenColors 键符合 VS Code 模式且无未知字段`, () => {
+    for (const [key, value] of Object.entries(theme.semanticTokenColors)) {
+      assert.match(key, SEMANTIC_KEY_PATTERN, `语义键 "${key}" 不符合 VS Code 的选择器模式`)
+      if (value && typeof value === "object") {
+        for (const field of Object.keys(value)) {
+          assert.ok(
+            SEMANTIC_STYLE_KEYS.has(field),
+            `语义键 "${key}" 含未知字段 "${field}"（会被 VS Code 静默忽略）`,
+          )
+        }
+      }
+    }
+  })
+
+  test(`theme(${name}): tokenColors 的 scope 名形状合法`, () => {
+    const SCOPE_TOKEN = /^[A-Za-z0-9_*$@][A-Za-z0-9_*$@.\-]*$/
+    for (const rule of theme.tokenColors) {
+      const scopes = Array.isArray(rule.scope) ? rule.scope : [rule.scope]
+      for (const scope of scopes) {
+        for (const atom of String(scope).split(/\s+/)) {
+          assert.ok(SCOPE_TOKEN.test(atom), `scope "${scope}" 含非法片段 "${atom}"`)
+        }
+      }
+    }
+  })
+
+  // ==================== Python 高亮回归 ====================
+  // 相同 settings 的规则会被 mergeTokenColors 合并，因此统一用 scope 反查规则，
+  // 断言对"是否已合并"保持稳健。
+  const ruleWithScope = (scope) =>
+    theme.tokenColors.find((rule) =>
+      (Array.isArray(rule.scope) ? rule.scope : [rule.scope]).includes(scope),
+    )
+
+  test(`theme(${name}): Python 转义字符有专属色（不同于字符串正文）`, () => {
+    const pythonEscape = ruleWithScope("constant.character.escape.python")
+    const genericEscape = ruleWithScope("constant.character.escape")
+    const stringRule = ruleWithScope("string.quoted.single")
+
+    assert.ok(genericEscape, "缺少通用 constant.character.escape 规则")
+    assert.ok(pythonEscape, "缺少 constant.character.escape.python 规则")
+    assert.ok(stringRule, "缺少 string.quoted.single 规则")
+
+    assert.equal(
+      pythonEscape.settings.foreground,
+      genericEscape.settings.foreground,
+      "Python 转义色应与通用转义规则一致（${highlight}）",
+    )
+    assert.notEqual(
+      pythonEscape.settings.foreground,
+      stringRule.settings.foreground,
+      "Python 转义色不应与字符串正文同色（否则等于没有高亮）",
+    )
+  })
+
+  test(`theme(${name}): True/False/None 的最终语义色 = constant.language 的 TextMate 色`, () => {
+    const languageRule = ruleWithScope("constant.language")
+    assert.ok(languageRule, "缺少 constant.language 规则")
+
+    // 只断言"键存在"是不够的（曾出错）：必须断言**最终生效样式**，
+    // 即按 VS Code 打分（层级 100-idx + 100×修饰符数）复算后胜出的颜色。
+    for (const modifiers of [[], ["readonly"], ["builtin"], ["readonly", "builtin"]]) {
+      const style = resolveSemanticStyle(theme.semanticTokenColors, {
+        type: "builtinConstant",
+        hierarchy: ["builtinConstant", "constant"],
+        modifiers,
+      })
+      assert.equal(
+        style.foreground,
+        languageRule.settings.foreground,
+        `builtinConstant 修饰符=${JSON.stringify(modifiers)} 的最终前景应为月光黄（constant.language）`,
+      )
+    }
+  })
+
+  test(`theme(${name}): self/cls 的最终语义样式 = python.yaml 的 self/cls 规则`, () => {
+    const selfRule = ruleWithScope("variable.language.special.self.python")
+    assert.ok(selfRule, "缺少 variable.language.special.self.python 规则")
+
+    for (const type of ["selfParameter", "clsParameter"]) {
+      const style = resolveSemanticStyle(theme.semanticTokenColors, {
+        type,
+        hierarchy: [type, "parameter"],
+        modifiers: [],
+      })
+      assert.equal(style.foreground, selfRule.settings.foreground, `${type} 最终前景应与 self/cls 规则一致`)
+      assert.equal(style.italic, true, `${type} 最终应为斜体（与 self/cls 规则一致）`)
     }
   })
 }

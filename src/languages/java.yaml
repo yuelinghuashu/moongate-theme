@@ -81,6 +81,13 @@ tokenColors:
       foreground: "${comment}"
       fontStyle: "italic"
 
+  # ========== 继承基类（COVERAGE.md 补齐，与 Python 同款） ==========
+  - name: Java - Inherited Class
+    scope:
+      - "entity.other.inherited-class.java"
+    settings:
+      foreground: "${warning}"
+
   # ========== 转义字符 ==========
   - name: Java - Escape Characters
     scope:

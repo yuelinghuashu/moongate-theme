@@ -44,20 +44,25 @@ Moongate is a VS Code theme born from [moongate.top](https://moongate.top), brin
 
 ## 🧠 Core Optimizations
 
-| Optimization                     | How Moongate Fixes It                                                                  |
-| -------------------------------- | -------------------------------------------------------------------------------------- |
-| **Day‑Night Consistency**        | Same hue, different lightness – seamless switching                                     |
-| **Function Def/Call Separation** | Definitions bold, calls not – unified across C/C++, Go, Java, C#, Python, Rust, JS, TS |
-| **JSON Nesting Depth**           | Blue → Cyan → Purple gradient – levels at a glance                                     |
-| **UI Physical Depth**            | Elevation system – natural "paper stack" effect                                        |
-| **Design System Unity**          | DTCG-inspired tokens – one color language across all products                          |
+| Optimization                      | How Moongate Fixes It                                                                                                                                                    |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Day‑Night Consistency**         | Same hue, different lightness – seamless switching                                                                                                                       |
+| **Function Def/Call Separation**  | Definitions bold, calls not – unified across C/C++, Go, Java, C#, Python, Rust, JS, TS                                                                                   |
+| **No Unstyled UI Surfaces**       | Key coverage is diffed against VS Code's default themes (357 keys) and quantified in the generated `docs/COVERAGE.md` – no surface silently falls back to default colors |
+| **Dark/Light Parity**             | Build-time enforcement that each syntax role keeps the same distinctness structure in both modes (light no longer merges function names with types)                      |
+| **Python Docstring Highlighting** | Bundled injection grammar: Sphinx field list (`:param:` / `:type:` / `:raises:`), Google / NumPy sections and inline reST – matching the JSDoc look in TS                |
+| **JSON Nesting Depth**            | Blue → Cyan → Purple gradient – levels at a glance                                                                                                                       |
+| **UI Physical Depth**             | Elevation system – natural "paper stack" effect                                                                                                                          |
+| **Design System Unity**           | DTCG-inspired tokens – one color language across all products                                                                                                            |
 
-## ✨ v2.7.1 Highlights
+## ✨ v2.8.0 Highlights
 
-- **🎨 Light text hierarchy de-collapsed** — monotonic 15-step gray ramp; `comment/textDim/textMuted/variableDim/operator` no longer share one color; `textInactive` now ≥3:1; all 16 light-terminal ANSI colors readable (whites ≥4.5:1)
-- **🔧 Dark interactive contrast** — new `primarySolid`/`selectionForeground` roles lift white-on-solid and selection text from 3.68:1 / 4.19:1 to 5.17:1
-- **🛠️ Engineering checks** — cross-rule scope conflict detection, layer-reference & no-raw-hex enforcement, dark/light key parity, ANSI + UI-pair contrast matrix, all enforced at build time
-- **🤝 Ecosystem sync** — CSS/SCSS/TS tokens synced to moongate-vue and rebuilt (cross-repo `check-tokens` green)
+- **🚨 Visibility fixes** — input-validation text was undefined and fell back to 1.10–3.24:1 (now 4.81–10.69:1); the light status-bar prominent item was white-on-white at 1.00:1 (now 17.85:1)
+- **🧭 UI key coverage** — aligned with VS Code's default themes: 100+ new keys (current-line highlight, indent guides, overview ruler, diff line tints, Markdown/hover surfaces, modern AI/Agents surfaces), uncovered keys 173 → 37 (the rest deferred by choice and tracked)
+- **🎨 Dark/light parity** — light `highlight` split from `function` (both were `#0369a1`); light `gitAdded` 3.61:1 → 5.25:1
+- **📝 Python docstring highlighting** — bundled injection grammar for Sphinx field lists (`:param:` / `:type:` / `:raises:`), Google / NumPy sections and inline reST
+- **🔬 Stronger validation & tests** — fallback readability, dark/light distinctness parity, dead-key detection, cross-repo token contract snapshot, artifact consistency; assertions 141 → 181
+- **🤝 Ecosystem sync** — CSS/SCSS/TS tokens synced to moongate-vue (light `--ui-highlight` / `--ui-git-added` changed)
 
 [📜 View full changelog](./CHANGELOG_EN.md)
 
@@ -97,11 +102,15 @@ Moongate is not hand-written JSON — it's an industrial-grade build pipeline dr
 
 ### Quality Assurance
 
-| Tool                            | Purpose                                                           |
-| ------------------------------- | ----------------------------------------------------------------- |
-| `node scripts/build.js`         | One-command build of all artifacts                                |
-| `node scripts/verify-scopes.js` | Auto-verifies language scopes against VS Code's built-in grammars |
-| `pnpm test`                     | 83 automated tests (tokens/generators/validators/scopes)          |
+| Tool                            | Purpose                                                                                      |
+| ------------------------------- | -------------------------------------------------------------------------------------------- |
+| `node scripts/build.js`         | One-command build of all artifacts                                                           |
+| `node scripts/verify-scopes.js` | Auto-verifies language scopes against VS Code's built-in grammars                            |
+| `pnpm test`                     | 181 automated assertions (artifacts / semantic precedence / grammar tokenization / coverage) |
+| `pnpm run check:artifacts`      | Rebuilds and verifies committed artifacts are in sync (no forgotten rebuilds)                |
+| `pnpm run check:contract`       | Cross-repo token contract: names only ever added, CSS/SCSS/TS in agreement                   |
+| `pnpm run sync:color-ids`       | Refreshes the known-VS Code-color-id table (catches typos / dead keys)                       |
+| `pnpm test`                     | 83 automated tests (tokens/generators/validators/scopes)                                     |
 
 ### Local Development
 

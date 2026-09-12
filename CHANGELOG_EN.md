@@ -2,6 +2,49 @@
 
 [🇨🇳 中文版](./CHANGELOG.md) | English
 
+## [2.8.0] - 2026-09-12
+
+### 🩹 Visibility Fixes (measured contrast)
+
+- **Unreadable input validation messages**: `inputValidation.error/info/warningForeground` were undefined and fell back to VS Code defaults – only **1.10–2.00:1 (dark) / 1.87–3.24:1 (light)** on the colored backgrounds. They now use `${surfaceGround}` (same idiom as `statusBarItem.errorForeground`) → dark 6.45 / 4.85 / 10.69:1, light 6.19 / 8.35 / 4.81:1.
+- **White-on-white status bar prominent item (light)**: missing `statusBarItem.prominentForeground` / `prominentHoverForeground` produced **1.00:1 (invisible)**; now `${text}` → dark 13.76 / 11.04:1, light 17.85 / 16.30:1.
+- `statusBarItem.hoverForeground` and `terminalCursor.background` are now defined explicitly (no non-Moongate fallbacks).
+
+### 🧭 UI Key Coverage (aligned with VS Code 1.130 default themes)
+
+- **111 new UI keys**: current-line / range / hover / inactive-selection highlights, indent guides, overview ruler, diff line backgrounds, unfocused tabs (9), list focus outline & drop background, Markdown/hover surfaces (links, inline code, block quotes), staged git states, minimap slider, menu/menubar/toolbar, breadcrumbs, notification center, welcome page, comments widget, notebook, checkboxes, button borders, status bar focus ring, and the **modern AI surfaces** (Agents 20 keys, modern activity bar, `surface.*`, chat working-border animation).
+- Uncovered keys: **173 → 37** (the remaining extension-view batch – charts / gauge / peekView / settings / quickInputList – is deferred by choice and listed in `docs/COVERAGE.md`).
+
+### 🔬 Stronger Validation (regression-proofing)
+
+- **Fallback readability check**: when only one half of a foreground/background pair is themed, the checker computes contrast against VS Code's real fallback value and **fails the build** below threshold – exactly the failure mode behind the two bugs above.
+- **Dark/light distinctness parity**: syntax roles must keep the same same-color structure in both modes; differences require a registered exemption.
+- **Contrast role coverage** extended to `highlight`/`cyan`/`purple`/`git*`/`bracket1-6` (with `gitIgnored`/`codeDim` registered as exemptions); UI pair matrix grew from 6 to 16 entries.
+- New **`docs/COVERAGE.md`** (generated: UI key coverage / per-language leaf-scope coverage / role distinctness) plus permanent assertions in `test/theme-coverage.test.js`.
+
+### 🎨 Dark/Light Consistency
+
+- **Light `highlight` split from `function`**: both were `#0369a1`, merging type/escape/placeholder colors with function names; `highlight` is now `{blue-600}` (`--ui-highlight: #2563eb`).
+- **Light `gitAdded`**: `#059669` (3.61:1) → `{green-800}` `#047857` (5.25:1, same tier as `success`, matching dark); `--ui-git-added` follows.
+
+### 🌐 Syntax Coverage
+
+- **Markdown**: setext headings (`===`/`---`) and inline `` `code` ``; **Java**: inherited classes; **C#**: variable declaration family (field/local/parameter/event/preprocessor symbol) and goto labels; **C/C++**: scope-resolution constructor/destructor/operator-overload variants, the full predefined-macro family, and the variadic ellipsis.
+- Uncovered syntax leaf scopes: **26 → 0** (4 Python regex-internal scopes and 3 grammar placeholder/catch-all scopes are registered as documented exemptions).
+
+> Cross-repo sync: `--ui-highlight` and `--ui-git-added` (light) changed – sync moongate-vue's `src/styles/tokens/colors.css` and value tables per `docs/TOKEN_CONVENTIONS.md` §7.
+
+### 🧪 Test Suite Hardening (141 → 181 assertions)
+
+- **Dead color-key detection**: a known-VS Code-color-id table (installer + official docs, refreshed by `pnpm run sync:color-ids`) is checked on every build – it immediately found and removed **12 dead keys** (`chat.editorBackground`, `chat.suggestedRequest*`, `editorPlaceholder.foreground`, `editorStickyScroll.foreground`, `inlineChat.regionHighlight`, `modernActivityBar.foreground`, `portsIconRunningForeground`, `terminalCommandGuide.{background,border,activeForeground}`, `textBlockQuote.foreground`).
+- **Cross-repo contract snapshot**: `docs/token-names.snapshot.json` + `pnpm run check:contract` – role names may only be added (never removed/renamed) and CSS/SCSS/TS must agree, protecting moongate-vue's `check-tokens.ts`.
+- **Artifact consistency**: `pnpm run check:artifacts` (rebuild then `git diff`); the build now formats generated markdown with prettier, which also fixed `docs/DESIGN_SYSTEM.md`'s formatting drift and stale values (`highlight`/`gitAdded`).
+- **Build failure paths & idempotency**: `MOONGATE_ROOT` support lets tests mutate a temp copy and assert 7 failure branches (architecture violations, raw hex, undefined role, unreadable half-pair, distinctness mismatch, key parity, contrast) plus byte-identical repeat builds.
+- **Semantic key reachability** against installed extensions' declared types/modifiers (including superType chains), with a reasoned allow-list for 4 reserved keys.
+- **Style field validity**: `fontStyle` values, `semanticTokenColors` key shape and unknown fields, `tokenColors` scope-name shape.
+- **Release metadata & packaging**: `docs/COVERAGE.md` content/numbers, `verify-scopes` CLI exit code, version ⟷ CHANGELOG headings, `contributes.*` file existence, and a `vsce ls` packaging manifest check.
+- **Portability & robustness**: the docstring grammar test now resolves VS Code paths via `VSCODE_EXTENSIONS_DIR`/platform candidates and **skips instead of failing** without VS Code; new adversarial-input cases (unterminated docstrings, 100k-char lines, deep nesting, CRLF, escapes) led to **tightening the injection grammar** so long runs of `*`/backticks are no longer mistaken for emphasis/literals.
+
 ## [2.7.1] - 2026-09-06
 
 ### 🎨 Semantic Text Hierarchy Refactor (Light)

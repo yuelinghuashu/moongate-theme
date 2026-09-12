@@ -1,0 +1,67 @@
+# Python docstring 内部高亮（配合 syntaxes/python-docstring.injection.tmLanguage.json）
+#
+# 为什么需要它：VS Code 的 MagicPython 与 Pylance 自带语法都只给整个 docstring 一个 scope，
+# 内部零 token；TS 的 JSDoc 效果来自 typescript-basics 的注入语法 + 本仓库 jsdoc.yaml。
+# 这里的 scope 全部由本扩展的注入语法产生（docstring 正文基调见 languages/python.yaml）。
+#
+# 配色逐项对应 jsdoc.yaml：标签/参数/类型 = JSDoc - Tags / Parameter names / Types。
+tokenColors:
+  # ========== 字段与段落头（Sphinx field list、Google/NumPy 段落、Sphinx 指令） ==========
+  - name: Python Docstring - Tags & Sections
+    scope:
+      - "keyword.other.documentation.docstring.python"
+      - "keyword.other.directive.documentation.docstring.python"
+    settings:
+      foreground: "${primary}"
+      fontStyle: "bold"
+
+  # ========== 参数名 ==========
+  - name: Python Docstring - Parameter Names
+    scope:
+      - "variable.parameter.documentation.docstring.python"
+    settings:
+      foreground: "${success}"
+      fontStyle: "italic"
+
+  # ========== 类型引用（:type:、:raises:、name (type): 中的类型） ==========
+  - name: Python Docstring - Types
+    scope:
+      - "entity.name.type.documentation.docstring.python"
+    settings:
+      foreground: "${highlight}"
+
+  # ========== 字段冒号、段落分隔线 ==========
+  - name: Python Docstring - Punctuation
+    scope:
+      - "punctuation.separator.documentation.docstring.python"
+      - "punctuation.definition.section.documentation.docstring.python"
+      - "punctuation.definition.directive.documentation.docstring.python"
+    settings:
+      foreground: "${punctuation}"
+
+  # ========== 交叉引用角色（:class:`Foo`） ==========
+  - name: Python Docstring - Roles
+    scope:
+      - "keyword.other.role.documentation.docstring.python"
+    settings:
+      foreground: "${purple}"
+
+  # ========== 行内字面量（``code``） ==========
+  - name: Python Docstring - Inline Literals
+    scope:
+      - "markup.inline.raw.docstring.python"
+    settings:
+      foreground: "${warning}"
+
+  # ========== 强调（只加字形，颜色继承 docstring 正文的注释色，避免过花） ==========
+  - name: Python Docstring - Bold
+    scope:
+      - "markup.bold.docstring.python"
+    settings:
+      fontStyle: "bold"
+
+  - name: Python Docstring - Italic
+    scope:
+      - "markup.italic.docstring.python"
+    settings:
+      fontStyle: "italic"
