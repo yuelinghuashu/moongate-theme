@@ -525,7 +525,8 @@
         "storage.type.rune.go",
         "storage.type.string.go",
         "storage.type.uintptr.go",
-        "string.regexp"
+        "string.regexp",
+        "support.type.primitive.rust"
       ],
       "settings": {
         "foreground": "#22d3ee"
@@ -616,6 +617,7 @@
         "punctuation.definition.expression.vue",
         "punctuation.definition.interpolation.begin.cs",
         "punctuation.definition.interpolation.end.cs",
+        "punctuation.section.embedded.rust",
         "source.js.embedded",
         "string.interpolated.shell",
         "string.other.link.description.markdown",
@@ -1073,6 +1075,19 @@
     },
     {
       "scope": [
+        "entity.name.type.lifetime.rust",
+        "punctuation.definition.lifetime.rust",
+        "storage.modifier.lifetime.rust",
+        "storage.modifier.sql"
+      ],
+      "settings": {
+        "foreground": "#22d3ee",
+        "fontStyle": "italic"
+      },
+      "name": "Rust - Lifetimes"
+    },
+    {
+      "scope": [
         "*link*",
         "*uri*",
         "*url*"
@@ -1129,18 +1144,6 @@
         "fontStyle": "underline"
       },
       "name": "Markdown Links"
-    },
-    {
-      "scope": [
-        "entity.name.type.lifetime.rust",
-        "punctuation.definition.lifetime.rust",
-        "storage.modifier.sql"
-      ],
-      "settings": {
-        "foreground": "#22d3ee",
-        "fontStyle": "italic"
-      },
-      "name": "Rust - Lifetimes"
     },
     {
       "scope": [
@@ -1241,6 +1244,7 @@
     "property.readonly": "#e2e8f0",
     "constant": "#e2e8f0",
     "enumMember": "#e2e8f0",
+    "enumMember:rust": "#fbbf24",
     "constant.builtin": "#fbbf24",
     "builtinConstant": "#fbbf24",
     "function": "#87cefa",
@@ -1250,11 +1254,13 @@
     "interface": "#fbbf24",
     "type": "#fbbf24",
     "type.builtin": "#22d3ee",
+    "builtinType:rust": "#22d3ee",
     "typeParameter": "#22d3ee",
     "namespace": "#7a8c9e",
     "annotation": "#c084fc",
     "macro": "#c084fc",
     "label": "#f87171",
+    "unresolvedReference": "#f87171",
     "variable.array": "#cbd5e1",
     "variable.builtin:python": {
       "foreground": "#c084fc",

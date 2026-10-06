@@ -42,6 +42,11 @@ property.readonly: "${text}"
 # 常量
 constant: "${text}"
 enumMember: "${text}"
+# Rust 枚举变体（On/Off）：rust-analyzer 发 enumMember，而内置 Rust 语法只给变体 catch-all
+# entity.name.type.rust（→ base.yaml 的 entity.name.type 黄），通用 enumMember 键会把它压成正文色。
+# 语言权重使本键 110 > 通用键 100；其它语言的枚举成员不受影响（详见 TOKEN_CONVENTIONS §9）。
+# 副作用：`*.deprecated`(100) 打分更低，已废弃的枚举变体只保留 strikethrough，前景色不再是压暗灰。
+"enumMember:rust": "${warning}"
 # 内置常量（Pylance/Python：True / False / None / NotImplemented / Ellipsis / __debug__）
 #
 # ⚠️ VS Code 语义选择器打分 = (100 − 选择器类型在父类型层级中的下标) + 100 × 选择器修饰符个数，
@@ -84,6 +89,10 @@ type: "${warning}"
 #    与 C#/Java/Go 语法里的 storage.type.primitive.* / entity.name.type.* 青色一致，
 #    不复用 TextMate 的 entity.name.type 黄。打分 199（99 + builtin 修饰符）压过 type(99)。
 type.builtin: "${cyan}"
+# rust-analyzer 的基础类型用**自定义类型** builtinType（superType: type），不带 builtin 修饰符：
+# 只写 type.builtin 时它会被上面的 type(99) 抢先填色（主题语义键先于探针填字段），
+# 于是 Rust 的 i32/str/bool 变黄。此处显式声明，与 languages/rust.yaml 的青色探针规则同色。
+"builtinType:rust": "${cyan}"
 # ⚠️ 刻意偏离 TextMate 层：类型参数（TS/Rust 泛型）用青色，与基础类型同族；TextMate 侧是黄。
 typeParameter: "${cyan}"
 
@@ -123,6 +132,10 @@ property.static:
 #    靠"同分后出现者胜出"取胜，因此必须排在各类型键之后。
 "*.invalid":
   foreground: "${error}"
+
+# rust-analyzer 的未解析引用（自定义类型 unresolvedReference：无 superType、无探针 scope）
+# → 只能由语义键承载；颜色与 TextMate 层 invalid.illegal 一致，未解析的名字直接报红。
+unresolvedReference: "${error}"
 
 # 类型注释（Pylance 的 typeHintComment 修饰符，如 # type: int）
 # 同上：探针 → comment.typehint.type.notation.python，保持注释样式而非类型色。

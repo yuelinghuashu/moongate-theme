@@ -5,7 +5,7 @@
   "description": "Where Moon Meets Code — a low-glare dark & light theme, WCAG-verified",
   "publisher": "yuelinghuashu",
   "icon": "images/icon.png",
-  "version": "2.8.0",
+  "version": "2.8.1",
   "engines": {
     "vscode": "^1.130.0"
   },

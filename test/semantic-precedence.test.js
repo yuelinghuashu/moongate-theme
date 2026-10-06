@@ -6,8 +6,9 @@
  * 修饰符权重远大于层级惩罚，因此「父类型 + 修饰符」键会反超精确类型键——
  * 真实事故：Pylance 的 True/False/None 是 builtinConstant + readonly、builtin，
  * 主题的 constant.builtin(199) 压过 builtinConstant(100) 变成白色。
+ * 真实事故 2：Rust 枚举变体被通用键 `enumMember` 压成正文色，探针表为此支持 `<type>:<language>`。
  *
- * 本测试把「已声明的探针」当作契约：VS Code 内建 33 条 + 已装 Pylance 声明的 17 条。
+ * 本测试把 `PROBES` 表中「已声明的探针」当作契约（VS Code 内建默认探针 + 已装扩展声明的探针）。
  * 对每条探针，语义层的**最终生效色**必须等于 TextMate 层的最终生效色；
  * 若确实需要偏离（本主题的刻意设计），必须登记进 DEVIATIONS 并写明理由——
  * 且该条目一旦不再偏离，测试会失败以强制复核（避免 allow-list 腐坏）。
@@ -18,7 +19,7 @@ import { execFileSync } from "node:child_process"
 import fs from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
-import { resolveSemanticStyle, resolveTextmateStyle, loadSemanticRegistry, findUnreachableSemanticKeys, SEMANTIC_KEY_ALLOWLIST } from "./helpers.js"
+import { resolveSemanticStyle, resolveTextmateStyle, loadSemanticRegistry, findUnreachableSemanticKeys, parseSemanticSelector, SEMANTIC_KEY_ALLOWLIST } from "./helpers.js"
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -53,6 +54,10 @@ const ALL_TYPES = "*"
  * 探针表：selector（semanticTokenColors 键形式）→ 该选择器对应 token 的 TextMate scope
  * - 前 22 条为 VS Code 内建（ColorThemeData.getTokenStylingDefaultRules）
  * - 后 17 条为 Pylance 声明（package.json 的 semanticTokenScopes）
+ *
+ * 键形可为 `<type>.<modifier>...:<language>`：语言后缀同时决定 token 的 language
+ * 与 TextMate 栈根（source.<language>），默认 python（上面的 Pylance 探针都是 python）。
+ * 也可用探针上的 `language` / `type` / `modifiers` 字段显式覆盖。
  */
 const PROBES = [
   // ===== VS Code 内建：类型 =====
@@ -76,6 +81,8 @@ const PROBES = [
   { key: "parameter", scopes: ["variable.parameter"] },
   { key: "property", scopes: ["variable.other.property"] },
   { key: "enumMember", scopes: ["variable.other.enummember"] },
+  // Rust 枚举变体：rust-analyzer 发 enumMember，语法只给得出 catch-all entity.name.type.rust
+  { key: "enumMember:rust", scopes: ["entity.name.type.rust"] },
   { key: "event", scopes: ["variable.other.event"] },
   { key: "decorator", scopes: ["entity.name.decorator", "entity.name.function"] },
   // ===== VS Code 内建：修饰符限定 =====
@@ -145,19 +152,24 @@ for (const [name, theme] of Object.entries(themes)) {
     const deviationHits = new Map()
 
     for (const probe of PROBES) {
-      const types = probe.types === ALL_TYPES || probe.types === undefined ? [probe.key.split(".")[0]] : probe.types
+      const selector = parseSemanticSelector(probe.key)
+      const language = probe.language ?? selector.language ?? "python"
+      const types =
+        probe.types === ALL_TYPES || probe.types === undefined
+          ? [probe.type ?? selector.type]
+          : probe.types
       for (const type of types) {
         const token = {
           type,
-          modifiers: probe.key.split(".").slice(1),
+          modifiers: probe.modifiers ?? selector.modifiers,
           hierarchy: HIERARCHY[type] ?? [type],
-          language: "python",
+          language,
         }
         const semantic = resolveSemanticStyle(theme.semanticTokenColors, token)
         if (semantic.foreground === undefined) continue
 
         for (const scope of probe.scopes) {
-          const textmate = resolveTextmateStyle(theme.tokenColors, ["source.python", scope])
+          const textmate = resolveTextmateStyle(theme.tokenColors, [`source.${language}`, scope])
           if (textmate.foreground === undefined) continue
           checked += 1
 
@@ -227,6 +239,184 @@ test("关键探针：转义 / 内置常量 / self·cls / invalid / typeHintComme
         semantic.foreground.toLowerCase(),
         textmate.foreground.toLowerCase(),
         `${c.type} 语义色应与 ${c.scope} 的 TextMate 色一致`,
+      )
+    }
+  }
+})
+
+// ==================== Rust 枚举变体（防"探针空跑"复发） ====================
+
+test("探针：Rust 枚举变体 enumMember 语义色 == TextMate(entity.name.type.rust)", () => {
+  // 事故：通用键 enumMember 把 Rust 变体压成正文色，与 enum 类型名的黄+粗不一致。
+  // 要求：语言限定键把它拉回 TextMate 层色，且不得波及其它语言。
+  for (const [name, theme] of Object.entries(themes)) {
+    const textmate = resolveTextmateStyle(theme.tokenColors, ["source.rust", "entity.name.type.rust"])
+    // 上游探针必须真的命中，否则本测试会像旧版一样静默失效
+    assert.ok(
+      textmate.foreground,
+      `theme(${name}): Rust 变体缺少 TextMate 规则（entity.name.type.rust）——探针失效`,
+    )
+
+    for (const modifiers of [["declaration"], []]) {
+      const semantic = resolveSemanticStyle(theme.semanticTokenColors, {
+        type: "enumMember",
+        modifiers,
+        hierarchy: ["enumMember"],
+        language: "rust",
+      })
+      assert.equal(
+        semantic.foreground?.toLowerCase(),
+        textmate.foreground.toLowerCase(),
+        `theme(${name}): Rust 枚举变体（${modifiers.join("+") || "引用位"}）语义色 ${semantic.foreground} ` +
+          `与 TextMate 层 ${textmate.foreground} 不一致 —— 检查 semantic.yaml 的 "enumMember:rust"`,
+      )
+    }
+
+    // 语言限定键不得外溢：其它语言的枚举成员仍等于通用 enumMember 键的值
+    const generic = theme.semanticTokenColors.enumMember
+    assert.ok(generic, `theme(${name}): 缺少通用 enumMember 语义键`)
+    for (const language of ["python", "typescript", "java", "csharp"]) {
+      const other = resolveSemanticStyle(theme.semanticTokenColors, {
+        type: "enumMember",
+        modifiers: ["declaration"],
+        hierarchy: ["enumMember"],
+        language,
+      })
+      assert.equal(
+        other.foreground?.toLowerCase(),
+        generic.toLowerCase(),
+        `theme(${name}): ${language} 的枚举成员被 Rust 限定键影响（${other.foreground} ≠ ${generic}）`,
+      )
+    }
+  }
+})
+
+// ==================== 语言服务器探针 scope（方向：语义角色纵深） ====================
+
+/**
+ * 服务器探针 scope ↔ 语法 scope：同一个构造的两条路径必须同色
+ *
+ * 起因（实测）：rust-analyzer 的探针 scope 落在通用规则上 ——
+ *   lifetime  → storage.modifier.lifetime.rust → base.yaml 的 storage.modifier（主蓝加粗），
+ *               而 rust.yaml 的 lifetime 规则是青斜，等于永不生效；
+ *   builtinType → support.type.primitive.rust → base.yaml 的 support.type（黄），
+ *               而主题刻意让基础类型走青色。
+ * 这类 scope 不在内置语法里，必须显式写进 languages/rust.yaml 才能生效。
+ */
+const PROBE_ALIGNMENT = [
+  { token: "builtinType:rust", modifiers: [], probe: "support.type.primitive.rust", grammar: "entity.name.type.numeric.rust" },
+  { token: "lifetime", modifiers: [], probe: "storage.modifier.lifetime.rust", grammar: "entity.name.type.lifetime.rust" },
+]
+
+test("探针 scope 与语法 scope 同色（rust-analyzer semanticTokenScopes）", () => {
+  for (const [name, theme] of Object.entries(themes)) {
+    for (const { token, modifiers, probe, grammar } of PROBE_ALIGNMENT) {
+      const viaProbe = resolveTextmateStyle(theme.tokenColors, ["source.rust", probe])
+      const viaGrammar = resolveTextmateStyle(theme.tokenColors, ["source.rust", grammar])
+      assert.ok(viaProbe.foreground && viaGrammar.foreground, `theme(${name}): ${probe} / ${grammar} 缺规则`)
+      assert.equal(
+        viaProbe.foreground.toLowerCase(),
+        viaGrammar.foreground.toLowerCase(),
+        `theme(${name}): 探针 ${probe}（${viaProbe.foreground}）与语法 ${grammar}（${viaGrammar.foreground}）不同色`,
+      )
+      assert.equal(viaProbe.fontStyle ?? "", viaGrammar.fontStyle ?? "", `theme(${name}): ${probe} 的字体样式与 ${grammar} 不一致`)
+
+      // 语义层（若有主题键命中）必须与探针同色，否则语义键会抢在探针前填字段
+      const { type, language } = parseSemanticSelector(token)
+      const semantic = resolveSemanticStyle(theme.semanticTokenColors, {
+        type,
+        modifiers,
+        hierarchy: [type],
+        language,
+      })
+      if (semantic.foreground) {
+        assert.equal(
+          semantic.foreground.toLowerCase(),
+          viaProbe.foreground.toLowerCase(),
+          `theme(${name}): ${token} 语义键 ${semantic.foreground} 与探针 scope ${viaProbe.foreground} 冲突`,
+        )
+      }
+    }
+
+    // 格式化占位符：与 JS 模板插值（base.yaml 的 meta.embedded）同色
+    const interpolation = resolveTextmateStyle(theme.tokenColors, ["source.js", "meta.embedded"])
+    const specifier = resolveTextmateStyle(theme.tokenColors, ["source.rust", "punctuation.section.embedded.rust"])
+    assert.equal(
+      specifier.foreground?.toLowerCase(),
+      interpolation.foreground?.toLowerCase(),
+      `theme(${name}): println!("{}") 的占位符应与表达式插值同色`,
+    )
+
+    // 未解析引用：必须与 TextMate 层的 invalid 同色（无探针，只能由语义键承载）
+    const unresolved = resolveSemanticStyle(theme.semanticTokenColors, {
+      type: "unresolvedReference",
+      modifiers: [],
+      hierarchy: ["unresolvedReference"],
+      language: "rust",
+    })
+    const invalid = resolveTextmateStyle(theme.tokenColors, ["source.rust", "invalid.illegal"])
+    assert.equal(
+      unresolved.foreground?.toLowerCase(),
+      invalid.foreground?.toLowerCase(),
+      `theme(${name}): unresolvedReference 必须与 invalid.illegal 同为错误色`,
+    )
+  }
+})
+
+// ==================== 已装服务器声明的语义角色全量对齐 ====================
+
+/** 只审计主题真正出语言文件的语言（toml/dart 等无专属文件，落后到通用规则，另有登记） */
+const AUDITED_LANGUAGES = new Set(["rust", "python", "go", "vue", "javascript", "typescript"])
+
+/** 刻意不给样式（服务器声明了，但主题决定不区分）——新增条目必须写明理由 */
+const UNSTYLED_SEMANTIC_ROLES = {
+  "rust *.mutable": "可变性靠 declaration 高亮与代码阅读判断，全量下划线过吵",
+  "python parenthesis": "括号/花括号/分号已有 TextMate 的 punctuation 灰，语义层不再区分",
+  "python bracket": "同上",
+  "python curlybrace": "同上",
+  "python semicolon": "同上",
+}
+
+test("已装服务器声明的语义角色：语义层与探针 scope 必须同色（或登记为不区分）", () => {
+  const home = process.env.VSCODE_EXTENSIONS_DIR || `${process.env.HOME}/.vscode/extensions`
+  const rows = []
+  for (const dir of fs.readdirSync(home)) {
+    const manifest = path.join(home, dir, "package.json")
+    if (!fs.existsSync(manifest)) continue
+    let contributes
+    try {
+      contributes = JSON.parse(fs.readFileSync(manifest, "utf8")).contributes || {}
+    } catch {
+      continue
+    }
+    const superOf = new Map((contributes.semanticTokenTypes || []).filter((t) => t.superType).map((t) => [t.id, t.superType]))
+    const chain = (type) => {
+      const out = [type]
+      for (let cursor = superOf.get(type); cursor && !out.includes(cursor); cursor = superOf.get(cursor)) out.push(cursor)
+      return out
+    }
+    for (const mapping of contributes.semanticTokenScopes || []) {
+      const language = mapping.language
+      if (!language || !AUDITED_LANGUAGES.has(language)) continue
+      for (const [key, probeScopes] of Object.entries(mapping.scopes || {})) {
+        const [type, ...modifiers] = key.split(".")
+        rows.push({ label: `${language} ${key}`, probeScopes, language, token: { type, modifiers, hierarchy: chain(type), language } })
+      }
+    }
+  }
+  assert.ok(rows.length >= 20, `审计行数异常（${rows.length}），检查已装扩展`)
+
+  for (const [name, theme] of Object.entries(themes)) {
+    for (const { label, probeScopes, language, token } of rows) {
+      if (UNSTYLED_SEMANTIC_ROLES[label]) continue
+      const semantic = resolveSemanticStyle(theme.semanticTokenColors, token)
+      if (!semantic.foreground) continue // 语义层不表态 → 由探针决定，无冲突
+      const probe = resolveTextmateStyle(theme.tokenColors, [`source.${language}`, ...probeScopes])
+      if (!probe.foreground) continue // 两侧都不上色，等同"不区分"，无冲突
+      assert.equal(
+        semantic.foreground.toLowerCase(),
+        probe.foreground.toLowerCase(),
+        `theme(${name}): ${label} 语义层 ${semantic.foreground} ≠ 探针 ${probeScopes[0]} 的 ${probe.foreground}`,
       )
     }
   }

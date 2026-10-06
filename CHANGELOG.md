@@ -2,7 +2,26 @@
 
 [🇬🇧 English](./CHANGELOG_EN.md) | 中文
 
-## [2.8.0] - 2026-09-12
+## [2.8.1] - 2026-09-30
+
+### 🩹 语法高亮修复
+
+- **Rust 枚举变体被显示成正文色**：`On` / `Off` 被 rust-analyzer 报成语义 token `enumMember`，通用键 `enumMember: "${text}"` 永远压过 TextMate 层（inspect 面板里 `entity.name.type` 的 `${warning}` 带删除线）。新增语言限定键 `"enumMember:rust": "${warning}"`（110 > 100），变体与 `State` 等 Rust 类型名同族：深色 `#fbbf24` / 浅色 `#b45309`。`tokenColors` 层面修不了（内置 Rust 语法只用 catch-all `entity.name.type.rust` 覆盖变体，无法与普通大驼峰标识符区分）。
+- **仅影响 Rust**：TS/Java/C#/Python 枚举成员仍为正文色；`Some`/`None`/`Ok`/`Err`（`defaultLibrary`）同属 `enumMember`，一并变黄。已废弃变体保留 `*.deprecated` 的删除线，只是前景色变黄。
+- **Rust 生命周期与基础类型之前一直没按设计上色**：rust-analyzer 把 `lifetime` 的探针 scope 指向 `storage.modifier.lifetime.rust`、`builtinType` 指向 `support.type.primitive.rust`，两者都不在内置语法里，于是落回通用规则 —— 生命周期成了主蓝加粗（声明的是青斜）、`i32`/`str` 成了黄（声明的是青）。现补上探针 scope 规则，并新增 `"builtinType:rust": "${cyan}"`（该类型带标准父类型 `type`，父类型键会先填色，探针没机会执行）。
+- **`println!("{}")` 的占位符、未解析的名字此前无专属色**：格式化占位符现与 JS 表达式插值同色 `${highlight}`；`unresolvedReference` 新增语义键 → `${error}`，未解析的名字直接报红。
+
+### 🧪 测试与文档
+
+- `test/semantic-precedence.test.js`：探针支持 `<type>:<language>` 语言限定键，新增 `enumMember:rust` 探针与回归用例（断言语义色 == TextMate 色、TextMate 侧必须解析出颜色、非 Rust 语言不受影响）。
+- 新增两组断言：①「探针 scope 与语法 scope 同色」——锁定 rust-analyzer 声明的探针映射不会再落回通用色；②「已装服务器声明的语义角色全量对齐」——按已装扩展的 `semanticTokenScopes` 逐条比对，刻意不区分的角色（如 `*.mutable`）登记在允许清单里。
+- `scripts/lib/scope-validator.js`：新增 `SERVER_DECLARED_SCOPES` + 从已装扩展读取声明 —— 服务器探针 scope 不在语法文件里，不应被判成「scope 不存在」。
+- `docs/TOKEN_CONVENTIONS.md` §9：补第三、四起事故、inspect 面板删除线判读、语言限定键用法与「探针 scope 落在通用规则上」的两类修法。
+
+---
+
+<details>
+<summary>## [2.8.0] - 2026-09-12</summary>
 
 ### 🩹 可见性故障修复（对比度实测）
 
@@ -45,7 +64,12 @@
 - **发布元数据与打包**：`docs/COVERAGE.md` 内容与数字断言、`verify-scopes` CLI 退出码、版本号 ⟷ CHANGELOG 标题、`contributes.*` 文件存在性、`vsce ls` 打包清单（含语法文件、不含源码/依赖）。
 - **可移植性与健壮性**：docstring 语法测试按 `VSCODE_EXTENSIONS_DIR` / 平台路径解析，缺 VS Code 时 **skip 而非失败**；新增对抗性输入用例（未闭合 docstring、10 万字符长行、深嵌套类型、CRLF、引号转义），并借此**收紧注入语法**：纯 `*`/`` ` ``长串不再被误判为粗体/斜体/行内字面量。
 
-## [2.7.1] - 2026-09-06
+</details>
+
+---
+
+<details>
+<summary>## [2.7.1] - 2026-09-06</summary>
 
 ### 🎨 语义层文本层级重构（浅色）
 
@@ -68,9 +92,12 @@
 - 重新生成 `themes/*` 并同步 `moongate-vue`：`src/styles/tokens/colors.css` 覆盖更新、组件 fallback 字面量（`--ui-text-inactive`）同步、`design-tokens.md` 数值表更新；`moongate-vue` 的 `check-tokens.ts` 与完整构建通过，`dist/style.css` 已重建。
 - 宣传措辞统一：README / 徽章由「DTCG 标准」改为「DTCG-inspired / DTCG 风格」（自研 YAML 令牌体系，非完整 DTCG `$type/$value` 格式）。
 
+</details>
+
 ---
 
-## [2.7.0] - 2026-08-19
+<details>
+<summary>## [2.7.0] - 2026-08-19</summary>
 
 ### 🚀 新增 3 种语言支持
 
@@ -93,6 +120,8 @@
 
 - 合并 `normalizeHex` 重复分支、移除 `resolveTokens` 冗余深度检查、`getThemeInfo` 复用 `ROOT_DIR`。
 - `scopeMatches` 通配符正则新增缓存，减少重复编译。
+
+</details>
 
 ---
 

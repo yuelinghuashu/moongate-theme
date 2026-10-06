@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/WCAG-AA%20%26%20AAA-blue" alt="WCAG">
   <img src="https://img.shields.io/badge/Dark%20%26%20Light-both-8A2BE2" alt="Dark & Light">
   <img src="https://img.shields.io/badge/Semantic%20Highlighting-on-purple" alt="Semantic Highlighting">
-  <img src="https://img.shields.io/badge/tests-83%20passing-brightgreen" alt="Tests">
+  <img src="https://img.shields.io/badge/tests-182%20passing-brightgreen" alt="Tests">
 </p>
 
 [🇨🇳 中文版](./README.md) | English
@@ -44,25 +44,22 @@ Moongate is a VS Code theme born from [moongate.top](https://moongate.top), brin
 
 ## 🧠 Core Optimizations
 
-| Optimization                      | How Moongate Fixes It                                                                                                                                                    |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Day‑Night Consistency**         | Same hue, different lightness – seamless switching                                                                                                                       |
-| **Function Def/Call Separation**  | Definitions bold, calls not – unified across C/C++, Go, Java, C#, Python, Rust, JS, TS                                                                                   |
-| **No Unstyled UI Surfaces**       | Key coverage is diffed against VS Code's default themes (357 keys) and quantified in the generated `docs/COVERAGE.md` – no surface silently falls back to default colors |
-| **Dark/Light Parity**             | Build-time enforcement that each syntax role keeps the same distinctness structure in both modes (light no longer merges function names with types)                      |
-| **Python Docstring Highlighting** | Bundled injection grammar: Sphinx field list (`:param:` / `:type:` / `:raises:`), Google / NumPy sections and inline reST – matching the JSDoc look in TS                |
-| **JSON Nesting Depth**            | Blue → Cyan → Purple gradient – levels at a glance                                                                                                                       |
-| **UI Physical Depth**             | Elevation system – natural "paper stack" effect                                                                                                                          |
-| **Design System Unity**           | DTCG-inspired tokens – one color language across all products                                                                                                            |
+| Optimization                      | How Moongate Fixes It                                                                                                                                     |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Day‑Night Consistency**         | Same hue, different lightness – seamless switching                                                                                                        |
+| **Function Def/Call Separation**  | Definitions bold, calls not – unified across C/C++, Go, Java, C#, Python, Rust, JS, TS                                                                    |
+| **No Unstyled UI Surfaces**       | Key coverage is diffed against VS Code's default themes and quantified in the generated `docs/COVERAGE.md`                                                |
+| **Dark/Light Parity**             | Build-time enforcement that each syntax role keeps the same distinctness structure in both modes (light no longer merges function names with types)       |
+| **Python Docstring Highlighting** | Bundled injection grammar: Sphinx field list (`:param:` / `:type:` / `:raises:`), Google / NumPy sections and inline reST – matching the JSDoc look in TS |
+| **JSON Nesting Depth**            | Blue → Cyan → Purple gradient – levels at a glance                                                                                                        |
+| **UI Physical Depth**             | Elevation system – natural "paper stack" effect                                                                                                           |
+| **Design System Unity**           | DTCG-inspired tokens – one color language across all products                                                                                             |
 
 ## ✨ v2.8.0 Highlights
 
-- **🚨 Visibility fixes** — input-validation text was undefined and fell back to 1.10–3.24:1 (now 4.81–10.69:1); the light status-bar prominent item was white-on-white at 1.00:1 (now 17.85:1)
-- **🧭 UI key coverage** — aligned with VS Code's default themes: 100+ new keys (current-line highlight, indent guides, overview ruler, diff line tints, Markdown/hover surfaces, modern AI/Agents surfaces), uncovered keys 173 → 37 (the rest deferred by choice and tracked)
-- **🎨 Dark/light parity** — light `highlight` split from `function` (both were `#0369a1`); light `gitAdded` 3.61:1 → 5.25:1
-- **📝 Python docstring highlighting** — bundled injection grammar for Sphinx field lists (`:param:` / `:type:` / `:raises:`), Google / NumPy sections and inline reST
-- **🔬 Stronger validation & tests** — fallback readability, dark/light distinctness parity, dead-key detection, cross-repo token contract snapshot, artifact consistency; assertions 141 → 181
-- **🤝 Ecosystem sync** — CSS/SCSS/TS tokens synced to moongate-vue (light `--ui-highlight` / `--ui-git-added` changed)
+- **🚨 Visibility fixes** — undefined input-validation foregrounds and the white-on-white light status-bar prominent item are fixed
+- **🧭 UI key coverage** — 100+ new keys (including modern AI/Agents surfaces); the remainder is quantified in the generated coverage report
+- **📝 Python docstring highlighting** — bundled injection grammar for Sphinx / Google / NumPy sections and inline reST
 
 [📜 View full changelog](./CHANGELOG_EN.md)
 
@@ -76,7 +73,7 @@ Moongate is built on DTCG-inspired design tokens, providing complete color, layo
 
 ## 🏗️ Engineering Build
 
-Moongate is not hand-written JSON — it's an industrial-grade build pipeline driven by **DTCG-inspired tokens + YAML semantic layers**:
+Moongate is built by a **DTCG-inspired token + YAML semantic layer** pipeline:
 
 ```text
 ┌─────────────────────────────────────────────────────┐
@@ -106,11 +103,10 @@ Moongate is not hand-written JSON — it's an industrial-grade build pipeline dr
 | ------------------------------- | -------------------------------------------------------------------------------------------- |
 | `node scripts/build.js`         | One-command build of all artifacts                                                           |
 | `node scripts/verify-scopes.js` | Auto-verifies language scopes against VS Code's built-in grammars                            |
-| `pnpm test`                     | 181 automated assertions (artifacts / semantic precedence / grammar tokenization / coverage) |
+| `pnpm test`                     | 182 automated assertions (artifacts / semantic precedence / grammar tokenization / coverage) |
 | `pnpm run check:artifacts`      | Rebuilds and verifies committed artifacts are in sync (no forgotten rebuilds)                |
 | `pnpm run check:contract`       | Cross-repo token contract: names only ever added, CSS/SCSS/TS in agreement                   |
 | `pnpm run sync:color-ids`       | Refreshes the known-VS Code-color-id table (catches typos / dead keys)                       |
-| `pnpm test`                     | 83 automated tests (tokens/generators/validators/scopes)                                     |
 
 ### Local Development
 
@@ -121,7 +117,7 @@ pnpm test           # Run all automated tests
 pnpm run dev        # Watch source files and rebuild automatically
 ```
 
-> 🌙 **Why not hand-write JSON?** Because a hand-written theme can only change color values — it can't evolve its _visual system_. With a token-driven theme, changing one semantic variable (e.g., `primary`) propagates across the entire theme, never drifting out of sync.
+> 🌙 Token-driven: change one semantic variable (e.g. `primary`) and every artifact updates with it.
 
 ## ⚙️ Recommended Setup
 

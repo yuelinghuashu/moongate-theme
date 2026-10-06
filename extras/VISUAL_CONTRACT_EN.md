@@ -4,13 +4,7 @@
 
 # 🌙 Moongate Visual Contract v2.0
 
-## ——Let Day and Night Moonlight Both Render Faithfully on Your Screen
-
-Moongate 2.0 introduces a complete **dual‑theme system** for the first time: dark "Night Sky" and light "Dawn". They share the same semantic color mapping, but have undergone **gravity compensation** for different ambient lighting—the dark mode focuses on preserving shadow details, while the light mode optimizes readability and comfort in bright environments.
-
-Yet, no matter how precisely a theme is designed, the final result still depends on whether your monitor **faithfully reproduces these designs**. Incorrect hardware settings can turn the deep night sky into dull grey plastic, or make the gentle dawn glare harsh.
-
-This guide is not a dogma; it is a **visual contract**. By aligning our physical parameters together, we can let Moongate's moonlight truly shine on your screen.
+Moongate ships a dark "Night Sky" and a light "Dawn" theme that share one semantic color mapping; every color value is designed for a monitor running **sRGB at Gamma 2.2**. Wrong monitor settings (wide gamut, dynamic contrast, excessive sharpness) will make the rendered result deviate from the design — this guide lists the hardware settings to verify.
 
 ---
 
@@ -52,7 +46,7 @@ Different panels have vastly different physical characteristics. Here are pitfal
 2. **Alternative**: If no sRGB mode is available, force sRGB at the OS level — disable HDR on Windows; macOS typically handles this automatically via ColorSync.
 3. **Fallback**: Choose "User Defined" and set saturation to 50.
 
-> **Why is sRGB so important?** Moongate's WCAG contrast validation is calculated using the sRGB linearization formula. In sRGB mode, contrast ratios are accurate. In wide‑gamut mode, the actual rendered RGB values deviate from the specified values, and the foundation of contrast calculation no longer holds. Choosing sRGB is not "sacrificing color" — it is **ensuring that the colors you see are the colors the designer intended**.
+> **Why is sRGB so important?** Moongate's WCAG contrast validation uses the sRGB linearization formula; in wide‑gamut mode the rendered RGB values deviate from the specified ones, so the premise of that validation no longer holds.
 
 ### 🔪 Trap 3: Sharpness
 
@@ -128,19 +122,14 @@ The ranges below are based on typical monitors. **Always calibrate using the vis
 
 ---
 
-## 🤝 VI. Our Visual Contract (v2.0 Day‑Night Manifesto)
+## 🤝 VI. Feedback
 
-Moongate's design philosophy has never changed: **To keep auxiliary information at the threshold of "perceptible but not eye‑catching" on your retina, and to let the core logic emerge naturally through a stepped brightness hierarchy.**  
-v2.0 goes further: **No matter how the ambient light shifts, through two precisely compensated themes – dark and light – we pledge to deliver consistent clarity and comfort.**
-
-If you have followed the calibration above and still find some elements too bright or too dark, you are welcome to share your calibration experience. Your feedback will help us continuously improve Moongate and deliver a more precise moonlight and dawn on more screens.
-
-However, if your monitor has "dynamic contrast", "vivid mode", "Black Stabilizer > 50", or similar gimmicks enabled, please try turning them off first. **Moongate's day and night moonlight both need a clean mirror to reflect accurately.**
+If you have followed the calibration above and still find some elements too bright or too dark, feel free to share your experience. If your monitor has "dynamic contrast", "vivid mode", "Black Stabilizer > 50" or similar enabled, turn them off first and compare again.
 
 ---
 
-## 📌 Appendix: A Note on Hardware Limits
+## 📌 Appendix: Hardware Limits
 
-If, after calibration, the 2% gray patch remains invisible in dark mode, or the 250–255 bright patches are still difficult to distinguish in light mode – this is often your monitor's physical limit. In such cases, prioritize your eye comfort. Moongate's core design will still provide an excellent coding experience; the end of calibration is not theoretical perfection, but the discovery of the balance point that is most comfortable for your eyes.
+If, after calibration, the 2% gray patch remains invisible in dark mode, or the 250–255 bright patches are still hard to distinguish in light mode, that is usually your monitor's physical limit — prioritize eye comfort.
 
 [⬆ Back to top](#)

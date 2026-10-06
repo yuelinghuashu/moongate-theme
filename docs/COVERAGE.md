@@ -6,24 +6,26 @@
 ## 一、界面键覆盖
 
 - 主题定义：**475** 键
-- VS Code 默认主题：**357** 键
-- 未覆盖（回退到 VS Code 默认色）：**37** 键
-- 主题独有（默认主题未定义，由本主题自行决定）：**155** 键
+- VS Code 默认主题：**348** 键
+- 未覆盖（回退到 VS Code 默认色）：**35** 键
+- 主题独有（默认主题未定义，由本主题自行决定）：**162** 键
 
 ### 未覆盖键（按前缀）
 
 | 前缀                       | 数量 | 键                                                                                                                     |
 | -------------------------- | ---- | ---------------------------------------------------------------------------------------------------------------------- |
 | `charts`                   | 8    | `blue` `foreground` `green` `lines` `orange` `purple` `red` `yellow`                                                   |
-| `gauge`                    | 7    | `background` `border` `errorBackground` `errorForeground` `foreground` `warningBackground` `warningForeground`         |
 | `peekViewResult`           | 6    | `background` `fileForeground` `lineForeground` `matchHighlightBackground` `selectionBackground` `selectionForeground`  |
 | `settings`                 | 6    | `dropdownBackground` `dropdownBorder` `headerForeground` `modifiedItemIndicator` `numberInputBorder` `textInputBorder` |
-| `quickInputList`           | 5    | `focusBackground` `focusForeground` `focusHighlightForeground` `focusIconForeground` `hoverBackground`                 |
+| `modernActivityBarItem`    | 4    | `activeBackground` `activeForeground` `hoverBackground` `hoverForeground`                                              |
+| `quickInputList`           | 4    | `focusBackground` `focusForeground` `focusHighlightForeground` `focusIconForeground`                                   |
+| `browser`                  | 1    | `border`                                                                                                               |
+| `modernActivityBar`        | 1    | `border`                                                                                                               |
 | `peekViewEditor`           | 1    | `matchHighlightBackground`                                                                                             |
 | `peekViewTitleDescription` | 1    | `foreground`                                                                                                           |
 | `peekViewTitleLabel`       | 1    | `foreground`                                                                                                           |
-| `quickInput`               | 1    | `border`                                                                                                               |
 | `searchEditor`             | 1    | `textInputBorder`                                                                                                      |
+| `statusBar`                | 1    | `inactiveBackground`                                                                                                   |
 
 ## 二、语法叶子 scope 覆盖
 

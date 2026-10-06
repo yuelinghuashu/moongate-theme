@@ -74,8 +74,9 @@ test("元数据：版本号出现在中英 CHANGELOG 标题中", () => {
   const version = pkg.version
   for (const file of ["CHANGELOG.md", "CHANGELOG_EN.md"]) {
     const text = fs.readFileSync(path.join(ROOT_DIR, file), "utf8")
+    // 已发布版本折叠为 <details><summary>## [x.y.z] …</summary>，只有未发布段是裸标题，两种都接受
     assert.ok(
-      new RegExp(`^## \\[${version.replace(/\./g, "\\.")}\\]`, "m").test(text),
+      new RegExp(`^(?:<summary>)?## \\[${version.replace(/\./g, "\\.")}\\]`, "m").test(text),
       `${file} 缺少与 package.json 版本一致的标题 ## [${version}]`,
     )
   }

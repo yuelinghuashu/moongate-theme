@@ -2,7 +2,26 @@
 
 [🇨🇳 中文版](./CHANGELOG.md) | English
 
-## [2.8.0] - 2026-09-12
+## [2.8.1] - 2026-09-30
+
+### 🩹 Syntax Highlighting Fix
+
+- **Rust enum variants rendered as plain text**: `On` / `Off` are reported by rust-analyzer as semantic tokens of type `enumMember`, so the generic key `enumMember: "${text}"` always won over the TextMate layer (in the inspect panel, `${warning}` on `entity.name.type` shows struck through). A new language-scoped key `"enumMember:rust": "${warning}"` (110 vs. 100) puts variants back in line with `State` and other Rust type names: `#fbbf24` dark / `#b45309` light. This cannot be fixed in `tokenColors` – the bundled Rust grammar covers variants with a single catch-all `entity.name.type.rust` that cannot be told apart from ordinary PascalCase identifiers.
+- **Rust only**: enum members in TS/Java/C#/Python stay plain text; `Some`/`None`/`Ok`/`Err` (which carry `defaultLibrary`) are `enumMember` too and turn yellow as well. Deprecated variants keep the `*.deprecated` strikethrough, only the foreground turns yellow.
+- **Rust lifetimes and primitive types were not rendering as designed**: rust-analyzer points the probe scopes for `lifetime` at `storage.modifier.lifetime.rust` and for `builtinType` at `support.type.primitive.rust`; neither exists in the bundled grammar, so they fell back to the generic rules – lifetimes became bold blue (designed: cyan italic) and `i32`/`str` became yellow (designed: cyan). Both probe scopes are now styled, plus a new `"builtinType:rust": "${cyan}"` key (that type has the standard `type` supertype, whose key fills the field first and pre-empts the probe).
+- **`println!("{}")` placeholders and unresolved names had no dedicated color**: placeholders now match JS expression interpolation (`${highlight}`), and `unresolvedReference` gets a semantic key → `${error}`, so unresolved names show up in red.
+
+### 🧪 Tests & Docs
+
+- `test/semantic-precedence.test.js`: probes support `<type>:<language>` language-scoped keys, with a new `enumMember:rust` probe and regression test (semantic color == TextMate color, the TextMate side must resolve a color, non-Rust languages unaffected).
+- Two new assertion groups: (1) "probe scope and grammar scope must match" – locks rust-analyzer's declared probe mappings so they can no longer fall back to generic colors; (2) "every semantic role declared by installed servers lines up" – compares each installed extension's `semanticTokenScopes`, with deliberately unstyled roles (e.g. `*.mutable`) registered in an allow-list.
+- `scripts/lib/scope-validator.js`: new `SERVER_DECLARED_SCOPES` plus discovery from installed extensions – server probe scopes are not in any grammar file and must not be reported as "scope does not exist".
+- `docs/TOKEN_CONVENTIONS.md` §9: incidents 3 and 4, how to read the inspect panel's strikethrough, language-scoped key usage, and the two fix paths when a probe scope lands on a generic rule.
+
+---
+
+<details>
+<summary>## [2.8.0] - 2026-09-12</summary>
 
 ### 🩹 Visibility Fixes (measured contrast)
 
@@ -45,7 +64,12 @@
 - **Release metadata & packaging**: `docs/COVERAGE.md` content/numbers, `verify-scopes` CLI exit code, version ⟷ CHANGELOG headings, `contributes.*` file existence, and a `vsce ls` packaging manifest check.
 - **Portability & robustness**: the docstring grammar test now resolves VS Code paths via `VSCODE_EXTENSIONS_DIR`/platform candidates and **skips instead of failing** without VS Code; new adversarial-input cases (unterminated docstrings, 100k-char lines, deep nesting, CRLF, escapes) led to **tightening the injection grammar** so long runs of `*`/backticks are no longer mistaken for emphasis/literals.
 
-## [2.7.1] - 2026-09-06
+</details>
+
+---
+
+<details>
+<summary>## [2.7.1] - 2026-09-06</summary>
 
 ### 🎨 Semantic Text Hierarchy Refactor (Light)
 
@@ -68,9 +92,12 @@
 - Regenerated `themes/*` and synced `moongate-vue`: `src/styles/tokens/colors.css` updated, component fallbacks (`--ui-text-inactive`) aligned, `design-tokens.md` table refreshed; `check-tokens.ts` and full build pass, `dist/style.css` rebuilt.
 - Wording unified: README/badges now say "DTCG-inspired" instead of "DTCG standard" (custom YAML token pipeline, not full DTCG `$type/$value`).
 
+</details>
+
 ---
 
-## [2.7.0] - 2026-08-19
+<details>
+<summary>## [2.7.0] - 2026-08-19</summary>
 
 ### 🚀 3 New Languages Added
 
@@ -93,6 +120,8 @@
 
 - Merged duplicate `normalizeHex` branches, removed redundant depth check in `resolveTokens`, `getThemeInfo` reuses `ROOT_DIR`.
 - `scopeMatches` wildcard regex caching added to reduce redundant compilation.
+
+</details>
 
 ---
 

@@ -1,6 +1,9 @@
 # Rust 特定规则
 # 只保留 base.yaml 未覆盖的 Rust 独有规则
 # scope 来源：VS Code 内置 rust.tmLanguage.json（已验证）
+#
+# ⚠️ 枚举变体（On/Off）的颜色不在本文件：语法只给出 catch-all entity.name.type.rust，
+#    且语义层 enumMember 优先 —— 修复点在 src/semantic.yaml 的 "enumMember:rust"。
 tokenColors:
   # ========== Rust 独有类型 ==========
   - name: Rust - Type Declarations (struct/enum/trait)
@@ -14,10 +17,13 @@ tokenColors:
       fontStyle: "bold"
 
   # ========== Rust - 基础类型（i32/u64/f64/str 等） ==========
+  # support.type.primitive.rust 是 rust-analyzer 声明的探针 scope（semanticTokenScopes.builtinType）：
+  # 它不在内置语法里，但语义 token 会按它回查本文件 —— 不写就会落到 base.yaml 的 support.type（黄）。
   - name: Rust - Primitive Types
     scope:
       - "entity.name.type.primitive.rust"
       - "entity.name.type.numeric.rust"
+      - "support.type.primitive.rust"
     settings:
       foreground: "${cyan}"
 
@@ -31,13 +37,25 @@ tokenColors:
       fontStyle: "bold"
 
   # ========== Rust - 生命周期 ==========
+  # storage.modifier.lifetime.rust 是 rust-analyzer 的探针 scope（semanticTokenScopes.lifetime）：
+  # 原样落回 base.yaml 的 storage.modifier（主蓝加粗），会让这里的青色斜体永远不生效。
   - name: Rust - Lifetimes
     scope:
       - "entity.name.type.lifetime.rust"
       - "punctuation.definition.lifetime.rust"
+      - "storage.modifier.lifetime.rust"
     settings:
       foreground: "${cyan}"
       fontStyle: "italic"
+
+  # ========== Rust - 格式化占位符 ==========
+  # punctuation.section.embedded.rust 是 rust-analyzer 的探针 scope（semanticTokenScopes.formatSpecifier），
+  # println!("{}") 里的 {} 走它；不写就是 base.yaml 的 punctuation 灰，弱于 JS 模板插值。
+  - name: Rust - Format Specifiers
+    scope:
+      - "punctuation.section.embedded.rust"
+    settings:
+      foreground: "${highlight}"
 
   # ========== Rust - 宏（对齐语义层 macro: purple） ==========
   - name: Rust - Macros

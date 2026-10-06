@@ -128,11 +128,28 @@ fillSubtle / fillMedium / overlayScrim`
 ## 9. 语义高亮优先级与探针一致性
 
 **语义层总是覆盖 TextMate 层**（`package.json` 默认开启 `editor.semanticHighlighting.enabled`），
-因此 `src/semantic.yaml` 的一个键可能悄悄盖掉某个语言文件精心声明的颜色。踩过的两个真实事故：
+因此 `src/semantic.yaml` 的一个键可能悄悄盖掉某个语言文件精心声明的颜色。踩过的四个真实事故：
 
 1. `True`/`False`/`None` 变白：Pylance 的 token 是 `builtinConstant`（父类型 `constant`）
    - 修饰符 `readonly`、`builtin`，主题的 `constant.builtin` 以 199 分压过 `builtinConstant`(100)。
 2. `self` 的主蓝斜体失效：`parameter` 规则按父类型命中 `selfParameter`，声明的 TextMate 色永远不生效。
+3. Rust 枚举变体（`On`/`Off`）变正文色：rust-analyzer 发 `enumMember`（+`declaration`），被通用键
+   `enumMember: ${text}` 命中；TextMate 层（内置 Rust 语法的 catch-all `entity.name.type.rust` →
+   `base.yaml` 的 `entity.name.type`）判它是 `${warning}` 黄。该 catch-all 把「任何首字母大写的标识符」
+   都归为一类，**此案无法用 `tokenColors` 修**，只能用语义层的语言限定键 `"enumMember:rust"`。
+   副作用：该键 110 分高于 `*.deprecated`(100)，已废弃的枚举变体只保留 strikethrough。
+4. Rust 生命周期变主蓝加粗、基础类型变黄（rust-analyzer 的**探针 scope 落在通用规则上**）：
+   服务器在 `semanticTokenScopes` 里把 `lifetime` 指向 `storage.modifier.lifetime.rust`、
+   把 `builtinType` 指向 `support.type.primitive.rust`，这两个 scope 不在内置语法里，
+   于是分别落到 `base.yaml` 的 `storage.modifier`（主蓝加粗）与 `support.type`（黄）——
+   `rust.yaml` 声明的青斜 lifetime、青色基础类型全部作废。两类修法不同：
+   - 类型**没有**超类型（`lifetime`/`formatSpecifier`）→ 主题语义键不会命中，探针说了算：
+     在语言文件里显式给探针 scope 上色即可（`storage.modifier.lifetime.rust`、
+     `punctuation.section.embedded.rust`）。
+   - 类型**带标准父类型**（`builtinType : type`）→ 父类型键（`type` 99 分）会先填字段，
+     探针根本没机会执行 → 必须写语义键 `"builtinType:rust"`。
+     注意这类探针 scope 不在语法文件里，需在 `scripts/lib/scope-validator.js` 的
+     `SERVER_DECLARED_SCOPES` / 已装扩展声明中放行，否则 `verify-scopes` 会判定为「scope 不存在」。
 
 ### 9.1 打分公式（VS Code 实现，勿凭直觉）
 
@@ -148,23 +165,32 @@ score = (100 − 选择器类型在父类型层级中的下标) + 100 × 选择�
 - 主题语义键若命中某 token，VS Code 内建/扩展注册的探针（`semanticTokenScopes` → TextMate scope）
   就**不会再填该字段**——所以「探针不生效」通常意味着主题键抢先填了颜色。
 
+**读懂 inspect 面板**：顶部 `foreground` 才是最终生效值；`textmate scopes` 段里的 `foreground` 行若被
+划删除线（VS Code 用 `<s>` 包裹，条件是语义 token 也提供了 foreground），说明该行**不是**生效色——
+两层一致时它整行消失。（与 `*.deprecated` 的 `fontStyle: strikethrough` 无关，后者显示在 `font style` 行。）
+
 ### 9.2 键形与语言限定
 
 - 键形：`<type>.<modifier>...`，通配用 `*`；**语言限定写作 `<type>.<modifier>:<language>`**
-  （schema 模式已核实允许），用于只想影响单一语言、又需要压过通用键的场景。
+  （schema 模式已核实允许），用于只想影响单一语言、又需要压过通用键的场景
+  （含 +10 分语言权重）。现有两例：`"variable.builtin:python"`、`"enumMember:rust"`（事故 3）。
+- 语言后缀同时决定探针的 token 语言与 TextMate 栈根：`PROBES` 里 `{ key: "enumMember:rust", ... }`
+  即按 `language: "rust"` + `source.rust` 求值（未写后缀的探针默认 python）。
 - 新增语言限定键前先确认该修饰符真的会被发出（例如 Pylance 的 legend 里没有 `defaultLibrary`，
   写 `variable.defaultLibrary` 就是死键）。
 
 ### 9.3 偏离登记（allow-list）
 
-`test/semantic-precedence.test.js` 把「VS Code 内建 33 条 + Pylance 17 条探针」当作契约：
-**语义层最终生效色必须等于 TextMate 层最终生效色**。确需偏离的（当前 5 条：`typeParameter`、
+`test/semantic-precedence.test.js` 的 `PROBES` 表把「VS Code 内建探针 + 已装 Pylance 声明的探针」
+当作契约：**语义层最终生效色必须等于 TextMate 层最终生效色**。确需偏离的（当前 5 条：`typeParameter`、
 `macro`、`variable.defaultLibrary.readonly`、`property.defaultLibrary.readonly`、`*.overridden`）
 必须登记进该文件的 `DEVIATIONS` 并写明理由；条目一旦不再偏离，测试会失败以强制复核。
+（探针若因 TextMate 侧解析不出颜色而被 `continue` 跳过等于白测：Rust 枚举变体另有独立断言强制
+TextMate 前景色必须存在，见 §9.2 与测试中的同名用例。）
 
 改动 `src/semantic.yaml`、`src/languages/*.yaml` 后请跑 `pnpm run test`；
 判定某处该用什么颜色时，优先用 `Developer: Inspect Editor Tokens and Scopes` 看**最终生效**的
-`Color theme: <键>` 与 `semantic token type/modifiers`，而不是猜。
+`Color theme: <键>` 与 `semantic token type/modifiers`（读法见 §9.1 末），而不是猜。
 
 ## 10. 注入语法（Python docstring）
 
@@ -206,6 +232,7 @@ score = (100 − 选择器类型在父类型层级中的下标) + 100 × 选择�
 （本机安装包提取 ∪ 官方 `theme-color.md`），每次构建都会把 `workbench.yaml` 的键对它核对 ——
 **VS Code 不认识的键定义后不会生效**（错字 / 已废弃 / 凭空添加）。构建只警告不失败，测试里是硬断言；
 数据表用 `pnpm run sync:color-ids` 刷新（`--offline` 只用本机安装包）。
+
 > 这条检查上线时就抓到 12 个死键（`chat.editorBackground`、`terminalCommandGuide.border`、
 > `modernActivityBar.foreground` 等），已全部删除。
 

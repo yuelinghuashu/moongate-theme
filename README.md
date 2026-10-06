@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/WCAG-AA%20%26%20AAA-blue" alt="WCAG">
   <img src="https://img.shields.io/badge/Dark%20%26%20Light-both-8A2BE2" alt="Dark & Light">
   <img src="https://img.shields.io/badge/Semantic%20Highlighting-on-purple" alt="Semantic Highlighting">
-  <img src="https://img.shields.io/badge/tests-83%20passing-brightgreen" alt="Tests">
+  <img src="https://img.shields.io/badge/tests-182%20passing-brightgreen" alt="Tests">
 </p>
 
 中文 | [🇬🇧 English](./README_EN.md)
@@ -48,7 +48,7 @@ Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | **昼夜语义一致性**        | 同一色系不同明度，视觉重量对等，切换无感                                                                                                |
 | **函数定义/调用分离**     | 定义加粗，调用不加粗，全语言统一（C/C++、Go、Java、C#、Python、Rust、JS、TS）                                                           |
-| **界面键无死角**          | 对齐 VS Code 默认主题键集（357 键），缺失/回退项由构建期报告 `docs/COVERAGE.md` 量化；不留"回退到默认配色"的界面                        |
+| **界面键无死角**          | 对齐 VS Code 默认主题键集，缺失/回退项由构建期报告 `docs/COVERAGE.md` 量化                                                              |
 | **深浅区分度一致**        | 构建期强制：同一语法角色在深/浅两模式的同色结构必须一致（浅色不再把函数名与类型混为一色）                                               |
 | **Python docstring 高亮** | 扩展自带注入语法：Sphinx field list（`:param:` / `:type:` / `:raises:`）、Google / NumPy 段落、内联 reST 全部上色，观感对齐 TS 的 JSDoc |
 | **JSON 嵌套层级**         | 蓝 → 青 → 紫 阶梯，层次一目了然                                                                                                         |
@@ -57,12 +57,9 @@ Moongate 是一个从个人博客 [moongate.top](https://moongate.top) 衍生而
 
 ## ✨ v2.8.0 亮点
 
-- **🚨 可见性故障修复**：输入校验提示前景缺失、回退后仅 1.10–3.24:1 → 现 4.81–10.69:1；浅色状态栏 prominent 项"白压白 1.00:1" → 17.85:1
-- **🧭 界面键覆盖补全**：对齐 VS Code 默认主题键集，新增 100+ 界面键（当前行高亮、缩进参考线、概览标尺、Diff 行底色、Markdown/hover 文档面、Agents 等现代 AI 界面），未覆盖项 173 → 37（其余为登记的延期批次）
-- **🎨 深浅一致性**：浅色 `highlight` 与 `function` 拆色（原同为 `#0369a1`）；浅色 `gitAdded` 3.61:1 → 5.25:1
-- **📝 Python 文档字符串高亮**：扩展自带注入语法，支持 Sphinx field list（`:param:` / `:type:` / `:raises:`）、Google / NumPy 段落与内联 reST
-- **🔬 校验与测试强化**：回退可读性、深浅区分度一致性、死键检查、跨仓库令牌契约快照、产出物一致性，测试 141 → 181 条
-- **🤝 生态同步**：CSS/SCSS/TS 令牌与 moongate-vue 组件库同步（浅色 `--ui-highlight` / `--ui-git-added` 有变更）
+- **🚨 可见性修复**：输入校验提示前景缺失、浅色状态栏 prominent 项"白压白"，均已修复
+- **🧭 界面键补全**：新增 100+ 界面键（含 Agents 等现代 AI 界面），未覆盖项由构建期报告量化
+- **📝 Python docstring 高亮**：自带注入语法，支持 Sphinx / Google / NumPy 段落与内联 reST
 
 [📜 查看完整更新日志](./CHANGELOG.md)
 
@@ -78,7 +75,7 @@ Moongate 基于 DTCG 风格（DTCG-inspired）设计令牌构建，提供完整�
 
 ## 🏗️ 工程化构建
 
-Moongate 不是手写 JSON，而是由 **DTCG 风格令牌 + YAML 语义层** 驱动的工业级构建流程：
+Moongate 由 **DTCG 风格令牌 + YAML 语义层** 驱动构建：
 
 ```text
 ┌─────────────────────────────────────────────────────┐
@@ -108,11 +105,10 @@ Moongate 不是手写 JSON，而是由 **DTCG 风格令牌 + YAML 语义层** �
 | ------------------------------- | ----------------------------------------------------------------- |
 | `node scripts/build.js`         | 一键构建全部产物                                                  |
 | `node scripts/verify-scopes.js` | 自动比对语言 scope 与 VS Code 内置语法                            |
-| `pnpm test`                     | 181 条自动化断言（主题产物 / 语义优先级 / 语法分词 / 覆盖与校验） |
+| `pnpm test`                     | 182 条自动化断言（主题产物 / 语义优先级 / 语法分词 / 覆盖与校验） |
 | `pnpm run check:artifacts`      | 重新构建后校验产物与提交内容一致（防"忘重建"）                    |
 | `pnpm run check:contract`       | 跨仓库令牌契约：角色名只增不删、CSS/SCSS/TS 三端一致              |
 | `pnpm run sync:color-ids`       | 刷新「VS Code 已知色键」数据表（防错字/死键）                     |
-| `pnpm test`                     | 83 个自动化测试（令牌/生成器/验证器/scope）                       |
 
 ### 本地开发
 
@@ -123,7 +119,7 @@ pnpm test           # 运行全部自动化测试
 pnpm run dev        # 监听源文件变化自动重新构建
 ```
 
-> 🌙 **为什么不手写 JSON？** 因为手写的主题只能改变色值，改不了「视觉体系」；而令牌驱动的主题，改变一个语义变量（如 `primary`），全主题联动更新，永不脱节。
+> 🌙 令牌驱动：改一个语义变量（如 `primary`），全部产物联动更新。
 
 ## ⚙️ 推荐配置
 

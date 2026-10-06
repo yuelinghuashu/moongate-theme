@@ -60,6 +60,49 @@ export const KNOWN_SCOPE_EXCEPTIONS = new Set([
   "string.interpolated.shell",
 ])
 
+/**
+ * 语言服务器声明的探针 scope（`contributes.semanticTokenScopes` 的取值）
+ *
+ * 主题给这类 scope 上色是**有意**的：VS Code 对语义 token 会按扩展声明的 scope 回查主题的
+ * TextMate 规则，而服务器用的 scope 往往不在 VS Code 内置语法里 —— 例如 rust-analyzer 的
+ * `storage.modifier.lifetime.rust`、`support.type.primitive.rust`（本机 0.3.3065 已核实）。
+ * 因此「语法文件里没有」不等于写错：本表 + 已装扩展的声明共同放行，其余仍按语法校验。
+ */
+export const SERVER_DECLARED_SCOPES = new Set([
+  // rust-analyzer（未安装该扩展时的兜底；装了会由 loadServerDeclaredScopes 自动补齐）
+  "support.type.primitive.rust",
+  "storage.modifier.lifetime.rust",
+  "punctuation.section.embedded.rust",
+])
+
+/** 从已装扩展的 semanticTokenScopes 收集探针 scope（缓存一次） */
+let serverScopesCache
+export function loadServerDeclaredScopes(
+  extensionsDir = process.env.VSCODE_EXTENSIONS_DIR || `${process.env.HOME}/.vscode/extensions`,
+) {
+  if (serverScopesCache && serverScopesCache.dir === extensionsDir) return serverScopesCache.scopes
+  const scopes = new Set(SERVER_DECLARED_SCOPES)
+  if (fs.existsSync(extensionsDir)) {
+    for (const entry of fs.readdirSync(extensionsDir)) {
+      const manifest = path.join(extensionsDir, entry, "package.json")
+      if (!fs.existsSync(manifest)) continue
+      let parsed
+      try {
+        parsed = JSON.parse(fs.readFileSync(manifest, "utf8"))
+      } catch {
+        continue
+      }
+      for (const mapping of parsed.contributes?.semanticTokenScopes || []) {
+        for (const list of Object.values(mapping.scopes || {})) {
+          for (const scope of list || []) scopes.add(scope)
+        }
+      }
+    }
+  }
+  serverScopesCache = { dir: extensionsDir, scopes }
+  return scopes
+}
+
 /** 语言配置文件 → VS Code 内置语法文件映射 */
 export function buildDefaultSyntaxMap(vscodeExt = VSCODE_EXT) {
   return {
@@ -367,10 +410,11 @@ export function verifyAllScopes({
     }
 
     const configScopes = loadConfigScopes(path.join(langDir, file))
+    const serverScopes = loadServerDeclaredScopes()
     const missing = []
     for (const sc of configScopes) {
       totalRules++
-      if (!scopeMatches(sc, allSyntaxScopes)) {
+      if (!scopeMatches(sc, allSyntaxScopes) && !serverScopes.has(sc)) {
         missing.push(sc)
         totalIssues++
       }
